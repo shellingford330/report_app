@@ -1,0 +1,15 @@
+<% provide(:title, "生徒一覧")%>
+
+<h3>生徒一覧</h3>
+
+	<% @students.each do |student| %>	
+		<tr>
+			<td><%= student.name %></td>
+			<td><%= student.email %></td>
+			<td><%= link_to '詳細', student %></td>
+			<td><%= link_to '編集', edit_student_path(student) %></td>
+			<td><%= link_to '削除', student, method: :delete, data: { confirm: '本当によろしいですか？'} %></td>
+		</tr>
+	<% end %>
+
+<%= link_to '生徒作成', new_student_path %>

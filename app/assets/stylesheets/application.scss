@@ -14,8 +14,19 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 /* 鈴木担当編集 */
+body {
+  margin-top: 56px;
+}
+
 .navbar {
   border-bottom: #008ed6 3px solid;
+}
+
+#error_explanation {
+  ul {
+    color: #bb0000;
+    margin: 0 0 30px 0;
+  }
 }
 
 /* 末包担当編集 */
