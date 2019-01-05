@@ -1,46 +1,28 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top id="main-nav">	
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a href="" class="navbar-brand">自由塾</a>
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-      <span class="navbar-toggler-icon"></span>
+    <button type="button" id="sidebarCollapse" class="btn btn-info">
+      <i class="fas fa-align-left"></i>
     </button>
+    <a href="" class="navbar-brand ml-100">自由塾</a>
+    <span class="navbar-toggler border-dark" data-toggle="collapse" data-target="#navbarCollapse">
+        <%= image_tag 'profile-icon', class: "profile-icon" %>
+    </span>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav ml-auto">
+      <ul class="nav navbar-nav ml-auto">
         <li class="nav-item">
-        	<a href="" class="nav-link">
-						<i class="far fa-clipboard"></i> お知らせ
-					</a>
-        </li>
-         <li class="nav-item">
-          <a href="" class="nav-link">
-						<i class="fas fa-users"></i> 生徒
-					</a>
-        </li>
-        <li class="nav-item">
-          <a href="" class="nav-link">
-						<i class="far fa-file-alt"></i> 指導報告書
-					</a>
-        </li>
-        <li class="nav-item">
-          <a href="" class="nav-link">
-						<i class="far fa-envelope"></i> お問い合わせ
-					</a>
-        </li>
-        <li class="nav-item dropdown mr-3">
-           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-            <i class="fas fa-user"></i> ユーザー名
+          <a class="nav-link" href="">
+            <i class="fas fa-user"></i> MyPage
           </a>
-          <div class="dropdown-menu">
-            <a href="" class="dropdown-item">
-              <i class="fas fa-user-circle"></i> マイページ
-            </a>
-            <a href="" class="dropdown-item">
-              <i class="fas fa-cog"></i> 設定
-            </a>
-          	<a href="" class="dropdown-item">
-            	<i class="fas fa-user-slash"></i> ログアウト
-        		</a>
-          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">
+            <i class="fas fa-cog"></i> Settting
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">
+            <i class="fas fa-user-slash"></i> Logout
+          </a>
         </li>
       </ul>
     </div>

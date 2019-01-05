@@ -1,5 +1,6 @@
 <% provide(:title, "生徒一覧")%>
 
+<div class="container">
 <h3>生徒一覧</h3>
 
 	<% @students.each do |student| %>	
@@ -13,3 +14,4 @@
 	<% end %>
 
 <%= link_to '生徒作成', new_student_path %>
+</div>
