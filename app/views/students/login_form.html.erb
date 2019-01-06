@@ -1,0 +1,17 @@
+<div class="container">
+<h2>ログイン</h2>
+<%= form_for(@student, url: '/students/login',method: :post ) do |f| %>
+	<%= render 'share/error_messages', obj: @student%>
+
+	<div class="form-group">
+		<%= f.label :email, 'メールアドレス'%>
+		<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "Email" %>
+	</div>
+	<div class="form-group">
+		<%= f.label :password, 'パスワード'%>
+		<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "Password" %>
+	</div>
+	<%= f.submit 'ログイン', disable_with: '処理中...' , class: "btn-outline-light btn-block bg-primary" %>
+
+<% end %>
+</div>

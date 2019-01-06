@@ -24,8 +24,15 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  background: #fafafa;
+  font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
+  background: #f4f0ec;
+  color: #4d3a34;
+  /*background: #fafafa;*/
+}
+
+.btn {
+  color: #fff;
+  background: #6078bd;
 }
 
 a,
@@ -45,15 +52,21 @@ a:focus {
   top: 0;
   right: 0;
 }
-
+/*-- navbar --*/
+.navbar {
+  background: #e4e4e4;
+  .btn:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
 .navbar-brand {
   margin-left: 10px;
 }
 
 .profile-icon {
   width: 34px;
-  color: #eee;
-  border: 2px solid #eee;
+  border: 2px solid #4d3a34;
   border-radius: 50%;
   vertical-align: bottom;
 }
@@ -66,11 +79,11 @@ a:focus {
   left: -250px;
   height: 100vh;
   z-index: 2000;
-  background: #7386d5;
-  color: #fff;
+  background: rgb(231, 231, 231);
+  color: rgb(119, 119, 119);
   transition: all 0.3s;
   overflow-y: scroll;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 3px rgba(179, 24, 24, 0.2);
 }
 
 #sidebar.active {
@@ -82,7 +95,8 @@ a:focus {
   height: 35px;
   line-height: 35px;
   text-align: center;
-  background: #7386d5;
+  background: #6078bd;
+  color: rgb(231, 231, 231);
   position: absolute;
   top: 10px;
   right: 10px;
@@ -90,11 +104,10 @@ a:focus {
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
-}
-
-#dismiss:hover {
-  background: #fff;
-  color: #7386d5;
+  &:hover {
+    background: #fff;
+    color: #7386d5;
+  }
 }
 
 .overlay {
@@ -114,12 +127,13 @@ a:focus {
 
 #sidebar .sidebar-header {
   padding: 20px 20px 13px 20px;
-  background: #6d7fcc;
+  background: #dedede;
+  color: rgb(51, 51, 51);
 }
 
 #sidebar ul.components {
   padding: 20px 0;
-  border-bottom: 1px solid #47748b;
+  border-bottom: 1px solid #838383;
 }
 
 #sidebar ul p {
@@ -134,32 +148,24 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-  color: #7386d5;
+  color: #2e353d;
   background: #fff;
 }
 
 #sidebar ul li.active > a,
 a[aria-expanded="true"] {
-  color: #fff;
-  background: #6d7fcc;
+  color: rgb(51, 51, 51);
+  background: #dedede;
 }
 
 a[data-toggle="collapse"] {
   position: relative;
 }
 
-.dropdown-toggle::after {
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-}
-
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: #6d7fcc;
+  background: #dedede;
 }
 
 /* 末包担当編集 */

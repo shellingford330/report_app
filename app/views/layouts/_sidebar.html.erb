@@ -5,21 +5,21 @@
         </div>
 
         <div class="sidebar-header">
-            <h2 class="text-center">自由塾</h2>
+            <h3 class="text-center">自由塾<br>日暮里教室</h3>
         </div>
 
         <ul class="list-unstyled components">
-            <h3 class="text-center pb-2">日暮里教室</h3>
+            <h4 class="text-center pb-2">ユーザー名</h4>
             <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
                     <i class="fas fa-users"></i> 生徒
                 </a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li>
-                        <a href="">生徒一覧</a>
+                        <%= link_to '生徒一覧', students_path %>
                     </li>
                     <li>
-                        <a href="#">生徒作成</a>
+                        <%= link_to '新規作成', new_student_path %>
                     </li>
                 </ul>
             </li>
