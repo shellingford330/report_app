@@ -9,16 +9,15 @@
     </span>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="nav navbar-nav ml-auto">
+        <% if student_logged_in? %>
         <li class="nav-item">
           <%= link_to current_student, class: "nav-link" do %>
             <i class="fas fa-user"></i> MyPage
           <% end %>
         </li>
         <li class="nav-item">
-          <% if student_logged_in? %>
-            <%= link_to edit_student_path(current_student),  class: "nav-link" do %>
-              <i class="fas fa-cog"></i> Settting
-            <% end %>
+          <%= link_to edit_student_path(current_student),  class: "nav-link" do %>
+            <i class="fas fa-cog"></i> Settting
           <% end %>
         </li>
         <li class="nav-item">
@@ -26,6 +25,7 @@
             <i class="fas fa-user-slash"></i> Logout
           <% end %>
         </li>
+        <% end %>
       </ul>
     </div>
   </div>

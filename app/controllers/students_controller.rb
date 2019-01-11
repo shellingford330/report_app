@@ -25,6 +25,9 @@ class StudentsController < ApplicationController
 		end
 	end
 
+	def update
+	end
+
 	def destroy
 		@student.destroy
 		flash[:success] = "無事削除されました！"
@@ -35,19 +38,21 @@ class StudentsController < ApplicationController
 	end
 
 	def login
-		@student = Student.find_by(email: params[:student][:email].downcase)
-		if @student && @student.authenticate(params[:student][:password])
-			student_log_in(@student)
+		student = Student.find_by(email: params[:student][:email].downcase)
+		if student && student.authenticate(params[:student][:password])
+			student_log_in(student)
 			flash[:success] = "ログインしました！"
-			redirect_to student_path(@student)
+			redirect_to student_path(student)
 		else
-			@student = Student.new(email: params[:student][:email])
+			@student = Student.new(student_params)
 			flash.now[:danger] = "もう一度入力情報を確認して下さい。"
 			render 'login_form'
 		end
 	end
 
 	def logout
+		student_log_out
+		redirect_to students_login_path
 	end
 
 	private
