@@ -41,6 +41,7 @@ class StudentsController < ApplicationController
 		student = Student.find_by(email: params[:student][:email].downcase)
 		if student && student.authenticate(params[:student][:password])
 			student_log_in(student)
+			remember_student(student)
 			flash[:success] = "ログインしました！"
 			redirect_to student_path(student)
 		else
@@ -51,6 +52,7 @@ class StudentsController < ApplicationController
 	end
 
 	def logout
+		forget_student(current_student)
 		student_log_out
 		redirect_to students_login_path
 	end
