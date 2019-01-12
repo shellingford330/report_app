@@ -38,6 +38,7 @@ module StudentsHelper
 
 	# 現在のユーザーをログアウトする
 	def	student_log_out
+		forget_student(current_student)
 		session.delete(:student_id)
 		@current_student = nil
 	end

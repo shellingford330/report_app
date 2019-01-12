@@ -17,12 +17,17 @@
   </head>
 
   <body>
-    <%= render 'layouts/sidebar' %>
-    <div id="content">
+    <% if !student_logged_in? %>
       <%= render 'layouts/flash' %>
-      <%= render 'layouts/navbar' %>
       <%= yield %>
-    </div>
+    <% else %>    
+      <%= render 'layouts/sidebar' %>
+      <div id="content">
+        <%= render 'layouts/flash' %>
+        <%= render 'layouts/navbar' %>
+        <%= yield %>
+      </div>
+    <% end %>
     <!-- Dark Overlay element -->
     <div class="overlay"></div>
 

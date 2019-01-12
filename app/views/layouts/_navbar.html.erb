@@ -9,7 +9,6 @@
     </span>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="nav navbar-nav ml-auto">
-        <% if student_logged_in? %>
         <li class="nav-item">
           <%= link_to current_student, class: "nav-link" do %>
             <i class="fas fa-user"></i> MyPage
@@ -25,7 +24,6 @@
             <i class="fas fa-user-slash"></i> Logout
           <% end %>
         </li>
-        <% end %>
       </ul>
     </div>
   </div>

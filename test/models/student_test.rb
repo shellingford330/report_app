@@ -47,4 +47,8 @@ class StudentTest < ActiveSupport::TestCase
     @student.password = @student.password_confirmation = " "
     assert_not @student.valid?
   end
+
+  test "authenticated? should be false with remember_digest nil" do
+    assert_not @student.authenticated?('')
+  end
 end

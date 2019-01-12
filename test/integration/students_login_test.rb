@@ -32,9 +32,12 @@ class StudentsLoginTest < ActionDispatch::IntegrationTest
                                                     password: "keiichi" } }
     delete students_logout_path
     assert_not student_is_logged_in?
+    delete students_logout_path
     assert_redirected_to students_login_path
     follow_redirect!
     assert_select "a[href=?]", students_logout_path, count: 0
     assert_select "a[href=?]", edit_student_path(@student), count: 0
   end
+
+
 end
