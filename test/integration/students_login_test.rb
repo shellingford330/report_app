@@ -39,5 +39,26 @@ class StudentsLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", edit_student_path(@student), count: 0
   end
 
-
+  test "login with remember me" do
+    get students_login_path
+    post students_login_path, params: { student:  { email: @student.email,
+                                                    password: "keiichi" } ,
+                                        remember_me: 'yes' }
+    assert_not_empty cookies['remember_token']
+  end
+  
+  test "login with not remember me" do
+    get students_login_path
+    post students_login_path, params: { student:  { email: @student.email,
+                                                    password: "keiichi" } ,
+                                        remember_me: 'yes' }
+    assert student_is_logged_in?
+    delete students_logout_path
+    assert_not student_is_logged_in?
+    assert_empty cookies['remember_token']
+    post students_login_path, params: { student:  { email: @student.email,
+                                                    password: "keiichi" } ,
+                                        remember_me: 'no' }
+    assert_empty cookies['remember_token']
+  end
 end
