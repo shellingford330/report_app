@@ -2,5 +2,10 @@
 
 keiichi:
   name: keiichi
-  email: student@example.com
+  email: keiichi@example.com
   password_digest: <%= Student.digest('keiichi') %>
+
+kai:
+  name: kai
+  email: kai@example.com
+  password_digest: <%= Student.digest('kai') %>

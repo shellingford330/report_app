@@ -9,7 +9,7 @@ class Student < ApplicationRecord
 											format: { with: VALID_EMAIL_REGEX },
 											uniqueness: { case_sentive: false }
 										}
-	validates :password, { presence: true, length: { minimum: 6 } }
+	validates :password, { presence: true, length: { minimum: 6 }, allow_nil: true }
 
 	# 引数で受け取った文字列をハッシュ化
 	def Student.digest(string)

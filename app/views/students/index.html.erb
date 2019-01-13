@@ -1,17 +1,62 @@
 <% provide(:title, "生徒一覧")%>
+  <section id="posts">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 mb-3">
+          <div class="card">
+            <div class="card-header">
+              <h4>生徒一覧</h4>
+            </div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>生徒氏名</th>
+                  <th  class="d-none d-lg-table-cell">メールアドレス</th>
+                  <th>編集</th>
+                  <th>削除</th>
+									<th></th>
+                </tr>
+              </thead>
+              <tbody>
+								<% @students.each do |student| %>
+                	<tr>	
+										<td><%= student.name %></td>
+										<td  class="d-none d-lg-table-cell"><%= student.email %></td>
+										<td><%= link_to '編集', edit_student_path(student) %></td>
+										<td><%= link_to '削除', student, method: :delete, data: { confirm: '本当によろしいですか？'} %></td>
+										<td>
+                      <%= link_to student, class: "btn btn-view" do %>
+                        <i class="fas fa-angle-double-right"></i> 詳細
+                      <% end %>
+                  	</td>
+									</tr>
+								<% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-<div class="container">
-<h3>生徒一覧</h3>
-
-	<% @students.each do |student| %>	
-		<tr>
-			<td><%= student.name %></td>
-			<td><%= student.email %></td>
-			<td><%= link_to '詳細', student %></td>
-			<td><%= link_to '編集', edit_student_path(student) %></td>
-			<td><%= link_to '削除', student, method: :delete, data: { confirm: '本当によろしいですか？'} %></td>
-		</tr>
-	<% end %>
-
-<%= link_to '生徒作成', new_student_path %>
-</div>
+        <div class="col-md-3">
+          <div class="card text-center card-bg-green mb-3">
+            <div class="card-body">
+              <h3>指導報告書</h3>
+              <h4 class="display-4">
+                <i class="fas fa-pencil-alt"></i> 6
+              </h4>
+              <%= link_to '見る', students_path, class: "btn btn-view-green" %>
+            </div>
+          </div>
+         
+          <div class="card text-center card-bg-pink mb-3">
+            <div class="card-body">
+              <h3>生徒一覧</h3>
+              <h4 class="display-4">
+                <i class="fas fa-users"></i> 4
+              </h4>
+              <%= link_to '見る', students_path, class: "btn btn-view-pink" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

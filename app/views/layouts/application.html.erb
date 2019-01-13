@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <% if !student_logged_in? %>
+    <% unless student_logged_in? %>
       <%= render 'layouts/flash' %>
       <%= yield %>
     <% else %>    

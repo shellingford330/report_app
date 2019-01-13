@@ -42,4 +42,9 @@ module StudentsHelper
 		session.delete(:student_id)
 		@current_student = nil
 	end
+
+	# 渡された生徒とログインしている生徒が同じである場合trueを、違う場合falseを返す
+	def correct_student?(student)
+		student == current_student
+	end
 end
