@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
 	before_action :student_already_logged_in, only: [:login_form, :login]
-	before_action :student_logged_in, only: [:edit, :update]
+	before_action :student_logged_in, only: [:edit, :update, :index]
 	before_action :correct_student,   only: [:edit, :update]
 	before_action :set_student,       only: [:show, :destroy]
 	before_action :initialize_student,only: [:new, :login_form]
@@ -53,7 +53,7 @@ class StudentsController < ApplicationController
 			student_log_in(student)
 			params[:remember_me] == 'yes' ? remember_student(student) : forget_student(student)
 			flash[:success] = "ログインしました"
-			redirect_to student_path(student)
+			redirect_back_to student_path(student)
 		else
 			flash.now[:danger] = "入力情報を確認して下さい"
 			render 'login_form'
@@ -88,6 +88,7 @@ class StudentsController < ApplicationController
 		def student_logged_in
 			unless student_logged_in?
 				flash[:danger] = "ログインをして下さい"
+				store_location
 				redirect_to students_login_path
 			end
 		end

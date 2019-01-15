@@ -68,4 +68,11 @@ class StudentsEditTest < ActionDispatch::IntegrationTest
                                                        email: "foo@ex.com" } }
     assert_redirected_to @other_student
   end
+
+  test "success friendly forwarding" do
+    get edit_student_path(@student)
+    post students_login_path, params: { student: { email: @student.email,
+                                                   password: "keiichi" } }
+    assert_redirected_to edit_student_path(@student)
+  end
 end
