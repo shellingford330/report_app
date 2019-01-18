@@ -12,7 +12,7 @@ class StudentTest < ActiveSupport::TestCase
   end
 
   test "name should not be too long" do
-    @student.name = "a" * 21
+    @student.name = "a" * 51
     assert_not @student.valid?
   end
 

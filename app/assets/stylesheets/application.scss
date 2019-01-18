@@ -77,6 +77,7 @@ a:focus {
 }
 
 /*-- 生徒一覧 --*/
+/*-- カード --*/
 .btn-view {
   display: inline-block;
   text-decoration: none;
@@ -87,27 +88,43 @@ a:focus {
   }
 }
 
-.btn-view-green {
+.btn-view-green,
+.btn-view-pink,
+.btn-view-brown,
+.btn-view-blue {
   display: inline-block;
   text-decoration: none;
-  background: #9bcd76;
   border: solid 1px #fff;
   border-radius: 5px;
   &:hover {
     background: #fff;
+  }
+}
+.btn-view-green {
+  background: #9bcd76;
+  &:hover {
     color: #9bcd76;
   }
 }
 
 .btn-view-pink {
-  display: inline-block;
-  text-decoration: none;
   background: #f3b4aa;
-  border: solid 1px #fff;
-  border-radius: 5px;
   &:hover {
     background: #fff;
-    color: #f3b4aa;
+  }
+}
+
+.btn-view-blue {
+  background: #7d90df;
+  &:hover {
+    color: #7d90df;
+  }
+}
+
+.btn-view-brown {
+  background: #b08274;
+  &:hover {
+    color: #b08274;
   }
 }
 
@@ -119,6 +136,64 @@ a:focus {
 .card-bg-pink {
   color: #fff;
   background: #f3b4aa;
+}
+
+.card-bg-blue {
+  color: #fff;
+  background: #7d90df;
+}
+
+.card-bg-brown {
+  color: #fff;
+  background: #b08274;
+}
+
+/*-- ページネーション --*/
+.pagination {
+  display: block;
+  padding: 1em;
+  text-align: center;
+  color: #4d3a34;
+  .disabled {
+    color: #c4afaa;
+  }
+  a,
+  span,
+  .current {
+    line-height: 40px;
+    font-size: 16px;
+
+    padding: 0 1.5px;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+  }
+  a,
+  .current {
+    border: 1px solid transparent;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+  }
+  .current {
+    color: #fff;
+    cursor: default;
+    background-color: #6078bd;
+    font-style: normal;
+  }
+  a {
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      color: #fff;
+      background-color: #6078bd;
+    }
+    &:active {
+      color: #fff;
+      outline: none;
+      background-color: #6078bd;
+    }
+  }
 }
 
 /*-- ログインフォーム --*/
@@ -147,7 +222,7 @@ a:focus {
 
 /*-- navbar --*/
 .navbar {
-  background: #e4e4e4;
+  background: rgb(245, 245, 245);
   .btn:hover {
     background-color: #fff;
     color: #000;
@@ -172,11 +247,22 @@ a:focus {
   left: -250px;
   height: 100vh;
   z-index: 2000;
-  background: rgb(231, 231, 231);
-  color: rgb(119, 119, 119);
+  background: rgb(245, 245, 245);
+  color: rgb(66, 66, 66);
   transition: all 0.3s;
   overflow-y: scroll;
-  box-shadow: 3px 3px 3px rgba(179, 24, 24, 0.2);
+  .fa-users {
+    color: #88685e;
+  }
+  .fa-clipboard {
+    color: #d5877b;
+  }
+  .fa-file-alt {
+    color: #7d90df;
+  }
+  .fa-envelope {
+    color: #78a258;
+  }
 }
 
 #sidebar.active {
@@ -221,12 +307,12 @@ a:focus {
 
 #sidebar .sidebar-header {
   padding: 20px 20px 13px 20px;
-  background: #dedede;
+  background: rgb(230, 230, 230);
   color: #4d3a34;
 }
 
 #sidebar ul.components {
-  padding: 20px 0;
+  padding-bottom: 10px;
   border-bottom: 1px solid #838383;
 }
 
@@ -249,7 +335,7 @@ a:focus {
 #sidebar ul li.active > a,
 a[aria-expanded="true"] {
   color: #4d3a34;
-  background: #dedede;
+  background: rgb(222, 222, 222);
 }
 
 a[data-toggle="collapse"] {
@@ -259,7 +345,7 @@ a[data-toggle="collapse"] {
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: #dedede;
+  background: rgb(222, 222, 222);
 }
 
 /* 末包担当編集 */

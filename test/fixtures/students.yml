@@ -9,3 +9,20 @@ kai:
   name: kai
   email: kai@example.com
   password_digest: <%= Student.digest('kai') %>
+
+michael:
+  name: Michael Example
+  email: michael@example.com
+  password_digest: <%= Student.digest('password') %>
+
+archer:
+  name: Sterling Archer
+  email: duchess@example.gov
+  password_digest: <%= Student.digest('password') %>
+
+<% 30.times do |n| %>
+student_<%= n %>:
+  name:  <%= "Student #{n}" %>
+  email: <%= "student-#{n}@example.com" %>
+  password_digest: <%= Student.digest('password') %>
+<% end %>
