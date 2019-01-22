@@ -2,12 +2,17 @@ require 'test_helper'
 
 class StudentTest < ActiveSupport::TestCase
   def setup
-    @student = Student.new(name: "suzuki", email: "user@example.com",
+    @student = Student.new(name: "suzuki", grade: "u4", email: "user@example.com",
                            password: "foobar", password_confirmation: "foobar")
   end
 
   test "name should be present" do
     @student.name = ""
+    assert_not @student.valid?
+  end
+
+  test "grade should be present" do
+    @student.grade = ""
     assert_not @student.valid?
   end
 

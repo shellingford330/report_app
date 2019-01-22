@@ -1,22 +1,24 @@
+<% provide(:title, "ログイン")%>
 <div class="login">
-<%= form_for(@student, url: '/students/login', html: { class: 'login-form' , method: :post }) do |f| %>
-	<h1>自由塾</h1>
-	<div class="form-group">
-		<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "Email address" %>
-	</div>
+	<%= form_for(@student, url: '/students/login', html: { class: 'login-form' , method: :post }) do |f| %>
 
-	<div class="form-group">
-		<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "Password" %>
-	</div> 
+		<h1>自由塾</h1>
+		<div class="form-group">
+			<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "Email address" %>
+		</div>
 
-	<div class="form-group">
-		<%= label_tag :remember_me do %>
-			<%= check_box_tag :remember_me,'yes', 'no' %>
-			<span>パスワードを保存する</span>
-		<% end %>
-	</div>
+		<div class="form-group">
+			<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "Password" %>
+		</div> 
 
-	<%= f.submit 'ログイン', disable_with: '処理中...' , class: "btn btn-block btn-sub" %>
+		<div class="form-group">
+			<%= label_tag :remember_me do %>
+				<%= check_box_tag :remember_me,'yes', 'no' %>
+				<span>パスワードを保存する</span>
+			<% end %>
+		</div>
 
-<% end %>
+		<%= f.submit 'ログイン', disable_with: '処理中...' , class: "btn btn-block btn-sub" %>
+
+	<% end %>
 </div>

@@ -1,27 +1,32 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 keiichi:
+  grade: 大学2年生
   name: keiichi
   email: keiichi@example.com
   password_digest: <%= Student.digest('keiichi') %>
 
 kai:
+  grade: 大学1年生
   name: kai
   email: kai@example.com
   password_digest: <%= Student.digest('kai') %>
 
 michael:
-  name: Michael Example
+  grade: 年少
+  name: michael
   email: michael@example.com
   password_digest: <%= Student.digest('password') %>
 
 archer:
-  name: Sterling Archer
+  grade: 年中
+  name: archer
   email: duchess@example.gov
   password_digest: <%= Student.digest('password') %>
 
 <% 30.times do |n| %>
 student_<%= n %>:
+  grade: 中学1年生
   name:  <%= "Student #{n}" %>
   email: <%= "student-#{n}@example.com" %>
   password_digest: <%= Student.digest('password') %>

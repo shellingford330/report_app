@@ -18,23 +18,25 @@
                 </tr>
               </thead>
               <tbody>
-								<% @students.each do |student| %>
-                	<tr>	
-										<td><%= student.name %></td>
-										<td class="d-none d-lg-table-cell"><%= student.email %></td>
-										<td><%= link_to '編集', edit_student_path(student) %></td>
-										<td><%= link_to '削除', student, method: :delete, data: { confirm: '本当によろしいですか？'} %></td>
-										<td>
-                      <%= link_to student, class: "btn btn-view" do %>
-                        <i class="fas fa-angle-double-right"></i> 詳細
-                      <% end %>
-                  	</td>
-									</tr>
-								<% end %>
+                <% Student.grades.each do |grade|%>
+                  <% @students.where(grade: grade).each do |student|%>
+                    <tr>	
+                      <td><%= student.name %></td>
+                      <td class="d-none d-lg-table-cell"><%= student.email %></td>
+                      <td><%= link_to '編集', edit_student_path(student) %></td>
+                      <td><%= link_to '削除', student, method: :delete, data: { confirm: '本当によろしいですか？'} %></td>
+                      <td>
+                        <%= link_to student, class: "btn btn-view" do %>
+                          <i class="fas fa-angle-double-right"></i> 詳細
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                <% end %>
               </tbody>
             </table>
           </div>
-          <%= will_paginate @students, :previous_label => '&laquo', :next_label => '&raquo' %>
+          <%#= will_paginate @students, :previous_label => '&laquo', :next_label => '&raquo' %>
         </div>
         
 

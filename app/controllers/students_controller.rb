@@ -6,7 +6,8 @@ class StudentsController < ApplicationController
 	before_action :initialize_student,only: [:new, :login_form]
 	before_action :new_student,       only: [:create, :login]
 	def index
-		@students = Student.paginate(page: params[:page], per_page: 10)
+		#@students = Student.paginate(page: params[:page], per_page: 10)
+		@students = Student.all
 	end
 
 	def	new
@@ -67,7 +68,7 @@ class StudentsController < ApplicationController
 
 	private
 		def	student_params
-			params.require(:student).permit(:name, :email, :password, :password_confirmation)
+			params.require(:student).permit(:name, :grade, :email, :password, :password_confirmation)
 		end
 
 		# beforeアクション

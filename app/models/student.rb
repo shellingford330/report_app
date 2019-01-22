@@ -3,6 +3,7 @@ class Student < ApplicationRecord
 	has_secure_password
 	before_save { self.email.downcase! }
 
+	validates :grade, { presence: true }
 	validates :name,  { presence: true, length: { maximum: 50 } }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, { presence: true, length: { maximum: 255 },
@@ -38,5 +39,12 @@ class Student < ApplicationRecord
 	def authenticated?(remember_token)
 		return false if self.remember_digest.nil?
 		BCrypt::Password.new(remember_digest).is_password?(remember_token)
+	end
+
+	# 全部の学年を配列で返す
+	def Student.grades
+		[ "年少", "年中", "年長", "小学1年生", "小学2年生", "小学3年生", "小学4年生", "小学5年生", "小学6年生",
+			"中学1年生", "中学2年生", "中学3年生", "高校1年生", "高校2年生", "高校3年生", "大学1年生", "大学2年生", 
+			"大学3年生", "大学4年生", ]
 	end
 end
