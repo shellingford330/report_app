@@ -1,6 +1,5 @@
-
 <%= form_for(student) do |f| %>
-	<%= render 'share/error_messages', obj: student%>
+	<%= render 'share/error_messages', user: student%>
 	<div class="form-group">
 		<%= f.label :name, '氏名'%>
 		<%= f.text_field :name, class: "form-control form-control-lg", placeholder: "Name"%>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+owner:
+  name: owner
+  email: owner@example.com
+  status: 0
+  password_digest: owner
+
+manager:
+  name: manager
+  email: manager@example.com
+  status: 1
+  password_digest: manager
+
+teacher:
+  name: teacher
+  email: teacher@exapmle.com
+  status: 2
+  password_digest: teacher

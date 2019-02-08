@@ -1,0 +1,16 @@
+<% provide(:title, "個人設定")%>
+<% provide(:btn_text, "変更する")%>
+<div class="container">
+	<div class="row">
+		<div class="col-md-9 mx-auto">
+			<div class="card shadow-sm">
+				<div class="card-header">
+					<h2>個人情報を変更する</h2>
+				</div>
+				<div class="card-body">
+					<%= render 'form', teacher: @teacher %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

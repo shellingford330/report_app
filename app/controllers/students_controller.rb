@@ -24,7 +24,7 @@ class StudentsController < ApplicationController
 			flash[:success] = "生徒が作成されました"
 			redirect_to @student
 		else
-			flash.now[:danger] = "作成し直してください"
+			flash.now[:danger] = "失敗しました"
 			render 'new'
 		end
 	end
