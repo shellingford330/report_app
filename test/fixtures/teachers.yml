@@ -4,7 +4,7 @@ owner:
   name: owner
   email: owner@example.com
   status: 0
-  password_digest: owner
+  password_digest: jyukuowner
 
 manager:
   name: manager

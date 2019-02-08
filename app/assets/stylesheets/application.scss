@@ -29,6 +29,10 @@ body {
 .btn {
   background: #6078bd; /*ボタン色*/
   color: #fff;
+  &:hover {
+    background: #8197d6; /*ボタンにカーソルのせた色*/
+    color: #fff;
+  }
 }
 
 .btn-sub {
@@ -37,10 +41,6 @@ body {
   text-decoration: none;
   border-bottom: solid 4px #627295; /*ボタン下の色*/
   border-radius: 5px;
-  &:hover {
-    background: #6f83bf; /*ボタンにカーソルのせた色*/
-    color: #fff;
-  }
   &:active {
     -ms-transform: translateY(4px);
     -webkit-transform: translateY(4px);
@@ -252,6 +252,9 @@ a:focus {
   color: #4d3a34;
   transition: all 0.3s;
   overflow-y: scroll;
+  .fa-graduation-cap {
+    color: #88685e;
+  }
   .fa-users {
     color: #88685e;
   }

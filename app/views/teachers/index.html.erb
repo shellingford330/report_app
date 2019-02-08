@@ -1,33 +1,85 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, "講師一覧")%>
+  <section id="posts">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 mb-3">
+          <div class="card">
+            <div class="card-header">
+              <h4>講師一覧</h4>
+            </div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>講師氏名</th>
+                  <th  class="d-none d-lg-table-cell">メールアドレス</th>
+                  <th>権限</th>
+                  <th>削除</th>
+									<th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @teachers.each do |teacher| %>
+                  <tr>	
+                    <td><%= teacher.name %></td>
+                    <td class="d-none d-lg-table-cell"><%= teacher.email %></td>
+                    <td><%= teacher.status %></td>
+                    <td><%= link_to '削除', teacher, method: :delete, data: { confirm: '本当によろしいですか？'} %></td>
+                    <td>
+                      <%= link_to teacher, class: "btn" do %>
+                        <i class="fas fa-angle-double-right"></i> 詳細
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <%= will_paginate @teachers, :previous_label => '&laquo', :next_label => '&raquo' %>
+        </div>
+        
 
-<h1>Teachers</h1>
+        <div class="col-md-3">
+          <div class="card text-center card-bg-blue mb-3">
+            <div class="card-body">
+              <h3>指導報告書</h3>
+              <h4 class="display-4">
+                <i class="fas fa-pencil-alt"></i> 6
+              </h4>
+              <%= link_to '見る', teachers_path, class: "btn btn-view-blue" %>
+            </div>
+          </div>
+         
+          <div class="card text-center card-bg-brown mb-3">
+            <div class="card-body">
+              <h3>生徒一覧</h3>
+              <h4 class="display-4">
+                <i class="fas fa-users"></i> <%= sum_students %>
+              </h4>
+              <%= link_to '見る', students_path, class: "btn btn-view-brown" %>
+            </div>
+          </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Status</th>
-      <th>Password digest</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+          <div class="card text-center card-bg-pink mb-3">
+            <div class="card-body">
+              <h3>お知らせ</h3>
+              <h4 class="display-4">
+                <i class="fas fa-clipboard"></i> 6
+              </h4>
+              <%= link_to '見る', teachers_path, class: "btn btn-view-pink" %>
+            </div>
+          </div>
 
-  <tbody>
-    <% @teachers.each do |teacher| %>
-      <tr>
-        <td><%= teacher.name %></td>
-        <td><%= teacher.email %></td>
-        <td><%= teacher.status %></td>
-        <td><%= teacher.password_digest %></td>
-        <td><%= link_to 'Show', teacher %></td>
-        <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-        <td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <div class="card text-center card-bg-green mb-3">
+            <div class="card-body">
+              <h3>お問い合わせ</h3>
+              <h4 class="display-4">
+                <i class="fas fa-envelope"></i> 6
+              </h4>
+              <%= link_to '見る', teachers_path, class: "btn btn-view-green" %>
+            </div>
+          </div>
 
-<br>
-
-<%= link_to 'New Teacher', new_teacher_path %>
+        </div>
+      </div>
+    </div>
+  </section>

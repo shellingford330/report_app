@@ -1,7 +1,7 @@
 <% provide(:title, @student.name)%>
 <div class="container">
 	<p>
-		<strong>生徒名</strong>
+		<strong>氏名</strong>
 		<%= @student.name %>
 	</p>
 	<p>
@@ -12,4 +12,6 @@
 		<strong>メールアドレス</strong>
 		<%= @student.email %>
 	</p>
+	<%= link_to '編集する', edit_student_path(@student) , class: "btn"%> |
+  <%= link_to '戻る', students_path, class: "btn" %>
 </div>

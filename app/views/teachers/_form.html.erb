@@ -1,6 +1,6 @@
 <%= form_for(teacher) do |f| %>
   <%= render 'share/error_messages', user: teacher %>
-  <div class="form-gruop">
+  <div class="form-group">
     <%= f.label :name, '氏名'%>
     <%= f.text_field :name, class: "form-control form-control-lg", placeholder: "Name" %>
   </div>
@@ -12,7 +12,7 @@
 
   <div class="form-group">
     <%= f.label :status, '教師の権限' %>
-    <%= f.select :status, { "オーナー" => 0, "管理者" => 1, "教師" => 2 }, { include_blank: '選択して下さい' }, class: "form-control form-control-lg", placeholder: "Authority" %>
+    <%= f.select :status, { "オーナー" => 0, "管理者" => 1, "講師" => 2 }, { include_blank: '選択して下さい' }, class: "form-control form-control-lg", placeholder: "Authority" %>
   </div>
 
   <% unless teacher.new_record? %>

@@ -1,24 +1,17 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @teacher.name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @teacher.email %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @teacher.status %>
-</p>
-
-<p>
-  <strong>Password digest:</strong>
-  <%= @teacher.password_digest %>
-</p>
-
-<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
-<%= link_to 'Back', teachers_path %>
+<% provide(:title, @teacher.name)%>
+<div class="container">
+	<p>
+		<strong>氏名</strong>
+		<%= @teacher.name %>
+	</p>
+  <p>
+		<strong>メールアドレス</strong>
+		<%= @teacher.email %>
+	</p>
+	<p>
+		<strong>講師権限</strong>
+		<%= @teacher.status %>
+	</p>
+  <%= link_to '編集する', edit_teacher_path(@teacher) , class: "btn"%> |
+  <%= link_to '戻る', teachers_path, class: "btn" %>
+</div>

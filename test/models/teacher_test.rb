@@ -2,7 +2,8 @@ require 'test_helper'
 
 class TeacherTest < ActiveSupport::TestCase
   setup do
-    @teacher = teachers(:owner)
+    @teacher = Teacher.new( name: "keiichi", email: "keiichi@example.com", status: 2,
+     password: "keiichi", password_confirmation: "keiichi" )
   end
 
   test "name should be present" do
@@ -42,4 +43,13 @@ class TeacherTest < ActiveSupport::TestCase
     assert_equal address.downcase, @teacher.reload.email
   end
 
+  test "password should be present" do
+    @teacher.password = @teacher.password_confirmation = " " * 6
+    assert_not @teacher.valid?
+  end
+
+  test "password should have at least 6 length" do
+    @teacher.password = @teacher.password_confirmation = "a" * 5
+    assert_not @teacher.valid?
+  end
 end
