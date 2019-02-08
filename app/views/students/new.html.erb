@@ -1,9 +1,16 @@
-<% provide(:title, "生徒登録")%>
-<% provide(:btn_text, "保存")%>
+<% provide(:title, "生徒作成")%>
+<% provide(:btn_text, "作成する")%>
 <div class="container">
-	<h1>生徒登録</h1>
-
-	<%= render 'form', student: @student %>
-
-	<%= link_to '生徒一覧へ戻る', students_path %>
+	<div class="row">
+		<div class="col-md-9 mx-auto">
+			<div class="card shadow-sm">
+				<div class="card-header">
+					<h2>生徒登録</h2>
+				</div>
+				<div class="card-body">
+					<%= render 'form', student: @student %>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

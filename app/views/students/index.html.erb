@@ -18,7 +18,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% Student.grades.each do |grade|%>
+                <% Student.grades.each do |grade| %>
                   <% @students.where(grade: grade).each do |student|%>
                     <tr>	
                       <td><%= student.name %></td>

@@ -1,9 +1,16 @@
-<% provide(:title, "編集")%>
-<% provide(:btn_text, "更新")%>
+<% provide(:title, "個人設定")%>
+<% provide(:btn_text, "変更する")%>
 <div class="container">
-	<h1>ユーザー名</h1>
-
-	<%= render 'form', student: @student %>
-
-	<%= link_to '生徒一覧へ', students_path %>
+	<div class="row">
+		<div class="col-md-9 mx-auto">
+			<div class="card shadow-sm">
+				<div class="card-header">
+					<h2><%= @student.name %></h2>
+				</div>
+				<div class="card-body">
+					<%= render 'form', student: @student %>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

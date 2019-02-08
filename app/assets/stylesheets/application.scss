@@ -15,14 +15,6 @@
 @import "bootstrap";
 /* 鈴木担当編集 */
 
-/*-- errors_message --*/
-#error_explanation {
-  ul {
-    color: #bb0000;
-    margin: 0 0 30px 0;
-  }
-}
-
 html {
   height: 100%;
 }
@@ -110,7 +102,7 @@ a:focus {
 .btn-view-pink {
   background: #f3b4aa;
   &:hover {
-    background: #fff;
+    color: #f3b4aa;
   }
 }
 
@@ -223,20 +215,29 @@ a:focus {
 /*-- navbar --*/
 .navbar {
   background: rgb(245, 245, 245);
+  transition: 0.3s;
   .btn:hover {
     background-color: #fff;
-    color: #000;
+    color: #6078bd;
+    border: solid 1px #6078bd;
+  }
+  .navbar-brand {
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+  .navbar-toggler {
+    padding: 0;
+  }
+  .profile-icon {
+    width: 34px;
+    border: 2px solid #4d3a34;
+    border-radius: 50%;
+    vertical-align: middle;
   }
 }
-.navbar-brand {
-  margin-left: 10px;
-}
 
-.profile-icon {
-  width: 34px;
-  border: 2px solid #4d3a34;
-  border-radius: 50%;
-  vertical-align: bottom;
+.navbar.hide {
+  transform: translateY(-60px);
 }
 
 /*-- sidebar --*/
@@ -248,7 +249,7 @@ a:focus {
   height: 100vh;
   z-index: 2000;
   background: rgb(245, 245, 245);
-  color: rgb(66, 66, 66);
+  color: #4d3a34;
   transition: all 0.3s;
   overflow-y: scroll;
   .fa-users {
@@ -276,7 +277,7 @@ a:focus {
   line-height: 35px;
   text-align: center;
   background: #6078bd;
-  color: rgb(231, 231, 231);
+  color: rgb(238, 238, 238);
   position: absolute;
   top: 10px;
   right: 10px;
@@ -287,6 +288,7 @@ a:focus {
   &:hover {
     background: #fff;
     color: #7386d5;
+    border: solid 1px #6078bd;
   }
 }
 
@@ -307,13 +309,14 @@ a:focus {
 
 #sidebar .sidebar-header {
   padding: 20px 20px 13px 20px;
-  background: rgb(230, 230, 230);
+  background: rgb(240, 240, 240);
   color: #4d3a34;
+  border-bottom: 1px solid #dadada;
 }
 
 #sidebar ul.components {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #838383;
+  padding: 10px 0px;
+  border-bottom: 1px solid #b3b1b1;
 }
 
 #sidebar ul p {
@@ -328,14 +331,14 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-  color: #2e353d;
+  color: #4d3a34;
   background: #fff;
 }
 
 #sidebar ul li.active > a,
 a[aria-expanded="true"] {
   color: #4d3a34;
-  background: rgb(222, 222, 222);
+  background: rgb(235, 235, 235);
 }
 
 a[data-toggle="collapse"] {
@@ -345,7 +348,7 @@ a[data-toggle="collapse"] {
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: rgb(222, 222, 222);
+  background: rgb(235, 235, 235);
 }
 
 /* 末包担当編集 */
@@ -390,7 +393,7 @@ ul ul a {
 .google {
   color: red;
 }
-/*メニューバー*/
+/*メニューバー*/ /*
 header ul {
   width: 1000px;
   overflow: hidden;
@@ -414,7 +417,7 @@ header a {
 header a:hover {
   background-color: #c58;
 }
-/*指導報告書*/
+/*指導報告書*/ /*
 .report {
   font-size: 10px;
 }
@@ -426,7 +429,36 @@ textarea {
   text-align: center;
 }
 
-/*塾からのお知らせ*/
+/*塾からのお知らせ*/ /*
 .news ul {
   border: 2px, solid, black;
 }
+
+.mb-0 > .btn {
+  border: 1px solid #4d3a34;
+  text-decoration: none;
+}
+.mb-0 > .btn:hover {
+  background-color: #fff;
+  color: #000;
+  text-decoration: none;
+}
+.btn-view {
+  border: 1px solid #4d3a34;
+  text-decoration: none;
+}
+.btn-view:hover {
+  background-color: #fff;
+  color: #000;
+  text-decoration: none;
+}
+.mystatus > h1 {
+  text-align: center;
+}
+h1 > .btn {
+  background: #f4f0ec;
+  color: black;
+  padding: 10px;
+  font-size: 40px;
+}
+*/

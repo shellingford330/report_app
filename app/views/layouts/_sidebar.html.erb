@@ -9,12 +9,12 @@
         </div>
 
         <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+            <li class="">
+                <a href="#studentSubmenu" data-toggle="collapse" aria-expanded="false">
                     <i class="fas fa-users"></i>          生徒
-                    <i class="arrow fa fa-angle-right float-right mt-1"></i>
+                    <i class="arrow fa fa-angle-down float-right mt-1"></i>
                 </a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
+                <ul class="collapse list-unstyled" id="studentSubmenu">
                     <li>
                         <%= link_to '生徒一覧', students_path %>
                     </li>
@@ -27,11 +27,11 @@
                 <a href="">
                     <i class="far fa-clipboard"></i>          お知らせ
                 </a>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false">
                     <i class="far fa-file-alt"></i>          指導報告書
-                    <i class="arrow fa fa-angle-right float-right mt-1"></i>
+                    <i class="arrow fa fa-angle-down float-right mt-1"></i>
                 </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
+                <ul class="collapse list-unstyled" id="reportSubmenu">
                     <li>
                         <a href="">新規作成</a>
                     </li>

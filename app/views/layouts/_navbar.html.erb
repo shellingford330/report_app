@@ -1,14 +1,16 @@
-<nav class="navbar navbar-expand-lg border-bottom border-secondary fixed-top">
+<nav class="navbar navbar-expand-sm border-bottom border-secondary fixed-top">
   <div class="container">
-    <button type="button" id="sidebarCollapse" class="btn btn-outline-dark">
-      <i class="fas fa-align-left"></i>
-    </button>
-    <a href="https://jiyujyuku.com" rel="noopener" class="navbar-brand ml-100" target="_blank">自由塾</a>
+    <div>
+      <button type="button" id="sidebarCollapse" class="btn">
+        <i class="fas fa-align-left"></i>
+      </button>
+      <a href="/" rel="noopener" class="navbar-brand" target="_blank">自由塾</a>
+    </div>
     <span class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <%= image_tag 'profile-icon.png', class: "profile-icon" %>
     </span>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="nav navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <%= link_to current_student, class: "nav-link" do %>
             <i class="fas fa-user"></i> マイページ
