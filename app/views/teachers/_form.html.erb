@@ -7,14 +7,12 @@
 
   <div class="form-group">
     <%= f.label :email, 'メールアドレス' %>
-    <%= f.text_field :email, class: "form-control form-control-lg", placeholder: "Email" %>
+    <%= f.email_field :email, class: "form-control form-control-lg", placeholder: "Email" %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :status, '教師の権限' %>
-    <%= f.select :status, { "オーナー" => 0, "管理者" => 1, "講師" => 2 }, { include_blank: '選択して下さい' }, class: "form-control form-control-lg", placeholder: "Authority" %>
-  </div>
+    
 
+  
   <% unless teacher.new_record? %>
       <p class="text-danger">※パスワードを変更しない場合は、以下の欄を空にして更新して下さい。</p>
   <% end %>

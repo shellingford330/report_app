@@ -3,8 +3,8 @@
 owner:
   name: owner
   email: owner@example.com
-  status: 0
-  password_digest: jyukuowner
+  status: 2
+  password_digest: jiyujyuku
 
 manager:
   name: manager
@@ -15,5 +15,5 @@ manager:
 teacher:
   name: teacher
   email: teacher@exapmle.com
-  status: 2
+  status: 0
   password_digest: teacher

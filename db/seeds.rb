@@ -6,79 +6,51 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Student.create!( grade: "大学4年生",
-								 name: "owner", 
-								 email: "owner@jiyujyuku.com",
+owner = Teacher.new( status: 2,
+								 name: "オーナー", 
+								 email: "owner@example.com",
 								 password: "jiyujyuku",
 								 password_confirmation: "jiyujyuku" )
+owner.save(validate: false)
 
-(0..3).each do |n|
+Teacher.create!( status: 1,
+								 name: "管理者", 
+								 email: "manager@example.com",
+								 password: "manager",
+								 password_confirmation: "manager" )
+
+Teacher.create!( status: 0,
+								 name: "講師", 
+								 email: "teacher@exapmle.com",
+								 password: "teacher",
+								 password_confirmation: "teacher" )
+
+50.times do |n|
 	name = Faker::Name.name
-	email = "student#{n+1}@jiyujyuku.com"
+	email = "teacher#{n+1}@example.com"
 	password = "password"
-	Student.create!( grade: "年少",
-									name: name,
-									email: email,
-									password: password,
-									password_confirmation: password )
+	Teacher.create!( status: 0,
+								 name: name, 
+								 email: email,
+								 password: password,
+								 password_confirmation: password )
 end
-(4..6).each do |n|
+
+Student.create!( grade: "年少",
+								 name: "生徒代表", 
+								 email: "student@example.com",
+								 password: "student",
+								 password_confirmation: "student" )
+
+50.times do |n|
 	name = Faker::Name.name
-	email = "student#{n+1}@jiyujyuku.com"
+	email = "student#{n+1}@example.com"
+	grades = Student.grades
 	password = "password"
-	Student.create!( grade: "年中",
-									name: name,
-									email: email,
-									password: password,
-									password_confirmation: password )
+	Student.create!( grade: grades[n%19],
+								 name: name, 
+								 email: email,
+								 password: password,
+								 password_confirmation: password )
 end
-(7..10).each do |n|
-	name = Faker::Name.name
-	email = "student#{n+1}@jiyujyuku.com"
-	password = "password"
-	Student.create!( grade: "年長",
-									name: name,
-									email: email,
-									password: password,
-									password_confirmation: password )
-end
-(11..20).each do |n|
-	name = Faker::Name.name
-	email = "student#{n+1}@jiyujyuku.com"
-	password = "password"
-	Student.create!( grade: "小学#{n%3+1}年生",
-									 name: name,
-									 email: email,
-									 password: password,
-									 password_confirmation: password )
-end
-(21..30).each do |n|
-	name = Faker::Name.name
-	email = "student#{n+1}@jiyujyuku.com"
-	password = "password"
-	Student.create!( grade: "中学#{n%3+1}年生",
-									 name: name,
-									 email: email,
-									 password: password,
-									 password_confirmation: password )
-end
-(31..40).each do |n|
-	name = Faker::Name.name
-	email = "student#{n+1}@jiyujyuku.com"
-	password = "password"
-	Student.create!( grade: "高校#{n%3+1}年生",
-									 name: name,
-									 email: email,
-									 password: password,
-									 password_confirmation: password )
-end
-(41..50).each do |n|
-	name = Faker::Name.name
-	email = "student#{n+1}@jiyujyuku.com"
-	password = "password"
-	Student.create!( grade: "大学#{n%3+1}年生",
-									 name: name,
-									 email: email,
-									 password: password,
-									 password_confirmation: password )
-end
+

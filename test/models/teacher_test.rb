@@ -2,8 +2,8 @@ require 'test_helper'
 
 class TeacherTest < ActiveSupport::TestCase
   setup do
-    @teacher = Teacher.new( name: "keiichi", email: "keiichi@example.com", status: 2,
-     password: "keiichi", password_confirmation: "keiichi" )
+    @teacher = Teacher.new( name: "keiichi", email: "keiichi@example.com", status: :teacher, 
+      password: "keiichi", password_confirmation: "keiichi" )
   end
 
   test "name should be present" do
@@ -37,7 +37,7 @@ class TeacherTest < ActiveSupport::TestCase
   end
   
   test "email should change into downcase before save" do
-    address = "FOObar@exaPle.Com"
+    address = "FOObar@examPle.Com"
     @teacher.email = address
     @teacher.save
     assert_equal address.downcase, @teacher.reload.email
@@ -52,4 +52,10 @@ class TeacherTest < ActiveSupport::TestCase
     @teacher.password = @teacher.password_confirmation = "a" * 5
     assert_not @teacher.valid?
   end
+
+  test "status should include in teacher and manager" do
+    @teacher.status = :owner
+    assert @teacher.invalid?
+  end
+
 end
