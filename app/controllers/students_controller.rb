@@ -53,10 +53,10 @@ class StudentsController < ApplicationController
 		if student && student.authenticate(params[:student][:password])
 			student_log_in(student)
 			params[:remember_me] == 'yes' ? remember_student(student) : forget_student(student)
-			flash[:success] = "ログインしました"
+			flash[:notice] = "ログインしました"
 			redirect_back_to student_path(student)
 		else
-			flash.now[:danger] = "入力情報を確認して下さい"
+			flash.now[:danger] = "入力情報をご確認ください"
 			render 'login_form'
 		end
 	end
