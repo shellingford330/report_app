@@ -83,7 +83,8 @@ a:focus {
 .btn-view-green,
 .btn-view-pink,
 .btn-view-brown,
-.btn-view-blue {
+.btn-view-blue,
+.btn-view-orange {
   display: inline-block;
   text-decoration: none;
   border: solid 1px #fff;
@@ -120,6 +121,20 @@ a:focus {
   }
 }
 
+.btn-view-brown {
+  background: #b08274;
+  &:hover {
+    color: #b08274;
+  }
+}
+
+.btn-view-orange {
+  background: #9f9f9f;
+  &:hover {
+    color: #9f9f9f;
+  }
+}
+
 .card-bg-green {
   color: #fff;
   background: #9bcd76;
@@ -138,6 +153,11 @@ a:focus {
 .card-bg-brown {
   color: #fff;
   background: #b08274;
+}
+
+.card-bg-orange {
+  color: #fff;
+  background: #9f9f9f;
 }
 
 /*-- ページネーション --*/
@@ -253,7 +273,7 @@ a:focus {
   transition: all 0.3s;
   overflow-y: scroll;
   .fa-graduation-cap {
-    color: #88685e;
+    color: #eb8f16;
   }
   .fa-users {
     color: #88685e;

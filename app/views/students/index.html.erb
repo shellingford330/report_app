@@ -38,19 +38,18 @@
           </div>
           <%#= will_paginate @students, :previous_label => '&laquo', :next_label => '&raquo' %>
         </div>
-        
 
-        <div class="col-md-3">
-          <div class="card text-center card-bg-blue mb-3">
+         <div class="col-md-3">
+          <div class="card text-center card-bg-orange mb-3">
             <div class="card-body">
-              <h3>指導報告書</h3>
+              <h3>生徒一覧</h3>
               <h4 class="display-4">
-                <i class="fas fa-pencil-alt"></i> 6
+                <i class="fas fa-graduation-cap"></i> <%= Student.count %>
               </h4>
-              <%= link_to '見る', students_path, class: "btn btn-view-blue" %>
+              <%= link_to '見る', students_path, class: "btn btn-view-orange" %>
             </div>
           </div>
-         
+
           <div class="card text-center card-bg-brown mb-3">
             <div class="card-body">
               <h3>講師一覧</h3>
@@ -60,6 +59,18 @@
               <%= link_to '見る', teachers_path, class: "btn btn-view-brown" %>
             </div>
           </div>
+
+          <div class="card text-center card-bg-blue mb-3">
+            <div class="card-body">
+              <h3>指導報告書</h3>
+              <h4 class="display-4">
+                <i class="fas fa-pencil-alt"></i> 6
+              </h4>
+              <%= link_to '見る', students_path, class: "btn btn-view-blue" %>
+            </div>
+          </div>
+        
+
 
           <div class="card text-center card-bg-pink mb-3">
             <div class="card-body">

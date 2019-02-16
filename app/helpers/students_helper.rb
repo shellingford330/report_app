@@ -61,6 +61,6 @@ module StudentsHelper
 
 	# 生徒の合計人数を返す
 	def	sum_students
-		Student.all.length
+		Student.count
 	end
 end

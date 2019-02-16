@@ -34,7 +34,7 @@ class StudentsController < ApplicationController
 			flash[:success] = "更新しました"
 			redirect_to @student
 		else
-			flash.now[:danger] = "入力情報を確認してください"
+			flash.now[:danger] = "入力情報をご確認下さい"
 			render 'edit'
 		end
 	end
@@ -42,7 +42,7 @@ class StudentsController < ApplicationController
 	def destroy
 		@student.destroy
 		flash[:success] = "生徒が削除されました"
-		redirect_to students_path
+		redirect_to students_url
 	end
 
 	def	login_form
@@ -56,7 +56,7 @@ class StudentsController < ApplicationController
 			flash[:notice] = "ログインしました"
 			redirect_back_to student_path(student)
 		else
-			flash.now[:danger] = "入力情報をご確認ください"
+			flash.now[:danger] = "入力情報をご確認下さい"
 			render 'login_form'
 		end
 	end

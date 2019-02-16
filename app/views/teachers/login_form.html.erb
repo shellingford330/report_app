@@ -1,8 +1,8 @@
-<% provide(:title, "生徒ログイン")%>
+<% provide(:title, "ログイン(講師)")%>
 <div class="login">
-	<%= form_for(@student, url: '/students/login', html: { class: 'login-form' , method: :post }) do |f| %>
+	<%= form_for(@teacher, url: '/teachers/login', html: { class: 'login-form' , method: :post }) do |f| %>
 
-		<h1>自由塾</h1>
+		<h1>自由塾(講師)</h1>
 		<div class="form-group">
 			<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "Email address" %>
 		</div>
@@ -18,7 +18,7 @@
 			<% end %>
 		</div>
 
-		<%= f.submit 'ログイン', disable_with: '処理中...' , class: "btn btn-block btn-sub" %>
+		<%= f.submit 'ログインする', disable_with: '処理中...' , class: "btn btn-block btn-sub" %>
 
 	<% end %>
 </div>
