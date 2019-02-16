@@ -21,11 +21,23 @@ class TeachersLoginTestTest < ActionDispatch::IntegrationTest
     assert_template 'teachers/login_form'
   end
 
-  test "teacher logput with valid" do
+  test "teacher logout with valid" do
     get teachers_login_path
     post teachers_login_path, params: { teacher: { email: @teacher.email, password: 'jiyujyuku' } }
+    assert_not session[:teacher_id].nil?
     delete teachers_logout_path
     assert session[:teacher_id].nil?
+    assert cookies['teacher_id'].nil?
     assert_redirected_to teachers_login_path
+  end
+
+  test "remember_me_box should be check" do
+    get teachers_login_path
+    post teachers_login_path, params: { teacher: { email: @teacher.email, password: 'jiyujyuku' },
+    remember_me: 'no' }
+    assert cookies['remember_token'].nil?
+    post teachers_login_path, params: { teacher: { email: @teacher.email, password: 'jiyujyuku' },
+    remember_me: 'yes' }
+    assert_not cookies['remember_token'].nil?
   end
 end

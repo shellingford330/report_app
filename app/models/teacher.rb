@@ -1,4 +1,5 @@
 class Teacher < ApplicationRecord
+	attr_accessor :remember_token
 	has_secure_password
 	before_save { self.email.downcase! }
 	enum status: { teacher: 0, manager: 1, owner: 2 }
@@ -25,5 +26,25 @@ class Teacher < ApplicationRecord
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
 	end
+
+	# ランダムな文字列を生成
+	def Teacher.new_token
+		SecureRandom.urlsafe_base64
+	end
+
+	# トークンを生成し、ハッシュ化した物をDBに保存
+	def remember
+		self.remember_token = Teacher.new_token
+		update_attribute(:remember_digest, Teacher.digest(remember_token))
+	end
+
+	# 講師に保存されているトークンを破棄
+	def forget
+		update_attribute(:remember_digest, nil)
+	end
 	
+	def authenticated?(remember_token)
+		return false if self.remember_digest.nil?
+		BCrypt::Password.new(remember_digest).is_password?(remember_token)
+	end
 end

@@ -50,6 +50,7 @@ class TeachersController < ApplicationController
 		if teacher && teacher.authenticate(params[:teacher][:password])
       flash[:notice] = "ログインしました"
       teacher_log_in(teacher)
+      params[:remember_me] == 'yes' ? remember_teacher(teacher) : forget_teacher(teacher)
 			redirect_back_to teacher
 		else
 			flash.now[:danger] = "入力情報をご確認下さい"
@@ -58,7 +59,7 @@ class TeachersController < ApplicationController
   end
 
   def logout
-    teacher_log_out
+    teacher_log_out if teacher_logged_in?
     redirect_to teachers_login_path
   end
 

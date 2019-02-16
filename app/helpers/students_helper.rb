@@ -25,7 +25,7 @@ module StudentsHelper
 		cookies.delete(:remember_token)
 	end
 
-	# ログインしている生徒がいればそのユーザーを、していない場合nilを返す
+	# ログインしている生徒がいればその生徒を、していない場合nilを返す
 	def	current_student
 		if (student_id = session[:student_id])
 			@current_student ||= Student.find_by(id: student_id)
