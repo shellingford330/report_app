@@ -20,17 +20,12 @@
   </head>
 
   <body>
-    <% unless student_logged_in? %>
+    <%= render 'layouts/sidebar' %>
+    <div id="content">
       <%= render 'layouts/flash' %>
+      <%= render 'layouts/navbar' %>
       <%= yield %>
-    <% else %>    
-      <%= render 'layouts/sidebar' %>
-      <div id="content">
-        <%= render 'layouts/flash' %>
-        <%= render 'layouts/navbar' %>
-        <%= yield %>
-      </div>
-    <% end %>
+    </div>
     <!-- Dark Overlay element -->
     <div class="overlay"></div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
@@ -73,7 +68,7 @@
         startPos = winScrollTop;
       });
     });
-</script>
+    </script>
   </body>
   
 </html>

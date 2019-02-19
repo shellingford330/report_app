@@ -11,20 +11,6 @@ module StudentsHelper
 		@current_student = nil
 	end
 
-	# 渡された生徒をcookiesに保存する
-	def remember_student(student)
-		student.remember
-		cookies.permanent.signed[:student_id] = student.id
-		cookies.permanent[:remember_token] = student.remember_token
-	end
-
-	# 渡された生徒のcookiesを削除する
-	def	forget_student(student)
-		student.forget
-		cookies.delete(:student_id)
-		cookies.delete(:remember_token)
-	end
-
 	# ログインしている生徒がいればその生徒を、していない場合nilを返す
 	def	current_student
 		if (student_id = session[:student_id])
@@ -38,7 +24,7 @@ module StudentsHelper
 		end
 	end
 
-	# ログインしている生徒がいればtureを、していない場合falseを返す
+	# ログインしている生徒がいればteを、していない場合falseを返す
 	def student_logged_in?
 		!current_student.nil?
 	end
@@ -48,16 +34,21 @@ module StudentsHelper
 		student == current_student
 	end
 
-	# アクセスしようとしたURL(なければデフォルト値)にリダイレクト
-	def redirect_back_to (default)
-		redirect_to (session[:forwarding_url] || default)
-		session.delete(:forwarding_url)
+
+	# 渡された生徒をcookiesに保存する
+	def remember_student(student)
+		student.remember
+		cookies.permanent.signed[:student_id] = student.id
+		cookies.permanent[:remember_token] = student.remember_token
 	end
 
-	# アクセスしようとしたURLを保存
-	def	store_location
-		session[:forwarding_url] = request.original_url if request.get?
+	# 渡された生徒のcookiesを削除する
+	def	forget_student(student)
+		student.forget
+		cookies.delete(:student_id)
+		cookies.delete(:remember_token)
 	end
+	
 
 	# 生徒の合計人数を返す
 	def	sum_students

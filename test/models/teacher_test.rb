@@ -55,7 +55,9 @@ class TeacherTest < ActiveSupport::TestCase
 
   test "status should include in teacher and manager" do
     @teacher.status = :owner
-    assert @teacher.invalid?
+    assert @teacher.valid?
+    @teacher.status = :manager
+    assert @teacher.valid?
   end
 
 end

@@ -61,4 +61,16 @@ class StudentsLoginTest < ActionDispatch::IntegrationTest
                                         remember_me: 'no' }
     assert_empty cookies['remember_token']
   end
+
+  test "students cant create and delete and index themselves" do
+    get students_login_path
+    post students_login_path, params: { student:  { email: @student.email,
+                                                    password: "keiichi" } ,
+                                        remember_me: 'yes' }
+    assert student_is_logged_in?
+    get students_path
+    assert_redirected_to teachers_login_path
+    get new_student_path
+    assert_redirected_to teachers_login_path
+  end
 end

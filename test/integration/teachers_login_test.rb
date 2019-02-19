@@ -36,8 +36,10 @@ class TeachersLoginTestTest < ActionDispatch::IntegrationTest
     post teachers_login_path, params: { teacher: { email: @teacher.email, password: 'jiyujyuku' },
     remember_me: 'no' }
     assert cookies['remember_token'].nil?
+    delete teachers_logout_path
     post teachers_login_path, params: { teacher: { email: @teacher.email, password: 'jiyujyuku' },
     remember_me: 'yes' }
     assert_not cookies['remember_token'].nil?
   end
+
 end

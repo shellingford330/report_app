@@ -5,7 +5,8 @@ class Teacher < ApplicationRecord
 	enum status: { teacher: 0, manager: 1, owner: 2 }
 	
 	validates :name,
-		presence: true
+		presence: true,
+		length: { maximum: 50, allow_nil: true }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email,
 		presence: true,
@@ -13,8 +14,8 @@ class Teacher < ApplicationRecord
 		format: { with: VALID_EMAIL_REGEX },
 		uniqueness: { case_sentive: false }
 	validates :status,
-		presence: true,
-		inclusion:{ in: [ "teacher", "manager" ] , allow_nil: true }
+		inclusion:{ in: [ "teacher", "manager" ] , allow_nil: true, 
+			unless: Proc.new { |teacher| teacher.status == 'owner'}  }
 	validates :password,
 		presence: true,
 		length: { minimum: 6, allow_nil: true },
@@ -43,6 +44,7 @@ class Teacher < ApplicationRecord
 		update_attribute(:remember_digest, nil)
 	end
 	
+	# 渡されたトークンがダイジェストと一致したらtrueを返す
 	def authenticated?(remember_token)
 		return false if self.remember_digest.nil?
 		BCrypt::Password.new(remember_digest).is_password?(remember_token)

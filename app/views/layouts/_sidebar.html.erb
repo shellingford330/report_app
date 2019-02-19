@@ -9,40 +9,43 @@
         </div>
 
         <ul class="list-unstyled components">
-            <li>
+            <% if teacher_logged_in? %>
+              <li>
                 <a href="#studentSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="fa fa-graduation-cap"></i>          生徒
-                    <i class="arrow fa fa-angle-down float-right mt-1"></i>
+                  <i class="fa fa-graduation-cap"></i>          生徒
+                  <i class="arrow fa fa-angle-down float-right mt-1"></i>
                 </a>
                 <ul class="collapse list-unstyled" id="studentSubmenu">
-                    <li>
-                        <%= link_to '生徒一覧', students_path %>
-                    </li>
-                    <li>
-                        <%= link_to '新規作成', new_student_path %>
-                    </li>
+                  <li>
+                    <%= link_to '生徒一覧', students_path %>
+                  </li>
+                  <li>
+                    <%= link_to_if current_teacher.status == "owner", '新規作成', new_student_path do end%>                    
+                  </li>
                 </ul>
-            </li>
-            <li>
+              </li>
+              <li>
                 <a href="#teacherSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="fas fa-users"></i>          講師
-                    <i class="arrow fa fa-angle-down float-right mt-1"></i>
+                  <i class="fas fa-users"></i>          講師
+                  <i class="arrow fa fa-angle-down float-right mt-1"></i>
                 </a>
                 <ul class="collapse list-unstyled" id="teacherSubmenu">
-                    <li>
-                        <%= link_to '講師一覧', teachers_path %>
-                    </li>
-                    <li>
-                        <%= link_to '新規作成', new_teacher_path %>
-                    </li>
+                  <li>
+                    <%= link_to '講師一覧', teachers_path %>
+                  </li>
+                  <li>
+                    <%= link_to_if current_teacher.status == "owner", '新規作成', new_teacher_path do end%>
+                  </li>
                 </ul>
-            </li>
+              </li>
+            <% end %>
             <li>
                 <a href="">
                     <i class="far fa-clipboard"></i>          お知らせ
                 </a>
             </li>
             <li>
+              <% if teacher_logged_in? %>
                 <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false">
                     <i class="far fa-file-alt"></i>          指導報告書
                     <i class="arrow fa fa-angle-down float-right mt-1"></i>
@@ -55,6 +58,11 @@
                         <a href="">報告書一覧</a>
                     </li>
                 </ul>
+              <% elsif student_logged_in? %>
+                <a href="">
+                  <i class="far fa-file-alt"></i>          指導報告書
+                </a>
+              <% end %>
             </li>
             <li>
                 <a href="">

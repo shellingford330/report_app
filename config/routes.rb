@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root   'students#login_form'
+  root   'teachers#index'
 
   get    '/students/login' => 'students#login_form'
   post   '/students/login'

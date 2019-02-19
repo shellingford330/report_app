@@ -1,7 +1,11 @@
 class TeachersController < ApplicationController
+  before_action :teacher_already_logged_in, only: [:login_form, :login]
+  before_action :teacher_logged_in,  only: [:index ,:new, :create, :show, :edit, :update, :destroy]
+  before_action :correct_teacher,    only: [:edit, :update]
+  before_action :owner_logged_in,    only: [:new, :create, :destroy]
   before_action :initialize_teacher, only: [:new, :login_form]
-  before_action :set_teacher,        only: [:show, :edit, :update, :destroy]
   before_action :new_teacher,        only: [:create, :login]
+  before_action :set_teacher,        only: [:show, :edit, :update, :destroy]
   def index
     @teachers = Teacher.paginate(page: params[:page], per_page: 10)
   end
@@ -18,7 +22,7 @@ class TeachersController < ApplicationController
   def create
     if @teacher.save
       redirect_to @teacher
-      flash[:success] =  '講師を作成しました' 
+      flash[:success] =  '講師が作成されました' 
     else
       flash.now[:danger] = "失敗しました"
       render 'new'
@@ -29,7 +33,7 @@ class TeachersController < ApplicationController
   def update
     if @teacher.update(teacher_params)
       redirect_to @teacher
-      flash[:success] =  'Teacher was successfully updated.'
+      flash[:success] =  '更新しました'
     else
       flash.now[:danger] = "入力情報をご確認下さい"
       render 'edit'
@@ -38,11 +42,12 @@ class TeachersController < ApplicationController
 
   def destroy
     @teacher.destroy
+    flash[:success] = '講師が削除されました'
     redirect_to teachers_url
-    flash[:success] = '講師を削除しました'
   end
 
   def login_form
+    render layout: 'login' 
   end
 
   def login
@@ -53,8 +58,8 @@ class TeachersController < ApplicationController
       params[:remember_me] == 'yes' ? remember_teacher(teacher) : forget_teacher(teacher)
 			redirect_back_to teacher
 		else
-			flash.now[:danger] = "入力情報をご確認下さい"
-			render 'login_form'
+      flash.now[:danger] = "入力情報をご確認下さい"
+      render 'login_form', layout: 'login'
 		end
   end
 
@@ -65,19 +70,34 @@ class TeachersController < ApplicationController
 
   private
     def teacher_params
-      params.require(:teacher).permit(:name, :email, :status, :password, :password_confirmation)
+      params.require(:teacher).permit(:name, :email, :password, :password_confirmation)
     end
 
     # before_action
-    def initialize_teacher
-      @teacher = Teacher.new
-    end
 
-    def new_teacher
-      @teacher = Teacher.new(teacher_params)
-    end
+    def initialize_teacher
+			@teacher = Teacher.new
+		end
+
+		def new_teacher
+			@teacher = Teacher.new(teacher_params)
+		end
 
     def set_teacher
       @teacher = Teacher.find(params[:id])
     end
+
+    # ログインを既にしているか確認
+		def teacher_already_logged_in
+			if teacher_logged_in?
+				redirect_to current_teacher
+			end
+		end
+    
+    # ログインしている講師であるか確認
+		def correct_teacher
+			@teacher = Teacher.find(params[:id])
+			redirect_to current_teacher unless correct_teacher?(@teacher)
+    end
+    
 end

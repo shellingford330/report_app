@@ -12,6 +12,5 @@
 		<strong>メールアドレス</strong>
 		<%= @student.email %>
 	</p>
-	<%= link_to '編集する', edit_student_path(@student) , class: "btn"%> |
-  <%= link_to '戻る', students_path, class: "btn" %>
+	<%= link_to_if student_logged_in?, '編集する', edit_student_path(@student) , class: "btn" do end%>
 </div>

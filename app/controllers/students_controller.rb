@@ -1,10 +1,14 @@
 class StudentsController < ApplicationController
 	before_action :student_already_logged_in, only: [:login_form, :login]
-	before_action :student_logged_in, only: [:index, :edit, :update, :destroy]
+	before_action :user_logged_in,    only: [:show] 
+	before_action :teacher_logged_in, only: [:index ,:new, :create, :destroy]
+	before_action :owner_logged_in,   only: [:new, :create, :destroy]
+	before_action :student_logged_in, only: [:edit, :update]
 	before_action :correct_student,   only: [:edit, :update]
 	before_action :set_student,       only: [:show, :destroy]
 	before_action :initialize_student,only: [:new, :login_form]
 	before_action :new_student,       only: [:create, :login]
+
 	def index
 		#@students = Student.paginate(page: params[:page], per_page: 10)
 		@students = Student.all
@@ -46,6 +50,7 @@ class StudentsController < ApplicationController
 	end
 
 	def	login_form
+		render layout: 'login'
 	end
 
 	def login
@@ -57,7 +62,7 @@ class StudentsController < ApplicationController
 			redirect_back_to student_path(student)
 		else
 			flash.now[:danger] = "入力情報をご確認下さい"
-			render 'login_form'
+			render 'login_form', layout: 'login'
 		end
 	end
 
