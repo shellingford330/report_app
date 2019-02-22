@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
 	before_action :student_already_logged_in, only: [:login_form, :login]
 	before_action :user_logged_in,    only: [:show] 
 	before_action :teacher_logged_in, only: [:index ,:new, :create, :destroy]
-	before_action :owner_logged_in,   only: [:new, :create, :destroy]
+	before_action :owner_logged_in,   only: [:new, :create, :destroy, :upgrade]
 	before_action :student_logged_in, only: [:edit, :update]
 	before_action :correct_student,   only: [:edit, :update]
 	before_action :set_student,       only: [:show, :destroy]
@@ -21,6 +21,18 @@ class StudentsController < ApplicationController
 	end
 
 	def edit
+	end
+
+	def upgrade
+		change_into_index = { "年少" => 0, "年中" => 1, "年長" => 2, "小学１年生" => 3, "小学２年生" => 4, "小学３年生" => 5, 
+			"小学４年生" => 6, "小学５年生" => 7, "小学６年生" => 8, "中学１年生" => 9, "中学２年生" => 10, "中学３年生" => 11, 
+			"高校１年生" => 12, "高校２年生" => 13, "高校３年生" => 14, "大学１年生" => 15, "大学２年生" => 16, "大学３年生" => 17, "大学４年生" => 18 }
+		Student.all.each do |student|
+			up_idx = ( change_into_index[student.grade] + 1 ) % 19
+			upgrade = Student.grades[up_idx]
+			student.update(grade: upgrade)
+		end
+		redirect_to students_path
 	end
 
 	def create

@@ -1,4 +1,22 @@
 <% provide(:title, "生徒一覧")%>
+<% if owner_logged_in? %>
+<section id="actions" class="mb-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 py-1">
+        <%= link_to new_student_path, class: "btn btn-block" do %>
+          <i class="fas fa-plus"></i> 生徒作成
+        <% end %>
+      </div>
+      <div class="col-md-6 py-1">
+        <%= link_to students_upgrade_path , method: :post, data: { confirm: '本当によろしいですか？'} , class: "btn btn-block" do %>
+          <i class="fas fa-check"></i> 学年を更新
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+<% end %>
   <section id="posts">
     <div class="container">
       <div class="row">

@@ -2,10 +2,10 @@ class TeachersController < ApplicationController
   before_action :teacher_already_logged_in, only: [:login_form, :login]
   before_action :teacher_logged_in,  only: [:index ,:new, :create, :show, :edit, :update, :destroy]
   before_action :correct_teacher,    only: [:edit, :update]
-  before_action :owner_logged_in,    only: [:new, :create, :destroy]
+  before_action :owner_logged_in,    only: [:new, :create, :auth, :destroy]
   before_action :initialize_teacher, only: [:new, :login_form]
   before_action :new_teacher,        only: [:create, :login]
-  before_action :set_teacher,        only: [:show, :edit, :update, :destroy]
+  before_action :set_teacher,        only: [:show, :edit, :update, :auth, :destroy]
   def index
     @teachers = Teacher.paginate(page: params[:page], per_page: 10)
   end
@@ -17,6 +17,12 @@ class TeachersController < ApplicationController
   end
 
   def edit
+  end
+
+  def auth
+    @teacher.update(status: params[:teacher][:status])
+    redirect_to @teacher
+    flash[:notice] = "権限を変更しました"
   end
 
   def create

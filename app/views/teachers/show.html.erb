@@ -12,6 +12,43 @@
 		<strong>講師権限</strong>
 		<%= @teacher.status %>
 	</p>
-  <%= link_to '編集する', edit_teacher_path(@teacher) , class: "btn"%> |
-  <%= link_to '戻る', teachers_path, class: "btn" %>
+	<% if @teacher.status != "owner" && owner_logged_in? %>
+	<a href="#" class="btn" data-toggle="modal" data-target="#addPostModal">
+    <i class="fas fa-plus"></i> 権限を変更する
+  </a>
+	<div class="modal fade" id="addPostModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">権限を変更する</h5>
+            <button class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+					<%= form_for(@teacher, url: "/teachers/#{@teacher.id}/auth", method: :post) do |f| %>
+          <div class="modal-body">
+						<div class="form-group">
+							<div class="form-check">
+								<label class="form-check-label">
+									<%= f.radio_button :status, 'teacher', class: "form-check-input"%>
+									講師
+								</label>
+							</div>
+							<div class="form-check">
+								<label class="form-check-label">
+									<%= f.radio_button :status, 'manager', class: "form-check-input"%>
+									管理者
+								</label>
+							</div>
+						</div>
+          </div>
+					<div class="modal-footer">
+						<%= f.submit "権限を付与する", data: { confirm: '本当に変更してもよろしいですか？', disable_with: '処理中...' }, 
+							class: "btn btn-sub" %>
+          </div>
+					<% end %>
+        </div>
+      </div>
+    </div>
+		<% end %>
 </div>
