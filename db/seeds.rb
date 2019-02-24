@@ -54,3 +54,25 @@ Student.create!( grade: "年少",
 								 password_confirmation: password )
 end
 
+students = Student.order(:created_at).take(6)
+teachers = Teacher.order(:created_at).take(3)
+subjects = ["算数", "国語", "理科", "社会", "数学", "英語" ]
+20.times do |n|
+	start_date = end_date = Date.today
+	comment = Faker::Lorem.sentence(5)
+	students.each do |student| 
+		student.reports.create!(
+			start_date: start_date, end_date: end_date,
+			subject: subjects[n%6], comment: comment,
+			teacher_id: 1
+		)
+	end
+	teachers.each do |teacher| 
+		teacher.reports.create!(
+			start_date: start_date, end_date: end_date,
+			subject: subjects[n%6], comment: comment,
+			student_id: 1
+		)
+	end
+end
+

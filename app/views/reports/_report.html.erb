@@ -1,0 +1,23 @@
+<div class="report mb-3">
+  <div class="card shadow-sm border-left-primary">
+    <div class="card-body">
+      <div class="card-body-icon">
+        <i class="far fa-file-alt"></i>
+      </div>
+      <strong class="d-inline-block mb-2"><%= report.subject %></strong>
+      <h4 class="mb-0">
+        <%= report.start_date.strftime('%m/%d') %>〜<%=
+        report.end_date.strftime('%m/%d') %>
+      </h4>
+      <div class="text-muted mb-1">
+        <%= time_ago_in_words(report.created_at) %>前に投稿
+      </div>
+      <p class="mb-auto">書いた講師：<i class="fas fa-user-circle"></i>    <%= report.teacher.name %></p>
+      <p class="card-text">
+        コメント：<%= report.comment.present? ? truncate(report.comment, length: 17) : "なし" %>
+      </p>
+      <%= link_to report, class: "btn" do %>
+      <i class="fas fa-arrow-right mr-1"></i>詳細 <% end %>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190216141331) do
+ActiveRecord::Schema.define(version: 20190223112811) do
+
+  create_table "reports", force: :cascade do |t|
+    t.date     "start_date",                 null: false
+    t.date     "end_date",                   null: false
+    t.string   "subject"
+    t.text     "content"
+    t.text     "homework"
+    t.text     "comment"
+    t.integer  "status",     default: 0,     null: false
+    t.boolean  "read_flg",   default: false, null: false
+    t.text     "memo"
+    t.integer  "student_id"
+    t.integer  "teacher_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["student_id", "created_at"], name: "index_reports_on_student_id_and_created_at"
+    t.index ["teacher_id", "created_at"], name: "index_reports_on_teacher_id_and_created_at"
+  end
 
   create_table "students", force: :cascade do |t|
     t.string   "name"

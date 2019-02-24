@@ -24,6 +24,7 @@ body {
   font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
   background: #f4f0ec;
   color: #4d3a34;
+  //background: #e9d2b8;
 }
 
 .btn {
@@ -59,7 +60,7 @@ a:focus {
 }
 
 #content {
-  padding-top: 70px;
+  padding-top: 55px;
   width: 100%;
   min-height: 100vh;
   transition: all 0.3s;
@@ -377,6 +378,42 @@ ul ul a {
 /* 管理者変更画面　モーダル */
 .modal-header {
   background-color: rgb(255, 186, 58);
+}
+
+/* マイページ */
+.avatar {
+  border-radius: 50%;
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  padding: 4px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+/* 指導報告書 */
+.border-left-primary {
+  border-left: 0.25rem solid #6078bd !important;
+}
+
+.card-body-icon {
+  position: absolute;
+  z-index: 0;
+  top: -0.5rem;
+  right: 2rem;
+  opacity: 0.07;
+  font-size: 10rem;
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
+}
+/* 生徒一覧 */
+.bg-delete {
+  background-color: #d76161;
+  color: white;
+  &:hover {
+    background-color: #cb4949;
+  }
 }
 
 /* 末包担当編集 */

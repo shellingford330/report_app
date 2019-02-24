@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :reports
   root   'teachers#index'
 
   post   '/students/upgrade'

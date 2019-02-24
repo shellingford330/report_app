@@ -1,16 +1,33 @@
 <% provide(:title, @student.name)%>
-<div class="container">
-	<p>
-		<strong>氏名</strong>
-		<%= @student.name %>
-	</p>
-	<p>
-		<strong>学年</strong>
-		<%= @student.grade %>
-	</p>
-	<p>
-		<strong>メールアドレス</strong>
-		<%= @student.email %>
-	</p>
-	<%= link_to_if student_logged_in?, '編集する', edit_student_path(@student) , class: "btn" do end%>
-</div>
+<section id="student">
+  <div class="container">
+		<div class="row">
+			<aside class="col-md-3 mt-3">
+				<div class="text-center"><%= image_tag 'user.png', alt: 'プロフイール画像', size: "225x225", class: "avatar mb-3" %></div>
+				<div class="card">
+					<div class="card-header">
+						<h5 class="mb-0">生徒情報</h5>
+					</div>
+					<div class="card-body">
+						<p class="mb-auto"><strong>氏名</strong>    <%= @student.name %></p>
+						<hr>
+						<p class="mb-auto"><strong>学年</strong>    <%= @student.grade %></p>
+					</div>
+				</div>
+				<% if correct_student?(@student) %>
+					<%= link_to edit_student_path(@student), class: "btn btn-block mt-2" do %>
+						<i class="fas fa-check"></i> 編集する
+					<% end %>
+				<% end %>
+      </aside>
+      <div class="col-md-9 mt-3">
+				<% if @student.reports.any? %>
+					<h3>指導報告書(<%= @student.reports.count %>件)</h3>
+					<hr>
+					<%= render @reports %>
+					<%= will_paginate @reports, :previous_label => '&laquo', :next_label => '&raquo' %>
+				<% end %>
+      </div>
+    </div>
+  </div>
+</section>

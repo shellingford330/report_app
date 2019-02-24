@@ -11,6 +11,7 @@ class TeachersController < ApplicationController
   end
 
   def show
+    @reports = @teacher.reports.paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -71,7 +72,7 @@ class TeachersController < ApplicationController
 
   def logout
     teacher_log_out if teacher_logged_in?
-    redirect_to teachers_login_path
+    redirect_to teachers_login_url
   end
 
   private

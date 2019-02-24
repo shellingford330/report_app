@@ -18,6 +18,7 @@ class StudentsController < ApplicationController
 	end
 
 	def	show
+		@reports = @student.reports.paginate(page: params[:page], per_page: 5)
 	end
 
 	def edit

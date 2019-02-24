@@ -34,7 +34,7 @@
                     <%= link_to '講師一覧', teachers_path %>
                   </li>
                   <li>
-                    <%= link_to_if current_teacher.status == "owner", '新規作成', new_teacher_path do end%>
+                    <%= link_to_if owner_logged_in?, '新規作成', new_teacher_path do end %>
                   </li>
                 </ul>
               </li>
@@ -52,16 +52,16 @@
                 </a>
                 <ul class="collapse list-unstyled" id="reportSubmenu">
                     <li>
-                        <a href="">新規作成</a>
+                        <%= link_to '新規作成', new_report_url %>
                     </li>
                     <li>
-                        <a href="">報告書一覧</a>
+                        <%= link_to '報告書一覧', reports_url %>
                     </li>
                 </ul>
               <% elsif student_logged_in? %>
-                <a href="">
+                <%= link_to reports_url do %>
                   <i class="far fa-file-alt"></i>          指導報告書
-                </a>
+                <% end %>
               <% end %>
             </li>
             <li>

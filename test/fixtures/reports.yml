@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2019-02-23
+  end_date: 2019-02-23
+  subject: MyString
+  content: MyText
+  homework: MyText
+  comment: MyText
+  status: 1
+  read_flg: false
+  memo: MyText
+  student: keiichi
+  teacher: owner
+  created_at: <%= 10.minutes.ago %>
+
+two:
+  start_date: 2019-02-23
+  end_date: 2019-02-23
+  subject: MyString
+  content: MyText
+  homework: MyText
+  comment: two
+  status: 1
+  read_flg: false
+  memo: MyText
+  student: keiichi
+  teacher: manager
+  created_at: <%= 2.minutes.ago %>
+
+most_recent:
+  start_date: 2019-02-23
+  end_date: 2019-02-23
+  subject: MyString
+  content: MyText
+  homework: MyText
+  comment: most
+  status: 1
+  read_flg: false
+  memo: MyText
+  student: keiichi
+  teacher: teacher
+  created_at: <%= Time.zone.now %>

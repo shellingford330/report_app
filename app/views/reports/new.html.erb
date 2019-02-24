@@ -1,0 +1,11 @@
+<% provide(:btn_text, "作成")%>
+<div class="container">
+  <h1>新規作成</h1>
+
+  <%= render 'form', report: @report %>
+
+  <%= link_to reports_path , class: "btn btn-view" do%>
+  <i></i> 戻る
+  <% end %>
+  
+</div>

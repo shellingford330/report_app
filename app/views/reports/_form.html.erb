@@ -1,0 +1,58 @@
+<%= form_for(report) do |f| %>
+  <% if report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(report.errors.count, "error") %> prohibited this report from being saved:</h2>
+
+      <ul>
+      <% report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <p class="mb-0">
+    <%= f.label :start_date,'開始日' %>
+    </p>
+    <%= f.date_select :start_date ,class: "form-control form-control-lg" %>
+  </div>
+
+  <div class="form-group">
+    <p class="mb-0">
+    <%= f.label :end_date,'終了日' %>
+    </p>
+    <%= f.date_select :end_date,class: "form-control form-control-lg" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :subject ,'教科'%>
+    <%= f.text_field :subject,class: "form-control form-control-lg" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :content ,'授業内容'%>
+    <%= f.text_area :content ,class: "form-control form-control-lg" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :homework,'宿題' %>
+    <%= f.text_area :homework,class: "form-control form-control-lg" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :comment,'コメント' %>
+    <%= f.text_area :comment ,class: "form-control form-control-lg"%>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :read_flg,'既読' %>
+    <%= f.check_box :read_flg ,class: "form-control form-control-lg" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit yield(:btn_text), data: { confirm: '本当に保存してもよろしいですか？', disable_with: '処理中...' },
+   class: "btn btn-block btn-view" %>
+  </div>
+
+<% end %>

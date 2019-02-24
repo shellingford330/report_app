@@ -1,0 +1,114 @@
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Post Content Column -->
+
+      <!-- Title -->
+      <h1 id="content-title">指導報告書</h1>
+
+      <hr>
+        <p>
+          <h2>
+            生徒の名前
+          </h2>
+        </p>
+
+      <hr>
+<table>
+  <tr>
+    <td>書いた講師</td>
+    <td><%= @report.teacher.name %></td>
+  </tr>
+  <tr>
+    <td>生徒氏名  </td>
+    <td><%= @report.student.name %></td>
+  </tr>
+  <tr>
+    <td>学年  </td>
+    <td><%= @report.student.grade %></td>
+  </tr>
+  <tr>
+    <td>授業日  </td>
+    <td><%= @report.start_date.strftime('%m/%d') %>〜<%= @report.end_date.strftime('%m/%d') %></td>
+  </tr>
+  <tr>
+    <td>科目  </td>
+    <td><%= @report.subject %></td>
+  </tr>
+</table>
+      <hr>
+      <div class="sentense">
+        <h3>授業の範囲</h3>
+        <p>
+          <%= @report.content %>
+        </p>
+        <h3>宿題の範囲</h3>
+        <p>
+          <%= @report.homework %>
+        </p>
+        <h3>コメント</h3>
+        <p><%= @report.comment %></p>
+        <h3>注記</h3>
+        <p><%= @report.memo %></p>
+
+      </div>
+      <hr>
+
+      <!-- Comments Form -->
+      <div class="card my-4">
+        <h5 class="card-header">コメントに返信する</h5>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <textarea class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-view">送信</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Single Comment -->
+      <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body">
+          <h5 class="mt-0">Commenter Name</h5>
+          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+        </div>
+      </div>
+
+      <!-- Comment with nested comments -->
+      <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body">
+          <h5 class="mt-0">Commenter Name</h5>
+          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+
+          <div class="media mt-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+              <h5 class="mt-0">Commenter Name</h5>
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+          </div>
+
+          <div class="media mt-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+              <h5 class="mt-0">Commenter Name</h5>
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <%= link_to edit_report_path(@report) , class: "btn btn-view" do %>
+      <i></i> 編集
+      <% end %>
+      <%= link_to @report, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-view" do %>
+        <i></i> 削除
+      <% end %>
+      <%= link_to  reports_path  , class: "btn btn-view" do %>
+      <i></i> 戻る
+      <% end %>
+</div>
+<!-- /.container -->

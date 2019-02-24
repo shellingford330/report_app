@@ -1,54 +1,72 @@
 <% provide(:title, @teacher.name)%>
-<div class="container">
-	<p>
-		<strong>氏名</strong>
-		<%= @teacher.name %>
-	</p>
-  <p>
-		<strong>メールアドレス</strong>
-		<%= @teacher.email %>
-	</p>
-	<p>
-		<strong>講師権限</strong>
-		<%= @teacher.status %>
-	</p>
-	<% if @teacher.status != "owner" && owner_logged_in? %>
-	<a href="#" class="btn" data-toggle="modal" data-target="#addPostModal">
-    <i class="fas fa-plus"></i> 権限を変更する
-  </a>
-	<div class="modal fade" id="addPostModal">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">権限を変更する</h5>
-            <button class="close" data-dismiss="modal">
-              <span>&times;</span>
-            </button>
-          </div>
-					<%= form_for(@teacher, url: "/teachers/#{@teacher.id}/auth", method: :post) do |f| %>
-          <div class="modal-body">
-						<div class="form-group">
-							<div class="form-check">
-								<label class="form-check-label">
-									<%= f.radio_button :status, 'teacher', class: "form-check-input"%>
-									講師
-								</label>
-							</div>
-							<div class="form-check">
-								<label class="form-check-label">
-									<%= f.radio_button :status, 'manager', class: "form-check-input"%>
-									管理者
-								</label>
+<section id="student">
+  <div class="container">
+		<div class="row">
+			<aside class="col-md-3 mt-3">
+				<div class="text-center"><%= image_tag 'user.png', alt: 'プロフイール画像', size: "225x225", class: "avatar mb-3" %></div>
+				<div class="card">
+					<div class="card-header">
+						<h5 class="mb-0">講師情報</h5>
+					</div>
+					<div class="card-body">
+						<p class="mb-auto"><strong>氏名</strong>    <%= @teacher.name %></p>
+						<hr>
+						<p class="mb-auto"><strong>権限</strong>    <%= @teacher.status %></p>
+					</div>
+				</div>
+				<% if correct_teacher?(@teacher) %>
+					<%= link_to edit_teacher_path(@teacher), class: "btn btn-block mt-2" do %>
+						<i class="fas fa-check"></i> 編集する
+					<% end %>
+				<% end %>
+				<% if @teacher.status != "owner" && owner_logged_in? %>
+					<a href="#" class="btn btn-block mt-2" data-toggle="modal" data-target="#addPostModal">
+						<i class="fas fa-plus"></i> 権限を変更する
+					</a>
+					<div class="modal fade" id="addPostModal">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">権限を変更する</h5>
+									<button class="close" data-dismiss="modal">
+										<span>&times;</span>
+									</button>
+								</div>
+								<%= form_for(@teacher, url: "/teachers/#{@teacher.id}/auth", method: :post) do |f| %>
+								<div class="modal-body">
+									<div class="form-group">
+										<div class="form-check">
+											<label class="form-check-label">
+												<%= f.radio_button :status, 'teacher', class: "form-check-input"%>
+												講師
+											</label>
+										</div>
+										<div class="form-check">
+											<label class="form-check-label">
+												<%= f.radio_button :status, 'manager', class: "form-check-input"%>
+												管理者
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<%= f.submit "権限を付与する", data: { confirm: '本当に変更してもよろしいですか？', disable_with: '処理中...' }, 
+										class: "btn" %>
+								</div>
+								<% end %>
 							</div>
 						</div>
-          </div>
-					<div class="modal-footer">
-						<%= f.submit "権限を付与する", data: { confirm: '本当に変更してもよろしいですか？', disable_with: '処理中...' }, 
-							class: "btn btn-sub" %>
-          </div>
-					<% end %>
-        </div>
+					</div>
+				<% end %>
+      </aside>
+      <div class="col-md-9 mt-3">
+				<% if @teacher.reports.any? %>
+					<h3>指導報告書(<%= @teacher.reports.count %>件)</h3>
+					<hr>
+					<%= render @reports %>
+					<%= will_paginate @reports, :previous_label => '&laquo', :next_label => '&raquo' %>
+				<% end %>
       </div>
     </div>
-		<% end %>
-</div>
+  </div>
+</section>

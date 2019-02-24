@@ -1,6 +1,8 @@
 class Teacher < ApplicationRecord
 	attr_accessor :remember_token
 	has_secure_password
+	has_many :reports
+	has_many :students, through: :reports
 	before_save { self.email.downcase! }
 	enum status: { teacher: 0, manager: 1, owner: 2 }
 	
