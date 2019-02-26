@@ -39,6 +39,11 @@ module TeachersHelper
 		current_teacher.status == "owner"
 	end
 
+	# ログインしている講師が認証されているか
+	def	admin_logged_in?
+		owner_logged_in? || current_teacher.status == "manager"
+	end
+
 	# 渡された講師をクッキーに保存
 	def remember_teacher(teacher)
 		teacher.remember

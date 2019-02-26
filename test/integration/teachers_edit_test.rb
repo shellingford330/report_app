@@ -5,6 +5,7 @@ class TeachersEditTest < ActionDispatch::IntegrationTest
     @teacher = teachers(:owner)
     @other_teacher = teachers(:manager)
   end
+
   test "only correct teacher edit and update" do
     get teachers_login_path
     post teachers_login_path, params: { teacher: { email: @teacher.email, password: 'jiyujyuku' },

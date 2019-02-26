@@ -1,6 +1,5 @@
 class StudentsController < ApplicationController
-	before_action :student_already_logged_in, only: [:login_form, :login]
-	before_action :user_logged_in,    only: [:show] 
+	before_action :student_already_logged_in,  only: [:login_form, :login]
 	before_action :teacher_logged_in, only: [:index ,:new, :create, :destroy]
 	before_action :owner_logged_in,   only: [:new, :create, :destroy, :upgrade]
 	before_action :student_logged_in, only: [:edit, :update]
@@ -10,7 +9,6 @@ class StudentsController < ApplicationController
 	before_action :new_student,       only: [:create, :login]
 
 	def index
-		#@students = Student.paginate(page: params[:page], per_page: 10)
 		@students = Student.all
 	end
 
@@ -18,6 +16,7 @@ class StudentsController < ApplicationController
 	end
 
 	def	show
+		redirect_to students_login_path unless correct_student?(@student) || teacher_logged_in?
 		@reports = @student.reports.paginate(page: params[:page], per_page: 5)
 	end
 

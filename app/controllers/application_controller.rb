@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 	include ApplicationHelper
   include StudentsHelper
 	include TeachersHelper
+	include ReportsHelper
 	
   # アクセスしようとしたURL(なければデフォルト値)にリダイレクト
 	def redirect_back_to (default)
@@ -18,7 +19,7 @@ class ApplicationController < ActionController::Base
 	private
 		# 共通のbefore_action
 
-		# ログインしているユーザーがいるか
+		# ログインしているユーザーがいるか確認
 		def user_logged_in
 			redirect_to students_login_path unless user_logged_in?
 		end

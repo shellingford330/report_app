@@ -22,8 +22,8 @@ class TeachersController < ApplicationController
 
   def auth
     @teacher.update(status: params[:teacher][:status])
-    redirect_to @teacher
     flash[:notice] = "権限を変更しました"
+    redirect_to @teacher
   end
 
   def create

@@ -1,11 +1,16 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: [:show, :edit, :update, :destroy]
+  before_action :teacher_logged_in, only: [:new, :create, :edit, :release, :draft, :update, :destroy]
+  before_action :admin_logged_in,   only: [:release, :draft]
+  before_action :set_report,        only: [:show, :edit, :release, :draft, :update, :destroy]
+  before_action :correct_teacher_or_admin, only: [:edit, :update, :destroy]
 
   def index
+    user_logged_in
     @reports = Report.paginate(page: params[:page], per_page: 9)
   end
 
   def show
+		redirect_to students_login_path unless correct_student?(@report.student) || teacher_logged_in?
   end
 
   def new
@@ -15,49 +20,64 @@ class ReportsController < ApplicationController
   def edit
   end
 
-  # POST /reports
+  def release
+    flash[:success] = "公開しました"
+    @report.released!
+    @report.save
+    redirect_to @report
+  end
+
+  def draft
+    flash[:success] = "非公開にしました"
+    @report.draft!
+    @report.save
+    redirect_to @report
+  end
+
   def create
     @report = Report.new(report_params)
 
-    respond_to do |format|
-      if @report.save
-        format.html { redirect_to @report, notice: 'Report was successfully created.' }
-        format.json { render :show, status: :created, location: @report }
-      else
-        format.html { render :new }
-        format.json { render json: @report.errors, status: :unprocessable_entity }
-      end
+    if @report.save
+      flash[:success] = '報告書が作成されました'
+      redirect_to @report
+    else
+      flash.now[:danger] = '入力情報をご確認下さい'
+      render 'new'
     end
   end
 
-  # PATCH/PUT /reports/1
   def update
-    respond_to do |format|
-      if @report.update(report_params)
-        format.html { redirect_to @report, notice: 'Report was successfully updated.' }
-        format.json { render :show, status: :ok, location: @report }
-      else
-        format.html { render :edit }
-        format.json { render json: @report.errors, status: :unprocessable_entity }
-      end
+    if @report.update(report_params)
+      flash[:success] = 'Report was successfully updated.' 
+      redirect_to @report
+    else
+      flash.now[:danger] = '入力情報をご確認下さい'
+      render 'edit'
     end
   end
 
-  # DELETE /reports/1
   def destroy
     @report.destroy
-    respond_to do |format|
-      format.html { redirect_to reports_url, notice: 'Report was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    flash[:success] = '削除されました'
+    redirect_to reports_url
   end
 
   private
     def report_params
-      params.require(:report).permit(:start_date, :end_date, :subject, :content, :homework, :comment, :status, :read_flg, :memo, :student_id, :teacher_id)
+      params.require(:report).permit(:start_date, :end_date, :subject, :content, :homework, :comment, :memo, :student_id, :teacher_id)
     end
     
     def set_report
       @report = Report.find(params[:id])
+    end
+
+    def admin_logged_in
+      redirect_to teachers_login_url unless admin_logged_in?
+    end
+
+    def correct_teacher_or_admin
+      unless correct_teacher?(@report.teacher) || admin_logged_in?
+        redirect_to teachers_login_url
+      end
     end
 end

@@ -1,3 +1,4 @@
+<% provide(:title, "報告書詳細")%>
 <!-- Page Content -->
 <div class="container">
 
@@ -101,6 +102,13 @@
 
         </div>
       </div>
+      <% if admin_logged_in? %>
+        <%= link_to_if draft?(@report), '公開する' , release_report_url(@report),
+         method: :post,class: "btn btn-view" do end%>
+        <%= link_to_if released?(@report), '非公開にする' , draft_report_url(@report),
+          method: :post, class: "btn btn-view" do end %>
+        
+      <% end %>
       <%= link_to edit_report_path(@report) , class: "btn btn-view" do %>
       <i></i> 編集
       <% end %>

@@ -21,7 +21,7 @@ Teacher.create!( status: 1,
 
 Teacher.create!( status: 0,
 								 name: "講師", 
-								 email: "teacher@exapmle.com",
+								 email: "teacher@example.com",
 								 password: "teacher",
 								 password_confirmation: "teacher" )
 

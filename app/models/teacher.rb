@@ -16,8 +16,7 @@ class Teacher < ApplicationRecord
 		format: { with: VALID_EMAIL_REGEX },
 		uniqueness: { case_sentive: false }
 	validates :status,
-		inclusion:{ in: [ "teacher", "manager" ] , allow_nil: true, 
-			if: Proc.new { |teacher| teacher.changed == ["status"] } }
+		inclusion:{ in: [ "teacher", "manager" ], if: Proc.new { |teacher| teacher.changed == ["status"] } }
 	validates :password,
 		presence: true,
 		length: { minimum: 6, allow_nil: true },
