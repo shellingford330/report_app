@@ -113,9 +113,7 @@ class StudentsController < ApplicationController
 
 		# ログインを既にしているか確認
 		def student_already_logged_in
-			if student_logged_in?
-				redirect_to current_student
-			end
+			redirect_to current_student if student_logged_in?
 		end
 
 		# ログインしている生徒であるか確認

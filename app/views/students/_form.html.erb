@@ -1,5 +1,5 @@
 <%= form_for(student) do |f| %>
-	<%= render 'share/error_messages', user: student%>
+	<%= render 'share/error_messages', obj: student%>
 	<div class="form-group">
 		<%= f.label :name, '氏名'%>
 		<%= f.text_field :name, class: "form-control form-control-lg", placeholder: "Name"%>
@@ -23,6 +23,11 @@
 		<%= f.label :password, 'パスワード確認（もう一度入力して下さい。）'%>
 		<%= f.password_field :password_confirmation, class: "form-control form-control-lg", placeholder: "Confirmation" %>
 	</div>
-	<%= f.submit yield(:btn_text), data: { confirm: '本当に保存してもよろしいですか？', disable_with: '処理中...' }, 
-	class: "btn btn-block btn-sub" %>
+	<div class="row">
+		<div class="col-md-4 mx-auto">
+			<%= f.submit yield(:btn_text), data: { confirm: '本当に保存してもよろしいですか？', disable_with: '処理中...' }, 
+			class: "btn btn-block btn-sub" %>
+		</div>
+	</div>
+
 <% end %>

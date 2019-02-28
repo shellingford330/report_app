@@ -22,7 +22,7 @@ html {
 body {
   height: 100%;
   font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
-  background: #f4f0ec;
+  background: #f7f5f2;
   color: #4d3a34;
   //background: #e9d2b8;
 }
@@ -392,7 +392,15 @@ ul ul a {
   border: 1px solid #ddd;
 }
 
-/* 指導報告書 */
+/* 指導報告書　詳細 */
+.report-text {
+  padding: 10px;
+  border: 1px solid #856c64;
+  border-radius: 4px;
+  background: #fff;
+}
+
+/* 指導報告書 一覧 */
 .border-left-primary {
   border-left: 0.25rem solid #6078bd !important;
 }
@@ -413,6 +421,17 @@ ul ul a {
   color: white;
   &:hover {
     background-color: #cb4949;
+  }
+}
+
+.bg-brown {
+  background-color: #f4f0ec;
+}
+
+.bg-green {
+  background: #83ab64;
+  &:hover {
+    background: #90bb6e;
   }
 }
 

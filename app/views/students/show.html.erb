@@ -16,7 +16,13 @@
 				</div>
 				<% if correct_student?(@student) %>
 					<%= link_to edit_student_path(@student), class: "btn btn-block mt-2" do %>
-						<i class="fas fa-check"></i> 編集する
+						<i class="fas fa-check"></i>  編集する
+					<% end %>
+				<% end %>
+				<% if owner_logged_in? %>
+					<%= link_to student_path(@student), method: :delete,
+					data: { confirm: '本当に削除しますか？'},  class: "btn btn-block mt-2 bg-delete" do %>
+						<i class="fas fa-trash"></i>  生徒を削除
 					<% end %>
 				<% end %>
       </aside>

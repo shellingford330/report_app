@@ -96,9 +96,7 @@ class TeachersController < ApplicationController
 
     # ログインを既にしているか確認
 		def teacher_already_logged_in
-			if teacher_logged_in?
-				redirect_to current_teacher
-			end
+			redirect_to current_teacher if teacher_logged_in?
 		end
     
     # ログインしている講師であるか確認

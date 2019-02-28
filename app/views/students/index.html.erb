@@ -18,11 +18,11 @@
       <div class="row mt-2">
         <div class="col-md-9 mb-3">
           <div class="card">
-            <div class="card-header" style="background-color: #e9d2b8; border-bottom: 2px solid #e9c7a1;">
+            <div style="background: #f0e7dd;" class="card-header">
               <h4>生徒一覧</h4>
             </div>
             <% @students.grades.each do |grade| %>
-              <div style="background: #f0e7dd;" type="a" class="card-header" id="heading-<%= grade %>">
+              <div type="a" class="card-header bg-brown" id="heading-<%= grade %>">
                 <h5 class="mb-0">
                   <div
                     class="collapsed"
@@ -52,13 +52,13 @@
                         </td>
                         <td class="text-right">
                           <% if owner_logged_in? %>
-                          <%= link_to student, method: :delete, data: { confirm:
-                          '本当によろしいですか？'} , class: "btn btn-view bg-delete" do%>
-                            <i class="fas fa-trash"></i> 削除 
-                          <% end %> 
+                            <%= link_to student, method: :delete, data: { confirm:
+                            '本当によろしいですか？'} , class: "btn btn-view bg-delete" do%>
+                              <i class="fas fa-trash"></i> 削除 
+                            <% end %> 
                           <% end %>
-                          <%= link_to student, class: "btn btn-view" do %>
-                            <i class="fas fa-angle-double-right"></i> 詳細 
+                          <%= link_to new_report_url(student_id: student.id), class: "btn btn-view" do %>
+                            <i class="fas fa-pencil-alt"></i> 報告書作成
                           <% end %>
                         </td>
                       </tr>

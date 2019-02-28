@@ -52,14 +52,14 @@
                 </a>
                 <ul class="collapse list-unstyled" id="reportSubmenu">
                     <li>
-                        <%= link_to '新規作成', new_report_url %>
+                        <%= link_to '新規作成', students_url %>
                     </li>
                     <li>
-                        <%= link_to '報告書一覧', reports_url %>
+                        <%= link_to '報告書一覧', teacher_reports_url %>
                     </li>
                 </ul>
               <% elsif student_logged_in? %>
-                <%= link_to reports_url do %>
+                <%= link_to student_reports_url do %>
                   <i class="far fa-file-alt"></i>          指導報告書
                 <% end %>
               <% end %>

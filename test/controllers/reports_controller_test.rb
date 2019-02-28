@@ -6,7 +6,9 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get reports_url
+    get teacher_reports_url
+    assert_redirected_to students_login_url
+    get student_reports_url
     assert_redirected_to students_login_url
   end
 
