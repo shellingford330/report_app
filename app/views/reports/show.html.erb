@@ -142,21 +142,17 @@
 					<p class="mb-auto"><strong>科目　　</strong>      <%= @report.subject %></p>
         </div>
       </div>
-      <% if admin_logged_in? %>
-        <% if draft?(@report) %>
-          <%= link_to release_report_path(@report), method: :post, class: "btn btn-block" do %>
-            公開する
-          <% end %>
-        <% elsif %>
-          <%= link_to draft_report_path(@report), method: :post, class: "btn btn-block" do %>
-            非公開にする
-          <% end %>
-        <% end %>
-      <% end %>
       <% if correct_teacher?(@teacher) || admin_logged_in? %>
 				<%= link_to edit_report_path(@report), class: "btn btn-block" do %>
 					<i class="fas fa-check"></i>  編集する
 				<% end %>
+        <% if admin_logged_in? %>
+          <% if draft?(@report) %>
+            <%= link_to '公開する', release_report_path(@report), method: :post, class: "btn btn-block" %>
+          <% elsif released?(@report) %>
+            <%= link_to '非公開にする', draft_report_path(@report), method: :post, class: "btn btn-block" %>
+          <% end %>
+        <% end %>
         <%= link_to @report, method: :delete,
         data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-block mt-2 bg-delete" do %>
 					<i class="fas fa-trash"></i>  削除する

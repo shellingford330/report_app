@@ -415,6 +415,23 @@ ul ul a {
   -webkit-transform: rotate(15deg);
   transform: rotate(15deg);
 }
+
+.report_check {
+  display: table;
+  width: 100%;
+  vertical-align: middle;
+  font-size: 13.5px;
+  .report_check_info {
+    display: table-cell;
+    width: 80px;
+  }
+  .report_check_list {
+    margin-top: 0px;
+    display: table-cell;
+    text-align: right;
+  }
+}
+
 /* 生徒一覧 */
 .bg-delete {
   background-color: #d76161;

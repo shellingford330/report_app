@@ -6,7 +6,8 @@ class ReportsController < ApplicationController
   before_action :correct_teacher_or_admin, only: [:edit, :update, :destroy]
 
   def student_index
-    @reports = Report.where(student_id: current_student.id).paginate(page: params[:page], per_page: 9)
+    @reports = Report.where(student_id: current_student.id, status: "released")
+    .paginate(page: params[:page], per_page: 9)
     render 'index'
   end
 
@@ -16,12 +17,13 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @student = @report.student
-    @teacher = @report.teacher
-    unless correct_student?(@student) || teacher_logged_in?
+    unless (judge = correct_student?(@report.student)) || teacher_logged_in?
       store_location
       redirect_to students_login_path 
     end
+    @report.update(read_flg: true) if judge
+    @student = @report.student
+    @teacher = @report.teacher
   end
 
   def new

@@ -1,15 +1,14 @@
-
 <script src='https://cdn.rawgit.com/jaredreich/notie.js/a9e4afbeea979c0e6ee50aaf5cb4ee80e65d225d/notie.js'></script>
 <% if flash[:success] %>
   <script>
-    notie.alert(1, '<%= flash[:success] %>', 3);
+    notie.alert(1, '<%= flash[:success] %>', 1.5);
   </script>
 <% elsif flash[:danger] %>
   <script>
-    notie.alert(3, '<%= flash[:danger] %>', 3);
+    notie.alert(3, '<%= flash[:danger] %>', 1.5);
   </script>
 <% elsif flash[:notice] %>
   <script>
-    notie.alert(4, '<%= flash[:notice] %>', 3);
+    notie.alert(4, '<%= flash[:notice] %>', 1.5);
   </script>
 <% end %>

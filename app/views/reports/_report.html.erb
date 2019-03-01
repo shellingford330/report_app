@@ -16,8 +16,37 @@
       <p class="card-text">
         コメント：<%= report.comment.present? ? truncate(report.comment, length: 17) : "なし" %>
       </p>
-      <%= link_to report, class: "btn" do %>
-      <i class="fas fa-arrow-right mr-1"></i>詳細 <% end %>
+      <div class="report_check">
+        <% if teacher_logged_in? %>
+          <%= link_to report, class: "btn report_check_info" do %>
+            <i class="fas fa-arrow-right mr-2"></i>詳細
+          <% end %>
+          <div class="report_check_list">
+            <% if released?(report)%>
+              <div class="report_check_list_item">
+                <i class="far fa-check-square"></i>    公開
+              </div>
+            <% else %>
+              <div class="report_check_list_item">
+                <i class="far fa-square"></i>    公開
+              </div>
+            <% end %>
+            <% if report.read_flg %>
+              <div class="report_check_list_item">
+                <i class="far fa-check-square"></i>   既読
+              </div>
+            <% else %>
+              <div class="report_check_list_item">
+                <i class="far fa-square"></i>   既読
+              </div>
+            <% end %>
+          </div>
+        <% elsif student_logged_in? %>
+          <%= link_to report, class: "btn" do %>
+            <i class="fas fa-arrow-right mr-2"></i>詳細
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

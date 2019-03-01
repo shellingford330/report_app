@@ -16,8 +16,13 @@ class StudentsController < ApplicationController
 	end
 
 	def	show
-		redirect_to students_login_path unless correct_student?(@student) || teacher_logged_in?
-		@reports = @student.reports.paginate(page: params[:page], per_page: 5)
+		redirect_to students_login_path unless (judge = correct_student?(@student)) || teacher_logged_in?
+		if judge
+			@reports = @student.reports.where(status: "released")
+			.paginate(page: params[:page], per_page: 5)
+		else
+			@reports = @student.reports.paginate(page: params[:page], per_page: 5)
+		end
 	end
 
 	def edit
