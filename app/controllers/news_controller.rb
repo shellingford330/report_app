@@ -1,9 +1,11 @@
 class NewsController < ApplicationController
   before_action :user_logged_in,    only:   [:index, :show]
   before_action :teacher_logged_in, except: [:index, :show]
-  before_action :set_news,          only:   [:show, :edit, :update, :destroy]
+  before_action :admin_logged_in,   only:   [:release, :draft]
+  before_action :set_news,          only:   [:show, :edit, :release, :draft, :update, :destroy]
   before_action :correct_student_or_teacher, only: [:show]
   before_action :correct_teacher_or_admin,   only: [:edit, :destroy, :update]
+
   def index
     if admin_logged_in?
       @news = News.paginate(page: params[:page], per_page: 9)
@@ -31,6 +33,20 @@ class NewsController < ApplicationController
     students_exist?
   end
 
+  def release
+    flash[:success] = "公開しました"
+    @news.released!
+    @news.save
+    redirect_to news_index_url
+  end
+
+  def draft
+    flash[:success] = "非公開にしました"
+    @news.draft!
+    @news.save
+    redirect_to news_index_url
+  end
+
   def create
     @news = current_teacher.news.build(news_params)
     @news.students_id = params[:news][:students_id].split(' ').map { |id| id.to_i }
@@ -39,7 +55,7 @@ class NewsController < ApplicationController
       @news.students_id.each do |student_id|
         Student.find(student_id).news << @news
       end
-      redirect_to @news
+      redirect_to news_index_url
       flash[:success] = '作成されました'
     else
       flash.now[:danger] = '入力情報をご確認下さい'
@@ -49,7 +65,7 @@ class NewsController < ApplicationController
 
   def update
     if @news.update(news_params)
-      redirect_to @news
+      redirect_to news_index_url
       flash[:success] = '更新しました'
     else
       flash.now[:danger] = '入力情報をご確認下さい'
@@ -64,6 +80,7 @@ class NewsController < ApplicationController
   end
 
   private
+    # 生徒が渡されているか？
     def students_exist?
       unless @news.students_id
         flash.now[:danger] = " 生徒が選択されていません"

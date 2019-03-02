@@ -84,15 +84,19 @@
           <div class="card text-center card-bg-blue mb-3">
             <div class="card-body">
               <h3>指導報告書</h3>
-              <h4 class="display-4"><i class="fas fa-pencil-alt"></i> <%= current_teacher.reports.count %></h4>
+              <h4 class="display-4">
+                <i class="fas fa-pencil-alt"></i> <%= current_teacher.reports.count %>
+              </h4>
               <%= link_to '見る', teacher_reports_path, class: "btn btn-view-blue" %>
             </div>
           </div>
           <div class="card text-center card-bg-pink mb-3">
             <div class="card-body">
               <h3>お知らせ</h3>
-              <h4 class="display-4"><i class="fas fa-clipboard"></i> 6</h4>
-              <%= link_to '見る', students_path, class: "btn btn-view-pink" %>
+              <h4 class="display-4">
+                <i class="fas fa-clipboard"></i> <%= current_teacher.news.count %>
+              </h4>
+              <%= link_to '見る', news_index_path, class: "btn btn-view-pink" %>
             </div>
           </div>
           <div class="card text-center card-bg-green mb-3">

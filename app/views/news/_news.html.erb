@@ -31,9 +31,9 @@
             <% end %>
           </div>
         <% elsif student_logged_in? %>
-          <%= link_to news, class: "btn btn-news" do %>
+          <a href="#" class="btn btn-news" data-toggle="modal" data-target="#addNews-<%=news.id%>Modal">
             <i class="fas fa-arrow-right mr-2"></i>詳細
-          <% end %>
+          </a>
         <% end %>
       </div>
     </div>
@@ -59,10 +59,17 @@
       </div>
       <% if correct_teacher?(news.teacher) || admin_logged_in? %>
       <div class="modal-footer">
+        <% if admin_logged_in? %>
+          <% if draft?(news) %>
+            <%= link_to '公開する', release_news_url(news), method: :post, class: "btn" %>
+          <% elsif released?(news) %>
+            <%= link_to '非公開にする', draft_news_url(news), method: :post, class: "btn" %>
+          <% end %>
+        <% end %>
         <%= link_to '編集する', edit_news_url(news), class: "btn" %>
+        <%= link_to '削除する', news_url(news), method: :delete, class: "btn bg-delete" %>
       </div>
       <% end %>
     </div>
   </div>
 </div>
-

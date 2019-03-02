@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get    '/reports/student'     => 'reports#student_index', as: :student_reports
   resources :reports, except: :index
 
+  post   '/news/:id/release' => 'news#release',       as: :release_news
+  post   '/news/:id/draft'   => 'news#draft',         as: :draft_news
   get    '/news/select_students',                           as: :select_students_news
   resources :news
 

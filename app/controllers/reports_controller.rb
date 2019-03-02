@@ -7,13 +7,12 @@ class ReportsController < ApplicationController
   before_action :correct_student_or_teacher, only: [:show]
 
   def student_index
-    @reports = Report.where(student_id: current_student.id, status: "released")
-    .paginate(page: params[:page], per_page: 9)
+    @reports = current_student.reports.released.paginate(page: params[:page], per_page: 9)
     render 'index'
   end
 
   def teacher_index
-    @reports = Report.where(teacher_id: current_teacher.id).paginate(page: params[:page], per_page: 9)
+    @reports = current_teacher.reports.paginate(page: params[:page], per_page: 9)
     render 'index'
   end
 
