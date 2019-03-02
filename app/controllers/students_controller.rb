@@ -9,7 +9,6 @@ class StudentsController < ApplicationController
 	before_action :new_student,       only: [:create, :login]
 
 	def index
-		@students = Student.all
 	end
 
 	def	new
@@ -18,10 +17,11 @@ class StudentsController < ApplicationController
 	def	show
 		redirect_to students_login_path unless (judge = correct_student?(@student)) || teacher_logged_in?
 		if judge
-			@reports = @student.reports.where(status: "released")
-			.paginate(page: params[:page], per_page: 5)
+			@reports = @student.reports.released.limit(3)
+			@news = @student.news.released.limit(3)
 		else
-			@reports = @student.reports.paginate(page: params[:page], per_page: 5)
+			@reports = @student.reports.limit(3)
+			@news = @student.news.limit(3)
 		end
 	end
 

@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190223112811) do
+ActiveRecord::Schema.define(version: 20190301114511) do
+
+  create_table "news", force: :cascade do |t|
+    t.string   "title",                  null: false
+    t.text     "content",                null: false
+    t.integer  "status",     default: 0, null: false
+    t.integer  "teacher_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["teacher_id", "created_at"], name: "index_news_on_teacher_id_and_created_at"
+  end
+
+  create_table "news_students", id: false, force: :cascade do |t|
+    t.integer "news_id",    null: false
+    t.integer "student_id", null: false
+  end
 
   create_table "reports", force: :cascade do |t|
     t.date     "start_date",                 null: false

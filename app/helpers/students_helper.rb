@@ -49,7 +49,11 @@ module StudentsHelper
 		cookies.delete(:remember_token)
 	end
 	
-
+	# 渡された学年の生徒を返す
+	def	students_of(grade)
+		Student.where(grade: grade)
+	end
+	
 	# 生徒の合計人数を返す
 	def	sum_students
 		Student.count

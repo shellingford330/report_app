@@ -1,0 +1,68 @@
+<div class="report mb-3">
+  <div class="card shadow-sm border-left-news">
+    <div class="card-body">
+      <div class="card-body-icon-news">
+        <i class="far fa-clipboard"></i>
+      </div>
+      <strong class="d-inline-block mb-2">お知らせ</strong>
+      <h5 class="mb-0">
+        「<%= news.title %>」
+      </h5>
+      <p class="my-2">
+        書いた講師：<i class="fas fa-user-circle"></i>    <%= news.teacher.name %>
+      </p>
+      <div class="text-muted my-2">
+        <%= time_ago_in_words(news.created_at) %>前に投稿
+      </div>
+      <div class="report_check">
+        <% if teacher_logged_in? %>
+          <a href="#" class="btn btn-news report_check_info" data-toggle="modal" data-target="#addNews-<%=news.id%>Modal">
+            <i class="fas fa-arrow-right mr-2"></i>詳細
+          </a>
+          <div class="report_check_list pt-4">
+            <% if released?(news)%>
+              <div class="report_check_list_item">
+                <i class="far fa-check-square"></i>    公開
+              </div>
+            <% else %>
+              <div class="report_check_list_item">
+                <i class="far fa-square"></i>    公開
+              </div>
+            <% end %>
+          </div>
+        <% elsif student_logged_in? %>
+          <%= link_to news, class: "btn btn-news" do %>
+            <i class="fas fa-arrow-right mr-2"></i>詳細
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="addNews-<%=news.id%>Modal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header modal-header-news">
+        <h5 class="modal-title border-left-brown pl-2">
+          「<%= news.title%>」
+        </h5>
+        <button class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body py-4">
+        <div class="row">
+          <div class="col-md-9 mx-auto">
+            <%= safe_join(news.content.split("\n"), tag(:br)) %>
+          </div>
+        </div>
+      </div>
+      <% if correct_teacher?(news.teacher) || admin_logged_in? %>
+      <div class="modal-footer">
+        <%= link_to '編集する', edit_news_url(news), class: "btn" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

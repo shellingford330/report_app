@@ -21,51 +21,53 @@
             <div style="background: #f0e7dd;" class="card-header">
               <h4>生徒一覧</h4>
             </div>
-            <% @students.grades.each do |grade| %>
-              <div type="a" class="card-header bg-brown" id="heading-<%= grade %>">
-                <h5 class="mb-0">
-                  <div
-                    class="collapsed"
-                    data-toggle="collapse"
-                    data-target="#collapse-<%= grade %>"
-                    aria-expanded="false"
-                    aria-controls="collapse-<%= grade %>"
-                  >
-                    <i class="arrow fa fa-angle-right mr-2"></i><%= grade %>
-                  </div>
-                </h5>
-              </div>
-              <div
-                id="collapse-<%= grade %>"
-                class="collapse"
-                aria-labelledby="heading-<%= grade %>"
-                data-parent="#accordion"
-              >
-                <table class="table">
-                    <tbody>
-                      <% Student.where(grade: grade).each do |student| %>
-                      <tr>
-                        <td class="pl-4">
-                          <%= link_to student do%>
-                            <i class="fas fa-user-circle"></i>     <%= student.name %>
-                          <% end %>
-                        </td>
-                        <td class="text-right">
-                          <% if owner_logged_in? %>
-                            <%= link_to student, method: :delete, data: { confirm:
-                            '本当によろしいですか？'} , class: "btn btn-view bg-delete" do%>
-                              <i class="fas fa-trash"></i> 削除 
-                            <% end %> 
-                          <% end %>
-                          <%= link_to new_report_url(student_id: student.id), class: "btn btn-view" do %>
-                            <i class="fas fa-pencil-alt"></i> 報告書作成
-                          <% end %>
-                        </td>
-                      </tr>
-                      <% end %>
-                    </tbody>
-                </table>
-              </div>
+            <% Student.grades.each do |grade| %>
+              <% if (@students = students_of(grade)).exists? %>
+                <div type="a" class="card-header bg-brown" id="heading-<%= grade %>">
+                  <h5 class="mb-0">
+                    <div
+                      class="collapsed"
+                      data-toggle="collapse"
+                      data-target="#collapse-<%= grade %>"
+                      aria-expanded="false"
+                      aria-controls="collapse-<%= grade %>"
+                    >
+                      <i class="arrow fa fa-angle-right mr-2"></i><%= grade %>
+                    </div>
+                  </h5>
+                </div>
+                <div
+                  id="collapse-<%= grade %>"
+                  class="collapse"
+                  aria-labelledby="heading-<%= grade %>"
+                  data-parent="#accordion"
+                >
+                  <table class="table">
+                      <tbody>
+                        <% @students.each do |student| %>
+                        <tr>
+                          <td class="pl-4">
+                            <%= link_to student do%>
+                              <i class="fas fa-user-circle"></i>     <%= student.name %>
+                            <% end %>
+                          </td>
+                          <td class="text-right">
+                            <% if owner_logged_in? %>
+                              <%= link_to student, method: :delete, data: { confirm:
+                              '本当によろしいですか？'} , class: "btn btn-view bg-delete" do%>
+                                <i class="fas fa-trash"></i> 削除 
+                              <% end %> 
+                            <% end %>
+                            <%= link_to new_report_url(student_id: student.id), class: "btn btn-view" do %>
+                              <i class="fas fa-pencil-alt"></i> 報告書作成
+                            <% end %>
+                          </td>
+                        </tr>
+                        <% end %>
+                      </tbody>
+                  </table>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -82,8 +84,8 @@
           <div class="card text-center card-bg-blue mb-3">
             <div class="card-body">
               <h3>指導報告書</h3>
-              <h4 class="display-4"><i class="fas fa-pencil-alt"></i> 6</h4>
-              <%= link_to '見る', students_path, class: "btn btn-view-blue" %>
+              <h4 class="display-4"><i class="fas fa-pencil-alt"></i> <%= current_teacher.reports.count %></h4>
+              <%= link_to '見る', teacher_reports_path, class: "btn btn-view-blue" %>
             </div>
           </div>
           <div class="card text-center card-bg-pink mb-3">

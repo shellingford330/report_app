@@ -76,3 +76,24 @@ subjects = ["算数", "国語", "理科", "社会", "数学", "英語" ]
 	end
 end
 
+20.times do |n|
+	title = Faker::Lorem.sentence(5)
+	content = Faker::Lorem.sentence(15)
+	students.each do |student| 
+		student.news.create!(
+			title: title,
+			content: content,
+			status: 1,
+			teacher_id: 1
+		)
+	end
+	teachers.each do |teacher| 
+		news = teacher.news.create!(
+			title: title,
+			content: content,
+			status: 0
+		)
+		students[0].news << news
+	end
+end
+

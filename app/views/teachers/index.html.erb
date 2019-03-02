@@ -11,21 +11,31 @@
               <thead>
                 <tr>
                   <th>講師氏名</th>
-                  <th  class="d-none d-lg-table-cell">メールアドレス</th>
-                  <th>権限</th>
-                  <% if owner_logged_in? %><th>削除</th><% end %>
+                  <th class="d-none d-lg-table-cell">権限</th>
+                  <% if owner_logged_in? %>
+                    <th class="text-right pr-5">削除</th>
+                  <% end %>
 									<th></th>
                 </tr>
               </thead>
               <tbody>
                 <% @teachers.each do |teacher| %>
                   <tr>	
-                    <td><%= teacher.name %></td>
-                    <td class="d-none d-lg-table-cell"><%= teacher.email %></td>
-                    <td><%= teacher.status %></td>
-                    <td><%= link_to_if owner_logged_in?, '削除', teacher, method: :delete,
-                     data: { confirm: '本当によろしいですか？'} do end %></td>
                     <td>
+                      <%= link_to teacher do %>
+                        <%= teacher.name %>
+                      <% end %>
+                    </td>
+                    <td  class="d-none d-lg-table-cell"><%= teacher.status %></td>
+                    <td  class="text-right">
+                      <% if owner_logged_in? %>
+                        <%= link_to teacher, method: :delete,
+                        data: { confirm: '本当によろしいですか？'}, class: "btn bg-delete" do %>
+                          <i class="fas fa-trash"></i> 削除
+                        <% end %>
+                      <% end %>
+                    </td>
+                    <td  class="text-right">
                       <%= link_to teacher, class: "btn" do %>
                         <i class="fas fa-angle-double-right"></i> 詳細
                       <% end %>

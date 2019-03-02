@@ -2,6 +2,31 @@ ja:
   will_paginate:
     page_gap: "〜"
   activerecord:
+    models:
+      student: 生徒
+      teacher: 講師
+      report: 指導報告書
+      news: お知らせ
+    attributes:
+      student:
+        name: 名前
+        grade: 学年
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+      teacher:
+        name: 名前
+        status: 権限
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+      report:
+        start_date: 開始日
+        end_date: 終了日
+        status: 報告書の状態
+      news:
+        title: タイトル
+        content: 本文
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

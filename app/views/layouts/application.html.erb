@@ -68,6 +68,18 @@
         startPos = winScrollTop;
       });
     });
+
+    $(function() {
+      $('#student_all').on('click', function() {
+        $('.student').prop('checked', this.checked);
+        $('.student_grade').prop('checked', this.checked);
+      });
+      <% Student.grades.each do |grade| %>
+        $('#student_<%= grade %>').on('click', function() {
+          $('#collapse-<%= grade %>').find('.student').prop('checked', this.checked);
+        });
+      <% end %>
+    });
     </script>
   </body>
   

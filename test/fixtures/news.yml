@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyText
+  status: 0
+  teacher: owner
+
+two:
+  title: MyString
+  content: MyText
+  status: 1
+  teacher: manager

@@ -35,6 +35,14 @@ body {
     color: #fff;
   }
 }
+.btn-news {
+  background: #f09183; /*ボタン色*/
+  color: #fff;
+  &:hover {
+    background: #f29b8d; /*ボタンにカーソルのせた色*/
+    color: #fff;
+  }
+}
 
 .btn-sub {
   display: inline-block;
@@ -51,11 +59,25 @@ body {
   }
 }
 
+.btn-sub-news {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-bottom: solid 4px #d77d6f; /*ボタン下の色*/
+  border-radius: 5px;
+  &:active {
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px); /*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2); /*影を小さく*/
+    border-bottom: none;
+  }
+}
+
 a,
 a:hover,
 a:focus {
   color: inherit;
-  text-decoration: none;
   transition: all 0.3s;
 }
 
@@ -349,6 +371,7 @@ a:focus {
 }
 
 #sidebar ul li a {
+  text-decoration: none;
   padding: 10px;
   font-size: 1.1em;
   display: block;
@@ -445,121 +468,60 @@ ul ul a {
   background-color: #f4f0ec;
 }
 
-.bg-green {
-  background: #83ab64;
+.link {
+  color: #ea8d76;
   &:hover {
-    background: #90bb6e;
+    color: #de6e52;
   }
 }
 
-/* 末包担当編集 */
-/*.login {
-  background-color: #eee;
+/* お知らせ　新規作成 */
+.modal-header-news {
+  background-color: #f09183;
 }
 
-.title {
-  text-align: center;
-  font-size: 50px;
+.btn-news {
+  background: #f09183; /*ボタン色*/
+  color: #fff;
+  &:hover {
+    background: #f29b8d; /*ボタンにカーソルのせた色*/
+    color: #fff;
+  }
 }
 
-.input {
-  text-align: center;
-  font-size: 15px;
-}
-
-.input input {
-  height: 2.878rem;
-  line-height: 1.5;
-  font-size: 1.25rem;
-  padding: 0.5rem 1rem;
-}
-.loginbutton {
-  margin: 20px;
-  padding: 20px;
-}
-
-.buttons {
-  text-align: right;
-  margin-right: 50px;
-}
-.facebook {
-  color: #33f;
-}
-.line {
-  color: #3c3;
-}
-.twitter {
-  color: skyblue;
-}
-.google {
-  color: red;
-}
-/*メニューバー*/ /*
-header ul {
-  width: 1000px;
-  overflow: hidden;
-}
-header li {
-  float: left;
-  width: 200px;
-  list-style-type: none;
-}
-
-header a {
-  display: block;
-  padding: 20px 0;
-  text-align: center;
-  font-weight: bold;
+.btn-sub-news {
+  display: inline-block;
+  padding: 0.5em 1em;
   text-decoration: none;
-  background-color: #ddd;
-  color: #000;
+  border-bottom: solid 4px #d77d6f; /*ボタン下の色*/
+  border-radius: 5px;
+  &:active {
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px); /*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2); /*影を小さく*/
+    border-bottom: none;
+  }
 }
 
-header a:hover {
-  background-color: #c58;
-}
-/*指導報告書*/ /*
-.report {
-  font-size: 10px;
-}
-.report input,
-textarea {
-  font-size: 1.25rem;
-}
-.reportbutton {
-  text-align: center;
+/* お知らせ　一覧 */
+
+.border-left-news {
+  border-left: 0.25rem solid #f09183 !important;
 }
 
-/*塾からのお知らせ*/ /*
-.news ul {
-  border: 2px, solid, black;
+.card-body-icon-news {
+  position: absolute;
+  z-index: 0;
+  top: -0.9rem;
+  right: 2rem;
+  opacity: 0.07;
+  font-size: 10rem;
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
 }
 
-.mb-0 > .btn {
-  border: 1px solid #4d3a34;
-  text-decoration: none;
+/*お知らせ　詳細*/
+.border-left-brown {
+  border-left: 0.25rem solid #74554c !important;
 }
-.mb-0 > .btn:hover {
-  background-color: #fff;
-  color: #000;
-  text-decoration: none;
-}
-.btn-view {
-  border: 1px solid #4d3a34;
-  text-decoration: none;
-}
-.btn-view:hover {
-  background-color: #fff;
-  color: #000;
-  text-decoration: none;
-}
-.mystatus > h1 {
-  text-align: center;
-}
-h1 > .btn {
-  background: #f4f0ec;
-  color: black;
-  padding: 10px;
-  font-size: 40px;
-}
-*/

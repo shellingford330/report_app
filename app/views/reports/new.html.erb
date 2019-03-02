@@ -16,12 +16,12 @@
 						<hr>
 						<div class="form-group">
 							<%= f.label :start_date,'開始日' %>
-							<%= f.date_field :start_date, class: "form-control　form-control-lg", value: Date.today.prev_day(15) %>
+							<%= f.date_field :start_date, value: Date.today.prev_day(15) %>
 						</div>
 
 						<div class="form-group">
 							<%= f.label :end_date,'終了日' %>
-							<%= f.date_field :end_date, class: "form-control　form-control-lg", value: Date.yesterday %>
+							<%= f.date_field :end_date, value: Date.yesterday %>
 						</div>
 
 						<div class="form-group">

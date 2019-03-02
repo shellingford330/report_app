@@ -46,4 +46,12 @@ class ApplicationController < ActionController::Base
 			end
 		end
 
+		# ログインしているのが認証された講師か確認
+    def admin_logged_in
+      unless admin_logged_in?
+        store_location
+        redirect_to teachers_login_url
+      end
+    end
+
 end

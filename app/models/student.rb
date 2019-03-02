@@ -1,6 +1,7 @@
 class Student < ApplicationRecord
 	attr_accessor :remember_token
 	has_secure_password
+	has_and_belongs_to_many :news
 	has_many :reports, dependent: :destroy
 	has_many :teachers, through: :reports
 	before_save { self.email.downcase! }

@@ -14,7 +14,7 @@
       </div>
       <p class="mb-auto">書いた講師：<i class="fas fa-user-circle"></i>    <%= report.teacher.name %></p>
       <p class="card-text">
-        コメント：<%= report.comment.present? ? truncate(report.comment, length: 17) : "なし" %>
+        コメント：<%= report.comment.present? ? truncate(report.comment, length: 15) : "なし" %>
       </p>
       <div class="report_check">
         <% if teacher_logged_in? %>

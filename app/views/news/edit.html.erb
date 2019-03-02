@@ -1,0 +1,16 @@
+<% provide(:title, "編集")%>
+<% provide(:btn_text, "更新する")%>
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-md-10 mx-auto">
+			<div class="card bg-brown shadow">
+				<div class="card-header">
+					<h2>お知らせ編集</h2>
+				</div>
+				<div class="card-body">
+					<%= render 'form', news: @news %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

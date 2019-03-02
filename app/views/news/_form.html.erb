@@ -1,0 +1,65 @@
+<%= form_for(news) do |f| %>
+  <%= render 'share/error_messages', obj: news %>
+
+  <div class="form-group">
+    <div class="row">
+      <% if news.new_record? %>
+      <div class="col-md-6">
+        <%= link_to  select_students_news_url, class: "btn btn-block" do %>
+          <i class="fas fa-arrow-right"></i>  生徒を選択する
+        <% end %>
+      </div>
+      <% end %>
+      <div class="col-md-6 mx-auto">
+        <a href="#" class="btn btn-block" data-toggle="modal" data-target="#addNewsModal">
+          <i class="fas fa-check"></i>  選択した生徒を確認
+        </a>
+      </div>
+    </div>
+	</div>
+
+  <div class="form-group">
+		<%= f.hidden_field :students_id, value: news.students_id %>
+	</div>
+
+  <div class="form-group">
+    <%= f.label :title, 'タイトル' %>
+    <%= f.text_field :title, class: "form-control form-control-lg" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :content, '本文' %>
+    <%= f.text_area :content, :size => "10x9",class: "form-control form-control-lg" %>
+  </div>
+
+  <div class="form-group">
+		<div class="row">
+			<div class="col-md-4 mx-auto">
+				<%= f.submit yield(:btn_text), data: { disable_with: '処理中...' }, class: "btn-news btn-block btn-sub-news" %>
+			</div>
+		</div>
+	</div>
+<% end %>
+<div class="modal fade" id="addNewsModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header modal-header-news">
+        <h5 class="modal-title">生徒を確認</h5>
+        <button class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% news.students_id.each do |student_id| %>
+          <p>
+            <% student = Student.find(student_id) %>
+            <%= student.grade %>
+                      <i class="fas fa-user-circle"></i>
+            <%= student.name %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
