@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190302211324) do
+ActiveRecord::Schema.define(version: 20190303054703) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "title"
@@ -37,6 +37,18 @@ ActiveRecord::Schema.define(version: 20190302211324) do
     t.integer "news_id",    null: false
     t.integer "student_id", null: false
     t.index ["student_id"], name: "index_news_students_on_student_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.text     "content",        null: false
+    t.string   "replyable_type"
+    t.integer  "replyable_id"
+    t.string   "writeable_type"
+    t.integer  "writeable_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["replyable_type", "replyable_id"], name: "index_replies_on_replyable_type_and_replyable_id"
+    t.index ["writeable_type", "writeable_id"], name: "index_replies_on_writeable_type_and_writeable_id"
   end
 
   create_table "reports", force: :cascade do |t|

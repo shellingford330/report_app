@@ -16,9 +16,9 @@
       </div>
       <div class="report_check">
         <% if teacher_logged_in? %>
-          <a href="#" class="btn btn-news report_check_info" data-toggle="modal" data-target="#addNews-<%=news.id%>Modal">
+          <%= link_to news, class: "btn btn-news" do %>
             <i class="fas fa-arrow-right mr-2"></i>詳細
-          </a>
+          <% end %>
           <div class="report_check_list pt-4">
             <% if released?(news)%>
               <div class="report_check_list_item">
@@ -31,45 +31,11 @@
             <% end %>
           </div>
         <% elsif student_logged_in? %>
-          <a href="#" class="btn btn-news" data-toggle="modal" data-target="#addNews-<%=news.id%>Modal">
+          <%= link_to news, class: "btn btn-news" do %>
             <i class="fas fa-arrow-right mr-2"></i>詳細
-          </a>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="addNews-<%=news.id%>Modal">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header modal-header-news">
-        <h5 class="modal-title border-left-brown pl-2">
-          「<%= news.title%>」
-        </h5>
-        <button class="close" data-dismiss="modal">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body py-4">
-        <div class="row">
-          <div class="col-md-9 mx-auto">
-            <%= safe_join(news.content.split("\n"), tag(:br)) %>
-          </div>
-        </div>
-      </div>
-      <% if correct_teacher?(news.teacher) || admin_logged_in? %>
-      <div class="modal-footer">
-        <% if admin_logged_in? %>
-          <% if draft?(news) %>
-            <%= link_to '公開する', release_news_url(news), method: :post, class: "btn" %>
-          <% elsif released?(news) %>
-            <%= link_to '非公開にする', draft_news_url(news), method: :post, class: "btn" %>
           <% end %>
         <% end %>
-        <%= link_to '編集する', edit_news_url(news), class: "btn" %>
-        <%= link_to '削除する', news_url(news), method: :delete, class: "btn bg-delete" %>
       </div>
-      <% end %>
     </div>
   </div>
 </div>

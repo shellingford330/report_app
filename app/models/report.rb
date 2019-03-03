@@ -1,6 +1,7 @@
 class Report < ApplicationRecord
   belongs_to :student
   belongs_to :teacher
+  has_many :replies, as: :replyable
 
   default_scope { order(created_at: :desc) }
   enum status: { draft: 0, released: 1, deleted: 2 }

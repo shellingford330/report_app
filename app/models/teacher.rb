@@ -2,6 +2,7 @@ class Teacher < ApplicationRecord
 	attr_accessor :remember_token
 	has_secure_password
 
+	has_many :replies,  as: :writeable
 	has_many :contacts, dependent: :destroy
 	has_many :news,     dependent: :destroy
 	has_many :reports,  dependent: :destroy

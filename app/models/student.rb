@@ -3,6 +3,7 @@ class Student < ApplicationRecord
 	has_secure_password
 
 	has_and_belongs_to_many :news
+	has_many :replies,  as: :writeable
 	has_many :contacts, dependent: :destroy
 	has_many :reports,  dependent: :destroy
 	has_many :teachers, through: :reports

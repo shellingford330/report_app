@@ -2,10 +2,10 @@ class ReportsController < ApplicationController
   before_action :user_logged_in,    only: [:student_index, :teacher_index]
   before_action :teacher_logged_in, only: [:new, :create, :edit, :release, :draft, :update, :destroy]
   before_action :admin_logged_in,   only: [:release, :draft]
-  before_action :set_report,        only: [:show, :edit, :release, :draft, :update, :destroy]
+  before_action :set_report,        only: [:show, :edit, :release, :draft, :update, :destroy, :reply]
   before_action :correct_teacher_or_admin,   only: [:edit, :update, :destroy]
   before_action :correct_student_or_teacher, only: [:show]
-
+  before_action :correct_student_or_admin,   only: [:reply]
   def student_index
     @reports = current_student.reports.released.paginate(page: params[:page], per_page: 9)
     render 'index'
@@ -17,6 +17,8 @@ class ReportsController < ApplicationController
   end
 
   def show
+    @reply = Reply.new
+
     @report.update(read_flg: true) if correct_student?(@report.student)
     @student = @report.student
     @teacher = @report.teacher
@@ -70,6 +72,17 @@ class ReportsController < ApplicationController
     redirect_to teacher_reports_url
   end
 
+  def reply
+    if student_logged_in?
+      @reply = current_student.replies.build(content: params[:reply][:content])
+    else
+      @reply = current_teacher.replies.build(content: params[:reply][:content])
+    end
+    @report.replies << @reply
+    flash[:success] = "返信しました"
+    redirect_to @report
+  end
+
   private
     def report_params
       params.require(:report).permit(:start_date, :end_date, :subject, :content, :homework, :comment, :memo, :student_id)
@@ -85,7 +98,7 @@ class ReportsController < ApplicationController
     def correct_teacher_or_admin
       unless correct_teacher?(@report.teacher) || admin_logged_in?
         store_location
-        redirect_to teachers_login_url
+        redirect_to teachers_login_url and return
       end
     end
 
@@ -93,7 +106,15 @@ class ReportsController < ApplicationController
     def correct_student_or_teacher
       unless correct_student?(@report.student) || teacher_logged_in?
         store_location
-        redirect_to students_login_path 
+        redirect_to students_login_path and return
+      end
+    end
+
+    # ログインしているのが生徒本人か、管理者か確認
+    def correct_student_or_admin
+      unless correct_student?(@report.student) || admin_logged_in?
+        store_location
+        redirect_to students_login_path and return
       end
     end
 end

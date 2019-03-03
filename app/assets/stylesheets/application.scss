@@ -45,7 +45,7 @@ body {
 }
 
 .btn-contact {
-  background: #96c671; /*ボタン色*/
+  background: #88b665; /*ボタン色*/
   color: #fff;
   &:hover {
     background: #9bd272; /*ボタンにカーソルのせた色*/
@@ -550,10 +550,21 @@ ul ul a {
   border-left: 0.25rem solid #826157 !important;
 }
 
+.news-title {
+  background: #f9f2f1;
+  margin: 5px 20px 10px 20px;
+  padding: 5px;
+  @media (min-width: 767px) {
+    padding-left: 20px;
+  }
+  font-size: 20px;
+  border-left: 5px solid #f09183;
+}
+
 /* お問い合わせ 一覧　*/
 
 .border-left-contact {
-  border-left: 0.25rem solid #96c671 !important;
+  border-left: 0.25rem solid #88b665 !important;
 }
 
 .card-body-icon-contact {
@@ -604,4 +615,14 @@ ul ul a {
   border-top: 1px solid rgb(242, 242, 242);
   width: 100%;
   padding: 20px 20px 10px 20px;
+}
+
+/* リプライ */
+.reply-teacher {
+  padding-left: 60px;
+}
+
+.student-icon,
+.teacher-icon {
+  border: 2px solid rgb(90, 69, 63);
 }

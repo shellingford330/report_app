@@ -1,9 +1,9 @@
 class ContactsController < ApplicationController
   before_action :user_logged_in,    only:   [:index, :show]
-  before_action :student_logged_in, except: [:index, :show]
-  before_action :set_contact,       only:   [:show, :edit, :update, :destroy]
+  before_action :student_logged_in, except: [:index, :show, :reply]
+  before_action :set_contact,       only:   [:show, :edit, :update, :destroy, :reply]
   before_action :set_admin,         only:   [:new, :edit, :create, :update]
-  before_action :correct_student_and_teacher_or_admin, only: [:show]
+  before_action :correct_student_or_admin, only: [:show, :reply]
   before_action :correct_student,   only:   [:edit, :update, :destroy]
 
   def index
@@ -17,6 +17,7 @@ class ContactsController < ApplicationController
   end
 
   def show
+    @reply = Reply.new
   end
 
   def new
@@ -53,6 +54,17 @@ class ContactsController < ApplicationController
     flash[:success] = '削除されました'
   end
 
+  def reply
+    if student_logged_in?
+      @reply = current_student.replies.build(content: params[:reply][:content])
+    else
+      @reply = current_teacher.replies.build(content: params[:reply][:content])
+    end
+    @contact.replies << @reply
+    flash[:success] = "返信しました"
+    redirect_to @contact
+  end
+
   private
 
     def set_contact
@@ -69,8 +81,8 @@ class ContactsController < ApplicationController
     end
 
     # ログインしているのが生徒本人か講師本人か管理者か確認
-    def correct_student_and_teacher_or_admin
-      unless admin_logged_in? || correct_student?(@contact.student) || correct_teacher?(@contact.teacher)
+    def correct_student_or_admin
+      unless admin_logged_in? || correct_student?(@contact.student)
         store_location
         redirect_to students_login_url and return
       end

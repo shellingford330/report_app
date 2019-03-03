@@ -1,24 +1,21 @@
 <% provide(:title, "報告書詳細") %>
 <div class="container">
   <div class="row">
-    <!-- Post Content Column -->
     <div class="col-lg-8">
-      <!-- Title -->
+      <!-- タイトル -->
       <h1 class="mt-4">指導報告書</h1>
 
-      <!-- Teacher -->
+      <!-- 指導報告書の内容 -->
       <p class="text-muted">
         ー   <%= time_ago_in_words(@report.created_at) %>前に投稿
       </p>
 
       <hr />
 
-      <!-- Date/Time -->
       <p>書いた講師： <i class="fas fa-user-circle"></i>    <%= @teacher.name %></p>
 
       <hr />
 
-      <!-- Post Content -->
       <% if @report.content.present? %>
         <p class="lead">
           授業内容
@@ -44,85 +41,26 @@
 
       <hr />
 
-      <!-- Comments Form -->
+      <!-- 返信フォーム -->
       <div class="card bg-brown my-4">
         <h5 class="card-header">返信する：</h5>
         <div class="card-body">
-          <form>
+          <%= form_for(@reply, url: reply_report_url) do |f| %>
             <div class="form-group">
-              <textarea class="form-control" rows="3"></textarea>
+              <%= f.text_area :content, :size => "10x3", class: "form-control form-control-lg" %>
             </div>
-            <button type="submit" class="btn">送信する</button>
-          </form>
+            <%= f.submit '送信する', data: { confirm: "本当に送信してもよろしいですか？", disable_with: '処理中...' }, class: "btn" %>
+          <% end %>
         </div>
       </div>
 
-      <!-- Single Comment -->
-      <div class="media mb-4">
-        <img
-          class="d-flex mr-3 rounded-circle"
-          src="http://placehold.it/50x50"
-          alt=""
-        />
-        <div class="media-body">
-          <h5 class="mt-0">Commenter Name</h5>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-          scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-          vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-          vulputate fringilla. Donec lacinia congue felis in faucibus.
-        </div>
-      </div>
-
-      <!-- Comment with nested comments -->
-      <div class="media mb-4">
-        <img
-          class="d-flex mr-3 rounded-circle"
-          src="http://placehold.it/50x50"
-          alt=""
-        />
-        <div class="media-body">
-          <h5 class="mt-0">Commenter Name</h5>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-          scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-          vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-          vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-          <div class="media mt-4">
-            <img
-              class="d-flex mr-3 rounded-circle"
-              src="http://placehold.it/50x50"
-              alt=""
-            />
-            <div class="media-body">
-              <h5 class="mt-0">Commenter Name</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-              scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-              vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-              nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
-          </div>
-
-          <div class="media mt-4">
-            <img
-              class="d-flex mr-3 rounded-circle"
-              src="http://placehold.it/50x50"
-              alt=""
-            />
-            <div class="media-body">
-              <h5 class="mt-0">Commenter Name</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-              scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-              vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-              nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- 返信履歴 -->
+      <%= render @report.replies %>
     </div>
 
-    <!-- Sidebar Widgets Column -->
+    <!-- サイドバー -->
     <div class="col-md-4">
-      <!-- Search Widget -->
+      <!-- 生徒情報-->
       <div class="card my-4">
         <h5 class="card-header">生徒情報</h5>
         <div class="card-body">
@@ -132,7 +70,7 @@
         </div>
       </div>
 
-      <!-- Side Widget -->
+      <!-- 報告書情報 -->
       <div class="card my-4">
         <h5 class="card-header">報告書情報</h5>
         <div class="card-body">
@@ -142,6 +80,8 @@
 					<p class="mb-auto"><strong>科目　　</strong>      <%= @report.subject %></p>
         </div>
       </div>
+
+      <!-- 報告書編集 -->
       <% if correct_teacher?(@teacher) || admin_logged_in? %>
 				<%= link_to edit_report_path(@report), class: "btn btn-block" do %>
 					<i class="fas fa-check"></i>  編集する
@@ -160,5 +100,4 @@
 			<% end %>
     </div>
   </div>
-  <!-- /.row -->
 </div>

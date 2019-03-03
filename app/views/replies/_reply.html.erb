@@ -1,0 +1,18 @@
+<!-- 返信履歴 -->
+<% if reply.writeable_type == "Teacher" %>
+	<div class="media mb-4 reply-teacher">
+		<%= image_tag 'teacher.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle teacher-icon" %>
+		<div class="media-body">
+			<h5 class="mt-0"><%= reply_teacher(reply).name %></h5>
+			<p class="report-text"><%= reply.content %></p>
+		</div>
+	</div>
+	<% elsif reply.writeable_type == "Student"%>
+	<div class="media mb-4">
+		<%= image_tag 'student.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle student-icon" %>
+		<div class="media-body">
+			<h5 class="mt-0"><h5 class="mt-0"><%= reply_student(reply).name %></h5></h5>
+			<p class="report-text"><%= reply.content %></p>
+		</div>
+	</div>
+<% end %>

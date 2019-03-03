@@ -2,25 +2,51 @@
 <div class="container">
   <div class="row">
     <div class="col-md-9 mx-auto">
-      <h3 class="mt-4 mb-0"><strong>お問い合わせ</strong></h3>
+      <h3 class="mt-4 mb-0">
+        <strong>お問い合わせ</strong>
+      </h3>
+
       <hr>
+
       <div class="contact-wrapper">
+
         <div class="contact-title">
           「<%= @contact.title %>」
         </div>
+
         <div class="contact-info">
           宛先講師：<i class="fas fa-user-circle"></i>     <%= @contact.teacher.name %>
         </div>
+
         <div class="contact-info">
           書いた生徒：<i class="fas fa-user-circle"></i>     <%= @contact.student.name %>
         </div>
+
         <div class="contact-info">
           日付：<%= @contact.created_at.strftime('%Y年%m月%d日') %>
         </div>
+
         <div class="contact-content">
           <%= safe_join(@contact.content.split("\n"), tag(:br)) %>
         </div>
+
       </div>
+
+      <!-- 返信フォーム -->
+      <div class="card bg-brown my-4">
+        <h5 class="card-header">返信する：</h5>
+        <div class="card-body">
+          <%= form_for(@reply, url: reply_contact_url) do |f| %>
+            <div class="form-group">
+              <%= f.text_area :content, :size => "10x3", class: "form-control form-control-lg" %>
+            </div>
+            <%= f.submit '送信する', data: { confirm: "本当に送信してもよろしいですか？", disable_with: '処理中...' }, class: "btn" %>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- 返信履歴 -->
+      <%= render @contact.replies %>
     </div>
   </div>
 </div>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  replyable: one
+  replyable_type: Replyable
+  writeable: one
+  writeable_type: Writeable
+
+two:
+  content: MyText
+  replyable: two
+  replyable_type: Replyable
+  writeable: two
+  writeable_type: Writeable

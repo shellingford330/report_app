@@ -77,7 +77,7 @@ subjects = ["算数", "国語", "理科", "社会", "数学", "英語" ]
 end
 
 20.times do |n|
-	title = Faker::Lorem.sentence(5)
+	title = Faker::Lorem.sentence(3)
 	content = Faker::Lorem.sentence(15)
 	students.each do |student| 
 		student.news.create!(
@@ -98,7 +98,7 @@ end
 end
 
 10.times do |n|
-	title = Faker::Lorem.sentence(5)
+	title = Faker::Lorem.sentence(3)
 	content = Faker::Lorem.sentence(15)
 	students.each do |student| 
 		student.contacts.create!(
