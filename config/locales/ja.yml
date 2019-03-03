@@ -7,6 +7,7 @@ ja:
       teacher: 講師
       report: 指導報告書
       news: お知らせ
+      contact: お問い合わせ
     attributes:
       student:
         name: 名前
@@ -27,6 +28,10 @@ ja:
       news:
         title: タイトル
         content: 本文
+      contact:
+        title: タイトル
+        content: 本文
+        teacher: 講師
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

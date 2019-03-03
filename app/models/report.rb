@@ -10,5 +10,7 @@ class Report < ApplicationRecord
   validates :status,
     presence: true,
     inclusion: { in: [ "draft", "released", "deleted" ], allow_nil: true }
+  validates :teacher_id, presence: true
+  validates :student_id, presence: true
 
 end
