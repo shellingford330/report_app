@@ -28,6 +28,15 @@ class ApplicationController < ActionController::Base
 			end
 		end
 
+		# ログインするよう必要があるか確認
+		def student_logged_in
+			unless student_logged_in?
+				flash[:danger] = "ログインをして下さい"
+				store_location
+				redirect_to students_login_path
+			end
+		end
+
 		# 講師がログインをするよう必要があるか確認
 		def teacher_logged_in
 			unless teacher_logged_in?

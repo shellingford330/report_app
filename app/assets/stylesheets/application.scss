@@ -44,6 +44,15 @@ body {
   }
 }
 
+.btn-contact {
+  background: #96c671; /*ボタン色*/
+  color: #fff;
+  &:hover {
+    background: #9bd272; /*ボタンにカーソルのせた色*/
+    color: #fff;
+  }
+}
+
 .btn-sub {
   display: inline-block;
   padding: 0.5em 1em;
@@ -64,6 +73,21 @@ body {
   padding: 0.5em 1em;
   text-decoration: none;
   border-bottom: solid 4px #d77d6f; /*ボタン下の色*/
+  border-radius: 5px;
+  &:active {
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px); /*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2); /*影を小さく*/
+    border-bottom: none;
+  }
+}
+
+.btn-sub-contact {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-bottom: solid 4px #78a555; /*ボタン下の色*/
   border-radius: 5px;
   &:active {
     -ms-transform: translateY(4px);
@@ -523,5 +547,61 @@ ul ul a {
 
 /*お知らせ　詳細*/
 .border-left-brown {
-  border-left: 0.25rem solid #74554c !important;
+  border-left: 0.25rem solid #826157 !important;
+}
+
+/* お問い合わせ 一覧　*/
+
+.border-left-contact {
+  border-left: 0.25rem solid #96c671 !important;
+}
+
+.card-body-icon-contact {
+  position: absolute;
+  z-index: 0;
+  top: -0.4rem;
+  right: 1.5rem;
+  opacity: 0.07;
+  font-size: 10rem;
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
+}
+
+/* お問い合わせ　詳細 */
+.contact-wrapper {
+  background: white;
+  width: 100%;
+  padding: 30px 40px;
+  @media (max-width: 767px) {
+    padding: 15px;
+  }
+  border-radius: 25px;
+}
+
+.contact-title {
+  background: #f3f7f1;
+  margin: 5px 20px 10px 20px;
+  padding: 5px;
+  @media (min-width: 767px) {
+    padding-left: 20px;
+  }
+  font-size: 20px;
+  border-left: 5px solid #96c671;
+}
+
+.contact-info {
+  width: 100%;
+  font-size: 14px;
+  padding-right: 30px;
+  display: block;
+  vertical-align: middle;
+  text-align: right;
+  height: 30px;
+}
+
+.contact-content {
+  font-size: 16px;
+  border-top: 1px solid rgb(242, 242, 242);
+  width: 100%;
+  padding: 20px 20px 10px 20px;
 }

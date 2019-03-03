@@ -1,7 +1,9 @@
 class News < ApplicationRecord
 	attr_accessor :students_id
+
 	has_and_belongs_to_many :students
 	belongs_to :teacher
+	
 	default_scope { order(created_at: :desc) }
   enum status: { draft: 0, released: 1, deleted: 2 }
 

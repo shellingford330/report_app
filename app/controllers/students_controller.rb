@@ -107,15 +107,6 @@ class StudentsController < ApplicationController
 			@student = Student.find(params[:id])
 		end
 
-		# ログインするよう必要があるか確認
-		def student_logged_in
-			unless student_logged_in?
-				flash[:danger] = "ログインをして下さい"
-				store_location
-				redirect_to students_login_path
-			end
-		end
-
 		# ログインを既にしているか確認
 		def student_already_logged_in
 			redirect_to current_student if student_logged_in?

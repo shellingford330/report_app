@@ -65,9 +65,9 @@
         </ul>
       </li>
       <li>
-        <a href="">
+        <%= link_to contacts_url do %>
           <i class="far fa-envelope"></i>          お問い合わせ
-        </a>
+        <% end %>
       </li>
     </ul>
   </nav>
@@ -91,9 +91,18 @@
         <% end %>
       </li>
       <li>
-        <a href="">
+        <a href="#contactSubmenu" data-toggle="collapse" aria-expanded="false">
           <i class="far fa-envelope"></i>          お問い合わせ
+          <i class="arrow fa fa-angle-down float-right mt-1"></i>
         </a>
+        <ul class="collapse list-unstyled" id="contactSubmenu">
+          <li>
+            <%= link_to '一覧', contacts_url %>
+          </li>
+          <li>
+            <%= link_to '新規作成', new_contact_url %>
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>

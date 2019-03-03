@@ -1,0 +1,30 @@
+<div class="report mb-3">
+  <div class="card shadow-sm border-left-contact">
+    <div class="card-body">
+      <div class="card-body-icon-contact">
+        <i class="far fa-envelope"></i>
+      </div>
+      <strong class="d-inline-block mb-2">お問い合わせ</strong>
+      <h5 class="mb-0">
+        「<%= contact.title %>」
+      </h5>
+			<% if student_logged_in? %>
+      <p class="my-2">
+        宛先講師：<i class="fas fa-user-circle"></i>    <%= contact.teacher.name %>
+      </p>
+			<% else %>
+			<p class="my-2">
+        書いた生徒：<i class="fas fa-user-circle"></i>    <%= contact.student.name %>
+      </p>
+			<% end %>
+      <div class="text-muted my-2">
+        <%= time_ago_in_words(contact.created_at) %>前に投稿
+      </div>
+      <div class="report_check">
+				<%= link_to contact, class: "btn btn-contact" do %>
+					<i class="fas fa-arrow-right mr-2"></i>詳細
+				<% end %>
+      </div>
+    </div>
+  </div>
+</div>
