@@ -97,3 +97,21 @@ end
 	end
 end
 
+10.times do |n|
+	title = Faker::Lorem.sentence(5)
+	content = Faker::Lorem.sentence(15)
+	students.each do |student| 
+		student.contacts.create!(
+			title: title,
+			content: content,
+			teacher_id: 1
+		)
+	end
+	teachers.each do |teacher| 
+		teacher.contacts.create!(
+			title: title,
+			content: content,
+			student_id: 1
+		)
+	end
+end
