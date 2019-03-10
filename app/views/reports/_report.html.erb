@@ -1,4 +1,4 @@
-<div class="report mb-3">
+<div class="mb-3">
   <div class="card shadow-sm border-left-primary">
     <div class="card-body">
       <div class="card-body-icon">
@@ -16,27 +16,27 @@
       <p class="card-text">
         コメント：<%= report.comment.present? ? truncate(report.comment, length: 15) : "なし" %>
       </p>
-      <div class="report_check">
+      <div class="card_check">
         <% if teacher_logged_in? %>
-          <%= link_to report, class: "btn report_check_info" do %>
+          <%= link_to report, class: "btn card_check_info" do %>
             <i class="fas fa-arrow-right mr-2"></i>詳細
           <% end %>
-          <div class="report_check_list">
+          <div class="card_check_list">
             <% if released?(report)%>
-              <div class="report_check_list_item">
+              <div>
                 <i class="far fa-check-square"></i>    公開
               </div>
             <% else %>
-              <div class="report_check_list_item">
+              <div>
                 <i class="far fa-square"></i>    公開
               </div>
             <% end %>
             <% if report.read_flg %>
-              <div class="report_check_list_item">
+              <div>
                 <i class="far fa-check-square"></i>   既読
               </div>
             <% else %>
-              <div class="report_check_list_item">
+              <div>
                 <i class="far fa-square"></i>   既読
               </div>
             <% end %>

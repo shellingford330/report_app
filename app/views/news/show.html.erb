@@ -4,17 +4,17 @@
     <div class="col-md-9 mx-auto">
       <h3 class="mt-4 mb-0"><strong>お知らせ</strong></h3>
       <hr>
-      <div class="contact-wrapper">
+      <div class="news-wrapper">
         <div class="news-title">
           「<%= @news.title %>」
         </div>
-        <div class="contact-info">
+        <div class="news-info">
           書いた講師：<i class="fas fa-user-circle"></i>     <%= @news.teacher.name %>
         </div>
-        <div class="contact-info">
+        <div class="news-info">
           日付：<%= @news.created_at.strftime('%Y年%m月%d日') %>
         </div>
-        <div class="contact-content">
+        <div class="news-content">
           <%= safe_join(@news.content.split("\n"), tag(:br)) %>
         </div>
         <% if correct_teacher?(@news.teacher) || admin_logged_in? %>

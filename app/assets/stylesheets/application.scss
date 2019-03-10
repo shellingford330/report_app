@@ -13,8 +13,8 @@
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
-/* 鈴木担当編集 */
 
+/*-- 全レイアウト共通 --*/
 html {
   height: 100%;
 }
@@ -24,9 +24,34 @@ body {
   font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
   background: #f7f5f2;
   color: #4d3a34;
-  //background: #e9d2b8;
 }
 
+a,
+a:hover,
+a:focus {
+  color: inherit;
+  transition: all 0.3s;
+}
+
+.link {
+  color: #ea8d76;
+  &:hover {
+    color: #de6e52;
+  }
+}
+
+/*-- 本体(サイドバーを抜く) --*/
+#content {
+  padding-top: 55px;
+  width: 100%;
+  min-height: 100vh;
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/*-- ボタン --*/
 .btn {
   background: #6078bd; /*ボタン色*/
   color: #fff;
@@ -35,6 +60,7 @@ body {
     color: #fff;
   }
 }
+
 .btn-news {
   background: #f09183; /*ボタン色*/
   color: #fff;
@@ -53,7 +79,10 @@ body {
   }
 }
 
-.btn-sub {
+// ボタン(送信用)
+.btn-sub,
+.btn-sub-news,
+.btn-sub-contact {
   display: inline-block;
   padding: 0.5em 1em;
   text-decoration: none;
@@ -69,69 +98,35 @@ body {
 }
 
 .btn-sub-news {
-  display: inline-block;
-  padding: 0.5em 1em;
-  text-decoration: none;
   border-bottom: solid 4px #d77d6f; /*ボタン下の色*/
-  border-radius: 5px;
-  &:active {
-    -ms-transform: translateY(4px);
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px); /*下に動く*/
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2); /*影を小さく*/
-    border-bottom: none;
-  }
 }
 
 .btn-sub-contact {
-  display: inline-block;
-  padding: 0.5em 1em;
-  text-decoration: none;
   border-bottom: solid 4px #78a555; /*ボタン下の色*/
-  border-radius: 5px;
-  &:active {
-    -ms-transform: translateY(4px);
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px); /*下に動く*/
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2); /*影を小さく*/
-    border-bottom: none;
-  }
 }
 
-a,
-a:hover,
-a:focus {
-  color: inherit;
-  transition: all 0.3s;
-}
-
-#content {
-  padding-top: 55px;
-  width: 100%;
-  min-height: 100vh;
-  transition: all 0.3s;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-/*-- 生徒一覧 --*/
-/*-- カード --*/
-.btn-view {
-  display: inline-block;
-  text-decoration: none;
-  border-radius: 5px;
+// 削除ボタン
+.bg-delete {
+  background-color: #d76161;
+  color: white;
   &:hover {
-    background: #6f83bf;
-    color: #fff;
+    background-color: #cb4949;
   }
 }
 
+/*-- 生徒 一覧 --*/
+
+// テーブルの背景
+.bg-brown {
+  background-color: #f4f0ec;
+}
+
+// カード
 .btn-view-green,
 .btn-view-pink,
 .btn-view-brown,
 .btn-view-blue,
-.btn-view-orange {
+.btn-view-gray {
   display: inline-block;
   text-decoration: none;
   border: solid 1px #fff;
@@ -175,7 +170,7 @@ a:focus {
   }
 }
 
-.btn-view-orange {
+.btn-view-gray {
   background: #9f9f9f;
   &:hover {
     color: #9f9f9f;
@@ -202,7 +197,7 @@ a:focus {
   background: #b08274;
 }
 
-.card-bg-orange {
+.card-bg-gray {
   color: #fff;
   background: #9f9f9f;
 }
@@ -221,7 +216,6 @@ a:focus {
   .current {
     line-height: 40px;
     font-size: 16px;
-
     padding: 0 1.5px;
     width: 40px;
     height: 40px;
@@ -279,7 +273,7 @@ a:focus {
   }
 }
 
-/*-- navbar --*/
+/*-- バー --*/
 .navbar {
   background: rgb(245, 245, 245);
   transition: 0.3s;
@@ -307,7 +301,7 @@ a:focus {
   transform: translateY(-60px);
 }
 
-/*-- sidebar --*/
+/*-- サイドバー --*/
 #sidebar {
   width: 250px;
   position: fixed;
@@ -319,6 +313,47 @@ a:focus {
   color: #4d3a34;
   transition: all 0.3s;
   overflow-y: scroll;
+  .sidebar-header {
+    padding: 20px 20px 13px 20px;
+    background: rgb(240, 240, 240);
+    color: #4d3a34;
+    border-bottom: 1px solid #dadada;
+  }
+  ul.components {
+    padding: 10px 0px;
+    border-bottom: 1px solid #b3b1b1;
+  }
+  ul {
+    p {
+      color: #fff;
+      padding: 10px;
+    }
+    li a {
+      text-decoration: none;
+      padding: 10px;
+      font-size: 1.1em;
+      display: block;
+      &:hover {
+        color: #4d3a34;
+        background: #fff;
+      }
+    }
+    li.active > a,
+    a[aria-expanded="true"] {
+      color: #4d3a34;
+      background: rgb(235, 235, 235);
+    }
+    ul a {
+      font-size: 0.9em !important;
+      padding-left: 30px !important;
+      background: rgb(235, 235, 235);
+    }
+
+    a[data-toggle="collapse"] {
+      position: relative;
+    }
+  }
+
   .fa-graduation-cap {
     color: #eb8f16;
   }
@@ -377,57 +412,7 @@ a:focus {
   opacity: 1;
 }
 
-#sidebar .sidebar-header {
-  padding: 20px 20px 13px 20px;
-  background: rgb(240, 240, 240);
-  color: #4d3a34;
-  border-bottom: 1px solid #dadada;
-}
-
-#sidebar ul.components {
-  padding: 10px 0px;
-  border-bottom: 1px solid #b3b1b1;
-}
-
-#sidebar ul p {
-  color: #fff;
-  padding: 10px;
-}
-
-#sidebar ul li a {
-  text-decoration: none;
-  padding: 10px;
-  font-size: 1.1em;
-  display: block;
-}
-
-#sidebar ul li a:hover {
-  color: #4d3a34;
-  background: #fff;
-}
-
-#sidebar ul li.active > a,
-a[aria-expanded="true"] {
-  color: #4d3a34;
-  background: rgb(235, 235, 235);
-}
-
-a[data-toggle="collapse"] {
-  position: relative;
-}
-
-ul ul a {
-  font-size: 0.9em !important;
-  padding-left: 30px !important;
-  background: rgb(235, 235, 235);
-}
-
-/* 管理者変更画面　モーダル */
-.modal-header {
-  background-color: rgb(255, 186, 58);
-}
-
-/* マイページ */
+/*-- 講師 マイページ --*/
 .avatar {
   border-radius: 50%;
   display: inline-block;
@@ -439,20 +424,40 @@ ul ul a {
   border: 1px solid #ddd;
 }
 
-/* 指導報告書　詳細 */
-.report-text {
+// 管理者変更画面　モーダル
+.bg-orange {
+  background-color: rgb(255, 186, 58);
+}
+
+/*-- 指導報告書（詳細） 返信テキスト --*/
+.round-text {
   padding: 10px;
   border: 1px solid #856c64;
   border-radius: 4px;
   background: #fff;
 }
 
-/* 指導報告書 一覧 */
-.border-left-primary {
-  border-left: 0.25rem solid #6078bd !important;
+/*-- 一覧のカード(報告書・お知らせ・お問い合わせ) --*/
+// 公開・既読のレイアウト
+.card_check {
+  display: table;
+  width: 100%;
+  vertical-align: middle;
+  font-size: 13.5px;
+  .card_check_info {
+    display: table-cell;
+    width: 80px;
+  }
+  .card_check_list {
+    margin-top: 0px;
+    display: table-cell;
+    text-align: right;
+  }
 }
 
-.card-body-icon {
+.card-body-icon,
+.card-body-icon-news,
+.card-body-icon-contact {
   position: absolute;
   z-index: 0;
   top: -0.5rem;
@@ -463,123 +468,60 @@ ul ul a {
   transform: rotate(15deg);
 }
 
-.report_check {
-  display: table;
-  width: 100%;
-  vertical-align: middle;
-  font-size: 13.5px;
-  .report_check_info {
-    display: table-cell;
-    width: 80px;
-  }
-  .report_check_list {
-    margin-top: 0px;
-    display: table-cell;
-    text-align: right;
-  }
+// 指導報告書
+.border-left-primary {
+  border-left: 0.25rem solid #6078bd !important;
 }
 
-/* 生徒一覧 */
-.bg-delete {
-  background-color: #d76161;
-  color: white;
-  &:hover {
-    background-color: #cb4949;
-  }
-}
-
-.bg-brown {
-  background-color: #f4f0ec;
-}
-
-.link {
-  color: #ea8d76;
-  &:hover {
-    color: #de6e52;
-  }
-}
-
-/* お知らせ　新規作成 */
-.modal-header-news {
-  background-color: #f09183;
-}
-
-.btn-news {
-  background: #f09183; /*ボタン色*/
-  color: #fff;
-  &:hover {
-    background: #f29b8d; /*ボタンにカーソルのせた色*/
-    color: #fff;
-  }
-}
-
-.btn-sub-news {
-  display: inline-block;
-  padding: 0.5em 1em;
-  text-decoration: none;
-  border-bottom: solid 4px #d77d6f; /*ボタン下の色*/
-  border-radius: 5px;
-  &:active {
-    -ms-transform: translateY(4px);
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px); /*下に動く*/
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2); /*影を小さく*/
-    border-bottom: none;
-  }
-}
-
-/* お知らせ　一覧 */
-
+// お知らせ
 .border-left-news {
   border-left: 0.25rem solid #f09183 !important;
 }
-
 .card-body-icon-news {
   position: absolute;
-  z-index: 0;
   top: -0.9rem;
   right: 2rem;
-  opacity: 0.07;
-  font-size: 10rem;
-  -webkit-transform: rotate(15deg);
-  transform: rotate(15deg);
 }
 
-/*お知らせ　詳細*/
-.border-left-brown {
-  border-left: 0.25rem solid #826157 !important;
-}
-
-.news-title {
-  background: #f9f2f1;
-  margin: 5px 20px 10px 20px;
-  padding: 5px;
-  @media (min-width: 767px) {
-    padding-left: 20px;
-  }
-  font-size: 20px;
-  border-left: 5px solid #f09183;
-}
-
-/* お問い合わせ 一覧　*/
-
+//お問い合わせ
 .border-left-contact {
   border-left: 0.25rem solid #88b665 !important;
 }
 
 .card-body-icon-contact {
   position: absolute;
-  z-index: 0;
   top: -0.4rem;
   right: 1.5rem;
-  opacity: 0.07;
-  font-size: 10rem;
-  -webkit-transform: rotate(15deg);
-  transform: rotate(15deg);
 }
 
-/* お問い合わせ　詳細 */
-.contact-wrapper {
+/*-- お知らせ　新規作成 (モーダル) --*/
+.bg-news {
+  background-color: #f09183;
+}
+
+/*-- 詳細（お知らせ・お問い合わせ）--*/
+.news-title,
+.contact-title {
+  margin: 5px 20px 10px 20px;
+  padding: 5px;
+  @media (min-width: 767px) {
+    padding-left: 20px;
+  }
+  font-size: 20px;
+}
+
+.news-title {
+  background: #f9f2f1;
+  border-left: 5px solid #f09183;
+}
+
+.contact-title {
+  background: #f3f7f1;
+  border-left: 5px solid #96c671;
+}
+
+.contact-wrapper,
+.news-wrapper {
   background: white;
   width: 100%;
   padding: 30px 40px;
@@ -589,35 +531,25 @@ ul ul a {
   border-radius: 25px;
 }
 
-.contact-title {
-  background: #f3f7f1;
-  margin: 5px 20px 10px 20px;
-  padding: 5px;
-  @media (min-width: 767px) {
-    padding-left: 20px;
-  }
-  font-size: 20px;
-  border-left: 5px solid #96c671;
-}
-
-.contact-info {
+.contact-info,
+.news-info {
   width: 100%;
   font-size: 14px;
   padding-right: 30px;
   display: block;
-  vertical-align: middle;
   text-align: right;
   height: 30px;
 }
 
-.contact-content {
+.contact-content,
+.news-content {
   font-size: 16px;
   border-top: 1px solid rgb(242, 242, 242);
   width: 100%;
   padding: 20px 20px 10px 20px;
 }
 
-/* リプライ */
+/*-- リプライ --*/
 .reply-teacher {
   padding-left: 60px;
 }

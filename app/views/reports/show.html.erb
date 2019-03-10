@@ -20,39 +20,42 @@
         <p class="lead">
           授業内容
         </p>
-        <%= simple_format(@report.content, class: "report-text") %>
+        <%= simple_format(@report.content, class: "round-text") %>
       <% end %>
 
       <% if @report.homework.present? %>
         <p class="lead">
           宿題
         </p>
-        <%= simple_format(@report.homework, class: "report-text") %>
+        <%= simple_format(@report.homework, class: "round-text") %>
       <% end %>
       
       <% if @report.comment.present? %>
         <p class="lead">
           講師からのコメント
         </p>
-        <p class="report-text">
+        <p class="round-text">
           <%= safe_join(@report.comment.split("\n"), tag(:br)) %>
         </p>
       <% end %>
 
-      <hr />
+      <% if @report.memo.present? && teacher_logged_in? %>
+        <p class="lead">
+          注記
+        </p>
+        <p class="round-text">
+          <%= safe_join(@report.memo.split("\n"), tag(:br)) %>
+        </p>
+      <% end %>
 
       <!-- 返信フォーム -->
-      <div class="card bg-brown my-4">
-        <h5 class="card-header">返信する：</h5>
-        <div class="card-body">
-          <%= form_for(@reply, url: reply_report_url) do |f| %>
-            <div class="form-group">
-              <%= f.text_area :content, :size => "10x3", class: "form-control form-control-lg" %>
-            </div>
-            <%= f.submit '送信する', data: { confirm: "本当に送信してもよろしいですか？", disable_with: '処理中...' }, class: "btn" %>
-          <% end %>
-        </div>
-      </div>
+      <% if admin_logged_in? %>
+
+      <hr />
+
+      <%= render 'replies/form', reply: @reply %>
+      
+      <% end %>
 
       <!-- 返信履歴 -->
       <%= render @report.replies %>
