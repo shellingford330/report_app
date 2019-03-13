@@ -4,8 +4,8 @@ class MessagesController < ApplicationController
   before_action :teacher_logged_in
 
   def index
-    @rooms = current_teacher.sent_messages.group(:from_id, :to_id)
-    .or(current_teacher.recieved_messages.group(:from_id, :to_id))
+    @rooms = current_teacher.sent_messages.group(:from_id, :to_id).order(nil)
+    .or(current_teacher.recieved_messages.group(:from_id, :to_id).order(nil))
     .reorder(created_at: :desc)
     @receiver_ids = []
     @teacher = Teacher.new
