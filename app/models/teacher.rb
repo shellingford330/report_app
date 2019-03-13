@@ -7,6 +7,8 @@ class Teacher < ApplicationRecord
 	has_many :news,     dependent: :destroy
 	has_many :reports,  dependent: :destroy
 	has_many :students, through: :reports
+	has_many :sent_messages, class_name: "Message", foreign_key: "from_id", dependent: :destroy
+	has_many :recieved_messages, class_name: "Message", foreign_key: "to_id", dependent: :destroy
 
 	before_save { self.email.downcase! }
 	enum status: { teacher: 0, manager: 1, owner: 2 }

@@ -1,0 +1,56 @@
+<% provide(:title, "トークルーム")%>
+<div class="container mt-3">
+  <h3 class="room-header">
+		メッセージ
+		<a href="#" class="btn rounded-circle add-message" data-toggle="modal" data-target="#addMessageModal">
+			<i class="fas fa-plus"></i>
+		</a>
+	</h3>
+
+  <div class="messages rounded">
+    <% @rooms.each do |room| %>
+		<% receiver = Teacher.find(room.to_id) %> 
+		<% receiver = Teacher.find(room.from_id) if receiver == current_teacher %>
+		<% unless @receiver_ids.include?(receiver.id) %>
+    <div class="chat_list">
+      <%= link_to message_url(receiver.id), class: "media" do %>
+        <%= image_tag 'teacher.png', :size => "50x50", class: "d-flex pt-1 mr-3
+        rounded-circle teacher-icon" %>
+        <div class="chat media-body">
+          <h5><%= receiver.name %> <span class="chat_date"><%= room.created_at.strftime('%m月%d日') %></span></h5>
+          <p>
+            <%= truncate(room.content, length: 34) %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+    <% @receiver_ids.push(receiver.id) %>
+		<% end %>
+		<% end %>
+  </div>
+</div>
+
+<div class="modal fade" id="addMessageModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header bg-orange">
+				<h5 class="modal-title">送る講師を選択する</h5>
+				<button class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<%= form_for(@teacher, url: new_message_url, method: :get) do |f| %>
+				<div class="modal-body">
+					<div class="form-group">
+						<%= f.label :id, '宛先講師' %>
+						<%= f.collection_select :id , @teachers, :id, :name, 
+						{ include_blank: '講師を選択して下さい' }, class: "form-control form-control-lg" %>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<%= f.submit "作成する", class: "btn" %>
+				</div>
+				<% end %>
+		</div>
+	</div>
+</div>

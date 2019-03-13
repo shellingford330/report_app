@@ -4,7 +4,7 @@
       <button type="button" id="sidebarCollapse" class="btn">
         <i class="fas fa-align-left"></i>
       </button>
-      <a href="/" rel="noopener" class="navbar-brand" target="_blank">自由塾</a>
+      <%= link_to "自由塾", current_user, class: "navbar-brand" %>
     </div>
     <span class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <%= image_tag 'profile-icon.png', :size => "38x36", class: "profile-icon pt-1" %>

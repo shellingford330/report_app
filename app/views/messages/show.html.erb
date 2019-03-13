@@ -1,0 +1,50 @@
+<% provide(:title, "チャット")%>
+<div id="frame">
+  <div class="content">
+    <div class="contact-profile">
+      <%= image_tag 'teacher.png', class: "d-flex teacher-icon" %>
+      <p><%= @to_teacher.name %></p>
+    </div>
+    <div class="messages">
+      <ul>
+        <% @messages.each do |message| %>
+				<% if message.to_id == current_teacher.id %>
+        <li class="sent">
+          <%= image_tag 'teacher.png', class: "teacher-icon" %>
+          <p>
+            <%= safe_join(message.content.split("\n"), tag(:br)) %>
+          </p>
+        </li>
+        <% else %>
+        <li class="replies">
+          <%= image_tag 'teacher.png', class: "d-flex teacher-icon" %>
+          <p>
+            <%= safe_join(message.content.split("\n"), tag(:br)) %>
+          </p>
+        </li>
+        <% end %>
+				<% end %>
+      </ul>
+    </div>
+    <div class="message-input">
+      <div class="wrap">
+				<form accept-charset="UTF-8" action="/messages" method="post">
+					<input name="utf8" type="hidden" value="&#x2713;" />
+					<input type="hidden" name="to_id" value="<%= @to_teacher.id %>">
+					<input type="text" name="content" placeholder="Write your message...">
+					<button class="submit">
+						<i class="fa fa-paper-plane" aria-hidden="true"></i>
+					</button>
+				</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	function newMessage(selector){
+		$('<li class="last"></li>').appendTo($('.messages ul'));
+    $('.messages').animate({scrollTop: $(selector).offset().top},'fast');
+	}
+	newMessage(".last");
+</script>

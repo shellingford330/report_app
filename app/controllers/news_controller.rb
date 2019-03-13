@@ -10,7 +10,7 @@ class NewsController < ApplicationController
     if admin_logged_in?
       @news = News.paginate(page: params[:page], per_page: 9)
     elsif teacher_logged_in?
-      @news = News.released.paginate(page: params[:page], per_page: 9)
+      @news = current_teacher.news.paginate(page: params[:page], per_page: 9)
     else
       @news = current_student.news.released.paginate(page: params[:page], per_page: 9)
     end

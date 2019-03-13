@@ -65,8 +65,15 @@
         </ul>
       </li>
       <li>
+        <% if admin_logged_in? %>
         <%= link_to contacts_url do %>
           <i class="far fa-envelope"></i>          お問い合わせ
+        <% end %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to messages_url do %>
+          <i class="far fa-comment"></i>          メッセージ
         <% end %>
       </li>
     </ul>

@@ -42,7 +42,7 @@ a:focus {
 
 /*-- 本体(サイドバーを抜く) --*/
 #content {
-  padding-top: 55px;
+  padding-top: 53px;
   width: 100%;
   min-height: 100vh;
   transition: all 0.3s;
@@ -354,8 +354,11 @@ a:focus {
     }
   }
 
-  .fa-graduation-cap {
+  .fa-comment {
     color: #eb8f16;
+  }
+  .fa-graduation-cap {
+    color: #9f9f9f;
   }
   .fa-users {
     color: #88685e;
@@ -554,7 +557,213 @@ a:focus {
   padding-left: 60px;
 }
 
+.reply {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 20px;
+  line-height: 130%;
+}
+
+.reply-left {
+  background: #435f7a;
+  color: #f5f5f5;
+}
+.reply-right {
+  background: #fff;
+  border: 1px solid #856c64;
+}
 .student-icon,
 .teacher-icon {
   border: 2px solid rgb(90, 69, 63);
+}
+
+/*-- チャット --*/
+.add-message {
+  float: right;
+  margin-right: 30px;
+}
+.room-header {
+  text-align: center;
+}
+.messages {
+  border-top: 1px solid #c4c4c4;
+}
+
+.chat_list {
+  border-bottom: 1px solid #c4c4c4;
+  margin: 0;
+  padding: 18px 16px 10px;
+}
+
+.chat {
+  padding-left: 15px;
+  h5 {
+    font-size: 15px;
+    color: #464646;
+    margin: 0 0 8px 0;
+  }
+  .chat_date {
+    font-size: 13px;
+    float: right;
+  }
+  p {
+    font-size: 14px;
+    color: #989898;
+    margin: auto;
+  }
+}
+
+/*-- トークルーム --*/
+#frame {
+  width: 100%;
+  height: 93.5vh;
+  min-height: 300px;
+  max-height: 720px;
+  @media (max-width: 360px) {
+    width: 100%;
+    height: 100vh;
+  }
+  .content {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    .contact-profile {
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      background: #f5f5f5;
+      img {
+        width: 40px;
+        border-radius: 50%;
+        float: left;
+        margin: 9px 12px 0 9px;
+      }
+      p {
+        float: left;
+        margin-bottom: 0px;
+      }
+    }
+
+    .messages {
+      height: auto;
+      width: 100%;
+      min-height: calc(100% - 80px);
+      max-height: calc(100% - 80px);
+      overflow-y: scroll;
+      overflow-x: hidden;
+      ul {
+        padding: 0px 1rem;
+        @media (min-width: 767px) {
+          padding: 0px 3rem;
+        }
+        li {
+          display: inline-block;
+          clear: both;
+          width: 100%;
+          font-size: 0.9em;
+          width: 100%;
+          margin: 15px 0px 0px 0px;
+          img {
+            width: 22px;
+            border-radius: 50%;
+            float: left;
+          }
+          p {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 205px;
+            line-height: 130%;
+            margin-bottom: 0px;
+          }
+        }
+        li:nth-last-child(1) {
+          margin-bottom: 20px;
+        }
+        li.sent img {
+          margin: 6px 8px 0 0;
+        }
+        li.sent p {
+          background: #435f7a;
+          color: #f5f5f5;
+        }
+        li.replies img {
+          float: right;
+          margin: 6px 0 0 8px;
+        }
+        li.replies p {
+          background: #fff;
+          float: right;
+        }
+        li.last {
+          margin: 0;
+        }
+      }
+    }
+    .messages::-webkit-scrollbar {
+      width: 8px;
+      background: transparent;
+    }
+    .messages::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+    .message-input {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      z-index: 99;
+      .wrap {
+        position: relative;
+        input {
+          font-family: "proxima-nova", "Source Sans Pro", sans-serif;
+          float: left;
+          border: none;
+          width: calc(100% - 50px);
+          padding: 13px 32px 15px 8px;
+          font-size: 0.8em;
+          color: #32465a;
+        }
+        input:focus {
+          outline: none;
+        }
+        button {
+          float: right;
+          border: none;
+          width: 50px;
+          padding: 12px 0;
+          cursor: pointer;
+          background: #32465a;
+          color: #f5f5f5;
+          &:hover {
+            background: #435f7a;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 735px) {
+  #frame .content .messages {
+    max-height: calc(100% - 105px);
+  }
+}
+
+@media screen and (min-width: 735px) {
+  #frame .content .messages ul li p {
+    max-width: 300px;
+  }
+}
+@media screen and (max-width: 735px) {
+  #frame .content .message-input .wrap input {
+    padding: 17px 32px 18px 8px;
+  }
+}
+@media screen and (max-width: 735px) {
+  #frame .content .message-input .wrap button {
+    padding: 16px 0;
+  }
 }

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :messages, only: [:index, :new, :show, :create]
+
   root   'teachers#index'
 
   get    '/students/login'      => 'students#login_form'
