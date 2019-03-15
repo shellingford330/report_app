@@ -32,26 +32,48 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-  
+
+    <!-- 複数選択ボックス　CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <!-- 日付入力　CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pickadate@3.6.0/lib/themes/default.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pickadate@3.6.0/lib/themes/default.date.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/pickadate@3.6.0/lib/picker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pickadate@3.6.0/lib/legacy.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pickadate@3.6.0/lib/picker.date.min.js"></script>
+
     <script type="text/javascript">
 
-    $(document).ready(function () {
+    $(document).ready(function() {
+      $('#dismiss, .overlay').on('click', function () {
+          // hide sidebar
+          $('#sidebar').removeClass('active');
+          // hide overlay
+          $('.overlay').removeClass('active');
+      });
 
-        $('#dismiss, .overlay').on('click', function () {
-            // hide sidebar
-            $('#sidebar').removeClass('active');
-            // hide overlay
-            $('.overlay').removeClass('active');
-        });
+      $('#sidebarCollapse').on('click', function () {
+          // open sidebar
+          $('#sidebar').addClass('active');
+          // fade in the overlay
+          $('.overlay').addClass('active');
+          $('.collapse.in').toggleClass('in');
+          $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
 
-        $('#sidebarCollapse').on('click', function () {
-            // open sidebar
-            $('#sidebar').addClass('active');
-            // fade in the overlay
-            $('.overlay').addClass('active');
-            $('.collapse.in').toggleClass('in');
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        });
+      $('.date').pickadate({
+        weekdaysShort: ['日', '月', '火', '水', '木', '金', '土'],
+        showMonthsShort: true,
+        firstDay: 1,
+        format: 'yyyy年mm月dd日'
+      });
+
+      $('.select-subjects').select2({
+        placeholder: '教科を選択して下さい。'
+      });
     });
 
     {/* バーを下スクロールすると消えるエフェクト */}
