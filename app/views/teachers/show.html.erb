@@ -60,11 +60,15 @@
 				<% end %>
       </aside>
       <div class="col-md-9 mt-3">
-				<% if @teacher.reports.any? %>
+				<% if @reports.any? %>
 					<h3>指導報告書(<%= @teacher.reports.count %>件)</h3>
 					<hr>
 					<%= render @reports %>
-					<%= will_paginate @reports, :previous_label => '&laquo', :next_label => '&raquo' %>
+					<p class="text-right">
+						<%= link_to teacher_reports_url(@teacher.id), class: "link" do %>
+							<i class="arrow fa fa-angle-right mt-1"></i>  もっと見る
+						<% end %>
+					</p>
 				<% end %>
       </div>
     </div>

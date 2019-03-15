@@ -19,9 +19,6 @@ class NewsController < ApplicationController
   def show
   end
 
-  def select_students
-  end
-
   def new
     @news = News.new
     @news.students_id = params[:students_id]
@@ -84,7 +81,7 @@ class NewsController < ApplicationController
     def students_exist?
       unless @news.students_id
         flash.now[:danger] = " 生徒が選択されていません"
-        render 'select_students' and return
+        render 'students/select' and return
       end
     end
 

@@ -8,12 +8,16 @@ class ReportsController < ApplicationController
   before_action :correct_student_or_admin,   only: [:reply]
 
   def student_index
-    @reports = current_student.reports.released.paginate(page: params[:page], per_page: 9)
+    if teacher_logged_in?
+      @reports = Report.where(student_id: params[:id]).paginate(page: params[:page], per_page: 9)
+    else
+      @reports = Report.where(student_id: params[:id]).released.paginate(page: params[:page], per_page: 9)
+    end
     render 'index'
   end
 
   def teacher_index
-    @reports = current_teacher.reports.paginate(page: params[:page], per_page: 9)
+    @reports = Report.where(teacher_id: params[:id]).paginate(page: params[:page], per_page: 9)
     render 'index'
   end
 

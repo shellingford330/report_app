@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
 	before_action :student_already_logged_in,  only: [:login_form, :login]
-	before_action :teacher_logged_in, only: [:index ,:new, :create, :destroy]
+	before_action :teacher_logged_in, only: [:index ,:new, :select, :create, :destroy]
 	before_action :owner_logged_in,   only: [:new, :create, :destroy, :upgrade]
 	before_action :student_logged_in, only: [:edit, :update]
 	before_action :correct_student,   only: [:edit, :update]
@@ -12,6 +12,9 @@ class StudentsController < ApplicationController
 	end
 
 	def	new
+	end
+
+	def select
 	end
 
 	def	show

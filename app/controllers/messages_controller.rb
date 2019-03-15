@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
   end
 
   def new
-    redirect_to "/messages/#{params[:teacher][:id]}"
+    redirect_to message_url(params[:teacher][:id])
   end
 
   def create

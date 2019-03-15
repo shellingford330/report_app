@@ -87,7 +87,7 @@
               <h4 class="display-4">
                 <i class="fas fa-pencil-alt"></i> <%= current_teacher.reports.count %>
               </h4>
-              <%= link_to '見る', teacher_reports_path, class: "btn btn-view-blue" %>
+              <%= link_to '見る', teacher_reports_path(current_teacher.id), class: "btn btn-view-blue" %>
             </div>
           </div>
           <div class="card text-center card-bg-pink mb-3">

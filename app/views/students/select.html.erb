@@ -1,5 +1,5 @@
 <%= provide(:title, "生徒選択") %>
-<%= form_tag( { action: :new }, { method: :get} ) do %>
+<%= form_tag( { controller: :news, action: :new }, { method: :get} ) do %>
 <section id="posts">
   <div class="container">
 		<div id="accordion">
@@ -66,4 +66,3 @@
   </div>
 </section>
 <% end %>
-

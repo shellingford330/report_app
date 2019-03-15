@@ -11,7 +11,7 @@ class TeachersController < ApplicationController
   end
 
   def show
-    @reports = @teacher.reports.paginate(page: params[:page], per_page: 5)
+    @reports = @teacher.reports.limit(3)
   end
 
   def new
