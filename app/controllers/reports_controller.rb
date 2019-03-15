@@ -6,6 +6,7 @@ class ReportsController < ApplicationController
   before_action :correct_teacher_or_admin,   only: [:edit, :update, :destroy]
   before_action :correct_student_or_teacher, only: [:show]
   before_action :correct_student_or_admin,   only: [:reply]
+
   def student_index
     @reports = current_student.reports.released.paginate(page: params[:page], per_page: 9)
     render 'index'
@@ -29,6 +30,7 @@ class ReportsController < ApplicationController
   end
 
   def edit
+    @report.subjects = @report.subject.split 
   end
 
   def release
@@ -47,20 +49,24 @@ class ReportsController < ApplicationController
 
   def create
     @report = current_teacher.reports.build(report_params)
+    @report.subject = params[:report][:subjects].join(" ")
     if @report.save
       flash[:success] = '報告書が作成されました'
       redirect_to @report
     else
+      @report.subjects = @report.subject.split
       flash.now[:danger] = '入力情報をご確認下さい'
       render 'new'
     end
   end
 
   def update
+    @report.subject = params[:report][:subjects].join(" ")
     if @report.update(report_params)
       flash[:success] = '更新しました' 
       redirect_to @report
     else
+      @report.subjects = @report.subject.split
       flash.now[:danger] = '入力情報をご確認下さい'
       render 'edit'
     end
@@ -85,7 +91,7 @@ class ReportsController < ApplicationController
 
   private
     def report_params
-      params.require(:report).permit(:start_date, :end_date, :subject, :content, :homework, :comment, :memo, :student_id)
+      params.require(:report).permit(:start_date, :end_date, :content, :homework, :comment, :memo, :student_id)
     end
     
     # before_action

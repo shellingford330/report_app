@@ -440,6 +440,22 @@ a:focus {
   background: #fff;
 }
 
+/*-- 指導報告書（new/edit） --*/
+.select-subjects {
+  width: 100% !important;
+}
+.select2-selection {
+  border: solid #ced4da 1px !important;
+  padding: 0.2rem 0.4rem;
+  font-size: 1.15rem !important;
+  line-height: 1.5rem !important;
+}
+
+.select2-selection__choice {
+  padding: 0.3rem 0.5rem !important;
+  font-size: 18px !important;
+  line-height: 1.25rem !important;
+}
 /*-- 一覧のカード(報告書・お知らせ・お問い合わせ) --*/
 // 公開・既読のレイアウト
 .card_check {

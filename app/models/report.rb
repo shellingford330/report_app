@@ -1,4 +1,6 @@
 class Report < ApplicationRecord
+  attr_accessor :subjects
+
   belongs_to :student
   belongs_to :teacher
   has_many :replies, as: :replyable
