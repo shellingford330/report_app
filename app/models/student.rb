@@ -1,5 +1,7 @@
 class Student < ApplicationRecord
 	attr_accessor :remember_token
+	attr_accessor :lesson_days
+
 	has_secure_password
 
 	has_and_belongs_to_many :news
@@ -11,6 +13,7 @@ class Student < ApplicationRecord
 	before_save { self.email.downcase! }
 
 	validates :grade, { presence: true }
+	validates :lesson_day, { presence: true }
 	validates :name,  { presence: true, length: { maximum: 50 } }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, { presence: true, length: { maximum: 255 },
@@ -53,5 +56,10 @@ class Student < ApplicationRecord
 		[ "年少", "年中", "年長", "小学１年生", "小学２年生", "小学３年生", "小学４年生", "小学５年生", "小学６年生",
 			"中学１年生", "中学２年生", "中学３年生", "高校１年生", "高校２年生", "高校３年生", "大学１年生", "大学２年生", 
 			"大学３年生", "大学４年生", ]
+	end
+
+	# 曜日を配列で返す
+	def Student.days
+		["月", "火", "水", "木", "金", "土", "日"]
 	end
 end

@@ -10,16 +10,25 @@
   <div class="messages rounded">
     <% @rooms.each do |room| %>
 		<% receiver = Teacher.find(room.to_id) %> 
-		<% receiver = Teacher.find(room.from_id) if receiver == current_teacher %>
+		<% if receiver == current_teacher %>
+			<% receiver = Teacher.find(room.from_id) %>
+			<% judge = true %>
+		<% end %>
 		<% unless @receiver_ids.include?(receiver.id) %>
     <div class="chat_list">
       <%= link_to message_url(receiver.id), class: "media" do %>
         <%= image_tag 'teacher.png', :size => "50x50", class: "d-flex pt-1 mr-3
         rounded-circle teacher-icon" %>
         <div class="chat media-body">
-          <h5><%= receiver.name %> <span class="chat_date"><%= room.created_at.strftime('%m月%d日') %></span></h5>
+          <h5>
+						<%= receiver.name %>
+						<span class="chat_date"><%= room.created_at.strftime('%m月%d日') %></span>
+					</h5>
           <p>
             <%= truncate(room.content, length: 34) %>
+						<% if judge %>
+						<span class="chat_date text-success">New</span>
+						<% end %>
           </p>
         </div>
       <% end %>

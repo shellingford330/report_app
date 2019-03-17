@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   delete '/students/logout'
   post   '/students/upgrade',                               as: :upgrade_student
   get    '/students/select',                                as: :select_students
+  get    '/students/:id/editbyteacher' => "students#editbyteacher",   as: :edit_by_teacher_student
+  patch  '/students/:id/editbyteacher' => "students#updatebyteacher", as: :update_by_teacher_student
   resources :students 
   
   get    '/teachers/login'      => 'teachers#login_form'

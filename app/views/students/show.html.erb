@@ -9,13 +9,19 @@
 						<h5 class="mb-0">生徒情報</h5>
 					</div>
 					<div class="card-body">
-						<p class="mb-auto"><strong>氏名</strong>    <%= @student.name %></p>
+						<p class="mb-auto"><strong>　氏名　　　</strong>    <%= @student.name %></p>
 						<hr>
-						<p class="mb-auto"><strong>学年</strong>    <%= @student.grade %></p>
+						<p class="mb-auto"><strong>　学年　　　</strong>    <%= @student.grade %></p>
+						<hr>
+						<p class="mb-auto"><strong>授業の曜日　</strong>    <%= @student.lesson_day %></p>
 					</div>
 				</div>
 				<% if correct_student?(@student) %>
 					<%= link_to edit_student_path(@student), class: "btn btn-block mt-2" do %>
+						<i class="fas fa-check"></i>  編集する
+					<% end %>
+				<% elsif admin_logged_in? %>
+					<%= link_to edit_by_teacher_student_path(@student), class: "btn btn-block mt-2" do %>
 						<i class="fas fa-check"></i>  編集する
 					<% end %>
 				<% end %>

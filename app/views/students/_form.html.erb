@@ -9,6 +9,10 @@
 		<%= f.select :grade, Student.grades, { include_blank: '選択して下さい' }, class: "form-control form-control-lg" %>
 	</div>
 	<div class="form-group">
+		<%= f.label :lesson_days ,'授業の曜日'%>
+		<%= f.select :lesson_days, Student.days, {}, multiple: true, class: "select-subjects" %>
+	</div>
+	<div class="form-group">
 		<%= f.label :email, 'メールアドレス'%>
 		<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "Email" %>
 	</div>

@@ -5,13 +5,6 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     @report = reports(:one)
   end
 
-  test "should get index" do
-    get teacher_reports_url
-    assert_redirected_to students_login_url
-    get student_reports_url
-    assert_redirected_to students_login_url
-  end
-
   test "should get new" do
     get new_report_url
     assert_redirected_to teachers_login_url

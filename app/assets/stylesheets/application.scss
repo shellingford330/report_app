@@ -276,6 +276,7 @@ a:focus {
 /*-- バー --*/
 .navbar {
   background: rgb(245, 245, 245);
+  border-bottom: 1px solid rgb(171, 170, 170);
   transition: 0.3s;
   .btn:hover {
     background-color: #fff;
@@ -299,6 +300,12 @@ a:focus {
 
 .navbar.hide {
   transform: translateY(-60px);
+}
+
+/*-- footer --*/
+footer {
+  background: #ede9e8;
+  border-top: 1px solid #e1d8d5;
 }
 
 /*-- サイドバー --*/
@@ -596,7 +603,6 @@ a:focus {
 /*-- チャット --*/
 .add-message {
   float: right;
-  margin-right: 30px;
 }
 .room-header {
   text-align: center;

@@ -2,9 +2,10 @@ class StudentsController < ApplicationController
 	before_action :student_already_logged_in,  only: [:login_form, :login]
 	before_action :teacher_logged_in, only: [:index ,:new, :select, :create, :destroy]
 	before_action :owner_logged_in,   only: [:new, :create, :destroy, :upgrade]
+	before_action :admin_logged_in,   only: [:editbyteacher, :updatebyteacher]
 	before_action :student_logged_in, only: [:edit, :update]
 	before_action :correct_student,   only: [:edit, :update]
-	before_action :set_student,       only: [:show, :destroy]
+	before_action :set_student,       only: [:show, :destroy, :editbyteacher, :updatebyteacher]
 	before_action :initialize_student,only: [:new, :login_form]
 	before_action :new_student,       only: [:create, :login]
 
@@ -29,6 +30,18 @@ class StudentsController < ApplicationController
 	end
 
 	def edit
+		@student.lesson_days = @student.lesson_day.split
+	end
+
+	def	editbyteacher
+		@student.lesson_days = @student.lesson_day.split
+	end
+
+	def	updatebyteacher
+		@student.lesson_day = params[:student][:lesson_days].join(" ")
+		@student.update(grade: params[:student][:grade])
+		flash[:success] = "更新しました"
+		redirect_to @student
 	end
 
 	def upgrade
@@ -44,20 +57,24 @@ class StudentsController < ApplicationController
 	end
 
 	def create
+		@student.lesson_day = params[:student][:lesson_days].join(" ")
 		if @student.save
 			flash[:success] = "生徒が作成されました"
 			redirect_to @student
 		else
+			@student.lesson_days = @student.lesson_day.split
 			flash.now[:danger] = "失敗しました"
 			render 'new'
 		end
 	end
 
 	def update
+		@student.lesson_day = params[:student][:lesson_days].join(" ")
 		if @student.update_attributes(student_params)
 			flash[:success] = "更新しました"
 			redirect_to @student
 		else
+			@student.lesson_days = @student.lesson_day.split
 			flash.now[:danger] = "入力情報をご確認下さい"
 			render 'edit'
 		end

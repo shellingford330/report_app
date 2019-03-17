@@ -67,9 +67,11 @@
       <div class="card my-4">
         <h5 class="card-header">生徒情報</h5>
         <div class="card-body">
-          <p class="mb-auto"><strong>氏名　</strong><%= @student.name %></p>
+          <p class="mb-auto">
+            <strong>氏名　　</strong><%= link_to @student.name, @student %>
+          </p>
 					<hr>
-					<p class="mb-auto"><strong>学年　</strong><%= @student.grade %></p>
+					<p class="mb-auto"><strong>学年　　</strong><%= @student.grade %></p>
         </div>
       </div>
 

@@ -25,7 +25,7 @@ Teacher.create!( status: 0,
 								 password: "teacher",
 								 password_confirmation: "teacher" )
 
-20.times do |n|
+50.times do |n|
 	name = Faker::Name.name
 	email = "teacher#{n+1}@example.com"
 	password = "password"
@@ -37,6 +37,7 @@ Teacher.create!( status: 0,
 end
 
 Student.create!( grade: "年少",
+								 lesson_day: "月 火 水",
 								 name: "生徒代表", 
 								 email: "student@example.com",
 								 password: "student",
@@ -46,8 +47,10 @@ Student.create!( grade: "年少",
 	name = Faker::Name.name
 	email = "student#{n+1}@example.com"
 	grades = Student.grades
+	days = Student.days
 	password = "password"
 	Student.create!( grade: grades[n%19],
+								 lesson_day: days[n%7],
 								 name: name, 
 								 email: email,
 								 password: password,

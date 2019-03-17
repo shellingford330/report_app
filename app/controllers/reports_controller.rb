@@ -23,7 +23,6 @@ class ReportsController < ApplicationController
 
   def show
     @reply = Reply.new
-
     @report.update(read_flg: true) if correct_student?(@report.student)
     @student = @report.student
     @teacher = @report.teacher

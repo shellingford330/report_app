@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190310095426) do
+ActiveRecord::Schema.define(version: 20190317071413) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "title"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20190310095426) do
     t.datetime "updated_at",      null: false
     t.string   "remember_digest"
     t.string   "grade"
+    t.string   "lesson_day"
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["grade"], name: "index_students_on_grade"
   end
