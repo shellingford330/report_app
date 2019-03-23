@@ -2,24 +2,28 @@
 
 keiichi:
   grade: 大学2年生
+  lesson_day: 月
   name: keiichi
   email: keiichi@example.com
   password_digest: <%= Student.digest('keiichi') %>
 
 kai:
   grade: 大学1年生
+  lesson_day: 月
   name: kai
   email: kai@example.com
   password_digest: <%= Student.digest('kai') %>
 
 michael:
   grade: 年少
+  lesson_day: 水
   name: michael
   email: michael@example.com
   password_digest: <%= Student.digest('password') %>
 
 archer:
   grade: 年中
+  lesson_day: 火
   name: archer
   email: duchess@example.gov
   password_digest: <%= Student.digest('password') %>
@@ -27,6 +31,7 @@ archer:
 <% 30.times do |n| %>
 student_<%= n %>:
   grade: 中学1年生
+  lesson_day: 月 火
   name:  <%= "Student #{n}" %>
   email: <%= "student-#{n}@example.com" %>
   password_digest: <%= Student.digest('password') %>

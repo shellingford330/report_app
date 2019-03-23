@@ -3,7 +3,7 @@ require 'test_helper'
 class StudentTest < ActiveSupport::TestCase
   def setup
     @student = Student.new(name: "suzuki", grade: "u4", email: "user@example.com",
-                           password: "foobar", password_confirmation: "foobar")
+                           password: "foobar", password_confirmation: "foobar", lesson_day: "月 火")
   end
 
   test "name should be present" do

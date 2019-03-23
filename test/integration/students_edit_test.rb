@@ -13,6 +13,7 @@ class StudentsEditTest < ActionDispatch::IntegrationTest
     get edit_student_path(@student)
     assert_template 'students/edit'
     patch student_path(@student), params: { student: { name: "",
+                                                       lesson_days: ["月"],
                                                        email: "st@example",
                                                        password: "foo",
                                                        password_confirmation: "bar" } }
@@ -28,6 +29,7 @@ class StudentsEditTest < ActionDispatch::IntegrationTest
     name = "exapmle"
     email = "st@example.com"
     patch student_path(@student), params: { student: { name: name,
+                                                       lesson_days: ["月"],
                                                        email: email,
                                                        password: "",
                                                        password_confirmation: "" } }
