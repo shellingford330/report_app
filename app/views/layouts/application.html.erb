@@ -82,19 +82,33 @@
       });
 
       <% Student.grades.each do |grade| %>
-        // チャックを外したり付けたりすると、「学年選択」のチェック外れたり付いたりする
+        // 読み込んだ時、各学年下の生徒が全てチェックされていると「学年選択」もチェックする
         if ($('#collapse-<%= grade %> :checked').length == $('#collapse-<%= grade %> :input').length) {
           $('#student_<%= grade %>').prop('checked', 'checked');
         }else{
           $('#student_<%= grade %>').prop('checked', false);
         }
       <% end %>
+
+      // 並び順を変更
+      $('.change-sorting-by-day').on('click', function () {
+        $('.student').prop('checked', false);
+        $('.student_grade').prop('checked', false);
+        $('.sort-by-grade').addClass('d-none');
+        $('.sort-by-day').removeClass('d-none');
+      });
+      $('.change-sorting-by-grade').on('click', function () {
+        $('.student').prop('checked', false);
+        $('.student_grade').prop('checked', false);
+        $('.sort-by-grade').removeClass('d-none');
+        $('.sort-by-day').addClass('d-none');
+      });
     });
 
     {/* バーを下スクロールすると消えるエフェクト */}
     $(function(){
       var startPos = 0,winScrollTop = 0;
-      $(window).on('scroll',function(){
+      $(window).on('scroll',function() {
         winScrollTop = $(this).scrollTop();
         if (winScrollTop >= startPos) {
           if (winScrollTop > 100) {
@@ -115,6 +129,7 @@
         $('.student_grade').prop('checked', this.checked);
       });
 
+      // 学年ソート
       <% Student.grades.each do |grade| %>
         // 「学年選択」のチェックするとその学年の生徒全てをチェックする
         $('#student_<%= grade %>').on('click', function() {
@@ -131,7 +146,24 @@
         });
       <% end %>
 
-      
+      // 曜日ソート
+      <% Student.days.each do |day| %>
+				<% ["年", "小", "中", "高", "大"].each do |grade| %>
+          // 「学年選択」のチェックするとその学年の生徒全てをチェックする
+          $('#student_<%= day %>_<%= grade %>').on('click', function() {
+            $('#collapse-<%= day %>-<%= grade %>').find('.student').prop('checked', this.checked);
+          });
+
+          // チャックを外したり付けたりすると、「学年選択」のチェック外れたり付いたりする
+          $('#collapse-<%= day %>-<%= grade %> .student').on('click', function() {
+            if ($('#collapse-<%= day %>-<%= grade %> :checked').length == $('#collapse-<%= day %>-<%= grade %> :input').length) {
+              $('#student_<%= day %>_<%= grade %>').prop('checked', 'checked');
+            }else{
+              $('#student_<%= day %>_<%= grade %>').prop('checked', false);
+            }
+          });
+        <% end %>
+      <% end %>
     });
     </script>
   </body>

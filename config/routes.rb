@@ -2,11 +2,6 @@ Rails.application.routes.draw do
 
   root   'teachers#index'
 
-  get    '/students/select'        => 'multiselect_students#select' ,         as: :select_students
-  get    '/reports/select_student' => 'multiselect_students#report' ,         as: :select_students_report
-  get    '/reports/new/students'   => 'multiselect_students#new_report' ,     as: :new_students_report
-  post   '/reports/new/students'   => 'multiselect_students#create_report' 
-
   get    '/students/login'      => 'students#login_form'
   post   '/students/login'
   delete '/students/logout'
@@ -28,10 +23,14 @@ Rails.application.routes.draw do
   get    '/reports/:id/student'     => 'reports#student_index', as: :student_reports
   resources :reports, except: :index
 
+  resources :multi_reports, only: [:index, :new, :create]
 
-  post   '/news/:id/release' => 'news#release',             as: :release_news
-  post   '/news/:id/draft'   => 'news#draft',               as: :draft_news
-  resources :news
+  get    '/news/select_students' => 'news#select' ,         as: :select_students 
+  post   '/news/:id/release'     => 'news#release',         as: :release_news
+  post   '/news/:id/draft'       => 'news#draft',           as: :draft_news
+  get    '/news/:id/teacher'     => 'news#teacher_index',   as: :teacher_news
+  get    '/news/:id/student'     => 'news#student_index',   as: :student_news
+  resources :news, except: :index
 
   post   '/contacts/:id/replies' => 'contacts#reply',       as: :reply_contact
   resources :contacts

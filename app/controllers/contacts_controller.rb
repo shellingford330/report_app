@@ -7,13 +7,8 @@ class ContactsController < ApplicationController
   before_action :correct_student,   only:   [:edit, :update, :destroy]
 
   def index
-    if admin_logged_in?
-      @contacts = Contact.paginate(page: params[:page], per_page: 9)
-    elsif teacher_logged_in?
-      @contacts = current_teacher.contacts.paginate(page: params[:page], per_page: 9)
-    else
-      @contacts = current_student.contacts.paginate(page: params[:page], per_page: 9)
-    end
+    user = current_user
+    @contacts = user.contacts.paginate(page: params[:page], per_page: 9)
   end
 
   def show

@@ -1,9 +1,7 @@
-class MultiselectStudentsController < ApplicationController
-	def select
-		@kind = params[:kind]
-	end
+class MultiReportsController < ApplicationController
+	before_action :teacher_logged_in, only: [:index, :new, :create]
 
-	def report
+	def index
 		if (students_id = params[:students_id])
 			@students_id = students_id.map { |i| i.to_i }
 		else
@@ -11,7 +9,7 @@ class MultiselectStudentsController < ApplicationController
 		end
 	end
 
-	def new_report
+	def new
 		if (@students_id = params[:students_id])
 			@reports = []
 			@students_id.each do |student_id|
@@ -22,11 +20,11 @@ class MultiselectStudentsController < ApplicationController
 			end
 		else
 			flash[:danger] = " 生徒が選択されていません"
-			redirect_to select_students_report_url
+			redirect_to multi_reports_url
 		end
 	end
 
-	def create_report
+	def create
 		@reports = current_teacher.reports.build(report_params)
 		judge = true
 		@reports.each do |report|
@@ -38,7 +36,7 @@ class MultiselectStudentsController < ApplicationController
 			redirect_to teacher_reports_url(current_teacher)
 		else
 			flash.now[:danger] = '入力情報をご確認下さい'
-			render 'new_report'
+			render 'new'
 		end
 	end
 

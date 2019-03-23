@@ -1,27 +1,48 @@
 class NewsController < ApplicationController
-  before_action :user_logged_in,    only:   [:index, :show]
-  before_action :teacher_logged_in, except: [:index, :show]
+  before_action :user_logged_in,    only:   [:student_index, :teacher_index, :show]
+  before_action :teacher_logged_in, except: [:student_index, :teacher_index, :show]
   before_action :admin_logged_in,   only:   [:release, :draft]
   before_action :set_news,          only:   [:show, :edit, :release, :draft, :update, :destroy]
   before_action :correct_student_or_teacher, only: [:show]
   before_action :correct_teacher_or_admin,   only: [:edit, :destroy, :update]
 
-  def index
-    if admin_logged_in?
-      @news = News.paginate(page: params[:page], per_page: 9)
-    elsif teacher_logged_in?
-      @news = current_teacher.news.paginate(page: params[:page], per_page: 9)
+  def student_index
+    student = Student.find(params[:id])
+    if teacher_logged_in?
+      @news = student.news.paginate(page: params[:page], per_page: 9) 
     else
-      @news = current_student.news.released.paginate(page: params[:page], per_page: 9)
+      @news = student.news.released.paginate(page: params[:page], per_page: 9) 
     end
+    render 'index'
+  end
+
+  def teacher_index
+    if admin_logged_in?
+      @news = News.paginate(page: params[:page], per_page: 9) 
+    else
+      @news = News.where(teacher_id: params[:id]).paginate(page: params[:page], per_page: 9) 
+    end
+    render 'index'
   end
 
   def show
   end
 
+  def select
+		if (students_id = params[:students_id])
+			@students_id = students_id.map { |i| i.to_i }
+		else
+			@students_id = []
+		end
+	end
+
   def new
     @news = News.new
-    @news.students_id = params[:students_id]
+    if params[:select] == "one"
+      @news.students_id = [params[:students_id].to_i]
+    else
+      @news.students_id = params[:students_id]
+    end
     students_exist?
   end
 
@@ -34,14 +55,14 @@ class NewsController < ApplicationController
     flash[:success] = "公開しました"
     @news.released!
     @news.save
-    redirect_to news_index_url
+    redirect_to teacher_news_url(current_teacher)
   end
 
   def draft
     flash[:success] = "非公開にしました"
     @news.draft!
     @news.save
-    redirect_to news_index_url
+    redirect_to teacher_news_url(current_teacher)
   end
 
   def create
@@ -52,7 +73,7 @@ class NewsController < ApplicationController
       @news.students_id.each do |student_id|
         Student.find(student_id).news << @news
       end
-      redirect_to news_index_url
+      redirect_to teacher_news_url(current_teacher)
       flash[:success] = '作成されました'
     else
       flash.now[:danger] = '入力情報をご確認下さい'
@@ -62,7 +83,7 @@ class NewsController < ApplicationController
 
   def update
     if @news.update(news_params)
-      redirect_to news_index_url
+      redirect_to teacher_news_url(current_teacher)
       flash[:success] = '更新しました'
     else
       flash.now[:danger] = '入力情報をご確認下さい'
@@ -72,7 +93,7 @@ class NewsController < ApplicationController
 
   def destroy
     @news.destroy
-    redirect_to news_index_url
+    redirect_to teacher_news_url(current_teacher)
     flash[:success] = '削除しました'
   end
 
@@ -81,8 +102,7 @@ class NewsController < ApplicationController
     def students_exist?
       unless @news.students_id
         flash.now[:danger] = " 生徒が選択されていません"
-        @kind = "news"
-        render 'multiselect_students/select' and return
+        render 'select' and return
       end
     end
 

@@ -11,7 +11,7 @@
 
 			<div class="row">
 				<div class="col-md-6">
-					<%= link_to select_students_report_url(students_id: @students_id), class: "btn btn-block my-1" do %>
+					<%= link_to multi_reports_url(students_id: @students_id), class: "btn btn-block my-1" do %>
           	<i class="fas fa-arrow-right"></i>  生徒を再選択する
         	<% end %>
 				</div>
@@ -22,7 +22,7 @@
       	</div>
 			</div>
 
-			<%= form_tag( action: :create_report ) do %>
+			<%= form_tag( action: :create ) do %>
 				<% @reports.each do |report| %>
 					<%= render 'report_form', report: report %>
 				<% end %>

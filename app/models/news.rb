@@ -6,6 +6,7 @@ class News < ApplicationRecord
 	has_many :replies, as: :replyable
 	
 	default_scope { order(created_at: :desc) }
+
   enum status: { draft: 0, released: 1, deleted: 2 }
 
 	validates :title,
