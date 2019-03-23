@@ -78,7 +78,7 @@ class ReportsController < ApplicationController
   def destroy
     @report.destroy
     flash[:success] = '削除されました'
-    redirect_to teacher_reports_url
+    redirect_to teacher_reports_url(current_teacher)
   end
 
   def reply

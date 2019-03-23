@@ -24,7 +24,7 @@
 
 						<div class="form-group">
 							<%= f.label :subjects ,'教科'%>
-							<%= f.select :subjects, ["数学", "英語", "国語"], {}, multiple: true, class: "select-subjects" %>
+							<%= f.select :subjects, Report.subjects, {}, multiple: true, class: "select-subjects" %>
 						</div>
 
 						<div class="form-group">

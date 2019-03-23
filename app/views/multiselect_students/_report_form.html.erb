@@ -1,0 +1,54 @@
+<div class="card bg-brown shadow my-3">
+
+	<!-- header/生徒の氏名 -->
+	<div class="card-header">
+		<h4 class="mb-0">
+			<i class="fas fa-user-circle"></i>  <%= report.student.name %>
+		</h4>
+	</div>
+
+	<!-- form -->
+	<div class="card-body">
+			<%= render 'share/error_messages', obj: report %>
+			<%= fields_for "report[]", report do |fr| %>
+			<div class="form-group">
+				<%= fr.hidden_field :student_id, value: report.student_id %>
+			</div>
+			<div class="form-group">
+				<%= fr.label :start_date,'開始日' %>
+				<%= fr.date_field :start_date, class:"date form-control" %>
+			</div>
+
+			<div class="form-group">
+				<%= fr.label :end_date,'終了日' %>
+				<%= fr.date_field :end_date, class:"date form-control" %>
+			</div>
+
+			<div class="form-group">
+				<%= fr.label :subjects ,'教科'%>
+				<%= fr.select :subjects ,Report.subjects, {}, multiple: true, class: "select-subjects",id: "select-subjects-#{report.student_id}" %>
+			</div>
+
+			<div class="form-group">
+				<%= fr.label :content ,'授業内容'%>
+				<%= fr.text_area :content ,:size => "10x3", class: "form-control form-control-lg" %>
+			</div>
+
+			<div class="form-group">
+				<%= fr.label :homework,'宿題' %>
+				<%= fr.text_area :homework, class: "form-control form-control-lg" %>
+			</div>
+
+			<div class="form-group">
+				<%= fr.label :comment,'コメント' %>
+				<%= fr.text_area :comment , :size => "10x6" ,class: "form-control form-control-lg"%>
+			</div>
+
+			<div class="form-group">
+				<%= fr.label :memo, '注記（生徒側には公開されません）' %>
+				<%= fr.text_area :memo , class: "form-control form-control-lg"%>
+			</div>
+			<% end %>
+	</div>
+
+</div>

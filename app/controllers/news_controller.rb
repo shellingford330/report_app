@@ -81,7 +81,8 @@ class NewsController < ApplicationController
     def students_exist?
       unless @news.students_id
         flash.now[:danger] = " 生徒が選択されていません"
-        render 'students/select' and return
+        @kind = "news"
+        render 'multiselect_students/select' and return
       end
     end
 

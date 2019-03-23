@@ -5,13 +5,13 @@
     <div class="row">
       <% if news.new_record? %>
       <div class="col-md-6">
-        <%= link_to  select_students_url, class: "btn btn-block" do %>
+        <%= link_to  select_students_url(kind: "news"), class: "btn btn-block my-1" do %>
           <i class="fas fa-arrow-right"></i>  生徒を選択する
         <% end %>
       </div>
       <% end %>
       <div class="col-md-6 mx-auto">
-        <a href="#" class="btn btn-block" data-toggle="modal" data-target="#addNewsModal">
+        <a href="#" class="btn btn-block my-1" data-toggle="modal" data-target="#addNewsModal">
           <i class="fas fa-check"></i>  選択した生徒を確認
         </a>
       </div>

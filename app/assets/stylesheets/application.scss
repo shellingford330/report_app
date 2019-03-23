@@ -328,7 +328,7 @@ footer {
   }
   ul.components {
     padding: 10px 0px;
-    border-bottom: 1px solid #b3b1b1;
+    border-bottom: 1px solid #dadada;
   }
   ul {
     p {
@@ -447,7 +447,7 @@ footer {
   background: #fff;
 }
 
-/*-- 指導報告書（new/edit） --*/
+/*-- 指導報告書（new/edit）生徒(new/edit/editbyteacher) --*/
 .select-subjects {
   width: 100% !important;
 }
@@ -736,16 +736,18 @@ footer {
       z-index: 99;
       .wrap {
         position: relative;
-        input {
+        input,
+        textarea {
           font-family: "proxima-nova", "Source Sans Pro", sans-serif;
           float: left;
           border: none;
           width: calc(100% - 50px);
-          padding: 13px 32px 15px 8px;
-          font-size: 0.8em;
+          padding: 12px 32px 10px 8px;
+          font-size: 1rem;
           color: #32465a;
         }
-        input:focus {
+        input:focus,
+        textarea:focus {
           outline: none;
         }
         button {

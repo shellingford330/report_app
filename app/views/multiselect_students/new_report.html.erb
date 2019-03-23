@@ -1,0 +1,43 @@
+<% provide(:title, "新規作成")%>
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-md-10 mx-auto">
+
+			<h3 class="mt-2 mb-0 pl-3">
+        <strong>指導報告書作成</strong>
+      </h3>
+
+			<hr>
+
+			<div class="row">
+				<div class="col-md-6">
+					<%= link_to select_students_report_url(students_id: @students_id), class: "btn btn-block my-1" do %>
+          	<i class="fas fa-arrow-right"></i>  生徒を再選択する
+        	<% end %>
+				</div>
+				<div class="col-md-6">
+					<a href="#" class="btn btn-block my-1" data-toggle="modal" data-target="#addNewsModal">
+						<i class="fas fa-check"></i>  まとめて編集する
+					</a>
+      	</div>
+			</div>
+
+			<%= form_tag( action: :create_report ) do %>
+				<% @reports.each do |report| %>
+					<%= render 'report_form', report: report %>
+				<% end %>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-4 mx-auto my-3">
+							<%= submit_tag "作成する", data: { disable_with: '処理中...' },
+						class: "btn btn-block btn-sub" %>
+						</div>
+					</div>
+				</div>
+
+			<% end %>
+
+		</div>
+	</div>
+</div>

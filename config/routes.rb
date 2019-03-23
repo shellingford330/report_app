@@ -2,11 +2,15 @@ Rails.application.routes.draw do
 
   root   'teachers#index'
 
+  get    '/students/select'        => 'multiselect_students#select' ,         as: :select_students
+  get    '/reports/select_student' => 'multiselect_students#report' ,         as: :select_students_report
+  get    '/reports/new/students'   => 'multiselect_students#new_report' ,     as: :new_students_report
+  post   '/reports/new/students'   => 'multiselect_students#create_report' 
+
   get    '/students/login'      => 'students#login_form'
   post   '/students/login'
   delete '/students/logout'
   post   '/students/upgrade',                               as: :upgrade_student
-  get    '/students/select',                                as: :select_students
   get    '/students/:id/editbyteacher' => "students#editbyteacher",   as: :edit_by_teacher_student
   patch  '/students/:id/editbyteacher' => "students#updatebyteacher", as: :update_by_teacher_student
   resources :students 

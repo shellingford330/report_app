@@ -43,7 +43,7 @@
         </a>
         <ul class="collapse list-unstyled" id="NewsSubmenu">
           <li>
-            <%= link_to '新規作成', select_students_url %>
+            <%= link_to '新規作成', select_students_url(kind: "news") %>
           </li>
           <li>
             <%= link_to 'お知らせ一覧', news_index_url %>
@@ -77,6 +77,13 @@
         <% end %>
       </li>
     </ul>
+    <div class="py-3">
+      <div class="container">
+        <p class="m-0 text-center">
+          <small> Copyright <span style="font-family:'Times New Roman', 'Times';">&copy;</span> 自由塾 2019</small>
+        </p>
+      </div>
+    </div>
   </nav>
 <% elsif student_logged_in? %>
   <nav id="sidebar">
@@ -112,5 +119,12 @@
         </ul>
       </li>
     </ul>
+    <div class="py-3">
+      <div class="container">
+        <p class="m-0 text-center">
+          <small> Copyright <span style="font-family:'Times New Roman', 'Times';">&copy;</span> 自由塾 2019</small>
+        </p>  
+      </div>
+    </div>
   </nav>
 <% end %>

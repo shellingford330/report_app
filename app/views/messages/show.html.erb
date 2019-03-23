@@ -26,12 +26,12 @@
 				<% end %>
       </ul>
     </div>
-    <div class="message-input">
+    <div class="message-input fixed-bottom">
       <div class="wrap">
 				<form accept-charset="UTF-8" action="/messages" method="post">
 					<input name="utf8" type="hidden" value="&#x2713;" />
 					<input type="hidden" name="to_id" value="<%= @to_teacher.id %>">
-					<input type="text" name="content" placeholder="Write your message...">
+					<textarea rows="1" name="content" placeholder="Write your message..."></textarea>
 					<button class="submit">
 						<i class="fa fa-paper-plane" aria-hidden="true"></i>
 					</button>

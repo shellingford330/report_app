@@ -16,4 +16,7 @@ class Report < ApplicationRecord
   validates :teacher_id, presence: true
   validates :student_id, presence: true
 
+  def Report.subjects
+    ['算数', '数学', '国語', '英語', '理科', '社会', 'その他', '都立中対策', '思考・表現', 'ロボットプログラミング教室']
+  end
 end

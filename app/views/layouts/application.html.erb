@@ -25,12 +25,6 @@
       <%= render 'layouts/flash' %>
       <%= render 'layouts/navbar' %>
       <%= yield %>
-      <footer class="py-5 mt-3">
-        <div class="container">
-          <p class="m-0 text-center">Copyright <span style="font-family:'Times New Roman', 'Times';">&copy;</span> 自由塾 2019</p>
-        </div>
-        <!-- /.container -->
-      </footer>
     </div>
     <!-- Dark Overlay element -->
     <div class="overlay"></div>
@@ -72,14 +66,29 @@
 
       $('.date').pickadate({
         weekdaysShort: ['日', '月', '火', '水', '木', '金', '土'],
+        monthsShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
         showMonthsShort: true,
+        today: '今日',
+        clear: '消す',
+        close: '閉じる',
         firstDay: 1,
-        format: 'yyyy年mm月dd日'
+        format: 'yy年mm月dd日',
+        formatSubmit: 'yyyy/mm/dd',
+        hiddenName: true
       });
 
       $('.select-subjects').select2({
         placeholder: '教科を選択して下さい。'
       });
+
+      <% Student.grades.each do |grade| %>
+        // チャックを外したり付けたりすると、「学年選択」のチェック外れたり付いたりする
+        if ($('#collapse-<%= grade %> :checked').length == $('#collapse-<%= grade %> :input').length) {
+          $('#student_<%= grade %>').prop('checked', 'checked');
+        }else{
+          $('#student_<%= grade %>').prop('checked', false);
+        }
+      <% end %>
     });
 
     {/* バーを下スクロールすると消えるエフェクト */}
@@ -101,14 +110,28 @@
     {/* 生徒選択ボックス */}
     $(function() {
       $('#student_all').on('click', function() {
+        // 「全選択」のチェックすると生徒全てをチェックする
         $('.student').prop('checked', this.checked);
         $('.student_grade').prop('checked', this.checked);
       });
+
       <% Student.grades.each do |grade| %>
+        // 「学年選択」のチェックするとその学年の生徒全てをチェックする
         $('#student_<%= grade %>').on('click', function() {
           $('#collapse-<%= grade %>').find('.student').prop('checked', this.checked);
         });
+
+        // チャックを外したり付けたりすると、「学年選択」のチェック外れたり付いたりする
+        $('#collapse-<%= grade %> .student').on('click', function() {
+          if ($('#collapse-<%= grade %> :checked').length == $('#collapse-<%= grade %> :input').length) {
+            $('#student_<%= grade %>').prop('checked', 'checked');
+          }else{
+            $('#student_<%= grade %>').prop('checked', false);
+          }
+        });
       <% end %>
+
+      
     });
     </script>
   </body>

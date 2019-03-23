@@ -15,9 +15,6 @@ class StudentsController < ApplicationController
 	def	new
 	end
 
-	def select
-	end
-
 	def	show
 		redirect_to students_login_path unless (judge = correct_student?(@student)) || teacher_logged_in?
 		if judge
