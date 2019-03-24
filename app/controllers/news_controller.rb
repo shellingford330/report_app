@@ -101,6 +101,7 @@ class NewsController < ApplicationController
     # 生徒が渡されているか？
     def students_exist?
       unless @news.students_id
+        @students_id = []
         flash.now[:danger] = " 生徒が選択されていません"
         render 'select' and return
       end
