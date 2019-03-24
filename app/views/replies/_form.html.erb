@@ -1,7 +1,7 @@
 <div class="card bg-brown my-4">
 	<h5 class="card-header">返信する：</h5>
 	<div class="card-body">
-		<%= form_for(reply, url: reply_report_url) do |f| %>
+		<%= form_for(reply, url: reply_report_url(@report)) do |f| %>
 			<div class="form-group">
 				<%= f.text_area :content, :size => "10x3", class: "form-control form-control-lg" %>
 			</div>
