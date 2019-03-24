@@ -16,12 +16,12 @@
 						<hr>
 						<div class="form-group">
 							<%= f.label :start_date,'開始日' %>
-							<%= f.date_field :start_date, class:"date form-control", value: Date.today.prev_day(15) %>
+							<%= f.date_field :start_date, class:"date form-control" %>
 						</div>
 
 						<div class="form-group">
 							<%= f.label :end_date,'終了日' %>
-							<%= f.date_field :end_date, class:"date form-control", value: Date.yesterday %>
+							<%= f.date_field :end_date, class:"date form-control" %>
 						</div>
 
 						<div class="form-group">
@@ -36,7 +36,7 @@
 
 						<div class="form-group">
 							<%= f.label :homework,'宿題' %>
-							<%= f.text_area :homework, class: "form-control form-control-lg", value: "学習記録をご覧下さい。" %>
+							<%= f.text_area :homework, class: "form-control form-control-lg" %>
 						</div>
 
 						<div class="form-group">

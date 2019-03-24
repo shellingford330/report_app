@@ -16,7 +16,7 @@
         	<% end %>
 				</div>
 				<div class="col-md-6">
-					<a href="#" class="btn btn-block my-1" data-toggle="modal" data-target="#addNewsModal">
+					<a href="#" class="btn btn-block my-1" data-toggle="modal" data-target="#editMixModal">
 						<i class="fas fa-check"></i>  まとめて編集する
 					</a>
       	</div>
@@ -41,3 +41,72 @@
 		</div>
 	</div>
 </div>
+
+<!-- モーダル -->
+<div class="modal fade" id="editMixModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content bg-brown">
+      <div class="modal-header border-bottom border-secondary">
+        <h5 class="modal-title">まとめて編集する</h5>
+        <button class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       	<%= form_for(@report, url: edit_multi_report_path, method: :post) do |f| %>
+					<%= render 'share/error_messages', obj: @report %>
+
+					<div class="form-group">
+						<%= f.hidden_field :student_id, value: @students_id %>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :start_date,'開始日' %>
+						<%= f.date_field :start_date, class:"date form-control" %>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :end_date,'終了日' %>
+						<%= f.date_field :end_date, class:"date form-control" %>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :subjects ,'教科'%>
+						<%= f.select :subjects , Report.subjects, {}, multiple: true, class: "select-subjects", style: "width: 100%;" %>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :content ,'授業内容'%>
+						<%= f.text_area :content ,:size => "10x3", class: "form-control form-control-lg" %>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :homework,'宿題' %>
+						<%= f.text_area :homework, class: "form-control form-control-lg" %>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :comment,'コメント' %>
+						<%= f.text_area :comment , :size => "10x6" ,class: "form-control form-control-lg"%>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :memo, '注記（生徒側には公開されません）' %>
+						<%= f.text_area :memo , class: "form-control form-control-lg"%>
+					</div>
+
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-4 mx-auto">
+								<%= f.submit "全ての報告書にコピーする", data: { disable_with: '処理中...' },
+							class: "btn btn-block btn-sub" %>
+							</div>
+						</div>
+					</div>
+					
+				<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

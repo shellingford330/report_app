@@ -1,5 +1,5 @@
 class MultiReportsController < ApplicationController
-	before_action :teacher_logged_in, only: [:index, :new, :create]
+	before_action :teacher_logged_in, only: [:index, :new, :create, :new_mix]
 
 	def index
 		if (students_id = params[:students_id])
@@ -11,6 +11,7 @@ class MultiReportsController < ApplicationController
 
 	def new
 		if (@students_id = params[:students_id])
+			@report = Report.new
 			@reports = []
 			@students_id.each do |student_id|
 				report  = Report.new(student_id: student_id)
@@ -24,17 +25,32 @@ class MultiReportsController < ApplicationController
 		end
 	end
 
+	def new_mix
+		@students_id = params[:report][:student_id].split(' ').map { |id| id.to_i }
+		@reports = []
+		@students_id.each do |student_id|
+			@report  = Report.new(params.require(:report).permit(:start_date, :end_date, :content, :homework, :comment, :memo))
+			@report.student_id = student_id
+			@report.subjects = params[:report][:subjects] 
+			@reports.push(@report)
+		end
+		render 'new'
+	end
+
 	def create
 		@reports = current_teacher.reports.build(report_params)
+		@students_id = []
 		judge = true
 		@reports.each do |report|
 			report.subjects = report.subject.split
+			@students_id.push(report.student_id)
 			judge = false unless report.save
 		end
 		if judge
 			flash[:success] = '報告書が作成されました'
 			redirect_to teacher_reports_url(current_teacher)
 		else
+			@report = Report.new
 			flash.now[:danger] = '入力情報をご確認下さい'
 			render 'new'
 		end
