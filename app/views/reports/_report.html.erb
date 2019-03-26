@@ -4,7 +4,12 @@
       <div class="card-body-icon">
         <i class="far fa-file-alt"></i>
       </div>
-      <strong class="d-inline-block mb-2"><%= report.subject %></strong>
+      <p class="mb-2">
+        <strong><%= report.subject %></strong>
+        <% if student_logged_in? && !report.read_flg %>
+          <span class="float-right text-success">New</span>
+        <% end %>
+      </p>
       <h4 class="mb-0">
         <%= report.start_date.strftime('%m/%d') %>〜<%=
         report.end_date.strftime('%m/%d') %>

@@ -7,55 +7,7 @@
 					<h2>報告書編集</h2>
 				</div>
 				<div class="card-body">
-					<%= form_for(@report) do |f| %>
-						<%= render 'share/error_messages', obj: @report %>
-						<h4><i class="fas fa-user-circle"></i>  <%= @report.student.name %></h4>
-						<%= f.hidden_field :student_id, value: @report.student_id %>
-						<hr>
-						<div class="form-group">
-							<%= f.label :start_date,'開始日' %>
-							<%= f.date_field :start_date, class:"date form-control" %>
-						</div>
-
-						<div class="form-group">
-							<%= f.label :end_date,'終了日' %>
-							<%= f.date_field :end_date, class:"date form-control" %>
-						</div>
-
-						<div class="form-group">
-							<%= f.label :subjects ,'教科'%>
-							<%= f.select :subjects, Report.subjects, {}, multiple: true, class: "select-subjects" %>
-						</div>
-
-						<div class="form-group">
-							<%= f.label :content ,'授業内容'%>
-							<%= f.text_area :content ,:size => "10x3", class: "form-control form-control-lg" %>
-						</div>
-
-						<div class="form-group">
-							<%= f.label :homework,'宿題' %>
-							<%= f.text_area :homework, class: "form-control form-control-lg" %>
-						</div>
-
-						<div class="form-group">
-							<%= f.label :comment,'コメント' %>
-							<%= f.text_area :comment , :size => "10x6" ,class: "form-control form-control-lg"%>
-						</div>
-
-						<div class="form-group">
-							<%= f.label :memo, '注記（生徒側には公開されません）' %>
-							<%= f.text_area :memo , class: "form-control form-control-lg"%>
-						</div>
-
-						<div class="form-group">
-							<div class="row">
-								<div class="col-md-4 mx-auto">
-									<%= f.submit "更新する", data: { disable_with: '処理中...' },
-								class: "btn btn-block btn-sub" %>
-								</div>
-							</div>
-						</div>
-					<% end %>
+					<%= render 'form', report: @report %>
 				</div>
 			</div>
 		</div>

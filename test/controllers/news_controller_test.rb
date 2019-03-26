@@ -5,11 +5,6 @@ class NewsControllerTest < ActionDispatch::IntegrationTest
     @news = news(:one)
   end
 
-  test "should get index" do
-    get news_index_url
-    assert_redirected_to students_login_path
-  end
-
   test "should get new" do
     get new_news_url
     assert_redirected_to teachers_login_path

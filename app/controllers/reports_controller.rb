@@ -17,8 +17,14 @@ class ReportsController < ApplicationController
   end
 
   def teacher_index
-    @reports = Report.where(teacher_id: params[:id]).paginate(page: params[:page], per_page: 9)
-    render 'index'
+    teacher = Teacher.find(params[:id])
+    if admin_logged_in? && correct_teacher?(teacher)
+      @reports = Report.paginate(page: params[:page], per_page: 9)
+      render 'admin_index'
+    else
+      @reports = teacher.reports.paginate(page: params[:page], per_page: 9)
+      render 'index'
+    end
   end
 
   def show

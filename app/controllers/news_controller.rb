@@ -17,10 +17,11 @@ class NewsController < ApplicationController
   end
 
   def teacher_index
-    if admin_logged_in?
+    teacher = Teacher.find(params[:id])
+    if admin_logged_in? && correct_teacher?(teacher)
       @news = News.paginate(page: params[:page], per_page: 9) 
     else
-      @news = News.where(teacher_id: params[:id]).paginate(page: params[:page], per_page: 9) 
+      @news = teacher.news.paginate(page: params[:page], per_page: 9) 
     end
     render 'index'
   end
