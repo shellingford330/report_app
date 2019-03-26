@@ -68,7 +68,7 @@
 					<h2 class="mb-0 pl-2">
 						指導報告書
 						<% if teacher_logged_in? %>
-							<%= link_to new_report_url(student_id: @student.id), class: "btn float-right" do %>
+							<%= link_to new_multi_report_url, class: "btn float-right" do %>
 								<i class="fas fa-plus"></i> 指導報告書
 							<% end %>
 						<% end %>

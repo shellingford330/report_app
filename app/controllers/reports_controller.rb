@@ -13,17 +13,14 @@ class ReportsController < ApplicationController
     else
       @reports = Report.where(student_id: params[:id]).released.paginate(page: params[:page], per_page: 9)
     end
-    render 'index'
   end
 
   def teacher_index
     teacher = Teacher.find(params[:id])
     if admin_logged_in? && correct_teacher?(teacher)
-      @reports = Report.paginate(page: params[:page], per_page: 9)
-      render 'admin_index'
+      @reports = Report.paginate(page: params[:page], per_page: 16)
     else
-      @reports = teacher.reports.paginate(page: params[:page], per_page: 9)
-      render 'index'
+      @reports = teacher.reports.paginate(page: params[:page], per_page: 16)
     end
   end
 
@@ -46,14 +43,14 @@ class ReportsController < ApplicationController
     flash[:success] = "公開しました"
     @report.released!
     @report.save
-    redirect_to @report
+    redirect_to teacher_reports_url(current_teacher)
   end
 
   def draft
     flash[:success] = "非公開にしました"
     @report.draft!
     @report.save
-    redirect_to @report
+    redirect_to teacher_reports_url(current_teacher)
   end
 
   def create

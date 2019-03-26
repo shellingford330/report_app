@@ -4,6 +4,9 @@
 	<div class="container">
 		<h3 class="mt-4 mb-3 pl-3">
 			<strong>指導報告書一覧</strong>
+			<%= link_to new_news_url(students_id: @student.id, select: "one"), class: "btn btn-news float-right" do %>
+				<i class="fas fa-plus"></i> 指導報告書
+			<% end %>
 		</h3>
 
 		<hr>
@@ -11,7 +14,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th class="table-column">授業日</th>
+					<th class="table-column d-none d-lg-table-cell">授業日</th>
 					<th class="table-column">生徒</th>
 					<th class="table-column">書いた講師</th>
 					<th class="table-column">公開</th>
@@ -21,9 +24,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% @reports.each do |report| %>
+				<% @news.each do |news| %>
 					<tr>
-						<td class="py-2">
+						<td class="py-2 d-none d-lg-table-cell">
 							<%= link_to report, class: "link" do %>
 								<%= report.start_date.strftime('%Y/%m/%d') %>〜<%= report.end_date.strftime('%m/%d') %>
 							<% end %>
@@ -61,5 +64,6 @@
 				<% end %>
 			</tbody>
 		</table>
+		<%= will_paginate @reports, :previous_label => '&laquo', :next_label => '&raquo' %>
 	</div>
 </section>
