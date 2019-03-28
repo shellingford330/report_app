@@ -10,7 +10,7 @@
 
         <p class="mb-2">
           <strong>お問い合わせ</strong>
-          <% if contact.replies.where(writeable_type: "Teacher", read_flg: false).exists? %>
+          <% if !contact.read_flg || contact.replies.where(writeable_type: "Teacher", read_flg: false).exists? %>
             <span class="float-right text-success">New</span>
           <% end %>
         </p>
