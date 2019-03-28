@@ -15,25 +15,8 @@
         <%= time_ago_in_words(news.created_at) %>前に投稿
       </div>
       <div class="card_check">
-        <% if teacher_logged_in? %>
-          <%= link_to news, class: "btn btn-news" do %>
-            <i class="fas fa-arrow-right mr-2"></i>詳細
-          <% end %>
-          <div class="card_check_list pt-2">
-            <% if released?(news)%>
-              <div>
-                <i class="far fa-check-square"></i>    公開
-              </div>
-            <% else %>
-              <div>
-                <i class="far fa-square"></i>    公開
-              </div>
-            <% end %>
-          </div>
-        <% elsif student_logged_in? %>
-          <%= link_to news, class: "btn btn-news" do %>
-            <i class="fas fa-arrow-right mr-2"></i>詳細
-          <% end %>
+        <%= link_to news, class: "btn btn-news" do %>
+          <i class="fas fa-arrow-right mr-2"></i>詳細
         <% end %>
       </div>
     </div>

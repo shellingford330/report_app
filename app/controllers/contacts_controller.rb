@@ -2,7 +2,7 @@ class ContactsController < ApplicationController
   before_action :user_logged_in,    only:   [:index, :show]
   before_action :student_logged_in, except: [:index, :show, :reply]
   before_action :set_contact,       only:   [:show, :edit, :update, :destroy, :reply]
-  before_action :set_admin,         only:   [:new, :edit, :create, :update]
+  before_action :set_admin,         only:   [:new, :edit]
   before_action :correct_student_or_admin, only: [:show, :reply]
   before_action :correct_student,   only:   [:edit, :update, :destroy]
 
@@ -13,6 +13,12 @@ class ContactsController < ApplicationController
 
   def show
     @reply = Reply.new
+    if teacher_logged_in?
+      @contact.update(read_flg: true)
+      @contact.replies.where(writeable_type: "Student").update_all(read_flg: true)
+    else
+      @contact.replies.where(writeable_type: "Teacher").update_all(read_flg: true)
+    end
   end
 
   def new

@@ -3,10 +3,7 @@
 <section id="reports" class="mt-3">
 	<div class="container">
 		<h3 class="mt-4 mb-3 pl-3">
-			<strong>指導報告書一覧</strong>
-			<%= link_to new_news_url(students_id: @student.id, select: "one"), class: "btn btn-news float-right" do %>
-				<i class="fas fa-plus"></i> 指導報告書
-			<% end %>
+			<strong>お知らせ一覧</strong>
 		</h3>
 
 		<hr>
@@ -14,49 +11,34 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th class="table-column d-none d-lg-table-cell">授業日</th>
-					<th class="table-column">生徒</th>
+					<th class="table-column">日付</th>
+					<th class="table-column">タイトル</th>
 					<th class="table-column">書いた講師</th>
 					<th class="table-column">公開</th>
-					<th class="table-column">既読</th>
-					<th class="table-column">返信</th>
 					<th class="table-column d-none d-lg-table-cell">削除</th>
 				</tr>
 			</thead>
 			<tbody>
 				<% @news.each do |news| %>
-					<tr>
-						<td class="py-2 d-none d-lg-table-cell">
-							<%= link_to report, class: "link" do %>
-								<%= report.start_date.strftime('%Y/%m/%d') %>〜<%= report.end_date.strftime('%m/%d') %>
-							<% end %>
-						</td>
-						<td  class="py-2"><i class="fas fa-user-circle"></i> <%= report.student.name %></td>
-						<td  class="py-2"><i class="fas fa-user-circle"></i> <%= report.teacher.name %></td>
+					<tr type="a">
 						<td  class="py-2">
-							<% if released?(report)%>
-								<i class="far fa-check-square"></i>
-							<% else %>
-								<i class="far fa-square"></i>
-							<% end %>
+							<%= link_to news.created_at.strftime('%Y年%m月%d日'), news, class: "link" %>
 						</td>
 						<td class="py-2">
-							<% if report.read_flg %>
-								<i class="far fa-check-square"></i>
-							<% else %>
-								<i class="far fa-square"></i>
-							<% end %>
+							<%= link_to "「#{news.title}」", news %>
 						</td>
-						<td class="py-2">
-							<% reply = report.replies.where(writeable_type: "Student") %>
-							<% if reply.exists? %>
-								<i class="far fa-check-square"></i> <%= "(#{reply.count}件)"%>
+						<td  class="py-2">
+							<i class="fas fa-user-circle"></i> <%= news.teacher.name %>
+						</td>
+						<td  class="py-2">
+							<% if released?(news)%>
+								<i class="far fa-check-square"></i>
 							<% else %>
 								<i class="far fa-square"></i>
 							<% end %>
 						</td>
 						<td class="py-2 d-none d-lg-table-cell">
-							<%= link_to report, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } do %>
+							<%= link_to news, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } do %>
 								<i style="color: #d76161;" class="fas fa-trash"></i>
 							<% end %>
 						</td>
@@ -64,6 +46,6 @@
 				<% end %>
 			</tbody>
 		</table>
-		<%= will_paginate @reports, :previous_label => '&laquo', :next_label => '&raquo' %>
+		<%= will_paginate @news, :previous_label => '&laquo', :next_label => '&raquo' %>
 	</div>
 </section>

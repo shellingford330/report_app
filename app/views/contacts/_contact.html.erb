@@ -1,30 +1,110 @@
-<div class="mb-3">
-  <div class="card shadow-sm border-left-contact">
-    <div class="card-body">
-      <div class="card-body-icon-contact">
-        <i class="far fa-envelope"></i>
-      </div>
-      <strong class="d-inline-block mb-2">お問い合わせ</strong>
-      <h5 class="mb-0">
-        「<%= contact.title %>」
-      </h5>
-			<% if student_logged_in? %>
-      <p class="my-2">
-        宛先講師：<i class="fas fa-user-circle"></i>    <%= contact.teacher.name %>
-      </p>
-			<% else %>
-			<p class="my-2">
-        書いた生徒：<i class="fas fa-user-circle"></i>    <%= contact.student.name %>
-      </p>
-			<% end %>
-      <div class="text-muted my-2">
-        <%= time_ago_in_words(contact.created_at) %>前に投稿
-      </div>
-      <div class="card_check">
-				<%= link_to contact, class: "btn btn-contact" do %>
-					<i class="fas fa-arrow-right mr-2"></i>詳細
-				<% end %>
+<!-- 生徒ログイン用 -->
+<% if student_logged_in? %>
+  <div class="mb-3">
+    <div class="card shadow-sm border-left-contact">
+      <div class="card-body">
+
+        <div class="card-body-icon-contact">
+          <i class="far fa-envelope"></i>
+        </div>
+
+        <p class="mb-2">
+          <strong>お問い合わせ</strong>
+          <% if contact.replies.where(writeable_type: "Teacher", read_flg: false).exists? %>
+            <span class="float-right text-success">New</span>
+          <% end %>
+        </p>
+
+        <h5 class="mb-0">
+          「<%= contact.title %>」
+        </h5>
+
+        <p class="my-2">
+          宛先講師：<i class="fas fa-user-circle"></i>    <%= contact.teacher.name %>
+        </p>
+    
+        <div class="text-muted my-2">
+          <%= time_ago_in_words(contact.created_at) %>前に投稿
+        </div>
+        <div class="card_check">
+          
+          <%= link_to contact, class: "btn btn-contact card_check_info" do %>
+            <i class="fas fa-arrow-right mr-2"></i>詳細
+          <% end %>
+
+          <div class="card_check_list">
+            <% if contact.read_flg %>
+              <div>
+                <i class="far fa-check-square"></i>    既読
+              </div>
+            <% else %>
+              <div>
+                <i class="far fa-square"></i>    既読
+              </div>
+            <% end %>
+
+            <% if contact.replies.where(writeable_type: "Teacher") %>
+              <div>
+                <i class="far fa-check-square"></i>   返信
+              </div>
+            <% else %>
+              <div>
+                <i class="far fa-square"></i>   返信
+              </div>
+            <% end %>
+          </div>
+          
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+<% else %>
+<!-- 講師ログイン用 -->
+  <div class="mb-3">
+    <div class="card shadow-sm border-left-contact">
+      <div class="card-body">
+        <div class="card-body-icon-contact">
+          <i class="far fa-envelope"></i>
+        </div>
+        <p class="mb-2">
+          <strong>お問い合わせ</strong>
+          <% if contact.replies.where(writeable_type: "Student", read_flg: false).exists? %>
+            <span class="float-right text-success">New</span>
+          <% end %>
+        </p>
+
+        <h5 class="mb-0">
+          「<%= contact.title %>」
+        </h5>
+        
+        <p class="my-2">
+          書いた生徒：<i class="fas fa-user-circle"></i>    <%= contact.student.name %>
+        </p>
+        
+        <div class="text-muted my-2">
+          <%= time_ago_in_words(contact.created_at) %>前に投稿
+        </div>
+        <div class="card_check">
+      
+          <%= link_to contact, class: "btn btn-contact card_check_info" do %>
+            <i class="fas fa-arrow-right mr-2"></i>詳細
+          <% end %>
+
+          <div class="card_check_list pt-4">
+            <% if contact.replies.where(writeable_type: "Student") %>
+              <div>
+                <i class="far fa-check-square"></i>    返信
+              </div>
+            <% else %>
+              <div>
+                <i class="far fa-square"></i>    返信
+              </div>
+            <% end %>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

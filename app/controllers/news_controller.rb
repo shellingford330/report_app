@@ -13,17 +13,15 @@ class NewsController < ApplicationController
     else
       @news = student.news.released.paginate(page: params[:page], per_page: 9) 
     end
-    render 'index'
   end
 
   def teacher_index
     teacher = Teacher.find(params[:id])
     if admin_logged_in? && correct_teacher?(teacher)
-      @news = News.paginate(page: params[:page], per_page: 9) 
+      @news = News.paginate(page: params[:page], per_page: 16) 
     else
-      @news = teacher.news.paginate(page: params[:page], per_page: 9) 
+      @news = teacher.news.paginate(page: params[:page], per_page: 16) 
     end
-    render 'index'
   end
 
   def show

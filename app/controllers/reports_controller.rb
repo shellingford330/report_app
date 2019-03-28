@@ -26,9 +26,12 @@ class ReportsController < ApplicationController
 
   def show
     @reply = Reply.new
-    @report.update(read_flg: true) if correct_student?(@report.student)
-    @student = @report.student
-    @teacher = @report.teacher
+    if student_logged_in?
+      @report.update(read_flg: true)
+      @report.replies.where(writeable_type: "Teacher").update_all(read_flg: true)
+    elsif admin_logged_in?
+      @report.replies.where(writeable_type: "Student").update_all(read_flg: true)
+    end
   end
 
   def new

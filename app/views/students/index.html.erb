@@ -43,28 +43,37 @@
                   data-parent="#accordion"
                 >
                   <table class="table">
-                      <tbody>
-                        <% @students.each do |student| %>
-                        <tr>
-                          <td class="pl-4">
-                            <%= link_to student do%>
-                              <i class="fas fa-user-circle"></i>     <%= student.name %>
-                            <% end %>
-                          </td>
-                          <td class="text-right">
-                            <% if owner_logged_in? %>
-                              <%= link_to student, method: :delete, data: { confirm:
-                              '本当によろしいですか？'} , class: "btn btn-view bg-delete" do%>
-                                <i class="fas fa-trash"></i> 削除 
-                              <% end %> 
-                            <% end %>
-                            <%= link_to new_report_url(student_id: student.id), class: "btn btn-view" do %>
-                              <i class="fas fa-plus"></i> 報告書
-                            <% end %>
-                          </td>
-                        </tr>
-                        <% end %>
-                      </tbody>
+                    <thead>
+                      <tr>
+                        <th>生徒氏名</th>
+                        <th>授業の曜日</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @students.each do |student| %>
+                      <tr>
+                        <td class="pl-4">
+                        <i class="fas fa-user-circle"></i>
+                          <%= link_to student.name, student, class: "link" %>
+                        </td>
+                        <td>
+                          <%= student.lesson_day %>
+                        </td>
+                        <td class="text-right">
+                          <% if owner_logged_in? %>
+                            <%= link_to student, method: :delete, data: { confirm:
+                            '本当によろしいですか？'} , class: "btn btn-view bg-delete" do%>
+                              <i class="fas fa-trash"></i> 削除 
+                            <% end %> 
+                          <% end %>
+                          <%= link_to new_report_url(student_id: student.id), class: "btn btn-view" do %>
+                            <i class="fas fa-plus"></i> 報告書
+                          <% end %>
+                        </td>
+                      </tr>
+                      <% end %>
+                    </tbody>
                   </table>
                 </div>
               <% end %>

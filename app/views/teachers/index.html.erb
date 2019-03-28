@@ -22,9 +22,8 @@
                 <% @teachers.each do |teacher| %>
                   <tr>	
                     <td>
-                      <%= link_to teacher do %>
-                        <i class="fas fa-user-circle"></i> <%= teacher.name %>
-                      <% end %>
+                      <i class="fas fa-user-circle"></i>
+                      <%= link_to teacher.name, teacher, class:"link" %>
                     </td>
                     <td  class="d-none d-lg-table-cell"><%= teacher.status %></td>
                     <td  class="text-right">
