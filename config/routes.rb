@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   post   '/multi_reports/new_mix', as: :edit_multi_report
   resources :multi_reports, only: [:index, :new, :create]
 
+  resources :edit_reports, only: [:index, :new, :create]
+
   get    '/news/select_students' => 'news#select' ,         as: :select_students 
   post   '/news/:id/release'     => 'news#release',         as: :release_news
   post   '/news/:id/draft'       => 'news#draft',           as: :draft_news

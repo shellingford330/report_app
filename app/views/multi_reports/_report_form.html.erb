@@ -48,6 +48,21 @@
 				<%= fr.label :memo, '注記（生徒側には公開されません）' %>
 				<%= fr.text_area :memo , class: "form-control form-control-lg"%>
 			</div>
+
+			<% if !report.new_record? && admin_logged_in? %>
+			<div class="form-group">
+				<label>公開/非公開</label>
+				<div class="form-check">
+					<%= fr.radio_button :status , 'released' , class: "form-check-input"%>
+					<%= fr.label :status, '公開', class:"form-check-label" %>
+				</div>
+				<div class="form-check">
+					<%= fr.radio_button :status , 'draft' , class: "form-check-input"%>
+					<%= fr.label :status, '下書き保存', class:"form-check-label" %>
+				</div>
+			</div>
+			<% end %>
+
 			<% end %>
 	</div>
 

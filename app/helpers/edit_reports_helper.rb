@@ -1,0 +1,2 @@
+module EditReportsHelper
+end

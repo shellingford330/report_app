@@ -1,0 +1,38 @@
+<% provide(:title, "報告書編集")%>
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-md-10 mx-auto">
+
+			<h3 class="mt-2 mb-0 pl-3">
+        <strong>指導報告書編集</strong>
+      </h3>
+
+			<hr>
+
+			<div class="row">
+				<div class="col-md-6 mx-auto">
+					<%= link_to edit_reports_url(reports_id: @reports_id), class: "btn btn-block my-1" do %>
+          	<i class="fas fa-arrow-right"></i>  報告書を再選択する
+        	<% end %>
+				</div>
+			</div>
+
+			<%= form_tag( action: :create ) do %>
+				<% @reports.each do |report| %>
+					<%= render 'multi_reports/report_form', report: report %>
+				<% end %>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-4 mx-auto my-3">
+							<%= submit_tag "更新する", data: { disable_with: '処理中...' },
+						class: "btn btn-block btn-sub" %>
+						</div>
+					</div>
+				</div>
+
+			<% end %>
+
+		</div>
+	</div>
+</div>

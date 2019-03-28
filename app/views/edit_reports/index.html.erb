@@ -1,28 +1,34 @@
-<% provide(:title, "報告書一覧")%>
+<% provide(:title, "指導報告書")%>
 
 <section id="reports" class="mt-3">
 	<div class="container">
 		<h3 class="mt-4 mb-3 pl-3">
-			<strong>指導報告書一覧</strong>
+			<strong>指導報告書</strong>
 		</h3>
 
 		<hr>
 
+		<%= form_tag( { action: :new } , { method: :get } ) do %>
 		<table class="table">
 			<thead>
 				<tr>
+
+					<th class="table-column"></th>
 					<th class="table-column">授業日</th>
 					<th class="table-column">生徒</th>
 					<th class="table-column">書いた講師</th>
 					<th class="table-column">公開</th>
 					<th class="table-column">既読</th>
 					<th class="table-column">未読の返信</th>
-					<th class="table-column d-none d-lg-table-cell">削除</th>
+					
 				</tr>
 			</thead>
 			<tbody>
 				<% @reports.each do |report| %>
 					<tr>
+						<td class="py-2">
+							<%= check_box_tag 'reports_id[]', report.id, @reports_id.include?(report.id) %>
+						</td>
 						<td class="py-2">
 							<%= link_to report, class: "link" do %>
 								<%= report.start_date.strftime('%Y/%m/%d') %>〜<%= report.end_date.strftime('%m/%d') %>
@@ -54,15 +60,15 @@
 							<% end %>
 						</td>
 
-						<td class="py-2 d-none d-lg-table-cell">
-							<%= link_to report, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } do %>
-								<i style="color: #d76161;" class="fas fa-trash"></i>
-							<% end %>
-						</td>
 					</tr>
 				<% end %>
 			</tbody>
 		</table>
-		<%= will_paginate @reports, :previous_label => '&laquo', :next_label => '&raquo' %>
+
+		<!-- 送信ボタン -->
+		<div style="width: 40%;" class="mx-auto mb-2">
+			<%= submit_tag '編集する', class: "btn btn-block btn-sub mt-1"%>
+		</div>
+		<% end %>
 	</div>
 </section>
