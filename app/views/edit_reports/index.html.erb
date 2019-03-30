@@ -3,12 +3,17 @@
 <section id="reports" class="mt-3">
 	<div class="container">
 		<h3 class="mt-4 mb-3 pl-3">
-			<strong>指導報告書</strong>
+			<strong>報告書検索/編集</strong>
+			<% if admin_logged_in? %>
+			<a href="#" class="btn float-right mr-2" data-toggle="modal" data-target="#searchReportsModal">
+				<i class="fas fa-search"></i> 検索する
+			</a>
+			<% end %>
 		</h3>
 
 		<hr>
 
-		<%= form_tag( { action: :new } , { method: :get } ) do %>
+		<%= form_tag( { controller: :edit_reports, action: :new } , { method: :get } ) do %>
 		<table class="table">
 			<thead>
 				<tr>
@@ -72,3 +77,66 @@
 		<% end %>
 	</div>
 </section>
+
+
+<!-- モーダル -->
+<div class="modal fade" id="searchReportsModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content bg-brown">
+      <div style="background: #c9bdb9;" class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-search"></i> 指導報告書検索</h5>
+        <button class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+			<%= form_for(@report, url: search_index_url ) do |f| %> 
+      <div class="modal-body">
+
+       	<h5><i class="fas fa-tasks"></i> 検索条件</h5>
+
+				<hr>
+
+				<div class="form-group">
+					<%= f.label :teacher_id, '書いた講師', class: "font-weight-bold" %>
+					<%= f.collection_select :teacher_id , Teacher.all, :id, :name, { include_blank: 'すべての講師' },
+					class: "select-teachers", style: "width: 100%;", multiple: true %>
+				</div>
+
+				<div class="form-group">
+					<legend class="col-form-label font-weight-bold">公開/非公開</legend>
+					<div class="form-check">
+						<%= f.radio_button :status , 'all' , class: "form-check-input"%>
+						<%= f.label :status, 'すべて', class:"form-check-label" %>
+					</div>	
+					<div class="form-check">
+						<%= f.radio_button :status , 'released' , class: "form-check-input"%>
+						<%= f.label :status, '公開', class:"form-check-label" %>
+					</div>
+					<div class="form-check">
+						<%= f.radio_button :status , 'draft' , class: "form-check-input"%>
+						<%= f.label :status, '下書き', class:"form-check-label" %>
+					</div>	
+				</div>
+
+				<%= fields_for @report.replies.build do |fr| %>
+					<div class="form-group">
+						<legend class="col-form-label font-weight-bold">返信あり</legend>
+						<div class="form-check">
+							<%= fr.check_box :exists, { class: "form-check-input" }, true, false %>
+							<%= fr.label :exists, 'すべて', class: "form-check-label"%>
+						</div>
+						<div class="form-check">
+							<%= fr.check_box :read_flg, { class: "form-check-input" }, true, false %>
+							<%= fr.label :read_flg, '未読', class: "form-check-label"%>
+						</div>
+					</div>
+				<% end %>
+
+			</div>
+			<div style="border-color: #e3d9d5 !important;" class="modal-footer">
+				<%= f.submit "検索する", class: "btn px-2" %>
+			</div>
+			<% end %>
+    </div>
+  </div>
+</div>

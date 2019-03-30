@@ -78,8 +78,12 @@
       });
 
       $('.select-subjects').select2({
-        placeholder: '教科を選択して下さい。'
+        placeholder: '選択して下さい。'
       });
+
+      $('.select-teachers').select2({
+      });
+
 
       <% Student.grades.each do |grade| %>
         // 読み込んだ時、各学年下の生徒が全てチェックされていると「学年選択」もチェックする

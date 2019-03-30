@@ -43,7 +43,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header bg-orange">
-				<h5 class="modal-title">送る講師を選択する</h5>
+				<h5 class="modal-title"><i class="far fa-paper-plane"></i> 宛先講師を選択する</h5>
 				<button class="close" data-dismiss="modal">
 					<span>&times;</span>
 				</button>
@@ -53,11 +53,11 @@
 					<div class="form-group">
 						<%= f.label :id, '宛先講師' %>
 						<%= f.collection_select :id , @teachers, :id, :name, 
-						{ include_blank: '講師を選択して下さい' }, class: "form-control form-control-lg" %>
+						{ include_blank: '講師を選択して下さい。' }, class: "form-control form-control-lg" %>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<%= f.submit "作成する", class: "btn" %>
+					<%= f.submit "ルームを作成", class: "btn" %>
 				</div>
 				<% end %>
 		</div>

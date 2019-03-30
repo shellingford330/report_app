@@ -1,11 +1,12 @@
 class EditReportsController < ApplicationController
-	before_action :teacher_logged_in, only: [:index, :new, :create]
+	before_action :teacher_logged_in
 
 	def index
+		@report = current_teacher.reports.build
 		if admin_logged_in?
 			@reports = Report.all
 		else
-			@reports = current_teacher.reports
+			@reports = current_teacher.reports.all
 		end
 		if (reports_id = params[:reports_id])
 			@reports_id = reports_id.map { |i| i.to_i }

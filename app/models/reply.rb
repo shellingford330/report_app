@@ -1,4 +1,6 @@
 class Reply < ApplicationRecord
+  attr_accessor :exists
+
   belongs_to :replyable, polymorphic: true
   belongs_to :writeable, polymorphic: true
 

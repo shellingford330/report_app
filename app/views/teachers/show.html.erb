@@ -21,13 +21,13 @@
 				<% end %>
 				<% if @teacher.status != "owner" && owner_logged_in? %>
 					<a href="#" class="btn btn-block mt-2" data-toggle="modal" data-target="#addPostModal">
-						<i class="fas fa-plus"></i> 権限を変更する
+						<i class="fas fa-user-check"></i> 権限を変更する
 					</a>
 					<div class="modal fade" id="addPostModal">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
 								<div class="modal-header bg-orange">
-									<h5 class="modal-title">権限を変更する</h5>
+									<h5 class="modal-title"><i class="fas fa-user-check"></i> 権限を変更する</h5>
 									<button class="close" data-dismiss="modal">
 										<span>&times;</span>
 									</button>

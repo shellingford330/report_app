@@ -20,7 +20,12 @@ class MessagesController < ApplicationController
   end
 
   def new
-    redirect_to message_url(params[:teacher][:id])
+    if (to_id = params[:teacher][:id]).present?
+      redirect_to message_url(to_id)
+    else
+      flash[:danger] = "宛先講師を入力してください。"
+      redirect_to messages_url
+    end
   end
 
   def create
