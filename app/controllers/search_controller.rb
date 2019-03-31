@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-	before_action :admin_logged_in
+	before_action :teacher_logged_in
 
 	def create
 		@report = current_teacher.reports.build

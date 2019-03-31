@@ -4,11 +4,9 @@
 	<div class="container">
 		<h3 class="mt-4 mb-3 pl-3">
 			<strong>報告書検索/編集</strong>
-			<% if admin_logged_in? %>
 			<a href="#" class="btn float-right mr-2" data-toggle="modal" data-target="#searchReportsModal">
 				<i class="fas fa-search"></i> 検索する
 			</a>
-			<% end %>
 		</h3>
 
 		<hr>
@@ -24,7 +22,7 @@
 					<th class="table-column">書いた講師</th>
 					<th class="table-column">公開</th>
 					<th class="table-column">既読</th>
-					<th class="table-column">未読の返信</th>
+					<th class="table-column">返信あり</th>
 					
 				</tr>
 			</thead>
@@ -32,8 +30,11 @@
 				<% @reports.each do |report| %>
 					<tr>
 						<td class="py-2">
-							<%= check_box_tag 'reports_id[]', report.id, @reports_id.include?(report.id) %>
+							<% if admin_logged_in? || correct_teacher?(report.teacher) %>
+								<%= check_box_tag 'reports_id[]', report.id, @reports_id.include?(report.id) %>
+							<% end %>
 						</td>
+
 						<td class="py-2">
 							<%= link_to report, class: "link" do %>
 								<%= report.start_date.strftime('%Y/%m/%d') %>〜<%= report.end_date.strftime('%m/%d') %>
@@ -57,7 +58,7 @@
 						</td>
 
 						<td class="py-2">
-							<% reply = report.replies.where(writeable_type: "Student", read_flg: false) %>
+							<% reply = report.replies.where(writeable_type: "Student") %>
 							<% if reply.exists? %>
 								<i class="far fa-check-square"></i> <%= "(#{reply.count}件)"%>
 							<% else %>
@@ -127,7 +128,7 @@
 						</div>
 						<div class="form-check">
 							<%= fr.check_box :read_flg, { class: "form-check-input" }, true, false %>
-							<%= fr.label :read_flg, '未読', class: "form-check-label"%>
+							<%= fr.label :read_flg, '未読のみ', class: "form-check-label"%>
 						</div>
 					</div>
 				<% end %>

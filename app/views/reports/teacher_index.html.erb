@@ -16,7 +16,7 @@
 					<th class="table-column">書いた講師</th>
 					<th class="table-column">公開</th>
 					<th class="table-column">既読</th>
-					<th class="table-column">未読の返信</th>
+					<th class="table-column">返信あり</th>
 					<th class="table-column d-none d-lg-table-cell">削除</th>
 				</tr>
 			</thead>
@@ -45,20 +45,25 @@
 							<% end %>
 						</td>
 
+						
 						<td class="py-2">
-							<% reply = report.replies.where(writeable_type: "Student", read_flg: false) %>
+							<% reply = report.replies.where(writeable_type: "Student") %>
 							<% if reply.exists? %>
-								<i class="far fa-check-square"></i> <%= "(#{reply.count}件)"%>
+								<i class="far fa-check-square"></i> <%= "(#{reply.count}件)" %>
 							<% else %>
 								<i class="far fa-square"></i>
 							<% end %>
 						</td>
+						
 
-						<td class="py-2 d-none d-lg-table-cell">
-							<%= link_to report, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } do %>
-								<i style="color: #d76161;" class="fas fa-trash"></i>
-							<% end %>
-						</td>
+						<% if admin_logged_in? || correct_teacher?(report.teacher) %>
+							<td class="py-2 d-none d-lg-table-cell">
+								<%= link_to report, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } do %>
+									<i style="color: #d76161;" class="fas fa-trash"></i>
+								<% end %>
+							</td>
+						<% end %>
+
 					</tr>
 				<% end %>
 			</tbody>

@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
-  before_action :user_logged_in,    only:   [:student_index, :teacher_index, :show]
-  before_action :teacher_logged_in, except: [:student_index, :teacher_index, :show]
+  before_action :user_logged_in,    only:   [:student_index, :show]
+  before_action :teacher_logged_in, except: [:student_index, :show]
   before_action :admin_logged_in,   only:   [:release, :draft]
   before_action :set_news,          only:   [:show, :edit, :release, :draft, :update, :destroy]
   before_action :correct_student_or_teacher, only: [:show]

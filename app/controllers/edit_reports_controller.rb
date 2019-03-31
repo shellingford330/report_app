@@ -3,11 +3,7 @@ class EditReportsController < ApplicationController
 
 	def index
 		@report = current_teacher.reports.build
-		if admin_logged_in?
-			@reports = Report.all
-		else
-			@reports = current_teacher.reports.all
-		end
+		@reports = Report.all
 		if (reports_id = params[:reports_id])
 			@reports_id = reports_id.map { |i| i.to_i }
 		else
@@ -17,7 +13,12 @@ class EditReportsController < ApplicationController
 
 	def new
 		if (@reports_id = params[:reports_id])
-			@reports = Report.where(id: @reports_id)
+			# ログインしているのが講師本人か、管理者出ないと編集できない
+			if admin_logged_in?
+				@reports = Report.where(id: @reports_id)
+			else
+				@reports = current_teacher.reports.where(id: @reports_id)
+			end
 			@reports.each do |report|
 				report.subjects = report.subject.split
 			end
@@ -32,9 +33,14 @@ class EditReportsController < ApplicationController
 		@reports_id = []
 		judge = true
 		params.require(:report).each do |report_id, value|
-			report = Report.find(report_id)
+			# ログインしているのが講師本人か、管理者出ないと編集できない
+			if admin_logged_in?
+				report = Report.find(report_id)
+				report.status = value[:status]
+			else
+				report = current_teacher.reports.find(report_id)
+			end
 			report.subjects = value[:subjects]
-			report.status = value[:status] if admin_logged_in?
 			report.subject = report.subjects.join(" ")
 			judge = false unless report.update(value.permit(:start_date, :end_date, :content, :homework, :comment, :memo, :student_id))
 			@reports_id.push(report_id.to_i)

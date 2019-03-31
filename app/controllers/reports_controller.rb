@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
-  before_action :user_logged_in,    only: [:student_index, :teacher_index]
-  before_action :teacher_logged_in, only: [:new, :create, :edit, :release, :draft, :update, :destroy]
+  before_action :user_logged_in,    only: [:student_index]
+  before_action :teacher_logged_in, only: [:teacher_index, :new, :create, :edit, :release, :draft, :update, :destroy]
   before_action :admin_logged_in,   only: [:release, :draft]
   before_action :set_report,        only: [:show, :edit, :release, :draft, :update, :destroy, :reply]
   before_action :correct_teacher_or_admin,   only: [:edit, :update, :destroy]
@@ -17,11 +17,7 @@ class ReportsController < ApplicationController
 
   def teacher_index
     teacher = Teacher.find(params[:id])
-    if admin_logged_in? && correct_teacher?(teacher)
-      @reports = Report.paginate(page: params[:page], per_page: 16)
-    else
-      @reports = teacher.reports.paginate(page: params[:page], per_page: 16)
-    end
+    @reports = teacher.reports.paginate(page: params[:page], per_page: 16)
   end
 
   def show
