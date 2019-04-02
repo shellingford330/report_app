@@ -41,7 +41,7 @@
 
       <% if @report.memo.present? && teacher_logged_in? %>
         <p class="lead">
-          注記
+          注記（生徒側には公開されません）
         </p>
         <p class="round-text">
           <%= safe_join(@report.memo.split("\n"), tag(:br)) %>

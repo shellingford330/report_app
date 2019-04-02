@@ -19,21 +19,23 @@ class SearchController < ApplicationController
 		# 返信が有る報告書を検索
 		@reports_id = []
 		if params[:reply] && (params[:reply][:exists] || (judge = params[:reply][:read_flg]))
-			@reports = @reports.map do |report|
+			@reports.each do |report|
 				if report.replies.where(writeable_type: "Student").exists?
 					# 未読の返信を検索
 					if judge
 						if report.replies.where(writeable_type: "Student", read_flg: false).exists?
-							report
+							@reports_id.push(report.id)
 						end
 					else
-						report
+						@reports_id.push(report.id)
 					end
 				end
 			end
-			@reports.compact!
+			@reports = Report.where(id: @reports_id)
+			@reports_id = []
 		end
 
+		@reports = @reports.page(params[:page])
 		render 'edit_reports/index'
 	end
 
