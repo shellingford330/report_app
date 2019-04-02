@@ -31,6 +31,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'faker'
 gem 'will_paginate'
+gem 'kaminari'
 
 group :development, :test do
   gem 'sqlite3'

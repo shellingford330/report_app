@@ -17,7 +17,7 @@ class ReportsController < ApplicationController
 
   def teacher_index
     teacher = Teacher.find(params[:id])
-    @reports = teacher.reports.paginate(page: params[:page], per_page: 16)
+    @reports = teacher.reports.paginate(page: params[:page], per_page: 15)
   end
 
   def show
