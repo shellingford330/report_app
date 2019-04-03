@@ -5,7 +5,7 @@
 		<div class="col-md-9 mx-auto">
 			<div class="card bg-brown shadow">
 				<div class="card-header">
-					<h2><%= @student.name %></h2>
+					<h2><i class="fas fa-user-circle"></i> <%= @student.name %></h2>
 				</div>
 				<div class="card-body">
 					<%= form_for(@student, url: update_by_teacher_student_url(@student), method: :patch) do |f| %>
