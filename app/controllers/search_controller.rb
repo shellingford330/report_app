@@ -1,8 +1,9 @@
 class SearchController < ApplicationController
 	before_action :teacher_logged_in
 
-	def create
+	def index
 		@report = current_teacher.reports.build
+		@reports_id = []
 		# 書いた講師を検索
 		teachers = Teacher.where(id: (ids = params[:report][:teacher_id]))
 		if teachers.exists?
@@ -16,9 +17,10 @@ class SearchController < ApplicationController
 			@reports.where!(status: params[:report][:status])
 		end
 
+		@reports_id = @reports.pluck(:id)
 		# 返信が有る報告書を検索
-		@reports_id = []
 		if params[:reply] && (params[:reply][:exists] || (judge = params[:reply][:read_flg]))
+			@reports_id = []
 			@reports.each do |report|
 				if report.replies.where(writeable_type: "Student").exists?
 					# 未読の返信を検索
@@ -31,11 +33,10 @@ class SearchController < ApplicationController
 					end
 				end
 			end
-			@reports = Report.where(id: @reports_id)
-			@reports_id = []
 		end
 
-		@reports = @reports.page(params[:page])
+		@reports = Report.where(id: @reports_id).page(params[:page]).per(15)
+		@reports_id = []
 		render 'edit_reports/index'
 	end
 

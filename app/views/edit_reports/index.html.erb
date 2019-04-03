@@ -51,7 +51,7 @@
           <span>&times;</span>
         </button>
       </div>
-			<%= form_for(@report, url: search_index_url ) do |f| %> 
+			<%= form_for(@report, url: search_index_url, method: :get ) do |f| %> 
       <div class="modal-body">
 
        	<h5><i class="fas fa-tasks"></i> 検索条件</h5>

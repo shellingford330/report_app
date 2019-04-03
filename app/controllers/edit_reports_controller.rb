@@ -3,7 +3,7 @@ class EditReportsController < ApplicationController
 
 	def index
 		@report = current_teacher.reports.build
-		@reports = Report.page(params[:page])
+		@reports = Report.page(params[:page]).per(15)
 		if (reports_id = params[:reports_id])
 			@reports_id = reports_id.map { |i| i.to_i }
 		else

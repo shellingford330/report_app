@@ -1,8 +1,6 @@
 class Report < ApplicationRecord
   attr_accessor :subjects
 
-  paginates_per 15
-
   belongs_to :student
   belongs_to :teacher
   has_many :replies, as: :replyable

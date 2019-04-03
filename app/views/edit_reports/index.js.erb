@@ -1,4 +1,4 @@
-$('#report').append("<%= escape_javascript(render 'report', object: @reports) %>")
+$('#report').append("<%= escape_javascript(render 'edit_reports/report', object: @reports) %>")
 $("#more_link").replaceWith("<%= escape_javascript(
   link_to_next_page(@reports, 'もっと見る', remote: true, class: 'link', id: 'more_link')
 ) %>");
