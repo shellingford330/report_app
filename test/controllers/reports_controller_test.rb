@@ -7,7 +7,7 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get new" do
     get new_report_url
-    assert_redirected_to teachers_login_url
+    assert_redirected_to login_form_teachers_url
   end
 
   test "should create report" do
@@ -15,7 +15,7 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
       post reports_url, params: { report: { comment: @report.comment, content: @report.content, end_date: @report.end_date, homework: @report.homework, memo: @report.memo, read_flg: @report.read_flg, start_date: @report.start_date, status: @report.status, student_id: @report.student_id, subject: @report.subject, teacher_id: @report.teacher_id } }
     end
 
-    assert_redirected_to teachers_login_url
+    assert_redirected_to login_form_teachers_url
   end
 
   test "should show report" do
@@ -25,12 +25,12 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get edit" do
     get edit_report_url(@report)
-    assert_redirected_to teachers_login_url
+    assert_redirected_to login_form_teachers_url
   end
 
   test "should update report" do
     patch report_url(@report), params: { report: { comment: @report.comment, content: @report.content, end_date: @report.end_date, homework: @report.homework, memo: @report.memo, read_flg: @report.read_flg, start_date: @report.start_date, status: @report.status, student_id: @report.student_id, subject: @report.subject, teacher_id: @report.teacher_id } }
-    assert_redirected_to teachers_login_url
+    assert_redirected_to login_form_teachers_url
   end
 
   test "should destroy report" do
@@ -38,7 +38,7 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
       delete report_url(@report)
     end
 
-    assert_redirected_to teachers_login_url
+    assert_redirected_to login_form_teachers_url
   end
 
 end

@@ -1,13 +1,14 @@
 class ReportsController < ApplicationController
-  before_action :user_logged_in,    only: [:student_index]
-  before_action :teacher_logged_in, only: [:teacher_index, :new, :create, :edit, :release, :draft, :update, :destroy]
+  before_action :user_logged_in,    only: [:student]
+  before_action :teacher_logged_in, only: [:teacher, :new, :create, :edit, :release, :draft, :update, :destroy]
   before_action :admin_logged_in,   only: [:release, :draft]
   before_action :set_report,        only: [:show, :edit, :release, :draft, :update, :destroy, :reply]
   before_action :correct_teacher_or_admin,   only: [:edit, :update, :destroy]
   before_action :correct_student_or_teacher, only: [:show]
   before_action :correct_student_or_admin,   only: [:reply]
 
-  def student_index
+  # 生徒の報告書一覧
+  def student
     if teacher_logged_in?
       @reports = Report.where(student_id: params[:id]).paginate(page: params[:page], per_page: 9)
     else
@@ -15,9 +16,9 @@ class ReportsController < ApplicationController
     end
   end
 
-  def teacher_index
-    teacher = Teacher.find(params[:id])
-    @reports = teacher.reports.paginate(page: params[:page], per_page: 15)
+  # 講師の報告書一覧
+  def teacher
+    @reports = Report.where(teacher_id: params[:id]).paginate(page: params[:page], per_page: 15)
   end
 
   def show
@@ -42,14 +43,14 @@ class ReportsController < ApplicationController
     flash[:success] = "公開しました"
     @report.released!
     @report.save
-    redirect_to teacher_reports_url(current_teacher)
+    redirect_to teacher_report_url(current_teacher)
   end
 
   def draft
     flash[:success] = "非公開にしました"
     @report.draft!
     @report.save
-    redirect_to teacher_reports_url(current_teacher)
+    redirect_to teacher_report_url(current_teacher)
   end
 
   def create
@@ -80,7 +81,7 @@ class ReportsController < ApplicationController
   def destroy
     @report.destroy
     flash[:success] = '削除されました'
-    redirect_to teacher_reports_url(current_teacher)
+    redirect_to teacher_report_url(current_teacher)
   end
 
   def reply
@@ -109,7 +110,7 @@ class ReportsController < ApplicationController
     def correct_teacher_or_admin
       unless correct_teacher?(@report.teacher) || admin_logged_in?
         store_location
-        redirect_to teachers_login_url and return
+        redirect_to login_form_teachers_url and return
       end
     end
 

@@ -69,8 +69,8 @@ class StudentsLoginTest < ActionDispatch::IntegrationTest
                                         remember_me: 'yes' }
     assert student_is_logged_in?
     get students_path
-    assert_redirected_to teachers_login_path
+    assert_redirected_to login_form_teachers_path
     get new_student_path
-    assert_redirected_to teachers_login_path
+    assert_redirected_to login_form_teachers_path
   end
 end

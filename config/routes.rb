@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root   'teachers#index'
+  root   'students#login_form'
 
   get    '/students/login'      => 'students#login_form'
   post   '/students/login'
@@ -10,33 +10,49 @@ Rails.application.routes.draw do
   patch  '/students/:id/editbyteacher' => "students#updatebyteacher", as: :update_by_teacher_student
   resources :students 
   
-  get    '/teachers/login'      => 'teachers#login_form'
-  post   '/teachers/login'
-  delete '/teachers/logout'
-  post   '/teachers/:id/auth'   => 'teachers#auth',         as: :auth_teacher
-  resources :teachers
+  
+  resources :teachers do
+    collection do
+      get :login_form
+      post :login
+      delete :logout
+    end
+    member do
+      post :auth
+    end
+  end
 
-  post   '/reports/:id/replies' => 'reports#reply',         as: :reply_report
-  post   '/reports/:id/release' => 'reports#release',       as: :release_report
-  post   '/reports/:id/draft'   => 'reports#draft',         as: :draft_report
-  get    '/reports/:id/teacher'     => 'reports#teacher_index', as: :teacher_reports
-  get    '/reports/:id/student'     => 'reports#student_index', as: :student_reports
-  resources :reports, except: :index
+  
+  resources :reports, except: :index do
+    member do
+      post :reply, :release, :draft
+      get :teacher, :student
+    end
+  end
 
-  post   '/multi_reports/new_mix', as: :edit_multi_report
-  resources :multi_reports, only: [:index, :new, :create]
+  resources :multi_reports, only: [:index, :new, :create] do
+    collection do
+      post :edit
+    end
+  end
 
   resources :edit_reports, only: [:index, :new, :create]
 
-  get    '/news/select_students' => 'news#select' ,         as: :select_students 
-  post   '/news/:id/release'     => 'news#release',         as: :release_news
-  post   '/news/:id/draft'       => 'news#draft',           as: :draft_news
-  get    '/news/:id/teacher'     => 'news#teacher_index',   as: :teacher_news
-  get    '/news/:id/student'     => 'news#student_index',   as: :student_news
-  resources :news, except: :index
+  resources :news, except: :index do
+    collection do
+      get :select
+    end
+    member do
+      post :release, :draft
+      get :teacher, :student
+    end
+  end
 
-  post   '/contacts/:id/replies' => 'contacts#reply',       as: :reply_contact
-  resources :contacts
+  resources :contacts do
+    member do
+      post :reply
+    end
+  end
 
   resources :messages, only: [:index, :new, :show, :create]
 

@@ -72,7 +72,7 @@ class TeachersController < ApplicationController
 
   def logout
     teacher_log_out if teacher_logged_in?
-    redirect_to teachers_login_url
+    redirect_to login_form_teachers_url
   end
 
   private

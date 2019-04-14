@@ -48,7 +48,7 @@ class EditReportsController < ApplicationController
 		end
 		if judge
 			flash[:success] = '報告書が更新されました'
-			redirect_to teacher_reports_url(current_teacher)
+			redirect_to teacher_report_url(current_teacher)
 		else
 			flash.now[:danger] = '入力情報をご確認下さい'
 			render 'new'

@@ -48,7 +48,7 @@
 						<h4 class="display-4">
 							<i class="fas fa-pencil-alt"></i> <%= @student.reports.released.count %>
 						</h4>
-						<%= link_to '見る', student_reports_url(@student.id), class: "btn btn-view-blue" %>
+						<%= link_to '見る', student_report_url(@student.id), class: "btn btn-view-blue" %>
 					</div>
 				</div>
 				<div class="card text-center card-bg-green mb-3">
@@ -79,7 +79,7 @@
 					<%= render @reports %>
 
 					<p class="text-right">
-						<%= link_to student_reports_url(@student.id), class: "link" do %>
+						<%= link_to student_report_url(@student.id), class: "link" do %>
 							<i class="arrow fa fa-angle-right mt-1"></i>  もっと見る
 						<% end %>
 					</p>

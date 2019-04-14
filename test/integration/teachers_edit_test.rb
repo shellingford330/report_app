@@ -7,8 +7,8 @@ class TeachersEditTest < ActionDispatch::IntegrationTest
   end
 
   test "only correct teacher edit and update" do
-    get teachers_login_path
-    post teachers_login_path, params: { teacher: { email: @teacher.email, password: 'jiyujyuku' },
+    get login_form_teachers_path
+    post login_teachers_path, params: { teacher: { email: @teacher.email, password: 'jiyujyuku' },
     remember_me: 'no' }
     get edit_teacher_path(@other_teacher)
     assert_redirected_to @teacher

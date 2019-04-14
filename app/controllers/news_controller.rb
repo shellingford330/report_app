@@ -1,12 +1,12 @@
 class NewsController < ApplicationController
-  before_action :user_logged_in,    only:   [:student_index, :show]
-  before_action :teacher_logged_in, except: [:student_index, :show]
+  before_action :user_logged_in,    only:   [:student, :show]
+  before_action :teacher_logged_in, except: [:student, :show]
   before_action :admin_logged_in,   only:   [:release, :draft]
   before_action :set_news,          only:   [:show, :edit, :release, :draft, :update, :destroy]
   before_action :correct_student_or_teacher, only: [:show]
   before_action :correct_teacher_or_admin,   only: [:edit, :destroy, :update]
 
-  def student_index
+  def student
     student = Student.find(params[:id])
     if teacher_logged_in?
       @news = student.news.paginate(page: params[:page], per_page: 9) 
@@ -15,7 +15,7 @@ class NewsController < ApplicationController
     end
   end
 
-  def teacher_index
+  def teacher
     teacher = Teacher.find(params[:id])
     if admin_logged_in? && correct_teacher?(teacher)
       @news = News.paginate(page: params[:page], per_page: 16) 
@@ -118,7 +118,7 @@ class NewsController < ApplicationController
     def correct_student_or_teacher
       unless teacher_logged_in? || current_student.news.exists?(@news.id)
         store_location
-        redirect_to teachers_login_url and return
+        redirect_to login_form_teachers_url and return
       end
     end
 
@@ -126,7 +126,7 @@ class NewsController < ApplicationController
     def correct_teacher_or_admin
       unless correct_teacher?(@news.teacher) || admin_logged_in?
         store_location
-        redirect_to teachers_login_url and return
+        redirect_to login_form_teachers_url and return
       end
     end
 end

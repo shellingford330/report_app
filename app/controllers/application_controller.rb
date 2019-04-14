@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
 			unless teacher_logged_in?
 				flash[:danger] = "ログインをして下さい"
 				store_location
-				redirect_to teachers_login_path
+				redirect_to login_form_teachers_path
 			end
 		end
 
@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
 			unless owner_logged_in?
 				flash[:danger] = "ログインをして下さい"
 				store_location
-				redirect_to teachers_login_path
+				redirect_to login_form_teachers_path
 			end
 		end
 
@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
     def admin_logged_in
       unless admin_logged_in?
         store_location
-        redirect_to teachers_login_url
+        redirect_to login_form_teachers_url
       end
     end
 

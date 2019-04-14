@@ -1,0 +1,51 @@
+<% provide(:title, "お知らせ一覧")%>
+
+<section id="reports" class="mt-3">
+	<div class="container">
+		<h3 class="mt-4 mb-3 pl-3">
+			<strong>お知らせ一覧</strong>
+		</h3>
+
+		<hr>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="table-column">日付</th>
+					<th class="table-column">タイトル</th>
+					<th class="table-column">書いた講師</th>
+					<th class="table-column">公開</th>
+					<th class="table-column d-none d-lg-table-cell">削除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @news.each do |news| %>
+					<tr type="a">
+						<td  class="py-2">
+							<%= link_to news.created_at.strftime('%Y年%m月%d日'), news, class: "link" %>
+						</td>
+						<td class="py-2">
+							<%= link_to "「#{news.title}」", news %>
+						</td>
+						<td  class="py-2">
+							<i class="fas fa-user-circle"></i> <%= news.teacher.name %>
+						</td>
+						<td  class="py-2">
+							<% if released?(news)%>
+								<i class="far fa-check-square"></i>
+							<% else %>
+								<i class="far fa-square"></i>
+							<% end %>
+						</td>
+						<td class="py-2 d-none d-lg-table-cell">
+							<%= link_to news, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } do %>
+								<i style="color: #d76161;" class="fas fa-trash"></i>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<%= will_paginate @news, :previous_label => '&laquo', :next_label => '&raquo' %>
+	</div>
+</section>

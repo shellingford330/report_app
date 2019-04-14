@@ -34,7 +34,7 @@
               <i class="fas fa-user-slash"></i> ログアウト
             <% end %>
           <% elsif teacher_logged_in? %>
-            <%= link_to teachers_logout_path, class: "nav-link", method: :delete, 
+            <%= link_to logout_teachers_path, class: "nav-link", method: :delete, 
             data: { confirm: '本当にログアウトしますか？' } do %>
               <i class="fas fa-user-slash"></i> ログアウト
             <% end %>
