@@ -7,7 +7,7 @@ class NoticeMailer < ApplicationMailer
   #
   def create_report(student)
     @student = student
-    mail to: current_teacher.email,
+    mail to: Teacher.last.email,
       subject: '新しい指導報告書が作成されました'
   end
 end
