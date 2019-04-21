@@ -7,8 +7,8 @@ class NoticeMailer < ApplicationMailer
   #
   def create_report(student)
     @student = student
-    mail to: student.email,
+    mail to:   'hirofumi0330@gmail.com',
       subject: '新しい指導報告書が作成されました',
-      bcc:     "hirofumi0330@gmail.com"  
+      bcc:     'hirofumi0330@gmail.com'  
   end
 end
