@@ -40,6 +40,7 @@ class ReportsController < ApplicationController
   end
 
   def release
+    NoticeMailer.create_report(@report.student).deliver_now unless @report.read_flg
     flash[:success] = "公開しました"
     @report.released!
     @report.save

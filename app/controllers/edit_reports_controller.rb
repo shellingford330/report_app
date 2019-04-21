@@ -13,7 +13,7 @@ class EditReportsController < ApplicationController
 
 	def new
 		if (@reports_id = params[:reports_id])
-			# ログインしているのが講師本人か、管理者出ないと編集できない
+			# ログインしているのが講師本人か、管理者でないと編集できない
 			if admin_logged_in?
 				@reports = Report.where(id: @reports_id)
 			else
@@ -36,7 +36,8 @@ class EditReportsController < ApplicationController
 			# ログインしているのが講師本人か、管理者出ないと編集できない
 			if admin_logged_in?
 				report = Report.find(report_id)
-				report.status = value[:status]
+				NoticeMailer.create_report(report.student).deliver_now unless value[:status] == "released" && report.status == "draft"
+				report.status = value[:status] 
 			else
 				report = current_teacher.reports.find(report_id)
 			end
