@@ -28,6 +28,7 @@ class TeachersController < ApplicationController
 
   def create
     if @teacher.save
+      @teacher.send_create_teacher_mail
       redirect_to @teacher
       flash[:success] =  '講師が作成されました' 
     else

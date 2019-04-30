@@ -20,7 +20,7 @@ class EditReportsController < ApplicationController
 				@reports = current_teacher.reports.where(id: @reports_id)
 			end
 			@reports.each do |report|
-				report.subjects = report.subject.split
+				report.array_subject
 			end
 		else
 			flash[:danger] = " 報告書が選択されていません"
@@ -36,7 +36,7 @@ class EditReportsController < ApplicationController
 			# ログインしているのが講師本人か、管理者出ないと編集できない
 			if admin_logged_in?
 				report = Report.find(report_id)
-				NoticeMailer.create_report(report.student).deliver_now if value[:status] == "released" && report.status == "draft"
+				report.send_create_report_mail if value[:status] == "released" && report.status == "draft"
 				report.status = value[:status] 
 			else
 				report = current_teacher.reports.find(report_id)

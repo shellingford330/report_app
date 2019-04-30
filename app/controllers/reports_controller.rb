@@ -36,11 +36,11 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    @report.subjects = @report.subject.split 
+    @report.array_subject
   end
 
   def release
-    NoticeMailer.create_report(@report.student).deliver_now unless @report.read_flg
+    @report.send_create_report_mail unless @report.read_flg
     flash[:success] = "公開しました"
     @report.released!
     @report.save
@@ -61,7 +61,7 @@ class ReportsController < ApplicationController
       flash[:success] = '報告書が作成されました'
       redirect_to @report
     else
-      @report.subjects = @report.subject.split
+      @report.array_subject
       flash.now[:danger] = '入力情報をご確認下さい'
       render 'new'
     end
@@ -73,7 +73,7 @@ class ReportsController < ApplicationController
       flash[:success] = '更新しました' 
       redirect_to @report
     else
-      @report.subjects = @report.subject.split
+      @report.array_subject
       flash.now[:danger] = '入力情報をご確認下さい'
       render 'edit'
     end
@@ -86,12 +86,9 @@ class ReportsController < ApplicationController
   end
 
   def reply
-    if student_logged_in?
-      @reply = current_student.replies.build(content: params[:reply][:content])
-    else
-      @reply = current_teacher.replies.build(content: params[:reply][:content])
-    end
+    @reply = current_user.replies.build(content: params[:reply][:content])
     @report.replies << @reply
+    @report.send_create_reply_mail
     flash[:success] = "返信しました"
     redirect_to @report
   end

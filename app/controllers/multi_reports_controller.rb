@@ -1,6 +1,7 @@
 class MultiReportsController < ApplicationController
 	before_action :teacher_logged_in, only: [:index, :new, :create, :edit_multi]
 
+	# 指導報告書の生徒選択
 	def index
 		if (students_id = params[:students_id])
 			@students_id = students_id.map { |i| i.to_i }
@@ -9,6 +10,7 @@ class MultiReportsController < ApplicationController
 		end
 	end
 
+	# 選んだ生徒の指導報告書を表示
 	def new
 		if (@students_id = params[:students_id])
 			@report = Report.new
@@ -25,6 +27,7 @@ class MultiReportsController < ApplicationController
 		end
 	end
 
+	# 指導報告書の複数新規作成のまとめて編集
 	def edit
 		@students_id = params[:report][:student_id].split(' ').map { |id| id.to_i }
 		@reports = []
@@ -37,12 +40,13 @@ class MultiReportsController < ApplicationController
 		render 'new'
 	end
 
+	# 指導報告書を作成
 	def create
 		@reports = current_teacher.reports.build(report_params)
 		@students_id = []
 		judge = true
 		@reports.each do |report|
-			report.subjects = report.subject.split
+			report.array_subject
 			@students_id.push(report.student_id)
 			judge = false unless report.save
 		end

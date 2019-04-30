@@ -57,4 +57,9 @@ class Teacher < ApplicationRecord
 		return false if self.remember_digest.nil?
 		BCrypt::Password.new(remember_digest).is_password?(remember_token)
 	end
+
+	# 講師の作成時に通知メール
+	def send_create_teacher_mail
+    NoticeMailer.create_teacher(self).deliver_now
+  end
 end

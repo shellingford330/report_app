@@ -56,6 +56,7 @@ class StudentsController < ApplicationController
 	def create
 		@student.lesson_day = params[:student][:lesson_days].join(" ")
 		if @student.save
+			@student.send_create_student_mail
 			flash[:success] = "生徒が作成されました"
 			redirect_to @student
 		else

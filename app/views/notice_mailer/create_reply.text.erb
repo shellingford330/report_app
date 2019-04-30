@@ -1,8 +1,12 @@
-<%= @student.name %> 様
+<%= @receiver.name %> 様
 
-<%= @student.name %> 様宛の新しい指導報告書が作成されました。
+<%= @receiver.name %>さんへ<%= @sender.name %>から返信がありました。
 ご確認される場合は、以下のリンクをクリックして下さい。
-<%= report_url(@paper) %>
+<% if @paper_name == "お問い合せ" %>
+	<%= contact_url(@paper) %>
+<% else %>
+	<%= report_url(@paper) %>
+<% end %>
 
 
 -----------------------------------------------

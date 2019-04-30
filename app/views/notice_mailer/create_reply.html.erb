@@ -1,11 +1,11 @@
-<p><%= @student.name %> 様</p>
+<p><%= @receiver.name %> 様</p>
 
 <hr>
 
 <p>
-<%= @student.name %> 様宛の新しい指導報告書が作成されました。<br>
+ <%= @paper_name %>に講師の<%= @sender.name %>から返信がありました。<br>
 ご確認される場合は、以下のリンクをクリックして下さい。<br>
-<%= link_to '新規報告書を見る', @report %>
+<%= link_to 'コメントを確認する', @paper %>
 </p>
 
 <hr>

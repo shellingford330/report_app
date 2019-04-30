@@ -9,4 +9,14 @@ class Contact < ApplicationRecord
     presence: true,
     length: { maximum: 32 }
   validates :content, presence: true
+
+  # お問い合わせ作成時に通知メール
+	def send_create_contact_mail
+    NoticeMailer.create_contact(self).deliver_now
+  end
+
+  # コメントされたら返信相手に通知メール
+  def send_create_reply_mail
+    NoticeMailer.create_reply(self).deliver_now
+  end
 end
