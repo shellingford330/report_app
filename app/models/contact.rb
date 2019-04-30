@@ -15,8 +15,4 @@ class Contact < ApplicationRecord
     NoticeMailer.create_contact(self).deliver_now
   end
 
-  # コメントされたら返信相手に通知メール
-  def send_create_reply_mail
-    NoticeMailer.create_reply(self).deliver_now
-  end
 end

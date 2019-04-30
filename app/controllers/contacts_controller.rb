@@ -59,7 +59,7 @@ class ContactsController < ApplicationController
   def reply
     @reply = current_user.replies.build(content: params[:reply][:content])
     @contact.replies << @reply
-    @contact.send_create_reply_mail
+    @reply.send_create_reply_mail
     flash[:success] = "返信しました"
     redirect_to @contact
   end
