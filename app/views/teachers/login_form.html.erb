@@ -2,7 +2,12 @@
 <div class="login">
 	<%= form_for(@teacher, url: '/teachers/login', html: { class: 'login-form' , method: :post }) do |f| %>
 
-		<h1><%= link_to '自由塾(講師)', students_login_url %></h1>
+		<h1 class="m-0">
+			<%= link_to  students_login_url do %>
+				<%= image_tag 'logo.png', height: 70 %>
+			<% end %>
+		</h1>
+		<p>(塾講師ログイン用)</p>
 		<div class="form-group">
 			<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "Email address" %>
 		</div>

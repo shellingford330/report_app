@@ -17,8 +17,6 @@ class MultiReportsController < ApplicationController
 			@reports = []
 			@students_id.each do |student_id|
 				report  = Report.new(student_id: student_id)
-				report.start_date = Date.today
-				report.homework = "学習記録をご覧下さい。"
 				@reports.push(report)
 			end
 		else

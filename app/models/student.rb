@@ -63,6 +63,11 @@ class Student < ApplicationRecord
 		["月", "火", "水", "木", "金", "土", "日"]
 	end
 
+	# 授業日を配列化
+	def array_lesson_day
+		self.lesson_days = lesson_day.split
+	end
+
 	# 渡された指導報告の生徒に通知メール
 	def send_create_student_mail
     NoticeMailer.create_student(self).deliver_now

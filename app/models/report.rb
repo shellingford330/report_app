@@ -6,7 +6,10 @@ class Report < ApplicationRecord
   has_many :replies, as: :replyable
 
   default_scope { order(created_at: :desc) }
+
   enum status: { draft: 0, released: 1, deleted: 2 }
+
+  after_initialize :set_params
 
   validates :start_date, presence: true
   validates :end_date, presence: true
@@ -30,5 +33,13 @@ class Report < ApplicationRecord
   def send_create_report_mail
     NoticeMailer.create_report(self).deliver_now
   end
+
+  private
+    # 指導報告書にデフォルトパラメーターをセット
+    def set_params
+      self.end_date   = 15.days.ago
+      self.start_date = 1.day.ago
+			self.homework   = "学習記録をご覧下さい。"
+    end
 
 end

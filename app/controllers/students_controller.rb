@@ -27,11 +27,11 @@ class StudentsController < ApplicationController
 	end
 
 	def edit
-		@student.lesson_days = @student.lesson_day.split
+		@student.array_lesson_day
 	end
 
 	def	editbyteacher
-		@student.lesson_days = @student.lesson_day.split
+		@student.array_lesson_day
 	end
 
 	def	updatebyteacher
@@ -60,7 +60,7 @@ class StudentsController < ApplicationController
 			flash[:success] = "生徒が作成されました"
 			redirect_to @student
 		else
-			@student.lesson_days = @student.lesson_day.split
+			@student.array_lesson_day
 			flash.now[:danger] = "失敗しました"
 			render 'new'
 		end
@@ -72,7 +72,7 @@ class StudentsController < ApplicationController
 			flash[:success] = "更新しました"
 			redirect_to @student
 		else
-			@student.lesson_days = @student.lesson_day.split
+			@student.array_lesson_day
 			flash.now[:danger] = "入力情報をご確認下さい"
 			render 'edit'
 		end

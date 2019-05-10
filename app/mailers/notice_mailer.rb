@@ -21,28 +21,46 @@ class NoticeMailer < ApplicationMailer
     mail to: @teacher.email, subject: '保護者からお問い合わせが届きました'
   end
 
-  # 渡された返信されたユーザーにメール
+  # 渡されたお知らせの生徒に通知メール
+  def create_news(news)
+    @news = news
+    @teacher = news.teacher
+    student_emails = news.students.pluck(:email)
+    mail to: student_emails, subject: 'お知らせが届きました'
+  end
+
+  # 渡された返信のユーザーに通知メール
   def create_reply(reply)
     @paper = reply.replyable
     @paper_name = @paper.class == Contact ? 'お問い合わせ' : '指導報告書'
     @sender = reply.writeable
-    @receiver = reply.writeable_type == "Student" ? Teacher.find_by(id: @paper.teacher_id) : Student.find_by(id: @paper.student_id)
-    mail to: @receiver.email, subject: "#{@paper_name}にコメントされました"
+    if reply.writeable_type == "Student"
+      @receiver = Teacher.find(@paper.teacher_id)
+      admin_emails = Teacher.where.not(status: 'teacher').pluck(:email)
+      mail to: @receiver.email,
+           bcc: admin_emails,
+           subject: "#{@paper_name}にコメントされました"
+    else
+      @receiver = Student.find(@paper.student_id)
+      mail to: @receiver.email, subject: "#{@paper_name}にコメントされました"
+    end
   end
   
   # 渡された指導報告の生徒に通知メール
   def create_student(student)
     @student = student
+    owner_emails = Teacher.owner.pluck(:email)
     mail to:      @student.email,
-         bcc:     'hirofumi0330@gmail.com',
+         bcc:     owner_emails,
          subject: '自由塾に生徒登録されました'
   end
 
   # 渡された指導報告の講師に通知メール
   def create_teacher(teacher)
     @teacher = teacher
+    owner_emails = Teacher.owner.pluck(:email)
     mail to:      @teacher.email,
-         bcc:     'hirofumi0330@gmail.com',
+         bcc:     owner_emails,
          subject: '自由塾に講師登録されました'
   end
 

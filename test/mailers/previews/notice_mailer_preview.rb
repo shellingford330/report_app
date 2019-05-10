@@ -13,6 +13,12 @@ class NoticeMailerPreview < ActionMailer::Preview
     NoticeMailer.create_contact(contact)
   end
 
+  # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/create_news
+  def create_news
+    news = News.first
+    NoticeMailer.create_news(news)
+  end
+
   # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/create_reply
   def create_reply
     reply = Reply.first
