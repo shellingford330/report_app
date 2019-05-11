@@ -10,7 +10,7 @@
 
         <p class="mb-2">
           <strong>お問い合わせ</strong>
-          <% if !contact.read_flg || contact.replies.where(writeable_type: "Teacher", read_flg: false).exists? %>
+          <% if student_checked?(contact) %>
             <span class="float-right text-success">New</span>
           <% end %>
         </p>
@@ -43,7 +43,7 @@
               </div>
             <% end %>
 
-            <% if contact.replies.where(writeable_type: "Teacher") %>
+            <% if reply_exists?(contact) %>
               <div>
                 <i class="far fa-check-square"></i>   返信
               </div>
@@ -69,7 +69,7 @@
         </div>
         <p class="mb-2">
           <strong>お問い合わせ</strong>
-          <% if contact.replies.where(writeable_type: "Student", read_flg: false).exists? %>
+          <% if teacher_checked?(contact) %>
             <span class="float-right text-success">New</span>
           <% end %>
         </p>
@@ -92,7 +92,7 @@
           <% end %>
 
           <div class="card_check_list pt-4">
-            <% if contact.replies.where(writeable_type: "Student") %>
+            <% if contact.replies.where(writeable_type: "Student").exists? %>
               <div>
                 <i class="far fa-check-square"></i>    返信
               </div>
