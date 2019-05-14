@@ -1,0 +1,83 @@
+<% provide(:title, "グループ作成")%>
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-md-9 mx-auto">
+			<div class="card bg-brown shadow">
+				<div class="card-header">
+					<h2 class="m-0"><i class="fas fa-users"></i> グループ作成</h2>
+				</div>
+				<div class="card-body">
+					<%= form_tag(action: :create) do %>
+						<%= render 'share/error_messages', obj: @group %>
+						<div class="form-group">
+							<%= label :group, :name, 'グループ名' %>
+							<%= text_field :group, :name, class: "form-control form-control-lg", placeholder: "グループ名" %>
+						</div>
+						<div id="accordion">
+							<label>生徒を選択</label>
+							<!-- フォーム本体 -->
+							<% Student.grades.each do |grade| %>
+								<% if (@students = students_of(grade)).exists? %>
+									<div type="a" class="card-header bg-brown" id="heading-<%= grade %>">
+										<h5 class="mb-0">
+											<div
+												class="collapsed"
+												data-toggle="collapse"
+												data-target="#collapse-<%= grade %>"
+												aria-expanded="false"
+												aria-controls="collapse-<%= grade %>"
+											>
+												<div class="d-inline-block">
+													<i class="arrow fa fa-angle-right mr-2"></i><%= grade %>
+												</div>
+
+												<div class="d-inline-block">
+													<input type="checkbox" id="student_<%= grade %>" class="student_grade" name="student_<%= grade %>">
+													<label for="student_<%= grade %>">学年で選択</label>
+												</div>
+											</div>
+										</h5>
+									</div>
+									<div
+										id="collapse-<%= grade %>"
+										class="collapse"
+										aria-labelledby="heading-<%= grade %>"
+										data-parent="#accordion"
+									>
+										<table class="table bg-white">
+												<tbody>
+													<% @students.each do |student| %>
+													<tr>
+														<td class="pl-4">
+															<%= check_box_tag 'students_id[]', student.id, @students_id.include?(student.id), class: "student" %>
+															<i class="fas fa-user-circle"></i>     <%= student.name %>	
+														</td>
+													</tr>
+													<% end %>
+												</tbody>
+										</table>
+									</div>
+								<% end %>
+							<% end %>
+
+							<!-- 全選択 -->
+							<h6 class="mt-3 mb-0">
+								<input type="checkbox" id="student_all" name="student_all">
+								<label for="student_all">全ての生徒を選択</label>
+							</h6>
+						
+						</div>
+					</div>
+						
+
+						<div class="row">
+							<div class="col-md-4 mx-auto">
+								<%= submit_tag '登録する', data: {  disable_with: '処理中...' }, class: "btn btn-block btn-sub" %>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

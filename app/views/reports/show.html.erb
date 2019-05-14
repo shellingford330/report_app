@@ -3,16 +3,16 @@
   <div class="row">
     <div class="col-lg-8">
       <!-- タイトル -->
-      <h2 class="mt-3">指導報告書</h2>
+      <h3 class="pl-2 mt-3 mb-1"><strong>指導報告書</strong></h3>
 
       <!-- 指導報告書の内容 -->
-      <p class="text-muted">
-        ー   <%= time_ago_in_words(@report.created_at) %>前に投稿
+      <p class="pl-2 text-muted">
+        -    <%= time_ago_in_words(@report.created_at) %>前に投稿
       </p>
 
       <hr />
 
-      <p>書いた講師： <i class="fas fa-user-circle"></i>    <%= @report.teacher.name %></p>
+      <p class="pl-2">書いた講師： <i class="fas fa-user-circle"></i>    <%= @report.teacher.name %></p>
 
       <hr />
 

@@ -1,0 +1,44 @@
+<% provide(:title, 'グループ一覧') %>
+<section class="mt-3">
+	<div class="container">
+		<h3 class="mt-4 mb-3 pl-3">
+			<strong>グループ一覧</strong>
+      <% if admin_logged_in? %>
+        <%= link_to new_group_url, class: "btn float-right mr-2" do %>
+          <i class="fas fa-plus"></i>
+        <% end %>
+      <% end %>
+		</h3>
+
+		<hr>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="table-column">ID</th>
+          <th class="table-column">グループ名</th>
+          <th class="table-column">生徒数</th>
+          <% if admin_logged_in? %>
+            <th class="table-column">削除</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @groups.each do |group| %>
+          <tr>
+            <td><%= group.id %></td>
+            <td><%= link_to group.name, group, class: "link" %></td>
+            <td><%= group.students.count %>人</td>
+            <td>
+              <% if admin_logged_in? %>
+                <%= link_to group, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } do %>
+                  <i style="color: #d76161;" class="fas fa-trash"></i>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

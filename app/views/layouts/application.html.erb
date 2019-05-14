@@ -48,6 +48,7 @@
     <script type="text/javascript">
 
     $(document).ready(function() {
+      // サイドバーを閉じる
       $('#dismiss, .overlay').on('click', function () {
           // hide sidebar
           $('#sidebar').removeClass('active');
@@ -55,6 +56,7 @@
           $('.overlay').removeClass('active');
       });
 
+      // サイドバーを開く
       $('#sidebarCollapse').on('click', function () {
           // open sidebar
           $('#sidebar').addClass('active');
@@ -64,6 +66,7 @@
           $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });
 
+      // カレンダープラグインの設定
       $('.date').pickadate({
         weekdaysShort: ['日', '月', '火', '水', '木', '金', '土'],
         monthsShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
@@ -77,6 +80,7 @@
         hiddenName: true
       });
 
+      // マルチ選択プラグインの設定
       $('.select-subjects').select2({
         placeholder: '選択して下さい。'
       });
@@ -100,12 +104,21 @@
         $('.student_grade').prop('checked', false);
         $('.sort-by-grade').addClass('d-none');
         $('.sort-by-day').removeClass('d-none');
+        $('.sort-by-group').addClass('d-none');
       });
       $('.change-sorting-by-grade').on('click', function () {
         $('.student').prop('checked', false);
         $('.student_grade').prop('checked', false);
         $('.sort-by-grade').removeClass('d-none');
         $('.sort-by-day').addClass('d-none');
+        $('.sort-by-group').addClass('d-none');
+      });
+      $('.change-sorting-by-group').on('click', function () {
+        $('.student').prop('checked', false);
+        $('.student_grade').prop('checked', false);
+        $('.sort-by-group').removeClass('d-none');
+        $('.sort-by-day').addClass('d-none');
+        $('.sort-by-grade').addClass('d-none');
       });
     });
 
@@ -153,12 +166,12 @@
       // 曜日ソート
       <% Student.days.each do |day| %>
 				<% ["年", "小", "中", "高", "大"].each do |grade| %>
-          // 「学年選択」のチェックするとその学年の生徒全てをチェックする
+          // 「曜日選択」のチェックするとその学年の生徒全てをチェックする
           $('#student_<%= day %>_<%= grade %>').on('click', function() {
             $('#collapse-<%= day %>-<%= grade %>').find('.student').prop('checked', this.checked);
           });
 
-          // チャックを外したり付けたりすると、「学年選択」のチェック外れたり付いたりする
+          // チャックを外したり付けたりすると、「曜日選択」のチェック外れたり付いたりする
           $('#collapse-<%= day %>-<%= grade %> .student').on('click', function() {
             if ($('#collapse-<%= day %>-<%= grade %> :checked').length == $('#collapse-<%= day %>-<%= grade %> :input').length) {
               $('#student_<%= day %>_<%= grade %>').prop('checked', 'checked');
@@ -167,6 +180,23 @@
             }
           });
         <% end %>
+      <% end %>
+
+      // グループソート
+      <% Group.all.pluck(:name).each do |name| %>
+        // 「グループ選択」のチェックするとその学年の生徒全てをチェックする
+        $('#student_<%= name %>').on('click', function() {
+          $('#collapse-<%= name %>').find('.student').prop('checked', this.checked);
+        });
+
+        // チャックを外したり付けたりすると、「グループ選択」のチェック外れたり付いたりする
+        $('#collapse-<%= name %> .student').on('click', function() {
+          if ($('#collapse-<%= name %> :checked').length == $('#collapse-<%= name %> :input').length) {
+            $('#student_<%= name %>').prop('checked', 'checked');
+          }else{
+            $('#student_<%= name %>').prop('checked', false);
+          }
+        });
       <% end %>
     });
     </script>

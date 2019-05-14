@@ -11,6 +11,8 @@
 							<p class="change-sorting-by-grade d-inline-block mb-0 link">学年</p>
 							｜
 							<p class="change-sorting-by-day d-inline-block mb-0 link">曜日</p>
+							｜
+							<p class="change-sorting-by-group d-inline-block mb-0 link">グループ</p>
 						</h6>
 					</div>
 
@@ -140,11 +142,67 @@
 								<% end %>
 							</div>
 
-							<!-- 全選択 -->
-							<h6 class="mt-3 mb-0">
-								<input type="checkbox" id="student_all" name="student_all">
-								<label for="student_all">全ての生徒を選択</label>
-							</h6>
+							<!-- 送信ボタン -->
+							<div style="width: 40%;" class="mx-auto mb-2">
+								<%= submit_tag '生徒を選択', class: "btn btn-block btn-sub mt-1"%>
+							</div>
+						</div>
+					<% end %>
+
+					<!-- グループフォーム -->
+					<%= form_tag( { action: :new }, { method: :get } ) do %>
+						<div class="sort-by-group d-none">
+							<!-- フォーム本体 -->
+							<div class="card">
+								<div style="background: #f0e7dd;" class="card-header">
+									<h4>生徒を選択して下さい</h4>
+								</div>
+								<% Group.all.each do |group| %>
+									<% name = group.name %>
+									<!-- アコーディオンヘッダー -->
+									<div type="a" class="card-header bg-brown" id="heading-<%= name %>">
+										<h5 class="mb-0">
+											<div
+												class="collapsed"
+												data-toggle="collapse"
+												data-target="#collapse-<%= name %>"
+												aria-expanded="false"
+												aria-controls="collapse-<%= name %>"
+											>
+												<div class="d-inline-block">
+													<i class="arrow fa fa-angle-right mr-2"></i> <%= name %>
+												</div>
+
+												<div class="d-inline-block text-right">
+													<input type="checkbox" id="student_<%= name %>" class="student_grade" name="student_<%= name %>">
+													<label for="student_<%= name %>">グループで選択</label>
+												</div>
+											</div>
+										</h5>
+									</div>
+
+									<!-- アコーディオン中身 -->
+									<div
+										id="collapse-<%= name %>"
+										class="collapse"
+										aria-labelledby="heading-<%= name %>"
+										data-parent="#accordion"
+									>
+										<table class="table">
+												<tbody>
+													<% group.students.each do |student| %>
+													<tr>
+														<td class="pl-4">
+															<%= check_box_tag 'students_id[]', student.id, @students_id.include?(student.id), class: "student" %>
+															<i class="fas fa-user-circle"></i>     <%= student.name %>	
+														</td>
+													</tr>
+													<% end %>
+												</tbody>
+										</table>
+									</div>
+								<% end %>
+							</div>
 
 							<!-- 送信ボタン -->
 							<div style="width: 40%;" class="mx-auto mb-2">
@@ -152,6 +210,8 @@
 							</div>
 						</div>
 					<% end %>
+
+					
         </div>
       </div>
     </div>

@@ -18,7 +18,13 @@
             <%= link_to '生徒一覧', students_path %>
           </li>
           <li>
-            <%= link_to_if current_teacher.status == "owner", '新規作成', new_student_path do end%>                    
+            <%= link_to_if admin_logged_in?, '生徒作成', new_student_path do end%>                    
+          </li>
+          <li>
+            <%= link_to 'グループ一覧', groups_path %>
+          </li>
+          <li>
+            <%= link_to_if admin_logged_in?, 'グループ作成', new_group_path do end%>                    
           </li>
         </ul>
       </li>

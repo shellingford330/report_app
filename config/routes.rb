@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   patch  '/students/:id/editbyteacher' => "students#updatebyteacher", as: :update_by_teacher_student
   resources :students 
   
+  resources :groups
   
   resources :teachers do
     collection do
