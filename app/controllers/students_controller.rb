@@ -57,11 +57,11 @@ class StudentsController < ApplicationController
 		@student.lesson_day = params[:student][:lesson_days].join(" ")
 		if @student.save
 			@student.send_create_student_mail
-			flash[:success] = "生徒が作成されました"
+			flash[:success] = "登録完了しました"
 			redirect_to @student
 		else
 			@student.array_lesson_day
-			flash.now[:danger] = "失敗しました"
+			flash.now[:danger] = "入力情報をご確認下さい"
 			render 'new'
 		end
 	end

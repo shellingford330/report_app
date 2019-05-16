@@ -12,6 +12,7 @@ ja:
       student:
         name: 名前
         grade: 学年
+        lesson_day: 授業の曜日
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
