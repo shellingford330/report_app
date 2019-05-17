@@ -30,18 +30,7 @@ class StudentTest < ActiveSupport::TestCase
     end
   end
 
-  test "email should be unique" do
-    duplicate_student = @student.dup
-    @student.save
-    assert_not duplicate_student.valid?
-  end
   
-  test "email should change into downcase before save" do
-    address = "FOObar@exaPle.Com"
-    @student.email = address
-    @student.save
-    assert_equal address.downcase, @student.reload.email
-  end
 
   test "password should not be too short" do
     @student.password = @student.password_confirmation = "a" * 5
@@ -54,7 +43,7 @@ class StudentTest < ActiveSupport::TestCase
   end
 
   test "authenticated? should be false with remember_digest nil" do
-    assert_not @student.authenticated?('')
+    assert_not @student.authenticated?(:remember,'')
   end
 
   test "associated reports should be destroyed" do

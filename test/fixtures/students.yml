@@ -5,6 +5,8 @@ keiichi:
   lesson_day: 月
   name: keiichi
   email: keiichi@example.com
+  activated: true
+  activated_at: <%= Time.zone.now %>
   password_digest: <%= Student.digest('keiichi') %>
 
 kai:
@@ -12,6 +14,8 @@ kai:
   lesson_day: 月
   name: kai
   email: kai@example.com
+  activated: true
+  activated_at: <%= Time.zone.now %>
   password_digest: <%= Student.digest('kai') %>
 
 michael:
@@ -19,6 +23,8 @@ michael:
   lesson_day: 水
   name: michael
   email: michael@example.com
+  activated: true
+  activated_at: <%= Time.zone.now %>
   password_digest: <%= Student.digest('password') %>
 
 archer:
@@ -26,6 +32,8 @@ archer:
   lesson_day: 火
   name: archer
   email: duchess@example.gov
+  activated: true
+  activated_at: <%= Time.zone.now %>
   password_digest: <%= Student.digest('password') %>
 
 <% 30.times do |n| %>
@@ -34,5 +42,7 @@ student_<%= n %>:
   lesson_day: 月 火
   name:  <%= "Student #{n}" %>
   email: <%= "student-#{n}@example.com" %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
   password_digest: <%= Student.digest('password') %>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190511062358) do
+ActiveRecord::Schema.define(version: 20190517111732) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "title"
@@ -97,13 +97,17 @@ ActiveRecord::Schema.define(version: 20190511062358) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "remember_digest"
     t.string   "grade"
     t.string   "lesson_day"
-    t.index ["email"], name: "index_students_on_email", unique: true
+    t.string   "activation_digest"
+    t.boolean  "activated",         default: false
+    t.datetime "activated_at"
+    t.string   "login_id"
     t.index ["grade"], name: "index_students_on_grade"
+    t.index ["login_id"], name: "index_students_on_login_id", unique: true
   end
 
   create_table "teachers", force: :cascade do |t|

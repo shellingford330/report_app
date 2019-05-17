@@ -40,12 +40,16 @@ Student.create!( grade: "年少",
 								 lesson_day: "月 火 水",
 								 name: "生徒代表", 
 								 email: "student@example.com",
+								 login_id: "student",
+								 activated: true,
+								 activated_at: Time.zone.now,
 								 password: "student",
 								 password_confirmation: "student" )
 
 50.times do |n|
 	name = Faker::Name.name
 	email = "student#{n+1}@example.com"
+	login_id = "student#{n+1}"
 	grades = Student.grades
 	days = Student.days
 	password = "password"
@@ -53,6 +57,9 @@ Student.create!( grade: "年少",
 								 lesson_day: days[n%7],
 								 name: name, 
 								 email: email,
+								 login_id: login_id,
+								 activated: true,
+								 activated_at: Time.zone.now,
 								 password: password,
 								 password_confirmation: password )
 end

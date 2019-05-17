@@ -93,7 +93,7 @@
 								<% Student.days.each do |day| %>
 									<% ["年", "小", "中", "高", "大"].each do |grade| %>
 
-										<% if (students = Student.where("lesson_day LIKE ? AND grade LIKE ?", "%#{day}%", "#{grade}%")).exists? %>
+										<% if (students = Student.where("lesson_day LIKE ? AND grade LIKE ? AND activated = ?", "%#{day}%", "#{grade}%", true)).exists? %>
 
 											<!-- アコーディオンヘッダー -->
 											<div type="a" class="card-header bg-brown" id="heading-<%= day %>-<%= grade %>">
@@ -190,7 +190,7 @@
 									>
 										<table class="table">
 												<tbody>
-													<% group.students.each do |student| %>
+													<% group.students.where(activated: true).each do |student| %>
 													<tr>
 														<td class="pl-4">
 															<%= check_box_tag 'students_id[]', student.id, @students_id.include?(student.id), class: "student" %>

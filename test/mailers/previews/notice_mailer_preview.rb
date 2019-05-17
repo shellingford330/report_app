@@ -25,6 +25,20 @@ class NoticeMailerPreview < ActionMailer::Preview
     NoticeMailer.create_reply(reply)
   end
 
+  # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/activate_account
+  def activate_account
+    student = Student.first
+    student.activation_token = Student.new_token
+    NoticeMailer.activate_account(student)
+  end
+
+  # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/authenticate_student
+  def authenticate_student
+    student = Student.first
+    student.activation_token = Student.new_token
+    NoticeMailer.authenticate_student(student)
+  end
+
   # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/create_student
   def create_student
     student = Student.first

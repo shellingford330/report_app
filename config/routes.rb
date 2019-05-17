@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get    '/students/:id/editbyteacher' => "students#editbyteacher",   as: :edit_by_teacher_student
   patch  '/students/:id/editbyteacher' => "students#updatebyteacher", as: :update_by_teacher_student
   resources :students 
+
+  resources :account_activations, only: [:show, :edit]
   
   resources :groups
   

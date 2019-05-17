@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
 	before_action :student_already_logged_in,  only: [:login_form, :login]
-	before_action :teacher_logged_in, only: [:index ,:new, :select, :create, :destroy]
-	before_action :owner_logged_in,   only: [:new, :create, :destroy, :upgrade]
+	before_action :teacher_logged_in, only: [:index ,:new, :destroy]
+	before_action :owner_logged_in,   only: [:new, :destroy, :upgrade]
 	before_action :admin_logged_in,   only: [:editbyteacher, :updatebyteacher]
 	before_action :student_logged_in, only: [:edit, :update]
 	before_action :correct_student,   only: [:edit, :update]
@@ -54,16 +54,15 @@ class StudentsController < ApplicationController
 	end
 
 	def create
-		@student.lesson_day = params[:student][:lesson_days].join(" ")
+		domain = /@/.match(@student.email).pre_match # メールアドレスの@の前のドメインを取得
+		@student.login_id = params[:first_name] ? domain + "_" + params[:first_name] : domain # 兄弟を持っているかどうか
 		if @student.save
-			@student.send_create_student_mail
-			flash[:success] = "登録完了しました"
-			redirect_to @student
+			@student.send_account_activation_mail
+			flash[:success] = "アカウント有効化メールをご確認下さい"
 		else
-			@student.array_lesson_day
-			flash.now[:danger] = "入力情報をご確認下さい"
-			render 'new'
+			flash[:danger] = "入力情報をご確認下さい"
 		end
+		redirect_to students_login_url
 	end
 
 	def update
@@ -89,12 +88,17 @@ class StudentsController < ApplicationController
 	end
 
 	def login
-		student = Student.find_by(email: params[:student][:email].downcase)
+		student = Student.find_by(login_id: params[:student][:login_id])
 		if student && student.authenticate(params[:student][:password])
-			student_log_in(student)
-			params[:remember_me] == 'yes' ? remember_student(student) : forget_student(student)
-			flash[:notice] = "ログインしました"
-			redirect_back_to student_path(student)
+			if student.activated?
+				student_log_in(student)
+				params[:remember_me] == 'yes' ? remember_student(student) : forget_student(student)
+				flash[:notice] = "ログインしました"
+				redirect_back_to student_path(student)
+			else
+				flash[:danger] = "アカウントが有効化されていません。メールをご確認下さい"
+				redirect_to students_login_url
+			end
 		else
 			flash.now[:danger] = "入力情報をご確認下さい"
 			render 'login_form', layout: 'login'
@@ -123,6 +127,7 @@ class StudentsController < ApplicationController
 
 		def	set_student
 			@student = Student.find(params[:id])
+			redirect_to login_form_teachers_url unless @student.activated?
 		end
 
 		# ログインを既にしているか確認

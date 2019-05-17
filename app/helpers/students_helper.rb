@@ -17,7 +17,7 @@ module StudentsHelper
 			@current_student ||= Student.find_by(id: student_id)
 		elsif (student_id = cookies.signed[:student_id])
 			student = Student.find_by(id: student_id)
-			if (student && student.authenticated?(cookies[:remember_token]))
+			if (student && student.authenticated?(:remember, cookies[:remember_token]))
 				student_log_in(student)
 				@current_student = student
 			end
@@ -51,7 +51,7 @@ module StudentsHelper
 	
 	# 渡された学年の生徒を返す
 	def	students_of(grade)
-		Student.where(grade: grade)
+		Student.where(grade: grade, activated: true)
 	end
 	
 	# 生徒の合計人数を返す

@@ -1,0 +1,18 @@
+<p>
+	生徒が自由塾に生徒登録をしました。<br>
+	以下が生徒の登録情報となります。
+<p>
+
+<ul>
+	<li>学年：<%= @student.grade %></li>
+	<li>生徒名：<%= @student.name %></li>
+	<li>メールアドレス：<%= @student.email %></li>
+	<li>パスワード：(セキュリティ保護のため、伏せています)</li>
+</ul>
+
+<p>
+	承認される場合、以下のリンクをクリックして下さい。<br>
+	承認されない場合、無視して下さい。
+</p>
+<%= link_to '承認する', edit_account_activation_url(@student.activation_token, login_id: @student.login_id) %>
+

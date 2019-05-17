@@ -1,5 +1,5 @@
 class Student < ApplicationRecord
-	attr_accessor :remember_token
+	attr_accessor :remember_token, :activation_token
 	attr_accessor :lesson_days
 
 	has_secure_password
@@ -11,15 +11,13 @@ class Student < ApplicationRecord
 	has_many :reports,  dependent: :destroy
 	has_many :teachers, through: :reports
 
-	before_save { self.email.downcase! }
+	before_create :create_activation_digest
 
 	validates :grade, { presence: true }
-	validates :lesson_day, { presence: true }
 	validates :name,  { presence: true, length: { maximum: 50 } }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, { presence: true, length: { maximum: 255 },
-											format: { with: VALID_EMAIL_REGEX },
-											uniqueness: { case_sentive: false }
+											format: { with: VALID_EMAIL_REGEX }
 										}
 	validates :password, { presence: true, length: { minimum: 6 }, allow_nil: true }
 
@@ -47,9 +45,10 @@ class Student < ApplicationRecord
 	end
 
 	# 渡されたトークンがダイジェストと一致したらtrueを返す
-	def authenticated?(remember_token)
-		return false if self.remember_digest.nil?
-		BCrypt::Password.new(remember_digest).is_password?(remember_token)
+	def authenticated?(attribute, token)	
+		digest = self.send("#{attribute}_digest")
+		return false if digest.nil?
+		BCrypt::Password.new(digest).is_password?(token)
 	end
 
 	# 全部の学年を配列で返す
@@ -69,8 +68,26 @@ class Student < ApplicationRecord
 		self.lesson_days = lesson_day.split
 	end
 
-	# 渡された指導報告の生徒に通知メール
+	# アカウント有効化のメール
+	def send_account_activation_mail
+    NoticeMailer.activate_account(self).deliver_now
+	end
+
+	# アカウント有効化のメール
+	def send_authenticate_student_mail
+    NoticeMailer.authenticate_student(self).deliver_now
+	end
+
+	# 登録された生徒に通知メール
 	def send_create_student_mail
     NoticeMailer.create_student(self).deliver_now
-  end
+	end
+	
+	private
+		# 有効化トークンおよびダイジェストを作成および代入
+		def create_activation_digest
+			self.activation_token  = Student.new_token
+			self.activation_digest = Student.digest(activation_token)
+		end
+
 end

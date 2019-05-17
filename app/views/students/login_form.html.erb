@@ -2,17 +2,18 @@
 <div class="login">
 	<%= form_for(@student, url: '/students/login', html: { class: 'login-form' , method: :post }) do |f| %>
 
-		<h1>
+		<h1 class="mb-4">
 			<%= link_to login_form_teachers_url do %>
 				<%= image_tag 'logo.png' , height: 70 %>
 			<% end %>
 		</h1>
+
 		<div class="form-group">
-			<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "Email address" %>
+			<%= f.text_field :login_id, class: "form-control form-control-lg", placeholder: "ログインID" %>
 		</div>
 
 		<div class="form-group">
-			<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "Password" %>
+			<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "パスワード" %>
 		</div> 
 
 		<div class="form-group">
@@ -22,7 +23,81 @@
 			<% end %>
 		</div>
 
-		<%= f.submit 'ログイン', disable_with: '処理中...' , class: "btn btn-block btn-sub" %>
+		<%= f.submit 'ログインする', disable_with: '処理中...' , class: "btn btn-block btn-sub" %>
+		<p class="m-2">
+			<a href="#" class="link" data-toggle="modal" data-target="#addMessageModal">
+				新規登録の方はこちらから
+			</a>
+		</p>
 
 	<% end %>
+</div>
+
+
+<div class="modal fade" id="addMessageModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content bg-brown">
+			<div class="modal-header" style="background: #c9bdb9;">
+				<h4 class="modal-title"><i class="fas fa-user-plus"></i> 生徒登録</h4>
+				<button class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<%= form_for(@student, method: :post) do |f| %>
+				<div class="modal-body">
+
+					<%= render 'share/error_messages', obj: @student%>
+
+					<div class="form-group">
+						<%= f.label :name, '氏名'%>
+						<%= f.text_field :name, class: "form-control form-control-lg", placeholder: "鈴木　一郎"%>
+					</div>
+
+					<div class="form-group">
+						<div class="row">
+							<div class="col">
+								<%= label_tag :last_name, "姓名（ローマ字）" %>
+								<%= text_field_tag :last_name, '',  class: "form-control form-control-lg",  placeholder: "suzuki" %>
+							</div>
+							<div class="col">
+								<%= label_tag :first_name, "名前（ローマ字）" %>
+								<%= text_field_tag :first_name, '', class: "form-control form-control-lg",  placeholder: "ichiro" %>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :grade, '現在の学年'%>
+						<%= f.select :grade, Student.grades, { include_blank: '選択して下さい' }, class: "form-control form-control-lg" %>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :email, 'メールアドレス'%>
+						<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "メールアドレス" %>
+					</div>
+
+					<p class="text-danger">※パスワードを変更しない場合は、以下の欄を空にして更新して下さい。</p>
+		
+					<div class="form-group">
+						<%= f.label :password, 'パスワード'%> 
+						<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "パスワード" %>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :password, 'パスワード確認（もう一度入力して下さい。）'%>
+						<%= f.password_field :password_confirmation, class: "form-control form-control-lg", placeholder: "パスワード確認" %>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4 mx-auto">
+							<%= f.submit "登録する", data: { confirm: '本当に保存してもよろしいですか？', disable_with: '処理中...' }, 
+							class: "btn btn-block btn-sub" %>
+						</div>
+					</div>
+
+				</div>
+				<% end %>
+
+		</div>
+	</div>
 </div>
