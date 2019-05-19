@@ -4,6 +4,7 @@ class AccountActivationsController < ApplicationController
 		student = Student.find_by(login_id: params[:login_id])
 		if student && !student.activated? && student.authenticated?(:activation, params[:id])
 			student.create_activation_digest
+			student.save
 			student.send_authenticate_student_mail
 			flash[:success] = "承認されるのをお待ち下さい"
 		else
