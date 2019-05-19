@@ -55,7 +55,7 @@ class StudentsController < ApplicationController
 
 	def create
 		domain = /@/.match(@student.email).pre_match # メールアドレスの@の前のドメインを取得
-		@student.login_id = params[:first_name] ? domain + "_" + params[:first_name] : domain # 兄弟を持っているかどうか
+		@student.login_id = params[:first_name] ? domain + "_" + params[:first_name] : domain
 		if @student.save
 			@student.send_account_activation_mail
 			flash[:success] = "アカウント有効化メールをご確認下さい"

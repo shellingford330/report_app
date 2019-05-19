@@ -14,4 +14,15 @@ class ActiveSupport::TestCase
   def student_is_logged_in?
     !session[:student_id].nil?
   end
+
+end
+
+class ActionDispatch::IntegrationTest
+
+  # テストユーザーとしてログインする
+  def student_login_as(student, password: 'password', remember_me: '1')
+    post students_login_path, params: { student: { login_id: student.login_id,
+                                                   password: password },
+                                        remember_me: remember_me }
+  end
 end

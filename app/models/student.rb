@@ -83,11 +83,10 @@ class Student < ApplicationRecord
     NoticeMailer.create_student(self).deliver_now
 	end
 	
-	private
-		# 有効化トークンおよびダイジェストを作成および代入
-		def create_activation_digest
-			self.activation_token  = Student.new_token
-			self.activation_digest = Student.digest(activation_token)
-		end
+	# 有効化トークンおよびダイジェストを作成および代入
+	def create_activation_digest
+		self.activation_token  = Student.new_token
+		self.activation_digest = Student.digest(activation_token)
+	end
 
 end
