@@ -27,11 +27,11 @@ class StudentsController < ApplicationController
 	end
 
 	def edit
-		@student.array_lesson_day
+		@student.array_lesson_day if @student.lesson_day.present?
 	end
 
 	def	editbyteacher
-		@student.array_lesson_day
+		@student.array_lesson_day if @student.lesson_day.present?
 	end
 
 	def	updatebyteacher

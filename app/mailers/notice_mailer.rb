@@ -67,7 +67,7 @@ class NoticeMailer < ApplicationMailer
     @owner_emails = Teacher.owner.pluck(:email)
     mail to:      @student.email,
          bcc:     @owner_emails,
-         subject: '自由塾に仮登録されました'
+         subject: '自由塾に登録されました'
   end
 
   # 渡された指導報告の講師に通知メール
