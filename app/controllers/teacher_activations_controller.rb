@@ -1,6 +1,6 @@
 class TeacherActivationsController < ApplicationController
 	def show
-		teacher = Teacher.find_by(email: params[:email)
+		teacher = Teacher.find_by(email: params[:email])
 		if authenticated?(teacher)
 			teacher.create_activation_digest
 			teacher.save
