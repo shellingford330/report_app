@@ -74,7 +74,7 @@ class Student < ApplicationRecord
     NoticeMailer.activate_account(self).deliver_now
 	end
 
-	# アカウント有効化のメール
+	# オーナーが生徒登録承認のメール
 	def send_authenticate_student_mail
     NoticeMailer.authenticate_student(self).deliver_now
 	end

@@ -4,16 +4,22 @@ owner:
   name: owner
   email: owner@example.com
   status: 2
+  activated: true
+  activated_at: <%= Time.zone.now %>
   password_digest: <%= Teacher.digest('jiyujyuku') %>
 
 manager:
   name: manager
   email: manager@example.com
   status: 1
+  activated: true
+  activated_at: <%= Time.zone.now %>
   password_digest: <%= Teacher.digest('manager') %>
 
 teacher:
   name: teacher
   email: teacher@exapmle.com
   status: 0
+  activated: true
+  activated_at: <%= Time.zone.now %>
   password_digest: <%= Teacher.digest('teacher') %>

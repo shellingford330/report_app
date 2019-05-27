@@ -60,12 +60,12 @@ class Teacher < ApplicationRecord
 		BCrypt::Password.new(remember_digest).is_password?(remember_token)
 	end
 
-	# 講師の作成時に通知メール
+	# 講師有効化のメール
 	def send_create_teacher_mail
     NoticeMailer.create_teacher(self).deliver_now
 	end
 
-	# 講師の作成時に通知メール
+	# オーナーが講師登録承認のメール
 	def send_teacher_activation_mail
     NoticeMailer.activate_teacher(self).deliver_now
 	end

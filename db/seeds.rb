@@ -6,22 +6,27 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-owner = Teacher.new( status: 2,
+owner = Teacher.create( status: 2,
 								 name: "オーナー", 
 								 email: "owner@example.com",
+								 activated: true,
+								 activated_at: Time.zone.now,
 								 password: "jiyujyuku",
 								 password_confirmation: "jiyujyuku" )
-owner.save(validate: false)
 
 Teacher.create!( status: 1,
 								 name: "管理者", 
 								 email: "manager@example.com",
+								 activated: true,
+								 activated_at: Time.zone.now,
 								 password: "manager",
 								 password_confirmation: "manager" )
 
 Teacher.create!( status: 0,
 								 name: "講師", 
 								 email: "teacher@example.com",
+								 activated: true,
+								 activated_at: Time.zone.now,
 								 password: "teacher",
 								 password_confirmation: "teacher" )
 
@@ -32,6 +37,8 @@ Teacher.create!( status: 0,
 	Teacher.create!( status: 0,
 								 name: name, 
 								 email: email,
+								 activated: true,
+								 activated_at: Time.zone.now,
 								 password: password,
 								 password_confirmation: password )
 end
