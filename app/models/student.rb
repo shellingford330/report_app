@@ -1,6 +1,5 @@
 class Student < ApplicationRecord
-	attr_accessor :remember_token, :activation_token
-	attr_accessor :lesson_days
+	attr_accessor :remember_token, :activation_token, :lesson_days
 
 	has_secure_password
 

@@ -1,5 +1,5 @@
 class Teacher < ApplicationRecord
-	attr_accessor :remember_token
+	attr_accessor :remember_token, :activation_token
 	has_secure_password
 
 	has_many :replies,  as: :writeable
@@ -55,7 +55,8 @@ class Teacher < ApplicationRecord
 	end
 	
 	# 渡されたトークンがダイジェストと一致したらtrueを返す
-	def authenticated?(remember_token)
+	def authenticated?(attribute, token)
+		digest = self.send("#{attribute}_digest")
 		return false if self.remember_digest.nil?
 		BCrypt::Password.new(remember_digest).is_password?(remember_token)
 	end
