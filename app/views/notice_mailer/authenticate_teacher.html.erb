@@ -1,0 +1,16 @@
+<p>
+	講師が自由塾に登録をしました。<br>
+	以下が講師の登録情報となります。
+<p>
+
+<ul>
+	<li>講師名：<%= @teacher.name %></li>
+	<li>メールアドレス：<%= @teacher.email %></li>
+	<li>パスワード：(セキュリティ保護のため、伏せています)</li>
+</ul>
+
+<p>
+	承認する場合、以下のリンクをクリックして下さい。<br>
+</p>
+<%= link_to '承認する', edit_teacher_activation_url(@teacher.activation_token, email: @teacher.email) %>
+

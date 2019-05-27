@@ -15,7 +15,7 @@
 
 <p>
 何か情報に間違いなどがあれば、以下から申し付け下さい。<br>
-<%= mail_to(Teacher.first.email, 'お問い合わせはこちら') %>
+<%= mail_to(@owner_emails[0], 'お問い合わせはこちら') %>
 </p>
 
 <p>

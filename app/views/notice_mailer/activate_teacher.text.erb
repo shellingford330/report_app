@@ -1,11 +1,11 @@
-<%= @student.name %> 様
+<%= @teacher.name %> 様
 
 	この度は自由塾に生徒登録して頂き、ありがとうございます。
 	以下からアカウントを有効化して下さい。
 	自由塾が承認次第、ログインが可能となります。
 
 
-<%= student_activation_url(@student.activation_token, login_id: @student.login_id) %>
+<%= teacher_activation_url(@teacher.activation_token, email: @teacher.email) %>
 
 
 学習指導塾「自由塾」

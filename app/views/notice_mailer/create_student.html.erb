@@ -10,8 +10,14 @@
 <ul>
 	<li>学年：<%= @student.grade %></li>
 	<li>生徒名：<%= @student.name %></li>
-	<li>パスワード：(セキュリティ保護のため、伏せています)</li>
 	<li>メールアドレス：<%= @student.email %></li>
+</ul>
+
+<p>以下の情報でログインを行ってください。</p>
+
+<ul>
+	<li>ログインID：<%= @student.login_id %></li>
+	<li>パスワード：(セキュリティ保護のため、伏せています)</li>
 </ul>
 
 <p>

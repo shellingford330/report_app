@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   patch  '/students/:id/editbyteacher' => "students#updatebyteacher", as: :update_by_teacher_student
   resources :students 
 
-  resources :account_activations, only: [:show, :edit]
+  resources :student_activations, only: [:show, :edit]
   
   resources :groups
   
@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       post :auth
     end
   end
+
+  resources :teacher_activations, only: [:show, :edit]
 
   
   resources :reports, except: :index do

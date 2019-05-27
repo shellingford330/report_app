@@ -11,6 +11,8 @@ class Teacher < ApplicationRecord
 	has_many :recieved_messages, class_name: "Message", foreign_key: "to_id", dependent: :destroy
 
 	before_save { self.email.downcase! }
+	before_create :create_activation_digest
+	
 	enum status: { teacher: 0, manager: 1, owner: 2 }
 	
 	validates :name,
@@ -61,5 +63,23 @@ class Teacher < ApplicationRecord
 	# 講師の作成時に通知メール
 	def send_create_teacher_mail
     NoticeMailer.create_teacher(self).deliver_now
-  end
+	end
+
+	# 講師の作成時に通知メール
+	def send_teacher_activation_mail
+    NoticeMailer.activate_teacher(self).deliver_now
+	end
+
+	# 講師の作成時に通知メール
+	def send_teacher_authentication_mail
+    NoticeMailer.authenticate_teacher(self).deliver_now
+	end
+
+
+	# 有効化トークンおよびダイジェストを作成および代入
+	def create_activation_digest
+		self.activation_token  = Teacher.new_token
+		self.activation_digest = Teacher.digest(activation_token)
+	end
+	
 end

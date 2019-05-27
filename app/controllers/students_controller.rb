@@ -59,10 +59,11 @@ class StudentsController < ApplicationController
 		if @student.save
 			@student.send_account_activation_mail
 			flash[:success] = "アカウント有効化メールをご確認下さい"
+			redirect_to students_login_url
 		else
-			flash[:danger] = "入力情報をご確認下さい"
+			flash.now[:danger] = "入力情報をご確認下さい"
+			render :login_form
 		end
-		redirect_to students_login_url
 	end
 
 	def update

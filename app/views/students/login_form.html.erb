@@ -9,11 +9,11 @@
 		</h1>
 
 		<div class="form-group">
-			<%= f.text_field :login_id, class: "form-control form-control-lg", placeholder: "ログインID" %>
+			<%= f.text_field :login_id, class: "form-control form-control-lg", placeholder: "Login ID" %>
 		</div>
 
 		<div class="form-group">
-			<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "パスワード" %>
+			<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "Password" %>
 		</div> 
 
 		<div class="form-group">
@@ -25,7 +25,7 @@
 
 		<%= f.submit 'ログインする', disable_with: '処理中...' , class: "btn btn-block btn-sub" %>
 		<p class="m-2">
-			<a href="#" class="link" data-toggle="modal" data-target="#addMessageModal">
+			<a href="#" class="link" data-toggle="modal" data-target="#addStudentModal">
 				新規登録の方はこちらから
 			</a>
 		</p>
@@ -34,7 +34,7 @@
 </div>
 
 
-<div class="modal fade" id="addMessageModal">
+<div class="modal fade" id="addStudentModal">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content bg-brown">
 			<div class="modal-header" style="background: #c9bdb9;">
@@ -75,8 +75,6 @@
 						<%= f.label :email, 'メールアドレス'%>
 						<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "メールアドレス" %>
 					</div>
-
-					<p class="text-danger">※パスワードを変更しない場合は、以下の欄を空にして更新して下さい。</p>
 		
 					<div class="form-group">
 						<%= f.label :password, 'パスワード'%> 

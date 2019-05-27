@@ -1,4 +1,4 @@
-class AccountActivationsController < ApplicationController
+class StudentActivationsController < ApplicationController
 
 	def show
 		student = Student.find_by(login_id: params[:login_id])

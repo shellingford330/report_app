@@ -50,14 +50,27 @@ class NoticeMailer < ApplicationMailer
   # 生徒のメールアドレス確認メール
   def activate_account(student)
     @student = student
-    mail to: student.email, subject: "アカウント有効化"
+    mail to: @student.email, subject: "アカウント有効化"
+  end
+
+  # 講師のメールアドレス確認メール
+  def activate_teacher(teacher)
+    @teacher = teacher
+    mail to: @teacher.email, subject: "アカウント有効化"
   end
 
   # 生徒がオーナーに承認依頼メール
   def authenticate_student(student)
     @student = student
     owner_emails = Teacher.owner.pluck(:email)
-    mail to: owner_emails, subject: "生徒から登録依頼が届きました"
+    mail to: owner_emails, subject: "生徒から登録依頼が届1きました"
+  end
+
+  # 講師がオーナーに承認依頼メール
+  def authenticate_teacher(teacher)
+    @teacher = teacher
+    owner_emails = Teacher.owner.pluck(:email)
+    mail to: owner_emails, subject: "生徒から登録依頼が届1きました"
   end
     
 
@@ -73,10 +86,10 @@ class NoticeMailer < ApplicationMailer
   # 渡された指導報告の講師に通知メール
   def create_teacher(teacher)
     @teacher = teacher
-    owner_emails = Teacher.owner.pluck(:email)
+    @owner_emails = Teacher.owner.pluck(:email)
     mail to:      @teacher.email,
-         bcc:     owner_emails,
-         subject: '自由塾に仮登録されました'
+         bcc:     @owner_emails,
+         subject: '自由塾に登録されました'
   end
 
 end

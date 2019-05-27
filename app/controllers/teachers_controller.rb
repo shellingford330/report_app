@@ -28,12 +28,12 @@ class TeachersController < ApplicationController
 
   def create
     if @teacher.save
-      @teacher.send_create_teacher_mail
+      @teacher.send_teacher_activation_mail
       redirect_to @teacher
-      flash[:success] =  '講師が作成されました' 
+      flash[:success] =  'アカウント有効化メールをご確認下さい' 
     else
-      flash.now[:danger] = "失敗しました"
-      render 'new'
+      flash.now[:danger] = "入力情報をご確認下さい"
+      render :login_form
     end
   end
 

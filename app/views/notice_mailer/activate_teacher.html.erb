@@ -1,16 +1,16 @@
-<p><%= @student.name %> 様</p>
+<p><%= @teacher.name %> 様</p>
 
 <hr>
 
 
 <p>
-	この度は自由塾に生徒登録して頂き、ありがとうございます。<br>
+	この度は自由塾に講師登録して頂き、ありがとうございます。<br>
 	以下からアカウントを有効化して下さい。<br>
 	自由塾が承認次第、ログインが可能となります。
 </p>
 
 <p>
-<%= link_to 'アカウント有効化', student_activation_url(@student.activation_token, login_id: @student.login_id) %>
+<%= link_to 'アカウント有効化', teacher_activation_url(@teacher.activation_token, email: @teacher.email) %>
 </p>
 
 <hr>

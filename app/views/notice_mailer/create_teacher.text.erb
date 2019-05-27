@@ -8,7 +8,7 @@
 メールアドレス：<%= @teacher.email %>
 
 間違いなどがあれば、以下のメールアドレスから申しつけ下さい。
-<%= Teacher.first.email %>
+<%= @owner_emails[0] %>
 
 ログインは<%= login_teachers_url %>から行ってください。
 

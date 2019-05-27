@@ -5,11 +5,13 @@
 
 学年：<%= @student.grade %>
 生徒名：<%= @student.name %>
-パスワード：(セキュリティ保護のため、伏せています)
 メールアドレス：<%= @student.email %>
 
+ログインID：<%= @student.login_id %>
+パスワード：(セキュリティ保護のため、伏せています)
+
 間違いなどがあれば、以下のメールアドレスから申しつけ下さい。
-<%= Teacher.first.email %>
+<%= @owner_emails[0] %>
 
 ログインは<%= students_login_url %>から行ってください。
 
