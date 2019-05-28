@@ -54,15 +54,15 @@ class StudentsController < ApplicationController
 	end
 
 	def create
-		domain = /@/.match(@student.email).pre_match # メールアドレスの@の前のドメインを取得
-		@student.login_id = params[:first_name] ? domain + "_" + params[:first_name] : domain
+		domain =  /@/.match(email).pre_match if (email = @student.email).present? # メールアドレスの@の前のドメインを取得
+		@student.login_id = params[:first_name].present? && !!domain ? domain + "_" + params[:first_name] : nil
 		if @student.save
 			@student.send_account_activation_mail
 			flash[:success] = "アカウント有効化メールをご確認下さい"
 			redirect_to students_login_url
 		else
 			flash.now[:danger] = "入力情報をご確認下さい"
-			render :login_form
+			render :login_form, layout: 'login'
 		end
 	end
 
