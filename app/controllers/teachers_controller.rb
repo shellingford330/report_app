@@ -29,7 +29,7 @@ class TeachersController < ApplicationController
   def create
     if @teacher.save
       @teacher.send_teacher_activation_mail
-      redirect_to @teacher
+      redirect_to login_form_teachers_url
       flash[:success] =  'アカウント有効化メールをご確認下さい' 
     else
       flash.now[:danger] = "入力情報をご確認下さい"

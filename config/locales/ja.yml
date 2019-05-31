@@ -12,6 +12,7 @@ ja:
       student:
         name: 名前
         grade: 学年
+        login_id: ログインID
         lesson_day: 授業の曜日
         email: メールアドレス
         password: パスワード
