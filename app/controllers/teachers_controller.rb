@@ -7,7 +7,7 @@ class TeachersController < ApplicationController
   before_action :new_teacher,        only: [:create, :login]
   before_action :set_teacher,        only: [:show, :edit, :update, :auth, :destroy]
   def index
-    @teachers = Teacher.paginate(page: params[:page], per_page: 10)
+    @teachers = Teacher.where(activated: true).paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -60,11 +60,16 @@ class TeachersController < ApplicationController
 
   def login
     teacher = Teacher.find_by(email: params[:teacher][:email].downcase)
-		if teacher && teacher.authenticate(params[:teacher][:password])
-      flash[:notice] = "ログインしました"
-      teacher_log_in(teacher)
-      params[:remember_me] == 'yes' ? remember_teacher(teacher) : forget_teacher(teacher)
-			redirect_back_to teacher
+    if teacher && teacher.authenticate(params[:teacher][:password])
+      if teacher.activated?
+        flash[:notice] = "ログインしました"
+        teacher_log_in(teacher)
+        params[:remember_me] == 'yes' ? remember_teacher(teacher) : forget_teacher(teacher)
+        redirect_back_to teacher
+      else
+        flash[:danger] = "アカウントが有効化されていません。メールをご確認下さい"
+        redirect_to login_form_teachers_url
+      end
 		else
       flash.now[:danger] = "入力情報をご確認下さい"
       render 'login_form', layout: 'login'

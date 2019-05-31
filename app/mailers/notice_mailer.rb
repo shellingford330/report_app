@@ -50,27 +50,27 @@ class NoticeMailer < ApplicationMailer
   # 生徒のメールアドレス確認メール
   def activate_account(student)
     @student = student
-    mail to: @student.email, subject: "アカウント有効化"
+    mail to: @student.email, subject: "アカウントを有効化して下さい"
   end
 
   # 講師のメールアドレス確認メール
   def activate_teacher(teacher)
     @teacher = teacher
-    mail to: @teacher.email, subject: "アカウント有効化"
+    mail to: @teacher.email, subject: "アカウントを有効化して下さい"
   end
 
   # 生徒がオーナーに承認依頼メール
   def authenticate_student(student)
     @student = student
     owner_emails = Teacher.owner.pluck(:email)
-    mail to: owner_emails, subject: "生徒から登録依頼が届1きました"
+    mail to: owner_emails, subject: "生徒から登録依頼が届きました"
   end
 
   # 講師がオーナーに承認依頼メール
   def authenticate_teacher(teacher)
     @teacher = teacher
     owner_emails = Teacher.owner.pluck(:email)
-    mail to: owner_emails, subject: "生徒から登録依頼が届1きました"
+    mail to: owner_emails, subject: "生徒から登録依頼が届きました"
   end
     
 
