@@ -6,13 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-owner = Teacher.create( status: 2,
-								 name: "オーナー", 
-								 email: "owner@example.com",
-								 activated: true,
-								 activated_at: Time.zone.now,
-								 password: "jiyujyuku",
-								 password_confirmation: "jiyujyuku" )
+owner = Teacher.new(status: 2,
+										name: "オーナー", 
+										email: "owner@example.com",
+										activated: true,
+										activated_at: Time.zone.now,
+										password: "jiyujyuku",
+										password_confirmation: "jiyujyuku" )
+owner.save(validate: false)
 
 Teacher.create!( status: 1,
 								 name: "管理者", 

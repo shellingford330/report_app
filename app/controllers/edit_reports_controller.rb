@@ -1,6 +1,7 @@
 class EditReportsController < ApplicationController
 	before_action :teacher_logged_in
 
+	# 報告書編集ページの報告書の一覧表示
 	def index
 		@report = current_teacher.reports.build
 		@reports = Report.page(params[:page]).per(15)
@@ -11,6 +12,7 @@ class EditReportsController < ApplicationController
 		end
 	end
 
+	# 選択した報告書のデータを取得、表示
 	def new
 		if (@reports_id = params[:reports_id])
 			# ログインしているのが講師本人か、管理者でないと編集できない
@@ -28,12 +30,13 @@ class EditReportsController < ApplicationController
 		end
 	end
 
+	# 報告書を更新
 	def create
 		@reports = []
 		@reports_id = []
 		judge = true
 		params.require(:report).each do |report_id, value|
-			# ログインしているのが講師本人か、管理者出ないと編集できない
+			# ログインしている講師が本人か、管理者でないと編集できない
 			if admin_logged_in?
 				report = Report.find(report_id)
 				report.send_create_report_mail if value[:status] == "released" && report.status == "draft"

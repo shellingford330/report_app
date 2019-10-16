@@ -5,7 +5,7 @@
       <i class="fas fa-arrow-left"></i>
     </div>
     <div class="sidebar-header">
-      <h3 class="text-center">自由塾<br>日暮里教室</h3>
+      <h3 class="text-center">自由塾<br>入谷教室</h3>
     </div>
     <ul class="list-unstyled components">
       <li>
@@ -18,13 +18,13 @@
             <%= link_to '生徒一覧', students_path %>
           </li>
           <li>
-            <%= link_to_if admin_logged_in?, '生徒作成', new_student_path do end%>                    
+            <%= link_to_if owner_logged_in?, '生徒作成', new_student_path do end %>                    
           </li>
           <li>
             <%= link_to 'グループ一覧', groups_path %>
           </li>
           <li>
-            <%= link_to_if admin_logged_in?, 'グループ作成', new_group_path do end%>                    
+            <%= link_to_if admin_logged_in?, 'グループ作成', new_group_path do end %>                    
           </li>
         </ul>
       </li>

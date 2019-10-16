@@ -11,6 +11,7 @@ class Student < ApplicationRecord
 	has_many :teachers, through: :reports
 
 	before_create :create_activation_digest
+	after_destroy { Rails.logger.info("##### Student is deleted with #{self.attributes.inspect} ######") }
 
 	validates :login_id, uniqueness: true
 	validates :grade, { presence: true }

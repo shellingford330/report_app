@@ -36,14 +36,14 @@ module TeachersHelper
 
 	# ログインしている講師がオーナーであるか
 	def	owner_logged_in?
-		return false unless (teacher = current_teacher)
-		teacher.status == "owner"
+		teacher = current_teacher
+		return teacher ? teacher.owner? : false 
 	end
 
 	# ログインしている講師が認証されているか
 	def	admin_logged_in?
-		return false unless (teacher = current_teacher)
-		teacher.status == "owner" || teacher.status == "manager"
+		teacher = current_teacher
+		return teacher ? teacher.owner? || teacher.manager? : false
 	end
 
 	# 渡された講師をクッキーに保存
@@ -59,5 +59,4 @@ module TeachersHelper
 		cookies.delete(:teacher_id)
 		cookies.delete(:remember_token)
 	end
-
 end
