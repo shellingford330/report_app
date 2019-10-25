@@ -1,21 +1,23 @@
 <% provide(:title, "ログイン(講師)")%>
+<div class="text-right p-3">
+	<%= link_to '生徒はこちら', students_login_url, class: "btn", 
+	style: "border-radius: 30px; background: #b08274;" %>
+</div>
 <div class="login">
 	<%= form_for(@teacher, url: '/teachers/login', html: { class: 'login-form' , method: :post }) do |f| %>
 
 		<h1 class="m-0">
-			<%= link_to students_login_url do %>
-				<%= image_tag 'logo.png', height: 70 %>
-			<% end %>
+			<%= image_tag 'logo.png', height: 70 %>
 		</h1>
 
 		<p>(塾講師ログイン用)</p>
 
 		<div class="form-group">
-			<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "メールアドレス" %>
+			<%= f.email_field :email, class: "form-control", placeholder: "メールアドレス" %>
 		</div>
 
 		<div class="form-group">
-			<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "パスワード" %>
+			<%= f.password_field :password, class: "form-control", placeholder: "パスワード" %>
 		</div> 
 
 		<div class="form-group">
@@ -41,7 +43,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content bg-brown">
 			<div class="modal-header" style="background: #c9bdb9;">
-				<h4 class="modal-title"><i class="fas fa-user-plus"></i> 講師登録</h4>
+				<h4 class="modal-title"><i class="fas fa-user-plus"></i> Okurun</h4>
 				<button class="close" data-dismiss="modal">
 					<span>&times;</span>
 				</button>
@@ -53,22 +55,22 @@
 
 					<div class="form-group">
 						<%= f.label :name, '氏名'%>
-						<%= f.text_field :name, class: "form-control form-control-lg", placeholder: "氏名" %>
+						<%= f.text_field :name, class: "form-control", placeholder: "氏名" %>
 					</div>
 
 					<div class="form-group">
 						<%= f.label :email, 'メールアドレス' %>
-						<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "メールアドレス" %>
+						<%= f.email_field :email, class: "form-control", placeholder: "メールアドレス" %>
 					</div>
 
 					<div class="form-group">
 						<%= f.label :password, 'パスワード'%> 
-						<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "パスワード" %>
+						<%= f.password_field :password, class: "form-control", placeholder: "パスワード" %>
 					</div>
 
 					<div class="form-group">
 						<%= f.label :password, 'パスワード確認（もう一度入力して下さい。）'%>
-						<%= f.password_field :password_confirmation, class: "form-control form-control-lg", placeholder: "確認" %>
+						<%= f.password_field :password_confirmation, class: "form-control", placeholder: "確認" %>
 					</div>
 					
 					<div class="row">

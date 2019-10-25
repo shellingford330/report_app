@@ -11,7 +11,7 @@ class TeachersController < ApplicationController
   end
 
   def show
-    @reports = @teacher.reports.limit(3)
+    @reports = @teacher.reports.eager_load(:replies).limit(3)
   end
 
   def new

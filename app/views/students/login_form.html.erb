@@ -1,19 +1,21 @@
 <% provide(:title, "ログイン")%>
+<div class="text-right p-3">
+	<%= link_to '講師はこちら', login_form_teachers_url, class: "btn", 
+	style: "border-radius: 30px; background: #b08274;" %>
+</div>
 <div class="login">
 	<%= form_for(@student, url: '/students/login', html: { class: 'login-form' , method: :post }) do |f| %>
 
 		<h1 class="mb-4">
-			<%= link_to login_form_teachers_url do %>
-				<%= image_tag 'logo.png' , height: 70 %>
-			<% end %>
+			<%= image_tag 'logo.png' , height: 70 %>
 		</h1>
 
 		<div class="form-group">
-			<%= f.text_field :login_id, class: "form-control form-control-lg", placeholder: "ログインID" %>
+			<%= f.text_field :login_id, class: "form-control", placeholder: "ログインID" %>
 		</div>
 
 		<div class="form-group">
-			<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "パスワード" %>
+			<%= f.password_field :password, class: "form-control", placeholder: "パスワード" %>
 		</div> 
 
 		<div class="form-group">
@@ -38,7 +40,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content bg-brown">
 			<div class="modal-header" style="background: #c9bdb9;">
-				<h4 class="modal-title"><i class="fas fa-user-plus"></i> 生徒登録</h4>
+				<h4 class="modal-title"><i class="fas fa-user-plus"></i> Okurun</h4>
 				<button class="close" data-dismiss="modal">
 					<span>&times;</span>
 				</button>
@@ -50,40 +52,40 @@
 
 					<div class="form-group">
 						<%= f.label :name, '氏名'%>
-						<%= f.text_field :name, class: "form-control form-control-lg", placeholder: "例）鈴木　一郎"%>
+						<%= f.text_field :name, class: "form-control", placeholder: "例）鈴木　一郎"%>
 					</div>
 
 					<div class="form-group">
 						<div class="row">
 							<div class="col">
 								<%= label_tag :last_name, "姓名（ローマ字）" %>
-								<%= text_field_tag :last_name, '',  class: "form-control form-control-lg",  placeholder: "例）suzuki" %>
+								<%= text_field_tag :last_name, '',  class: "form-control",  placeholder: "例）suzuki" %>
 							</div>
 							<div class="col">
 								<%= label_tag :first_name, "名前（ローマ字）" %>
-								<%= text_field_tag :first_name, '', class: "form-control form-control-lg",  placeholder: "例）ichiro" %>
+								<%= text_field_tag :first_name, '', class: "form-control",  placeholder: "例）ichiro" %>
 							</div>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<%= f.label :grade, '現在の学年'%>
-						<%= f.select :grade, Student.grades, { include_blank: '選択して下さい' }, class: "form-control form-control-lg" %>
+						<%= f.select :grade, Student.grades, { include_blank: '選択して下さい' }, class: "form-control" %>
 					</div>
 
 					<div class="form-group">
 						<%= f.label :email, 'メールアドレス'%>
-						<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "メールアドレス" %>
+						<%= f.email_field :email, class: "form-control", placeholder: "メールアドレス" %>
 					</div>
 		
 					<div class="form-group">
 						<%= f.label :password, 'パスワード'%> 
-						<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "パスワード" %>
+						<%= f.password_field :password, class: "form-control", placeholder: "パスワード" %>
 					</div>
 
 					<div class="form-group">
 						<%= f.label :password, 'パスワード確認（もう一度入力して下さい。）'%>
-						<%= f.password_field :password_confirmation, class: "form-control form-control-lg", placeholder: "確認" %>
+						<%= f.password_field :password_confirmation, class: "form-control", placeholder: "確認" %>
 					</div>
 
 					<div class="row">

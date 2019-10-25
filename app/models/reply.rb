@@ -5,6 +5,10 @@ class Reply < ApplicationRecord
   belongs_to :writeable, polymorphic: true
 
   default_scope { order(created_at: :asc) }
+
+  scope :read,   -> { where(read_flg: true) }  
+  scope :unread, -> { where(read_flg: false) } 
+  scope :written_by, -> (writer) { where(writeable_type: writer) }
   
   validates :content, presence: true
 

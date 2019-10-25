@@ -54,6 +54,7 @@ a:focus {
 
 /*-- ボタン --*/
 .btn {
+  // background: #eeb507;
   background: #6078bd; /*ボタン色*/
   color: #fff;
   &:hover {
@@ -253,9 +254,8 @@ a:focus {
 /*-- ログインフォーム --*/
 .login {
   text-align: center !important;
-  height: 100%;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  height: calc(100% - 65px);
+  padding-bottom: 65px;
   display: -webkit-flex;
   display: flex;
   -webkit-box-align: center;
