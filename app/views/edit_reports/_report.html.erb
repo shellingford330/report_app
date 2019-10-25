@@ -28,14 +28,14 @@
 			<% end %>
 		</td>
 
-		<td class="py-2">
+		<!--td class="py-2">
 			<% reply = report.replies.where(writeable_type: "Student") %>
 			<% if reply.exists? %>
 				<i class="far fa-check-square"></i> <%= "(#{reply.count}件)"%>
 			<% else %>
 				<i class="far fa-square"></i>
 			<% end %>
-		</td>
+		</td-->
 
 	</tr>
 <% end %>

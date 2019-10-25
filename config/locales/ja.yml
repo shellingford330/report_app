@@ -17,6 +17,8 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
+      group:
+        name: グループ名
       teacher:
         name: 名前
         status: 権限
