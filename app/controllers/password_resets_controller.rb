@@ -28,14 +28,14 @@ class PasswordResetsController < ApplicationController
     password = @user.kind_of?(Teacher) ? params[:teacher][:password] : params[:student][:password]
     if password.empty?
       @user.errors.add(:password, :blank)
-      render 'edit'
+      render 'edit', layout: 'login'
     elsif @user.update_attributes(user_params)
       @user.kind_of?(Teacher) ? teacher_log_in(@user) : student_log_in(@user)
       @user.update_attribute(:reset_digest, nil)
       flash[:success] = "パスワードを再設定しました"
       redirect_to @user
     else
-      render 'edit'
+      render 'edit', layout: 'login'
     end
   end
 
