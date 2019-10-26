@@ -16,13 +16,14 @@ class StudentsController < ApplicationController
 	end
 
 	def	show
-		redirect_to students_login_path unless (judge = correct_student?(@student)) || teacher_logged_in?
-		if judge
+		if correct_student?(@student)
 			@reports = @student.reports.released.limit(3)
 			@news = @student.news.released.limit(3)
-		else
+		elsif teacher_logged_in?
 			@reports = @student.reports.limit(3)
 			@news = @student.news.limit(3)
+		else
+			redirect_to students_login_path
 		end
 	end
 

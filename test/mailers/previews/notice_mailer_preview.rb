@@ -51,4 +51,11 @@ class NoticeMailerPreview < ActionMailer::Preview
     NoticeMailer.create_teacher(teacher)
   end
 
+  # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/password_reset
+  def password_reset
+    user = Student.first
+    user.reset_token = Student.new_token
+    NoticeMailer.password_reset(user)
+  end
+
 end

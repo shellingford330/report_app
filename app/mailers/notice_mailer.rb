@@ -92,4 +92,10 @@ class NoticeMailer < ApplicationMailer
          subject: '自由塾に登録されました'
   end
 
+  # パスワード再設定の本人確認メール
+  def password_reset(user)
+    @user = user
+    mail to: user.email, subject: 'パスワード再設定'
+  end
+
 end

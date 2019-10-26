@@ -1,5 +1,5 @@
 class Student < ApplicationRecord
-	attr_accessor :remember_token, :activation_token, :lesson_days
+	attr_accessor :remember_token, :activation_token, :reset_token, :lesson_days
 
 	has_secure_password
 
@@ -83,6 +83,11 @@ class Student < ApplicationRecord
 	def send_create_student_mail
     NoticeMailer.create_student(self).deliver_now
 	end
+
+	# パスワード再設定用のメール
+	def send_password_reset_email
+		NoticeMailer.password_reset(self).deliver_now
+	end
 	
 	# 有効化トークンおよびダイジェストを作成および代入
 	def create_activation_digest
@@ -90,4 +95,10 @@ class Student < ApplicationRecord
 		self.activation_digest = Student.digest(activation_token)
 	end
 
+	# パスワード再設定する際に本人かどうか確認のためのトークンとダイジェストを作成
+	def create_reset_digest
+		self.reset_token = Student.new_token
+		self.update_columns(reset_digest:  Student.digest(self.reset_token),
+												reset_sent_at: Time.zone.now)
+	end
 end

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root   'students#login_form'
 
   get    '/students/login'      => 'students#login_form'
@@ -34,6 +33,8 @@ Rails.application.routes.draw do
       get :teacher, :student
     end
   end
+
+  resources :password_resets, only: [:edit, :create, :update]
 
   resources :multi_reports, only: [:index, :new, :create] do
     collection do
