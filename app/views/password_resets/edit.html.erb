@@ -1,9 +1,9 @@
 <% provide(:title, 'パスワード再設定') %>
 <div class="container mt-3">
-  <h2>パスワード再設定</h2>
-  <hr>
   <div class="row">
     <div class="col-md-6 mx-auto">
+      <h2>パスワード再設定</h2>
+      <hr>
       <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
         <%= render 'share/error_messages', obj: @user %>
 
