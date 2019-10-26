@@ -40,7 +40,11 @@ class PasswordResetsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:password, :password_confirmation)
+    if user.kind_of?(Teacher)
+      params.require(:teacher).permit(:password, :password_confirmation)
+    else
+      params.require(:student).permit(:password, :password_confirmation)
+    end
   end
 
   # before フィルタ
