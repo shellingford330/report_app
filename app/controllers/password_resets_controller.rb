@@ -24,7 +24,8 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    if params[:user][:password].empty?
+    password = user.kind_of?(Teacher) ? params[:teacher][:password] : params[:student][:password]
+    if password.empty?
       @user.errors.add(:password, :blank)
       render 'edit'
     elsif @user.update_attributes(user_params)
