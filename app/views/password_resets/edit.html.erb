@@ -1,13 +1,5 @@
 <% provide(:title, 'パスワード再設定') %>
-<div class="container"
-  style="height: 100%; 
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;"
->
+<div class="container mt-4">
   <div class="row">
     <div class="col-md-6 mx-auto">
       <h2>パスワード再設定</h2>
@@ -30,7 +22,12 @@
           <%= f.password_field :password_confirmation, class: 'form-control' %>
         </div>
 
-        <%= f.submit "パスワード更新", class: "btn btn-sub" %>
+        <div class="row">
+          <div class="col-md-4 mx-auto">
+            <%= f.submit "パスワード更新", data: { disable_with: '処理中...' }, class: "btn btn-sub btn-block" %>
+            
+          </div>
+        </div>
       <% end %>
     </div>
   </div>
