@@ -11,7 +11,7 @@
 					<div class="card-body">
 						<p class="mb-auto"><strong>氏名　</strong>    <%= @teacher.name %></p>
 						<hr>
-						<p class="mb-auto"><strong>権限　</strong>    <%= @teacher.status %></p>
+						<p class="mb-auto"><strong>権限　</strong>    <%= @teacher.invert_status %></p>
 					</div>
 				</div>
 				<% if correct_teacher?(@teacher) %>

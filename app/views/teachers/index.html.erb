@@ -25,7 +25,7 @@
                       <i class="fas fa-user-circle"></i>
                       <%= link_to teacher.name, teacher, class:"link" %>
                     </td>
-                    <td  class="d-none d-lg-table-cell"><%= teacher.status %></td>
+                    <td  class="d-none d-lg-table-cell"><%= teacher.invert_status %></td>
                     <td  class="text-right">
                       <% if owner_logged_in? %>
                         <%= link_to teacher, method: :delete,

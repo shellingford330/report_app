@@ -94,5 +94,10 @@ class Teacher < ApplicationRecord
 		self.update_columns(reset_digest:  Teacher.digest(self.reset_token),
 												reset_sent_at: Time.zone.now)
 	end
+
+	def invert_status
+		status = { "teacher" => "講師", "manager" => "管理者", "owner" => "オーナー" }
+		status[self.status]
+	end
 	
 end
