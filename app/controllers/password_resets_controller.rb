@@ -21,6 +21,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
+    render 'edit', layout: 'login'
   end
 
   def update

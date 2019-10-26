@@ -7,7 +7,11 @@
       <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
         <%= render 'share/error_messages', obj: @user %>
 
-        <%= hidden_field_tag :email, @user.email %>
+        <% if @user.kind_of?(Teacher) %>
+          <%= hidden_field_tag :email, @user.email %>
+        <% else %>
+          <%= hidden_field_tag :login_id, @user.email %>
+        <% end %>
         <div class="form-group">
           <%= f.label :password, "パスワード" %>
           <%= f.password_field :password, class: 'form-control' %>
