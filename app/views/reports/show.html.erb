@@ -59,7 +59,7 @@
               <div class="form-group">
                 <%= f.text_area :content, :size => "10x3", class: "form-control form-control-lg" %>
               </div>
-              <%= f.submit '送信する', data: { confirm: "本当に送信してもよろしいですか？", disable_with: '処理中...' }, class: "btn" %>
+              <%= f.submit '送信する', data: { disable_with: '処理中...' }, class: "btn" %>
             <% end %>
           </div>
         </div>

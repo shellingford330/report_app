@@ -4,15 +4,6 @@
     <div class="col-md-9 mx-auto">
 
       <h3 class="mt-4 mb-0 pl-3">
-        <% if teacher_logged_in? %>
-          <%= link_to teacher_news_url(current_teacher), class: "btn" do %>
-            <i class="fas fa-arrow-left"></i>
-          <% end %>
-        <% else %>
-          <%= link_to student_news_url(current_student), class: "btn" do %>
-            <i class="fas fa-arrow-left"></i>
-          <% end %>
-        <% end %>
         <strong class="align-middle">お知らせ</strong>
       </h3>
 
@@ -35,9 +26,10 @@
           <%= safe_join(@news.content.split("\n"), tag(:br)) %>
         </div>
 
-        <hr>
-
         <% if correct_teacher?(@news.teacher) || admin_logged_in? %>
+
+          <hr>
+
           <div class="row mt-2">
 
             <div class="col-md-4 mt-2">
