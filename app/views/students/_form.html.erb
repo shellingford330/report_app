@@ -2,11 +2,11 @@
 	<%= render 'share/error_messages', obj: student%>
 	<div class="form-group">
 		<%= f.label :name, '氏名'%>
-		<%= f.text_field :name, class: "form-control form-control-lg", placeholder: "Name"%>
+		<%= f.text_field :name, class: "form-control", placeholder: "Name"%>
 	</div>
 	<div class="form-group">
 		<%= f.label :grade, '現在の学年'%>
-		<%= f.select :grade, Student.grades, { include_blank: '選択して下さい' }, class: "form-control form-control-lg" %>
+		<%= f.select :grade, Student.grades, { include_blank: '選択して下さい' }, class: "form-control" %>
 	</div>
 	<div class="form-group">
 		<%= f.label :lesson_days ,'授業の曜日'%>
@@ -14,21 +14,21 @@
 	</div>
 	<div class="form-group">
 		<%= f.label :email, 'メールアドレス'%>
-		<%= f.email_field :email, class: "form-control form-control-lg", placeholder: "Email" %>
+		<%= f.email_field :email, class: "form-control", placeholder: "Email" %>
 	</div>
 	<% unless student.new_record? %>
 			<p class="text-danger">※パスワードを変更しない場合は、以下の欄を空にして更新して下さい。</p>
 	<% end %>
 	<div class="form-group">
 		<%= f.label :password, 'パスワード'%> 
-		<%= f.password_field :password, class: "form-control form-control-lg", placeholder: "Password" %>
+		<%= f.password_field :password, class: "form-control", placeholder: "Password" %>
 	</div>
 	<div class="form-group">
 		<%= f.label :password, 'パスワード確認（もう一度入力して下さい。）'%>
-		<%= f.password_field :password_confirmation, class: "form-control form-control-lg", placeholder: "Confirmation" %>
+		<%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirmation" %>
 	</div>
 	<div class="row">
-		<div class="col-md-4 mx-auto">
+		<div class="col-md-6 mx-auto">
 			<%= f.submit yield(:btn_text), data: { confirm: '本当に保存してもよろしいですか？', disable_with: '処理中...' }, 
 			class: "btn btn-block btn-sub" %>
 		</div>

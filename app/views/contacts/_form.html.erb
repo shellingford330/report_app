@@ -4,17 +4,17 @@
   <div class="form-group">
     <%= f.label :teacher_id, '宛先講師' %>
     <%= f.collection_select :teacher_id, @admin, :id, :name, 
-    { include_blank: '講師を選択して下さい' }, class: "form-control form-control-lg" %>
+    { include_blank: '講師を選択して下さい' }, class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :title, 'タイトル' %>
-    <%= f.text_field :title, class: "form-control form-control-lg" %>
+    <%= f.text_field :title, class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :content, '本文' %>
-    <%= f.text_area :content, :size => "10x9",class: "form-control form-control-lg" %>
+    <%= f.text_area :content, :size => "10x9",class: "form-control" %>
   </div>
 
   <div class="form-group">

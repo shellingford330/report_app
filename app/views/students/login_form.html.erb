@@ -12,15 +12,15 @@
 
 		<div class="form-group">
 			<%= f.text_field :login_id, class: "form-control", placeholder: "ログインID" %>
-		</div>
 
-		<div class="form-group">
 			<%= f.password_field :password, class: "form-control", placeholder: "パスワード" %>
-			<p id="passwordHelpBlock" class="form-text">
-				<a href="#" class="link text-decoration-none" data-toggle="modal" data-target="#forget_password_modal">
-					パスワードを忘れた場合
+			<small class="form-text">
+				(パスワードを忘れた場合は
+				<a href="#" class="link" data-toggle="modal" data-target="#forget_password_modal">
+					こちら
 				</a>
-			</p>
+				)
+			</small>
 		</div> 
 
 		<div class="form-group">

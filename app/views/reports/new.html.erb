@@ -1,11 +1,13 @@
 <% provide(:title, "新規作成")%>
-<div class="container mt-3">
+<div class="container">
 	<div class="row">
 		<div class="col-md-10 mx-auto">
-			<div class="card bg-brown shadow">
-				<div class="card-header">
-					<h2><i class="far fa-edit"></i> 指導報告書作成</h2>
-				</div>
+			<h3 class="mt-4 mb-0 pl-3">
+        <strong class="align-middle">指導報告書作成</strong>
+      </h3>
+
+      <hr />
+			<div class="card bg-brown shadow-sm">
 				<div class="card-body">
 					<%= render 'form', report: @report %>
 				</div>

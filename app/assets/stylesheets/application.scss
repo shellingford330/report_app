@@ -41,6 +41,10 @@ a:focus {
   }
 }
 
+.form-control {
+  font-size: 16px;
+}
+
 /*-- 本体(サイドバーを抜く) --*/
 #content {
   padding-top: 53px;
@@ -271,6 +275,23 @@ a:focus {
   margin: 0 auto;
   h1 {
     margin-bottom: 30px;
+  }
+  .form-control {
+    position: relative;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+  #teacher_email,
+  #student_login_id {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  #teacher_password,
+  #student_password {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
   }
 }
 

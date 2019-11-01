@@ -16,7 +16,7 @@
         </a>
       </div>
     </div>
-	</div>
+  </div>
 
   <div class="form-group">
 		<%= f.hidden_field :students_id, value: news.students_id %>
@@ -24,12 +24,12 @@
 
   <div class="form-group">
     <%= f.label :title, 'タイトル' %>
-    <%= f.text_field :title, class: "form-control form-control-lg" %>
+    <%= f.text_field :title, class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :content, '本文' %>
-    <%= f.text_area :content, :size => "10x9",class: "form-control form-control-lg" %>
+    <%= f.text_area :content, :size => "10x9",class: "form-control" %>
   </div>
 
   <div class="form-group">
