@@ -1,6 +1,8 @@
 class Student < ApplicationRecord
 	attr_accessor :remember_token, :activation_token, :reset_token, :lesson_days
 
+	mount_uploader :image, ImageUploader
+
 	has_secure_password
 
 	has_and_belongs_to_many :news
@@ -21,6 +23,11 @@ class Student < ApplicationRecord
 											format: { with: VALID_EMAIL_REGEX }
 										}
 	validates :password, { presence: true, length: { minimum: 6 }, allow_nil: true }
+	validate do |student|
+		if student.image.size > 5.megabytes
+			errors.add(:image, "5MB以下にして下さい。")
+		end
+	end
 
 	# 引数で受け取った文字列をハッシュ化
 	def Student.digest(string)
@@ -101,4 +108,6 @@ class Student < ApplicationRecord
 		self.update_columns(reset_digest:  Student.digest(self.reset_token),
 												reset_sent_at: Time.zone.now)
 	end
+
+	
 end

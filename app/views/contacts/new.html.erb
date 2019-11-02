@@ -1,15 +1,15 @@
 <% provide(:title, "新規作成")%> <% provide(:btn_text, "作成する")%>
-<div class="container">
+<div class="container my-4">
   <div class="row">
     <div class="col-md-10 mx-auto">
-      <h3 class="mt-4 mb-0 pl-3">
-        <strong class="align-middle">お問い合わせ作成</strong>
-      </h3>
-
-      <hr />
-
-      <div class="card bg-brown shadow-sm">
+      <div class="card bg-brown shadow">
         <div class="card-body">
+          <h3 class="mb-0">
+            <strong class="align-middle">お問い合わせ作成</strong>
+          </h3>
+
+          <hr />
+
           <%= render 'form', contact: @contact %>
         </div>
       </div>

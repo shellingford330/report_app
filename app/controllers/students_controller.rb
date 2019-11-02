@@ -116,7 +116,9 @@ class StudentsController < ApplicationController
 
 	private
 		def	student_params
-			params.require(:student).permit(:name, :grade, :email, :password, :password_confirmation)
+			params.require(:student).permit(
+				:name, :grade, :email, :image, :image_cache, :remove_image, :password, :password_confirmation
+			)
 		end
 
 		# beforeアクション

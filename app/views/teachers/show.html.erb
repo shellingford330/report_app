@@ -3,7 +3,13 @@
   <div class="container">
 		<div class="row">
 			<aside class="col-md-3 mt-3">
-				<div class="text-center"><%= image_tag 'user.png', alt: 'プロフイール画像', size: "225x225", class: "avatar mb-3" %></div>
+				<div class="text-center">
+					<% if @teacher.image? %>
+						<%= image_tag @teacher.image.url , alt: 'プロフイール画像', size: "225x225", class: "rounded-circle mb-3" %>
+					<% else %>
+						<%= image_tag 'user.png', alt: 'プロフイール画像', size: "225x225", class: "avatar mb-3" %>
+					<% end %>
+				</div>
 				<div class="card">
 					<div class="card-header">
 						<h5 class="mb-0">講師情報</h5>

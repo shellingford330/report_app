@@ -1,5 +1,8 @@
 class Teacher < ApplicationRecord
 	attr_accessor :remember_token, :activation_token, :reset_token
+
+	mount_uploader :image, ImageUploader
+
 	has_secure_password
 
 	has_many :replies,  as: :writeable
@@ -31,6 +34,11 @@ class Teacher < ApplicationRecord
 		presence: true,
 		length: { minimum: 6, allow_nil: true },
 		allow_nil: true
+	validate do |teacher|
+		if teacher.image.size > 5.megabytes
+			errors.add(:image, "5MB以下にして下さい。")
+		end
+	end
 
 	# 引数で受け取った文字列をハッシュ化
 	def Teacher.digest(string)

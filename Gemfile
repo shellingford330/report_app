@@ -29,9 +29,17 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# データサンプル作成系
 gem 'faker'
+
+# ページネーション系
 gem 'will_paginate'
 gem 'kaminari'
+
+# 画像アップロード系
+gem 'carrierwave', '2.0.2'
+gem 'mini_magick', '4.9.5'
+gem 'rmagick',     '4.0.0'
 
 group :development, :test do
   gem 'sqlite3'

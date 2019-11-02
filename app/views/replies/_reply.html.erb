@@ -1,17 +1,27 @@
 <!-- 返信履歴 -->
 <% if reply.writeable_type == "Teacher" %>
 	<div class="media mb-2 reply-teacher">
-		<%= image_tag 'teacher.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle teacher-icon" %>
+		<% teacher = reply_teacher(reply) %>
+		<% if teacher.image? %>
+			<%= image_tag teacher.image.url, :size => "50x50", class: "d-flex mr-3 rounded-circle" %>
+		<% else %>
+			<%= image_tag 'student.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle student-icon" %>
+		<% end %>
 		<div class="media-body">
-			<h5 class="mt-0"><%= reply_teacher(reply).name %></h5>
+			<h5 class="mt-0"><%= teacher.name %></h5>
 			<p class="reply reply-right"><%= safe_join(reply.content.split("\n"), tag(:br)) %></p>
 		</div>
 	</div>
-	<% elsif reply.writeable_type == "Student"%>
+<% elsif reply.writeable_type == "Student"%>
 	<div class="media mb-2">
-		<%= image_tag 'student.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle student-icon" %>
+		<% student = reply_student(reply) %>
+		<% if student.image? %>
+			<%= image_tag student.image.url, :size => "50x50", class: "d-flex mr-3 rounded-circle" %>
+		<% else %>
+			<%= image_tag 'student.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle student-icon" %>
+		<% end %>
 		<div class="media-body">
-			<h5 class="mt-0"><h5 class="mt-0"><%= reply_student(reply).name %></h5></h5>
+			<h5 class="mt-0"><%= student.name %></h5>
 			<p class="reply reply-left"><%= safe_join(reply.content.split("\n"), tag(:br)) %></p>
 		</div>
 	</div>

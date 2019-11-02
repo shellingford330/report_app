@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191026035821) do
+ActiveRecord::Schema.define(version: 20191102115642) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "title"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20191026035821) do
     t.string   "login_id"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.string   "image"
     t.index ["grade"], name: "index_students_on_grade"
     t.index ["login_id"], name: "index_students_on_login_id", unique: true
   end
@@ -125,6 +126,7 @@ ActiveRecord::Schema.define(version: 20191026035821) do
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.string   "image"
     t.index ["email"], name: "index_teachers_on_email", unique: true
   end
 

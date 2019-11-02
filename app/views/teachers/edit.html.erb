@@ -4,10 +4,14 @@
 	<div class="row">
 		<div class="col-md-9 mx-auto">
 			<div class="card bg-brown shadow">
-				<div class="card-header">
-					<h2><i class="fas fa-user-edit"></i> 個人情報を変更</h2>
-				</div>
 				<div class="card-body">
+					<h3 class="mb-0">
+						<strong class="align-middle">
+							<i class="fas fa-user-circle"></i> <%= @teacher.name %>
+						</strong>
+					</h3>
+
+					<hr />
 					<%= render 'form', teacher: @teacher %>
 				</div>
 			</div>

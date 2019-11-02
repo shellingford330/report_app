@@ -1,32 +1,53 @@
 <%= form_for(student) do |f| %>
+
 	<%= render 'share/error_messages', obj: student%>
+
 	<div class="form-group">
 		<%= f.label :name, '氏名'%>
-		<%= f.text_field :name, class: "form-control", placeholder: "Name"%>
+		<%= f.text_field :name, class: "form-control", placeholder: "氏名"%>
 	</div>
+
 	<div class="form-group">
 		<%= f.label :grade, '現在の学年'%>
 		<%= f.select :grade, Student.grades, { include_blank: '選択して下さい' }, class: "form-control" %>
 	</div>
+
 	<div class="form-group">
 		<%= f.label :lesson_days ,'授業の曜日'%>
 		<%= f.select :lesson_days, Student.days, {}, multiple: true, class: "select-subjects" %>
 	</div>
+
 	<div class="form-group">
 		<%= f.label :email, 'メールアドレス'%>
-		<%= f.email_field :email, class: "form-control", placeholder: "Email" %>
+		<%= f.email_field :email, class: "form-control", placeholder: "メールアドレス" %>
 	</div>
+
 	<% unless student.new_record? %>
-			<p class="text-danger">※パスワードを変更しない場合は、以下の欄を空にして更新して下さい。</p>
+		<%= f.label :image, "アイコン画像" %><br>
+		<%= image_tag student.image.url, size: "225x225", class: "mb-2" if student.image? %>
+		<div class="form-group mb-1">
+			<%= f.file_field :image %>
+			<%= f.hidden_field :image_cache %>
+		</div>
+		<div class="form-group">
+			<label>
+				<%= f.check_box :remove_image, class: "form-check-label" %>
+				画像を削除する
+			</label>
+		</div>
+		<p class="text-danger">※パスワードを変更しない場合は、以下の欄を空にして更新して下さい。</p>
 	<% end %>
+
 	<div class="form-group">
 		<%= f.label :password, 'パスワード'%> 
-		<%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+		<%= f.password_field :password, class: "form-control", placeholder: "パスワード" %>
 	</div>
+
 	<div class="form-group">
 		<%= f.label :password, 'パスワード確認（もう一度入力して下さい。）'%>
-		<%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirmation" %>
+		<%= f.password_field :password_confirmation, class: "form-control", placeholder: "確認" %>
 	</div>
+
 	<div class="row">
 		<div class="col-md-6 mx-auto">
 			<%= f.submit yield(:btn_text), data: { confirm: '本当に保存してもよろしいですか？', disable_with: '処理中...' }, 
@@ -35,3 +56,12 @@
 	</div>
 
 <% end %>
+
+<script type="text/javascript">
+	$('#student_image').bind('change', function() {
+		var image_size = this.files[0].size/1024/1024;
+		if (image_size > 5) {
+			alert('最大のファイルサイズは5MBです。もっと小さいファイルを選択して下さい。');
+		}
+	});
+</script>
