@@ -2,12 +2,6 @@
   <%= render 'share/error_messages', obj: contact %>
 
   <div class="form-group">
-    <%= f.label :teacher_id, '宛先講師' %>
-    <%= f.collection_select :teacher_id, @admin, :id, :name, 
-    { include_blank: '講師を選択して下さい' }, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
     <%= f.label :title, 'タイトル' %>
     <%= f.text_field :title, class: "form-control" %>
   </div>

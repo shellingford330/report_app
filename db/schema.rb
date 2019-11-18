@@ -10,18 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191102115642) do
+ActiveRecord::Schema.define(version: 20191118153217) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "title"
     t.text     "content",                    null: false
     t.integer  "student_id"
-    t.integer  "teacher_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "read_flg",   default: false, null: false
+    t.index ["created_at"], name: "index_contacts_on_teacher_id_and_created_at"
     t.index ["student_id", "created_at"], name: "index_contacts_on_student_id_and_created_at"
-    t.index ["teacher_id", "created_at"], name: "index_contacts_on_teacher_id_and_created_at"
   end
 
   create_table "groups", force: :cascade do |t|
