@@ -79,7 +79,7 @@ class NoticeMailer < ApplicationMailer
     @owner_emails = Teacher.owner.pluck(:email)
     mail to:      @student.email,
          bcc:     @owner_emails,
-         subject: '自由塾に登録されました'
+         subject: '「okurun」に登録されました'
   end
 
   # 渡された指導報告の講師に通知メール
@@ -88,7 +88,7 @@ class NoticeMailer < ApplicationMailer
     @owner_emails = Teacher.owner.pluck(:email)
     mail to:      @teacher.email,
          bcc:     @owner_emails,
-         subject: '自由塾に登録されました'
+         subject: '「okurun」に登録されました'
   end
 
   # パスワード再設定の本人確認メール
