@@ -18,9 +18,6 @@
             <%= link_to '生徒一覧', students_path %>
           </li>
           <li>
-            <%= link_to_if owner_logged_in?, '生徒作成', new_student_path do end %>                    
-          </li>
-          <li>
             <%= link_to 'グループ一覧', groups_path %>
           </li>
           <li>
@@ -36,9 +33,6 @@
         <ul class="collapse list-unstyled" id="teacherSubmenu">
           <li>
             <%= link_to '講師一覧', teachers_path %>
-          </li>
-          <li>
-            <%= link_to_if owner_logged_in?, '新規作成', new_teacher_path do end %>
           </li>
         </ul>
       </li>

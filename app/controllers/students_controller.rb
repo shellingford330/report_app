@@ -1,18 +1,15 @@
 class StudentsController < ApplicationController
 	before_action :student_already_logged_in,  only: [:login_form, :login]
-	before_action :teacher_logged_in, only: [:index ,:new, :destroy]
-	before_action :owner_logged_in,   only: [:new, :destroy, :upgrade]
+	before_action :teacher_logged_in, only: [:index, :destroy]
+	before_action :owner_logged_in,   only: [:destroy, :upgrade]
 	before_action :admin_logged_in,   only: [:editbyteacher, :updatebyteacher]
 	before_action :student_logged_in, only: [:edit, :update]
 	before_action :correct_student,   only: [:edit, :update]
 	before_action :set_student,       only: [:show, :destroy, :editbyteacher, :updatebyteacher]
-	before_action :initialize_student,only: [:new, :login_form]
+	before_action :initialize_student,only: [:login_form]
 	before_action :new_student,       only: [:create, :login]
 
 	def index
-	end
-
-	def	new
 	end
 
 	def	show

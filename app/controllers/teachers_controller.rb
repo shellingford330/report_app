@@ -1,9 +1,9 @@
 class TeachersController < ApplicationController
   before_action :teacher_already_logged_in, only: [:login_form, :login]
-  before_action :teacher_logged_in,  only: [:index ,:new, :show, :edit, :update, :destroy]
+  before_action :teacher_logged_in,  only: [:index , :show, :edit, :update, :destroy]
   before_action :correct_teacher,    only: [:edit, :update]
-  before_action :owner_logged_in,    only: [:new, :auth, :destroy]
-  before_action :initialize_teacher, only: [:new, :login_form]
+  before_action :owner_logged_in,    only: [:auth, :destroy]
+  before_action :initialize_teacher, only: [:login_form]
   before_action :new_teacher,        only: [:create, :login]
   before_action :set_teacher,        only: [:show, :edit, :update, :auth, :destroy]
   def index
@@ -12,9 +12,6 @@ class TeachersController < ApplicationController
 
   def show
     @reports = @teacher.reports.eager_load(:replies).limit(3)
-  end
-
-  def new
   end
 
   def edit
