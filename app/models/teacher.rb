@@ -17,6 +17,8 @@ class Teacher < ApplicationRecord
 	after_destroy { Rails.logger.info("##### Teacher is deleted with #{self.attributes.inspect} ######") }
 	
 	enum status: { teacher: 0, manager: 1, owner: 2 }
+
+	scope :admin,   -> { owner.or(Teacher.manager) }  
 	
 	validates :name,
 		presence: true,

@@ -17,7 +17,7 @@ class NoticeMailer < ApplicationMailer
   def create_contact(contact)
     @contact = contact
     @student = contact.student
-    mail to: Teacher.manager.pluck(:email), subject: '保護者からお問い合わせが届きました'
+    mail to: Teacher.admin.pluck(:email), subject: '保護者からお問い合わせが届きました'
   end
 
   # 渡されたお知らせの生徒に通知メール
