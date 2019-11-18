@@ -27,7 +27,7 @@
                     </td>
                     <td  class="d-none d-lg-table-cell"><%= teacher.invert_status %></td>
                     <td  class="text-right">
-                      <% if owner_logged_in? %>
+                      <% if owner_logged_in? && !teacher.owner? %>
                         <%= link_to teacher, method: :delete,
                         data: { confirm: '本当によろしいですか？'}, class: "btn bg-delete" do %>
                           <i class="fas fa-trash"></i> 削除
