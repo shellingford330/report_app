@@ -1,11 +1,12 @@
-<p><%= @receiver.name %> 様</p>
+
+<p><%= @receiver %> 様</p>
 
 <hr>
 
 <p>
- <%= @paper_name %>に講師の<%= @sender.name %>から返信がありました。<br>
+ <%= @kind_of_doc %>に<%= @kind_of_sender %>の<%= @sender %>から返信が届きました。<br>
 ご確認される場合は、以下のリンクをクリックして下さい。<br>
-<%= link_to 'コメントを確認する', @paper %>
+<%= link_to '内容を確認する', @doc %>
 </p>
 
 <hr>

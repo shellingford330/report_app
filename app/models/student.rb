@@ -13,15 +13,22 @@ class Student < ApplicationRecord
 	has_many :teachers, through: :reports
 
 	before_create :create_activation_digest
-	after_destroy { Rails.logger.info("##### Student is deleted with #{self.attributes.inspect} ######") }
+	after_destroy do
+		Rails.logger.info("##### Student is deleted with #{self.attributes.inspect} ######") 
+	end
+	after_find do
+		self.lesson_days = lesson_day.try(:split)
+	end
 
-	validates :login_id, uniqueness: true
-	validates :grade, { presence: true }
-	validates :name,  { presence: true, length: { maximum: 50 } }
+	VALID_LOGIN_ID_REGEX = /\A.+_.+\Z/
+	validates :login_id, { uniqueness: true, 
+												 format: { with: VALID_LOGIN_ID_REGEX } }
+	validates :grade,    { presence: true }
+	validates :name,     { presence: true, length: { maximum: 50 } }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-	validates :email, { presence: true, length: { maximum: 255 },
-											format: { with: VALID_EMAIL_REGEX }
-										}
+	validates :email,    { presence: true, 
+												 length: { maximum: 255 },
+												 format: { with: VALID_EMAIL_REGEX } }
 	validates :password, { presence: true, length: { minimum: 6 }, allow_nil: true }
 	validate do |student|
 		if student.image.size > 5.megabytes
@@ -69,11 +76,6 @@ class Student < ApplicationRecord
 	# 曜日を配列で返す
 	def Student.days
 		["月", "火", "水", "木", "金", "土", "日"]
-	end
-
-	# 授業日を配列化
-	def array_lesson_day
-		self.lesson_days = lesson_day.split
 	end
 
 	# アカウント有効化のメール

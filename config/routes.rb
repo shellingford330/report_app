@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   post   '/students/login'
   delete '/students/logout'
   post   '/students/upgrade',                               as: :upgrade_student
-  get    '/students/:id/editbyteacher' => "students#editbyteacher",   as: :edit_by_teacher_student
-  patch  '/students/:id/editbyteacher' => "students#updatebyteacher", as: :update_by_teacher_student
   resources :students 
 
   resources :student_activations, only: [:show, :edit]
@@ -54,7 +52,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :contacts do
+  resources :contacts, except: [:edit, :update] do
     member do
       post :reply
     end

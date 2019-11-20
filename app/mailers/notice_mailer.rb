@@ -13,14 +13,14 @@ class NoticeMailer < ApplicationMailer
     mail to: @student.email, subject: '新しい指導報告書が作成されました'
   end
 
-  # 渡されたお問い合わせの講師に通知メール
+  # 管理者・オーナーにお問い合わせの通知メール
   def create_contact(contact)
     @contact = contact
     @student = contact.student
     mail to: Teacher.admin.pluck(:email), subject: '保護者からお問い合わせが届きました'
   end
 
-  # 渡されたお知らせの生徒に通知メール
+  # お知らせの生徒に通知メール
   def create_news(news)
     @news = news
     @teacher = news.teacher
@@ -28,20 +28,23 @@ class NoticeMailer < ApplicationMailer
     mail to: student_emails, subject: 'お知らせが届きました'
   end
 
-  # 渡された返信のユーザーに通知メール
+  # 返信が届いたユーザーに通知メール
   def create_reply(reply)
-    @paper = reply.replyable
-    @paper_name = @paper.class == Contact ? 'お問い合わせ' : '指導報告書'
-    @sender = reply.writeable
-    if reply.writeable_type == "Student"
-      @receiver = Teacher.find(@paper.teacher_id)
-      admin_emails = Teacher.where.not(status: 'teacher').pluck(:email)
-      mail to: @receiver.email,
-           bcc: admin_emails,
-           subject: "#{@paper_name}にコメントされました"
+    # 返信先の媒体(お問い合わせ, 指導報告書)
+    @doc = reply.replyable
+    @kind_of_doc = @doc.kind_of?(Contact) ? 'お問い合わせ' : '指導報告書'
+    # 返信をしたユーザー
+    @sender = reply.writeable.name
+    @kind_of_sender = @sender.kind_of?(Student) ? '生徒' : '自由塾'
+    # 返信が届いたユーザー
+    if @kind_of_sender == '生徒'
+      @receiver = "自由塾"
+      mail to: Teacher.admin.pluck(:email),
+           subject: "#{@kind_of_doc}に返信が届きました"
     else
-      @receiver = Student.find(@paper.student_id)
-      mail to: @receiver.email, subject: "#{@paper_name}にコメントされました"
+      student = Student.find(@doc.student_id)
+      @receiver = student.name
+      mail to: student.email, subject: "#{@kind_of_doc}に返信が届きました"
     end
   end
   

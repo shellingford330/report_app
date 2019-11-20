@@ -1,15 +1,11 @@
 class StudentsController < ApplicationController
-	before_action :student_already_logged_in,  only: [:login_form, :login]
-	before_action :teacher_logged_in, only: [:index, :destroy]
+	before_action :set_student,       only: [:show, :edit, :update, :destroy]
+	before_action :already_logged_in, only: [:login_form, :login]
 	before_action :owner_logged_in,   only: [:destroy, :upgrade]
-	before_action :admin_logged_in,   only: [:editbyteacher, :updatebyteacher]
-	before_action :student_logged_in, only: [:edit, :update]
-	before_action :correct_student,   only: [:edit, :update]
-	before_action :set_student,       only: [:show, :destroy, :editbyteacher, :updatebyteacher]
-	before_action :initialize_student,only: [:login_form]
-	before_action :new_student,       only: [:create, :login]
+	before_action :correct_student_or_admin, only: [:edit, :update]
 
 	def index
+		teacher_logged_in
 	end
 
 	def	show
@@ -25,18 +21,19 @@ class StudentsController < ApplicationController
 	end
 
 	def edit
-		@student.array_lesson_day if @student.lesson_day.present?
 	end
 
-	def	editbyteacher
-		@student.array_lesson_day if @student.lesson_day.present?
-	end
-
-	def	updatebyteacher
-		@student.lesson_day = params[:student][:lesson_days].join(" ")
-		@student.update(grade: params[:student][:grade])
-		flash[:success] = "更新しました"
-		redirect_to @student
+	def update
+		Rails.logger.info("##### params = #{params.inspect} ######")
+		if @student.update(student_params)
+			Rails.logger.info("##### days = #{@student.lesson_days} ######")
+			Rails.logger.info("##### day = #{@student.lesson_day} ######")
+			flash[:success] = "更新しました"
+			redirect_to @student
+		else
+			flash.now[:danger] = "入力情報をご確認下さい"
+			render 'edit'
+		end
 	end
 
 	def upgrade
@@ -52,10 +49,10 @@ class StudentsController < ApplicationController
 	end
 
 	def create
-		if @student.email.present?
-			domain =  /@/.match(@student.email).pre_match # メールアドレスの@の前のドメインを取得
-			@student.login_id = params[:first_name].present? ? domain + "_" + params[:first_name] : nil
-		end
+		@student = Student.new(student_params)
+		# メールアドレスの@の前のドメインを取得
+		domain =  /@/.match(@student.email).try(:pre_match)
+		@student.login_id = "#{domain}_#{params[:first_name]}"
 		if @student.save
 			@student.send_account_activation_mail
 			flash[:success] = "アカウント有効化メールをご確認下さい"
@@ -66,18 +63,6 @@ class StudentsController < ApplicationController
 		end
 	end
 
-	def update
-		@student.lesson_day = params[:student][:lesson_days].join(" ")
-		if @student.update_attributes(student_params)
-			flash[:success] = "更新しました"
-			redirect_to @student
-		else
-			@student.array_lesson_day
-			flash.now[:danger] = "入力情報をご確認下さい"
-			render 'edit'
-		end
-	end
-
 	def destroy
 		@student.destroy
 		flash[:success] = "生徒が削除されました"
@@ -85,10 +70,12 @@ class StudentsController < ApplicationController
 	end
 
 	def	login_form
+		@student = Student.new
 		render layout: 'login'
 	end
 
 	def login
+		@student = Student.new(login_id: params[:student][:login_id])
 		student = Student.find_by(login_id: params[:student][:login_id])
 		if student && student.authenticate(params[:student][:password])
 			if student.activated?
@@ -113,34 +100,36 @@ class StudentsController < ApplicationController
 
 	private
 		def	student_params
-			params.require(:student).permit(
-				:name, :grade, :email, :image, :image_cache, :remove_image, :password, :password_confirmation
-			)
+			params[:student][:lesson_day] = params[:student][:lesson_days].join(" ")
+			if admin_logged_in?
+				params.require(:student).permit(:name, :grade, :lesson_day)
+			else
+				params.require(:student).permit(
+					:name, :grade, :email, :lesson_day, :image, :image_cache, :remove_image, 
+					:password, :password_confirmation
+				)
+			end
 		end
 
 		# beforeアクション
 
-		def initialize_student
-			@student = Student.new
-		end
-
-		def new_student
-			@student = Student.new(student_params)
-		end
-
 		def	set_student
 			@student = Student.find(params[:id])
-			redirect_to login_form_teachers_url unless @student.activated?
+			unless @student.activated?
+				flash[:danger] = "アカウントが有効化されていません"
+				redirect_to students_login_url and return
+			end
 		end
 
-		# ログインを既にしているか確認
-		def student_already_logged_in
-			redirect_to current_student if student_logged_in?
+		def already_logged_in
+			redirect_to current_student and return if student_logged_in?
 		end
 
-		# ログインしている生徒であるか確認
-		def correct_student
-			@student = Student.find(params[:id])
-			redirect_to current_student unless correct_student?(@student)
+		def correct_student_or_admin
+			unless admin_logged_in? || correct_student?(@student)
+				store_location
+				redirect_to students_login_url and return
+			end
 		end
+
 end

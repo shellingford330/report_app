@@ -2,17 +2,11 @@
 <section id="posts">
   <div class="container">
     <% if owner_logged_in? %>
-    <div class="row">
-      <div class="col-md-6 py-2">
-        <%= link_to new_student_path, class: "btn btn-block" do %>
-        <i class="fas fa-plus"></i> 生徒作成 <% end %>
-      </div>
-      <div class="col-md-6 py-2">
+      <div class="py-2">
         <%= link_to upgrade_student_path , method: :post, data: { confirm:
         '本当によろしいですか？'} , class: "btn btn-block" do %>
         <i class="fas fa-check"></i> 学年を更新 <% end %>
       </div>
-    </div>
     <% end %>
     <div id="accordion">
       <div class="row mt-2">

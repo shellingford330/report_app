@@ -17,6 +17,7 @@
 		<%= f.select :lesson_days, Student.days, {}, multiple: true, class: "select-subjects" %>
 	</div>
 
+	<% if correct_student?(student) %>
 	<div class="form-group">
 		<%= f.label :email, 'メールアドレス'%>
 		<%= f.email_field :email, class: "form-control", placeholder: "メールアドレス" %>
@@ -47,6 +48,7 @@
 		<%= f.label :password, 'パスワード確認（もう一度入力して下さい。）'%>
 		<%= f.password_field :password_confirmation, class: "form-control", placeholder: "確認" %>
 	</div>
+	<% end %>
 
 	<div class="row">
 		<div class="col-md-6 mx-auto">
@@ -54,7 +56,6 @@
 			class: "btn btn-block btn-sub" %>
 		</div>
 	</div>
-
 <% end %>
 
 <script type="text/javascript">

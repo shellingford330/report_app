@@ -1,11 +1,11 @@
-<%= @receiver.name %> 様
+<%= @receiver %> 様
 
-<%= @receiver.name %>さんへ<%= @sender.name %>から返信がありました。
+<%= @receiver %>さんへ<%= @sender %>から返信がありました。
 ご確認される場合は、以下のリンクをクリックして下さい。
-<% if @paper_name == "お問い合せ" %>
-	<%= contact_url(@paper) %>
+<% if @kind_of_doc == "お問い合せ" %>
+	<%= contact_url(@doc) %>
 <% else %>
-	<%= report_url(@paper) %>
+	<%= report_url(@doc) %>
 <% end %>
 
 <%= render 'zyuku' %>
