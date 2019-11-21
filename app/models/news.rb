@@ -1,6 +1,4 @@
 class News < ApplicationRecord
-	attr_accessor :students_id
-
 	has_and_belongs_to_many :students
 	belongs_to :teacher
 	has_many :replies, as: :replyable

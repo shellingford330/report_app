@@ -14,7 +14,9 @@ class Teacher < ApplicationRecord
 
 	before_save { self.email.downcase! }
 	before_create :create_activation_digest
-	after_destroy { Rails.logger.info("##### Teacher is deleted with #{self.attributes.inspect} ######") }
+	after_destroy do
+		logger.info("Teacher is deleted: #{self.attributes.inspect}")
+	end
 	
 	enum status: { teacher: 0, manager: 1, owner: 2 }
 

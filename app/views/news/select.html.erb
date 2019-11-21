@@ -57,7 +57,7 @@
 														<% @students.each do |student| %>
 														<tr>
 															<td class="pl-4">
-																<%= check_box_tag 'students_id[]', student.id, @students_id.include?(student.id), class: "student" %>
+																<%= check_box_tag 'student_ids[]', student.id, @news.student_ids.include?(student.id), class: "student" %>
 																<i class="fas fa-user-circle"></i>     <%= student.name %>	
 															</td>
 														</tr>
@@ -129,7 +129,7 @@
 															<% students.each do |student| %>
 															<tr>
 																<td class="pl-4">
-																	<%= check_box_tag 'students_id[]', student.id, @students_id.include?(student.id), class: "student" %>
+																	<%= check_box_tag 'student_ids[]', student.id, @news.student_ids.include?(student.id), class: "student" %>
 																	<i class="fas fa-user-circle"></i>     <%= student.name %>	
 																</td>
 															</tr>
@@ -193,7 +193,7 @@
 													<% group.students.where(activated: true).each do |student| %>
 													<tr>
 														<td class="pl-4">
-															<%= check_box_tag 'students_id[]', student.id, @students_id.include?(student.id), class: "student" %>
+															<%= check_box_tag 'student_ids[]', student.id, @news.student_ids.include?(student.id), class: "student" %>
 															<i class="fas fa-user-circle"></i>     <%= student.name %>	
 														</td>
 													</tr>

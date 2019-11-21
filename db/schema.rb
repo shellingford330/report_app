@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191118153217) do
+ActiveRecord::Schema.define(version: 20191121061852) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "title"
@@ -21,6 +21,21 @@ ActiveRecord::Schema.define(version: 20191118153217) do
     t.boolean  "read_flg",   default: false, null: false
     t.index ["created_at"], name: "index_contacts_on_teacher_id_and_created_at"
     t.index ["student_id", "created_at"], name: "index_contacts_on_student_id_and_created_at"
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "groups", force: :cascade do |t|

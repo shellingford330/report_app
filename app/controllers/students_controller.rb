@@ -24,10 +24,7 @@ class StudentsController < ApplicationController
 	end
 
 	def update
-		Rails.logger.info("##### params = #{params.inspect} ######")
 		if @student.update(student_params)
-			Rails.logger.info("##### days = #{@student.lesson_days} ######")
-			Rails.logger.info("##### day = #{@student.lesson_day} ######")
 			flash[:success] = "更新しました"
 			redirect_to @student
 		else
@@ -100,7 +97,7 @@ class StudentsController < ApplicationController
 
 	private
 		def	student_params
-			params[:student][:lesson_day] = params[:student][:lesson_days].join(" ")
+			params[:student][:lesson_day] = params[:student][:lesson_days].join(" ") if params[:student]
 			if admin_logged_in?
 				params.require(:student).permit(:name, :grade, :lesson_day)
 			else

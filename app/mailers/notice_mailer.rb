@@ -25,7 +25,7 @@ class NoticeMailer < ApplicationMailer
     @news = news
     @teacher = news.teacher
     student_emails = news.students.pluck(:email)
-    mail to: student_emails, subject: 'お知らせが届きました'
+    mail to: @teacher.email, bcc: student_emails, subject: 'お知らせが届きました'
   end
 
   # 返信が届いたユーザーに通知メール

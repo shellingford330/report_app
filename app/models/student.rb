@@ -14,7 +14,7 @@ class Student < ApplicationRecord
 
 	before_create :create_activation_digest
 	after_destroy do
-		Rails.logger.info("##### Student is deleted with #{self.attributes.inspect} ######") 
+		logger.info("Student is deleted: #{self.attributes.inspect}") 
 	end
 	after_find do
 		self.lesson_days = lesson_day.try(:split)

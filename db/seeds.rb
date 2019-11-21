@@ -22,5 +22,3 @@ owner2 = Teacher.new(	status: 2,
 											password_confirmation: "jiyujyuku" )
 owner.save(validate: false)
 owner2.save(validate: false)
-
-

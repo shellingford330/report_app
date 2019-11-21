@@ -1,5 +1,6 @@
 class StudentActivationsController < ApplicationController
 
+	# 生徒が登録したメールアドレスが本人か確認
 	def show
 		student = Student.find_by(login_id: params[:login_id])
 		if student && !student.activated? && student.authenticated?(:activation, params[:id])
@@ -13,6 +14,7 @@ class StudentActivationsController < ApplicationController
 		redirect_to students_login_url
 	end
 
+	# 塾側が塾生か確認
 	def edit
 		student = Student.find_by(login_id: params[:login_id])
 		if student && !student.activated? && student.authenticated?(:activation, params[:id])
