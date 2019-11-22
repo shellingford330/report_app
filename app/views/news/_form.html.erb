@@ -1,4 +1,4 @@
-<%= form_for(news) do |f| %>
+<%= form_for( news, multipart: true ) do |f| %>
   <%= render 'share/error_messages', obj: news %>
 
   <div class="form-group">
@@ -18,9 +18,9 @@
     </div>
   </div>
 
-  <div class="form-group">
-		<%= f.hidden_field :student_ids, value: news.student_ids %>
-	</div>
+  <% news.student_ids.each do |id| %>
+		<%= f.hidden_field :student_ids, multiple: true, value: id %>
+	<% end %>
 
   <div class="form-group">
     <%= f.label :title, 'タイトル' %>
@@ -30,6 +30,11 @@
   <div class="form-group">
     <%= f.label :content, '本文' %>
     <%= f.text_area :content, :size => "10x9",class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :upfile, '添付ファイル' %><br>
+    <%= f.file_field :upfile, size: 50 %>
   </div>
 
   <div class="form-group">

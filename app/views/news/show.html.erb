@@ -23,8 +23,12 @@
         </div>
 
         <div class="news-content">
-          <%= safe_join(@news.content.split("\n"), tag(:br)) %>
+          <%= safe_join(@news.content.split("\n"), tag(:br)) %><br/>
         </div>
+
+        <% if (filename = Dir.glob("uploads/news/#{@news.id}/*")).present? %>
+          <%= link_to File.basename(filename[0]), file_news_url(@news), method: :post, class: "link" %>
+        <% end %>
 
         <% if correct_teacher?(@news.teacher) || admin_logged_in? %>
 
@@ -32,27 +36,15 @@
 
           <div class="row mt-2">
 
-            <div class="col-md-4 mt-2">
-              <%= link_to edit_news_url(@news), class: "btn d-block" do %>
-                <i class="fas fa-check"></i>  編集する
-              <% end %>
-            </div>
-
-            <div class="col-md-4 mt-2">
-              <% if admin_logged_in? %>
-                <% if draft?(@news) %>
-                  <%= link_to release_news_url(@news), method: :post, class: "btn d-block" do %>
-                    <i class="far fa-eye"></i> 公開する
-                  <% end %>
-                <% elsif released?(@news) %>
-                  <%= link_to  draft_news_url(@news), method: :post, class: "btn d-block" do %>
-                    <i class="far fa-eye-slash"></i> 非公開にする
-                  <% end %>
+            <% if admin_logged_in? && draft?(@news) %>
+              <div class="col-md-6 mt-2">
+                <%= link_to release_news_url(@news), method: :post, class: "btn d-block" do %>
+                  <i class="far fa-eye"></i> 公開する
                 <% end %>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
 
-            <div class="col-md-4 mt-2">
+            <div class="col-md-6 mt-2 mx-auto">
               <%= link_to news_url(@news), data:{ confirm: "本当に削除してもよろしいですか" },
                 method: :delete, class: "btn d-block bg-delete" do %>
                 <i class="fas fa-trash"></i>  削除する

@@ -1,8 +1,6 @@
 class NewsController < ApplicationController
   before_action :teacher_logged_in,          only: [:select, :new, :create]
-  before_action :admin_logged_in,            only: [:release, :draft]
-  before_action :set_news,                   only: [:show, :edit, :release, :draft, :update, :destroy]
-  before_action :correct_teacher_or_admin,   only: [:edit, :destroy, :update]
+  before_action :set_news,                   only: [:show, :release, :file, :destroy]
 
   def student
     student = Student.find(params[:id])
@@ -24,7 +22,7 @@ class NewsController < ApplicationController
       @news = teacher.news.paginate(page: params[:page], per_page: 16)
     else
       store_location
-      redirect_to students_login_url
+      redirect_to login_form_teachers_url
     end
   end
 
@@ -52,14 +50,17 @@ class NewsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def create
     @news = current_teacher.news.build(news_params)
-    @news.student_ids = params[:news][:student_ids].split
+    @news.student_ids = params[:news][:student_ids]
     if @news.save
-      NoticeMailer.create_news(@news).deliver_later
+      if ( file = @news.upfile )
+        path = "uploads/news/#{@news.id}"
+        FileUtils.mkdir_p(path) unless FileTest.exist?(path)
+        File.open("#{path}/#{file.original_filename}", 'wb') do |f|
+          f.write(file.read)
+        end
+      end
       flash[:success] = '作成されました'
       redirect_to teacher_news_url(current_teacher)
     else
@@ -68,34 +69,34 @@ class NewsController < ApplicationController
     end
   end
 
-  def update
-    if @news.update(news_params)
+  def destroy
+    # ログインしているのが講師本人か、認証された講師か確認
+    if correct_teacher?(@news.teacher) || admin_logged_in?
+      @news.destroy
       redirect_to teacher_news_url(current_teacher)
-      flash[:success] = '更新しました'
+      flash[:success] = '削除しました'
     else
-      flash.now[:danger] = '入力情報をご確認下さい'
-      render 'edit'
+      store_location
+      redirect_to login_form_teachers_url and return
     end
   end
 
-  def destroy
-    @news.destroy
-    redirect_to teacher_news_url(current_teacher)
-    flash[:success] = '削除しました'
-  end
-
   def release
-    flash[:success] = "公開しました"
+    admin_logged_in
     @news.released!
-    @news.save
+    flash[:success] = "公開しました"
+    NoticeMailer.create_news(@news).deliver_later
     redirect_to teacher_news_url(current_teacher)
   end
 
-  def draft
-    flash[:success] = "非公開にしました"
-    @news.draft!
-    @news.save
-    redirect_to teacher_news_url(current_teacher)
+  def file
+    user_logged_in
+    if filenames = Dir.glob("uploads/news/#{@news.id}/*")
+      send_file "uploads/news/#{@news.id}/#{File.basename(filenames[0])}"
+    else
+      flash[:danger] = "ファイルが存在しません"
+      redirect_back fallback_location: { action: :show }
+    end
   end
 
   private
@@ -104,14 +105,6 @@ class NewsController < ApplicationController
     end
 
     def news_params
-      params.require(:news).permit(:title, :content)
-    end
-
-    # ログインしているのが講師本人か、認証された講師か確認
-    def correct_teacher_or_admin
-      unless correct_teacher?(@news.teacher) || admin_logged_in?
-        store_location
-        redirect_to login_form_teachers_url and return
-      end
+      params.require(:news).permit(:title, :content, :upfile)
     end
 end

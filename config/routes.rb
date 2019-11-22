@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :student_activations, only: [:show, :edit]
   
-  resources :groups
+  resources :groups, except: [:edit, :update]
   
   resources :teachers do
     collection do
@@ -42,12 +42,12 @@ Rails.application.routes.draw do
 
   resources :edit_reports, only: [:index, :new, :create]
 
-  resources :news, except: :index do
+  resources :news, except: [:index, :edit, :update] do
     collection do
       get :select
     end
     member do
-      post :release, :draft
+      post :release, :file
       get :teacher, :student
     end
   end
