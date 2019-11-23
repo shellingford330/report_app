@@ -1,4 +1,7 @@
 class Contact < ApplicationRecord
+  attr_accessor :upfile
+  include FileValidation
+  
   belongs_to :student
   has_many :replies, as: :replyable
 

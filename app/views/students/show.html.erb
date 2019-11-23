@@ -87,11 +87,10 @@
 				<% end %>
 
 				<% if @news.any? %>
-					<% student_id = [@student.id]%>
 					<h2 class="mb-0 pl-2">
 						お知らせ
 						<% if teacher_logged_in? %>
-							<%= link_to new_news_url(students_id: @student.id, select: "one"), class: "btn btn-news float-right" do %>
+							<%= link_to new_news_url(student_ids: @student.id), class: "btn btn-news float-right" do %>
 								<i class="fas fa-plus"></i> お知らせ
 							<% end %>
 						<% end %>

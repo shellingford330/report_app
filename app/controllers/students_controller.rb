@@ -100,11 +100,11 @@ class StudentsController < ApplicationController
 			# 更新用
 			if admin_logged_in?
 				params[:student][:lesson_day] = params[:student][:lesson_days].join(" ")
-				params.require(:student).permit(:name, :grade, :lesson_day)
+				params.require(:student).permit(:name, :grade, :lesson_days)
 			elsif student_logged_in?
 				params[:student][:lesson_day] = params[:student][:lesson_days].join(" ")
 				params.require(:student).permit(
-					:name, :grade, :email, :lesson_day, :image, :image_cache, :remove_image, 
+					:name, :grade, :email, :lesson_days, :image, :image_cache, :remove_image, 
 					:password, :password_confirmation
 				)
 			# 登録用

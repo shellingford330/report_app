@@ -5,7 +5,7 @@ class NewsController < ApplicationController
   def student
     student = Student.find(params[:id])
     if teacher_logged_in?
-      @news = student.paginate(page: params[:page], per_page: 9) 
+      @news = student.news.paginate(page: params[:page], per_page: 9) 
     elsif correct_student?(student)
       @news = student.news.released.paginate(page: params[:page], per_page: 9) 
     else
@@ -72,6 +72,7 @@ class NewsController < ApplicationController
   def destroy
     # ログインしているのが講師本人か、認証された講師か確認
     if correct_teacher?(@news.teacher) || admin_logged_in?
+      FileUtils.rm_r("uploads/news/#{@news.id}")
       @news.destroy
       redirect_to teacher_news_url(current_teacher)
       flash[:success] = '削除しました'

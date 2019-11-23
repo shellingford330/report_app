@@ -87,10 +87,13 @@ class ReportsController < ApplicationController
 
   def reply
     @reply = current_user.replies.build(content: params[:reply][:content])
-    @report.replies << @reply
-    @reply.send_create_reply_mail
-    flash[:success] = "返信しました"
-    redirect_to @report
+    if @report.replies << @reply
+      @reply.send_create_reply_mail
+      flash[:success] = "返信しました"
+      redirect_to @report
+    else
+      render :show
+    end
   end
 
   private
