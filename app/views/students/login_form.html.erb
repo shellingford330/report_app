@@ -50,7 +50,7 @@
 					<span>&times;</span>
 				</button>
 			</div>
-			<%= form_for(@student, method: :post) do |f| %>
+			<%= form_for(@student, method: :post, remote: true) do |f| %>
 				<div class="modal-body">
 
 					<%= render 'share/error_messages', obj: @student%>
@@ -63,12 +63,12 @@
 					<div class="form-group">
 						<div class="row">
 							<div class="col">
-								<%= label_tag :last_name, "姓名（ローマ字）" %>
-								<%= text_field_tag :last_name, '',  class: "form-control",  placeholder: "例）suzuki" %>
+								<%= f.label :last_name, "姓名（ローマ字）" %>
+								<%= f.text_field :last_name,  class: "form-control",  placeholder: "例）suzuki" %>
 							</div>
 							<div class="col">
-								<%= label_tag :first_name, "名前（ローマ字）" %>
-								<%= text_field_tag :first_name, '', class: "form-control",  placeholder: "例）ichiro" %>
+								<%= f.label :first_name, "名前（ローマ字）" %>
+								<%= f.text_field :first_name, class: "form-control",  placeholder: "例）ichiro" %>
 							</div>
 						</div>
 					</div>

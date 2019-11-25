@@ -1,5 +1,5 @@
 class Student < ApplicationRecord
-	attr_accessor :remember_token, :activation_token, :reset_token, :lesson_days
+	attr_accessor :remember_token, :activation_token, :reset_token, :lesson_days, :first_name, :last_name
 
 	mount_uploader :image, ImageUploader
 
@@ -21,15 +21,16 @@ class Student < ApplicationRecord
 	end
 
 	VALID_LOGIN_ID_REGEX = /\A.+_.+\Z/
-	validates :login_id, { uniqueness: true, 
-												 format: { with: VALID_LOGIN_ID_REGEX } }
-	validates :grade,    { presence: true }
-	validates :name,     { presence: true, length: { maximum: 50 } }
+	validates :login_id,   { uniqueness: true, 
+												   format: { with: VALID_LOGIN_ID_REGEX } }
+	validates :first_name, { presence: true }
+	validates :grade,      { presence: true }
+	validates :name,       { presence: true, length: { maximum: 50 } }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-	validates :email,    { presence: true, 
-												 length: { maximum: 255 },
-												 format: { with: VALID_EMAIL_REGEX } }
-	validates :password, { presence: true, length: { minimum: 6 }, allow_nil: true }
+	validates :email,      { presence: true, 
+												   length: { maximum: 255 },
+												   format: { with: VALID_EMAIL_REGEX, allow_blank: true } }
+	validates :password,   { presence: true, length: { minimum: 6 }, allow_nil: true }
 	validate do |student|
 		if student.image.size > 5.megabytes
 			errors.add(:image, "5MB以下にして下さい。")

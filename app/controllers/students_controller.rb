@@ -49,14 +49,15 @@ class StudentsController < ApplicationController
 		@student = Student.new(student_params)
 		# メールアドレスの@の前のドメインを取得
 		domain =  /@/.match(@student.email).try(:pre_match)
-		@student.login_id = "#{domain}_#{params[:first_name]}"
+		@student.login_id = "#{domain}_#{@student.first_name}"
 		if @student.save
 			@student.send_account_activation_mail
-			flash[:success] = "アカウント有効化メールをご確認下さい"
-			redirect_to students_login_url
+			flash[:success] = "アカウント有効化メールを送信しました"
+			head 201
 		else
+			@student.login_id = nil
 			flash.now[:danger] = "入力情報をご確認下さい"
-			render :login_form, layout: 'login'
+			render json: { messages: @student.errors.full_messages }, status: 422
 		end
 	end
 
@@ -100,17 +101,17 @@ class StudentsController < ApplicationController
 			# 更新用
 			if admin_logged_in?
 				params[:student][:lesson_day] = params[:student][:lesson_days].join(" ")
-				params.require(:student).permit(:name, :grade, :lesson_days)
+				params.require(:student).permit(:name, :grade, :lesson_day)
 			elsif student_logged_in?
 				params[:student][:lesson_day] = params[:student][:lesson_days].join(" ")
 				params.require(:student).permit(
-					:name, :grade, :email, :lesson_days, :image, :image_cache, :remove_image, 
+					:name, :grade, :email, :lesson_day, :image, :image_cache, :remove_image, 
 					:password, :password_confirmation
 				)
 			# 登録用
 			else
 				params.require(:student).permit(
-					:name, :grade, :email, :password, :password_confirmation
+					:name, :grade, :email, :first_name, :last_name, :password, :password_confirmation
 				)
 			end
 		end
