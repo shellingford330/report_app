@@ -23,7 +23,7 @@ class Student < ApplicationRecord
 	VALID_LOGIN_ID_REGEX = /\A.+_.+\Z/
 	validates :login_id,   { uniqueness: true, 
 												   format: { with: VALID_LOGIN_ID_REGEX } }
-	validates :first_name, { presence: true }
+	validates :first_name, { presence: true, on: :create }
 	validates :grade,      { presence: true }
 	validates :name,       { presence: true, length: { maximum: 50 } }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

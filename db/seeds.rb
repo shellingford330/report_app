@@ -14,7 +14,7 @@ owner = Teacher.new(	status: 2,
 											password: "jiyujyuku",
 											password_confirmation: "jiyujyuku" )
 owner2 = Teacher.new(	status: 2,
-											name: "オーナー2", 
+											name: "owenr2", 
 											email: "owner2@example.com",
 											activated: true,
 											activated_at: Time.zone.now,

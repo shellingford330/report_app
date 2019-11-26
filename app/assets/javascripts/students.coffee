@@ -20,6 +20,4 @@ $(document).on 'ajax:error', '#new_student', (xhr, data, status) ->
 	else
 		frame.append(ul)
 		form.prepend(frame)
-		div = $('<div class="alert alert-danger" role="alert"></div>').text("#{count}つのエラーがあります。")
-		form.prepend(div)
 	
