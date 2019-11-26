@@ -97,6 +97,10 @@ class TeachersController < ApplicationController
 
     def set_teacher
       @teacher = Teacher.find(params[:id])
+      unless @teacher.activated?
+				flash[:danger] = "アカウントが有効化されていません"
+				redirect_to login_form_teachers_url and return
+			end
     end
 
     # ログインを既にしているか確認

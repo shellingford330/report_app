@@ -18,6 +18,10 @@
         <h5 class="mb-0">
           「<%= contact.title %>」
         </h5>
+
+        <p class="my-2">
+          内容：<%= truncate(contact.content, length: 15) %>
+        </p>
     
         <div class="text-muted my-2">
           <%= time_ago_in_words(contact.created_at) %>前に投稿

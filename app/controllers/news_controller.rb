@@ -72,7 +72,8 @@ class NewsController < ApplicationController
   def destroy
     # ログインしているのが講師本人か、認証された講師か確認
     if correct_teacher?(@news.teacher) || admin_logged_in?
-      FileUtils.rm_r("uploads/news/#{@news.id}")
+      path = "uploads/news/#{@news.id}"
+      FileUtils.rm_r(path) if FileTest.exist?(path)
       @news.destroy
       redirect_to teacher_news_url(current_teacher)
       flash[:success] = '削除しました'

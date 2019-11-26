@@ -46,18 +46,17 @@ class StudentsController < ApplicationController
 	end
 
 	def create
-		@student = Student.new(student_params)
+		student = Student.new(student_params)
 		# メールアドレスの@の前のドメインを取得
-		domain =  /@/.match(@student.email).try(:pre_match)
-		@student.login_id = "#{domain}_#{@student.first_name}"
-		if @student.save
-			@student.send_account_activation_mail
+		domain =  /@/.match(student.email).try(:pre_match)
+		student.login_id = "#{domain}_#{student.first_name}"
+		if student.save
+			student.send_account_activation_mail
 			flash[:success] = "アカウント有効化メールを送信しました"
 			head 201
 		else
-			@student.login_id = nil
 			flash.now[:danger] = "入力情報をご確認下さい"
-			render json: { messages: @student.errors.full_messages }, status: 422
+			render json: { messages: student.errors.full_messages }, status: 422
 		end
 	end
 
@@ -73,22 +72,27 @@ class StudentsController < ApplicationController
 	end
 
 	def login
-		@student = Student.new(login_id: params[:student][:login_id])
-		student = Student.find_by(login_id: params[:student][:login_id])
-		if student && student.authenticate(params[:student][:password])
-			if student.activated?
-				student_log_in(student)
-				params[:remember_me] == 'yes' ? remember_student(student) : forget_student(student)
-				flash[:notice] = "ログインしました"
-				redirect_back_to student_path(student)
-			else
-				flash[:danger] = "アカウントが有効化されていません。メールをご確認下さい"
-				redirect_to students_login_url
-			end
-		else
-			flash.now[:danger] = "入力情報をご確認下さい"
-			render 'login_form', layout: 'login'
+		@student = Student.find_by(login_id: params[:student][:login_id])
+		# 生徒が見つかったか
+		unless @student
+			@student = Student.new
+			flash.now[:danger] = "生徒が見つかりませんでした"
+			render 'login_form', layout: 'login' and return
 		end
+		# パスワードが間違っているか
+		unless @student.authenticate(params[:student][:password])
+			flash.now[:danger] = "パスワードが間違っております"
+			render 'login_form', layout: 'login' and return
+		end
+		# 有効化されているか
+		unless @student.activated?
+			flash[:danger] = "アカウントが有効化されていません。メールをご確認下さい"
+			redirect_to students_login_url and return
+		end
+		student_log_in(@student)
+		params[:remember_me] == 'yes' ? remember_student(@student) : forget_student(@student)
+		flash[:notice] = "ログインしました"
+		redirect_back_to student_path(@student)
 	end
 
 	def logout

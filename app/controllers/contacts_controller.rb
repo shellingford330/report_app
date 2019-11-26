@@ -55,10 +55,8 @@ class ContactsController < ApplicationController
     if @contact.replies << @reply
       @reply.send_create_reply_mail
       flash[:success] = "返信しました"
-      redirect_to @contact
-    else
-      render :show
     end
+    redirect_to @contact
   end
 
   private
