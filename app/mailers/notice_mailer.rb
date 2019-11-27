@@ -65,14 +65,14 @@ class NoticeMailer < ApplicationMailer
   def authenticate_student(student)
     @student = student
     owner_emails = Teacher.owner.pluck(:email)
-    mail to: owner_emails, subject: "生徒から登録依頼が届きました"
+    mail to: owner_emails, subject: "生徒の登録依頼が届きました"
   end
 
   # 講師がオーナーに承認依頼メール
   def authenticate_teacher(teacher)
     @teacher = teacher
     owner_emails = Teacher.owner.pluck(:email)
-    mail to: owner_emails, subject: "生徒から登録依頼が届きました"
+    mail to: owner_emails, subject: "講師の登録依頼が届きました"
   end
     
 

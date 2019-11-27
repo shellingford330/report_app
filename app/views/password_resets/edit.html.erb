@@ -1,6 +1,11 @@
 <% provide(:title, 'パスワード再設定') %>
-<div class="container mt-4">
-  <div class="row">
+<div class="container mt-4" style="
+    text-align: center !important;
+    height: calc(100% - 65px);
+    display: flex;
+    align-items: center;
+    justify-content: center;">
+  <div class="row" style="width: 100%;">
     <div class="col-md-6 mx-auto">
       <h2>パスワード再設定</h2>
       <hr>
@@ -23,7 +28,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-4 mx-auto">
+          <div class="col-md-6 mx-auto">
             <%= f.submit "パスワード更新", data: { disable_with: '処理中...' }, class: "btn btn-sub btn-block" %>
             
           </div>
