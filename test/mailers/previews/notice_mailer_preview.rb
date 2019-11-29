@@ -28,14 +28,14 @@ class NoticeMailerPreview < ActionMailer::Preview
   # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/activate_account
   def activate_account
     student = Student.first
-    student.activation_token = Student.new_token
+    student.activation_token = Token.generate
     NoticeMailer.activate_account(student)
   end
 
   # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/authenticate_student
   def authenticate_student
     student = Student.first
-    student.activation_token = Student.new_token
+    student.activation_token = Token.generate
     NoticeMailer.authenticate_student(student)
   end
 
@@ -54,7 +54,7 @@ class NoticeMailerPreview < ActionMailer::Preview
   # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/password_reset
   def password_reset
     user = Student.first
-    user.reset_token = Student.new_token
+    user.reset_token = Token.generate
     NoticeMailer.password_reset(user)
   end
 

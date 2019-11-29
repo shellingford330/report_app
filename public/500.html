@@ -58,6 +58,28 @@
       .message h3 {
         font-size: 2.5em;
       }
+      .message button {
+        background: transparent;
+        border: 2px solid #c8fff4;
+        color: #c8fff4;
+        padding: 5px 15px;
+        font-size: 1.25em;
+        transition: all 0.15s ease;
+        border-radius: 3px;
+      }
+
+      .message button a {
+        color: #c8fff4;
+        text-decoration: none;
+      }
+
+      .message button:hover {
+        background: #03dac6;
+        border: 2px solid #03dac6;
+        color: #111;
+        cursor: pointer;
+        transform: scale(1.05);
+      }
     </style>
   </head>
 
@@ -66,7 +88,13 @@
       <h1>500</h1>
       <h3>Server Error</h3>
       <h2>技術的な問題が発生しています。</h2>
-      <h4>ご迷惑をお掛けしております。</h4>
+      <h4>
+        ご迷惑をお掛けしております。<br />
+        以下からエラー内容をご報告して頂けますと幸いです。
+      </h4>
+      <button>
+        <a href="mailto:iriya@jiyujyuku.com">お問い合わせ</a>
+      </button>
     </div>
   </body>
 </html>
