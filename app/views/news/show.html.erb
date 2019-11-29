@@ -52,10 +52,36 @@
             </div>
             
           </div>
+
         <% end %>
         
       </div>
 
+      <% if teacher_logged_in? %>
+        <hr>
+
+        <h4 class="mt-4 pl-3">
+          <strong class="align-middle">生徒（<%= @students.count %>人）</strong>
+        </h4>
+        <table class="table table-sm">
+          <tbody>
+            <% @students.each do |student| %>
+            <tr>
+              <td>
+                <% if student.image? %>
+                  <%= image_tag student.image.url, :size => "20x20", class: "mr-3 rounded-circle" %>
+                <% else %>
+                  <%= image_tag 'student.png', :size => "20x20", class: "mr-3 rounded-circle student-icon" %>
+                <% end %>
+                <%= student.name %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+
+      
     </div>
   </div>
 </div>
