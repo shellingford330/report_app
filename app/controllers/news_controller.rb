@@ -32,6 +32,7 @@ class NewsController < ApplicationController
       store_location
       redirect_to login_form_teachers_url and return
     end
+    @students = @news.students
   end
 
   def select
