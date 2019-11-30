@@ -33,7 +33,7 @@ class ContactsController < ApplicationController
   def create
     @contact = current_student.contacts.build(contact_params)
     if @contact.save
-      @contact.send_create_contact_mail
+      NoticeMailer.create_contact(@contact).deliver_now
       redirect_to @contact
       flash[:success] = '作成されました'
     else
@@ -53,6 +53,7 @@ class ContactsController < ApplicationController
 
     @reply = current_user.replies.build(content: params[:reply][:content])
     if @contact.replies << @reply
+      @contact.touch                 # updated_atを更新
       @reply.send_create_reply_mail
       flash[:success] = "返信しました"
     end
