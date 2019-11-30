@@ -1,9 +1,9 @@
 <% provide(:title, "詳細") %>
-<div class="container">
+<div class="container my-4">
   <div class="row">
     <div class="col-md-9 mx-auto">
 
-      <h3 class="mt-4 mb-0 pl-3">
+      <h3 class="mb-0 pl-3">
         <strong class="align-middle">お知らせ</strong>
       </h3>
 
@@ -60,25 +60,27 @@
       <% if teacher_logged_in? %>
         <hr>
 
-        <h4 class="mt-4 pl-3">
-          <strong class="align-middle">生徒（<%= @students.count %>人）</strong>
-        </h4>
-        <table class="table table-sm">
-          <tbody>
-            <% @students.each do |student| %>
-            <tr>
-              <td>
-                <% if student.image? %>
-                  <%= image_tag student.image.url, :size => "20x20", class: "mr-3 rounded-circle" %>
-                <% else %>
-                  <%= image_tag 'student.png', :size => "20x20", class: "mr-3 rounded-circle student-icon" %>
-                <% end %>
-                <%= student.name %>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <div class="news-wrapper px-4 py-2">
+          <h4 class="mt-4 pl-2">
+            <strong class="align-middle">生徒（<%= @students.count %>人）</strong>
+          </h4>
+          <table class="table table-sm">
+            <tbody>
+              <% @students.each do |student| %>
+              <tr>
+                <td>
+                  <% if student.image? %>
+                    <%= image_tag student.image.url, :size => "20x20", class: "mr-3 rounded-circle" %>
+                  <% else %>
+                    <%= image_tag 'student.png', :size => "20x20", class: "mr-3 rounded-circle student-icon" %>
+                  <% end %>
+                  <%= student.name %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       <% end %>
 
       
