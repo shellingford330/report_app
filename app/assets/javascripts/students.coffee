@@ -20,4 +20,4 @@ $(document).on 'ajax:error', '#new_student', (xhr, data, status) ->
 	else
 		frame.append(ul)
 		form.prepend(frame)
-	
+	notie.alert(3, "入力情報をご確認下さい", 2.5);
