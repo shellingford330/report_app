@@ -34,17 +34,22 @@
 
           <hr>
 
-          <div class="row mt-2">
+          <div class="row">
+            <div class="col-md-4 mt-2 mx-auto">
+              <a href="#" class="btn btn-block" data-toggle="modal" data-target="#addNewsModal">
+                <i class="fas fa-check"></i>  選択した生徒を確認
+              </a>
+            </div>
 
             <% if admin_logged_in? && draft?(@news) %>
-              <div class="col-md-6 mt-2">
+              <div class="col-md-4 mt-2">
                 <%= link_to release_news_url(@news), method: :post, class: "btn d-block" do %>
                   <i class="far fa-eye"></i> 公開する
                 <% end %>
               </div>
             <% end %>
 
-            <div class="col-md-6 mt-2 mx-auto">
+            <div class="col-md-4 mt-2 mx-auto">
               <%= link_to news_url(@news), data:{ confirm: "本当に削除してもよろしいですか" },
                 method: :delete, class: "btn d-block bg-delete" do %>
                 <i class="fas fa-trash"></i>  削除する
@@ -56,34 +61,31 @@
         <% end %>
         
       </div>
-
-      <% if teacher_logged_in? %>
-        <hr>
-
-        <div class="news-wrapper px-4 py-2">
-          <h4 class="mt-4 pl-2">
-            <strong class="align-middle">生徒（<%= @students.count %>人）</strong>
-          </h4>
-          <table class="table table-sm">
-            <tbody>
-              <% @students.each do |student| %>
-              <tr>
-                <td>
-                  <% if student.image? %>
-                    <%= image_tag student.image.url, :size => "20x20", class: "mr-3 rounded-circle" %>
-                  <% else %>
-                    <%= image_tag 'student.png', :size => "20x20", class: "mr-3 rounded-circle student-icon" %>
-                  <% end %>
-                  <%= student.name %>
-                </td>
-              </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      <% end %>
-
       
+    </div>
+  </div>
+</div>
+
+
+<!-- モーダル -->
+<div class="modal fade" id="addNewsModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-news">
+        <h5 class="modal-title"><i class="far fa-check-circle"></i> 選択した生徒</h5>
+        <button class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% @students.each do |student| %>
+          <p>
+            <%= student.grade %>
+                      <i class="fas fa-user-circle"></i>
+            <%= student.name %>
+          </p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

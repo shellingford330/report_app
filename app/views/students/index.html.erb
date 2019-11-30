@@ -2,7 +2,7 @@
 <section id="posts">
   <div class="container">
     <% if owner_logged_in? %>
-      <div class="py-2">
+      <div class="my-2">
         <%= link_to upgrade_student_path , method: :post, data: { confirm:
         '本当によろしいですか？'} , class: "btn btn-block" do %>
         <i class="fas fa-check"></i> 学年を更新 <% end %>
