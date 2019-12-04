@@ -19,7 +19,7 @@ class NewsControllerTest < ActionDispatch::IntegrationTest
 
   test "should show news" do
     get news_url(@news)
-    assert_redirected_to students_login_path
+    assert_redirected_to root_path
   end
 
   test "should get edit" do

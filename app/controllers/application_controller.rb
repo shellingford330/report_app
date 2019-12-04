@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 			unless user_logged_in?
 				flash[:danger] = "ログインをして下さい"
 				store_location
-				redirect_to students_login_path
+				redirect_to root_path
 			end
 		end
 
@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
 			unless student_logged_in?
 				flash[:danger] = "ログインをして下さい"
 				store_location
-				redirect_to students_login_path
+				redirect_to root_path
 			end
 		end
 

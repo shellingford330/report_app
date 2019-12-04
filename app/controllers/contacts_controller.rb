@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
       @contacts = current_student.contacts.paginate(page: params[:page], per_page: 9)
     else
       store_location
-      redirect_to students_login_url
+      redirect_to root_url
     end
   end
 
@@ -22,7 +22,7 @@ class ContactsController < ApplicationController
       @contact.replies.written_by("Teacher").update_all(read_flg: true)
     else
       store_location
-      redirect_to students_login_url
+      redirect_to root_url
     end
   end
 
@@ -48,7 +48,7 @@ class ContactsController < ApplicationController
     # 管理者かお問い合わせを書いた生徒本人であるか確認
     unless admin_logged_in? || correct_student?(@contact.student)
       store_location
-      redirect_to students_login_url and return
+      redirect_to root_url and return
     end
 
     @reply = current_user.replies.build(content: params[:reply][:content])

@@ -76,7 +76,7 @@ class PasswordResetsController < ApplicationController
     if user.kind_of?(Teacher)
       redirect_to login_form_teachers_path and return
     else
-      redirect_to students_login_path and return
+      redirect_to root_path and return
     end
   end
 end

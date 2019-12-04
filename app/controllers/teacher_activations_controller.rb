@@ -17,7 +17,7 @@ class TeacherActivationsController < ApplicationController
 		if teacher && !teacher.activated? && teacher.authenticated?(:activation, params[:id])
 			teacher.update(activated: true, activated_at: Time.zone.now)
 			teacher.send_create_teacher_mail
-			flash[:success] = "生徒に承認メールを送信しました"
+			flash[:success] = "講師に承認メールを送信しました"
 		else
 			flash[:danger] = "有効化リンクが無効となっています"
 		end

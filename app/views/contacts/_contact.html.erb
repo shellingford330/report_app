@@ -10,7 +10,7 @@
 
         <p class="mb-2">
           <strong>お問い合わせ</strong>
-          <% if student_checked?(contact) %>
+          <% if contact.checked_by_student? %>
             <span class="float-right text-success">New</span>
           <% end %>
         </p>
@@ -43,7 +43,7 @@
               </div>
             <% end %>
 
-            <% if reply_exists?(contact) %>
+            <% if contact.has_replies? %>
               <div>
                 <i class="far fa-check-square"></i>   返信
               </div>
@@ -69,7 +69,7 @@
         </div>
         <p class="mb-2">
           <strong>お問い合わせ</strong>
-          <% if teacher_checked?(contact) %>
+          <% if contact.checked_by_teacher? %>
             <span class="float-right text-success">New</span>
           <% end %>
         </p>

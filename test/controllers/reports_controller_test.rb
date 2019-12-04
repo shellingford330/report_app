@@ -20,7 +20,7 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
 
   test "should show report" do
     get report_url(@report)
-    assert_redirected_to students_login_url
+    assert_redirected_to root_url
   end
 
   test "should get edit" do

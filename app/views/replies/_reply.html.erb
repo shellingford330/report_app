@@ -1,11 +1,11 @@
 <!-- 返信履歴 -->
 <% if reply.writeable_type == "Teacher" %>
 	<div class="media mb-2 reply-teacher">
-		<% teacher = reply_teacher(reply) %>
+		<% teacher = reply.teacher %>
 		<% if teacher.image? %>
 			<%= image_tag teacher.image.url, :size => "50x50", class: "d-flex mr-3 rounded-circle" %>
 		<% else %>
-			<%= image_tag 'student.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle student-icon" %>
+			<%= image_tag 'teacher.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle student-icon" %>
 		<% end %>
 		<div class="media-body">
 			<h5 class="mt-0"><%= teacher.name %></h5>
@@ -14,7 +14,7 @@
 	</div>
 <% elsif reply.writeable_type == "Student"%>
 	<div class="media mb-2">
-		<% student = reply_student(reply) %>
+		<% student = reply.student %>
 		<% if student.image? %>
 			<%= image_tag student.image.url, :size => "50x50", class: "d-flex mr-3 rounded-circle" %>
 		<% else %>

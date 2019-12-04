@@ -6,7 +6,7 @@ class StudentSignupTestTest < ActionDispatch::IntegrationTest
   end
 
   test "valid signup information with account activation" do
-    get students_login_path
+    get root_path
     assert_difference 'Student.count', 1 do
       post students_path, params: { student: { name: "鈴木　一郎",
                                                email: "ichiro@example.com",

@@ -119,7 +119,7 @@ class ReportsController < ApplicationController
     def correct_student_or_teacher
       unless correct_student?(@report.student) || teacher_logged_in?
         store_location
-        redirect_to students_login_path and return
+        redirect_to root_path and return
       end
     end
 
@@ -127,7 +127,7 @@ class ReportsController < ApplicationController
     def correct_student_or_admin
       unless correct_student?(@report.student) || admin_logged_in?
         store_location
-        redirect_to students_login_path and return
+        redirect_to root_path and return
       end
     end
 end

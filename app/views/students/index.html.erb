@@ -3,7 +3,7 @@
   <div class="container">
     <% if owner_logged_in? %>
       <div class="my-2">
-        <%= link_to upgrade_student_path , method: :post, data: { confirm:
+        <%= link_to upgrade_students_path , method: :post, data: { confirm:
         '本当によろしいですか？'} , class: "btn btn-block" do %>
         <i class="fas fa-check"></i> 学年を更新 <% end %>
       </div>
@@ -13,7 +13,7 @@
         <div class="col-md-9 mb-3">
           <div class="card">
             <div style="background: #f0e7dd;" class="card-header">
-              <h4>生徒一覧</h4>
+              <h4>生徒一覧（<%= Student.where(activated: false).count %>人）</h4>
             </div>
             <% Student.grades.each do |grade| %>
               <% if (@students = students_of(grade)).exists? %>
@@ -41,7 +41,6 @@
                       <tr>
                         <th>生徒氏名</th>
                         <th>授業の曜日</th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -53,17 +52,6 @@
                         </td>
                         <td>
                           <%= student.lesson_day %>
-                        </td>
-                        <td class="text-right">
-                          <% if owner_logged_in? %>
-                            <%= link_to student, method: :delete, data: { confirm:
-                            '本当によろしいですか？'} , class: "btn btn-view bg-delete" do%>
-                              <i class="fas fa-trash"></i> 削除 
-                            <% end %> 
-                          <% end %>
-                          <%= link_to new_report_url(student_id: student.id), class: "btn btn-view" do %>
-                            <i class="fas fa-plus"></i> 報告書
-                          <% end %>
                         </td>
                       </tr>
                       <% end %>

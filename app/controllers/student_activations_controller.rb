@@ -11,7 +11,7 @@ class StudentActivationsController < ApplicationController
 		else
 			flash[:danger] = "有効化リンクが無効となっています"
 		end
-		redirect_to students_login_url
+		redirect_to root_url
 	end
 
 	# 塾側が塾生か確認

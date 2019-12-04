@@ -10,7 +10,7 @@ class NewsController < ApplicationController
       @news = student.news.released.paginate(page: params[:page], per_page: 9) 
     else
       store_location
-      redirect_to students_login_url
+      redirect_to root_url
     end
   end
 

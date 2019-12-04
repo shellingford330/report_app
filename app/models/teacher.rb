@@ -2,6 +2,7 @@ class Teacher < ApplicationRecord
 	attr_accessor :remember_token, :activation_token, :reset_token
 
 	mount_uploader :image, ImageUploader
+	include User
 
 	has_secure_password
 
@@ -43,35 +44,40 @@ class Teacher < ApplicationRecord
 		end
 	end
 
-	# 引数で受け取った文字列をハッシュ化
-	def Teacher.digest(string)
-		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
+	def invert_status
+		status = { "teacher" => "講師", "manager" => "管理者", "owner" => "オーナー" }
+		status[self.status]
 	end
 
-	# ランダムな文字列を生成
-	def Teacher.new_token
-		SecureRandom.urlsafe_base64
-	end
+	# # 引数で受け取った文字列をハッシュ化
+	# def Teacher.digest(string)
+	# 	cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+  #                                                 BCrypt::Engine.cost
+  #   BCrypt::Password.create(string, cost: cost)
+	# end
 
-	# トークンを生成し、ハッシュ化した物をDBに保存
-	def remember
-		self.remember_token = Teacher.new_token
-		update_attribute(:remember_digest, Teacher.digest(remember_token))
-	end
+	# # ランダムな文字列を生成
+	# def Teacher.new_token
+	# 	SecureRandom.urlsafe_base64
+	# end
 
-	# 講師に保存されているトークンを破棄
-	def forget
-		update_attribute(:remember_digest, nil)
-	end
+	# # トークンを生成し、ハッシュ化した物をDBに保存
+	# def remember
+	# 	self.remember_token = Teacher.new_token
+	# 	update_attribute(:remember_digest, Teacher.digest(remember_token))
+	# end
+
+	# # 講師に保存されているトークンを破棄
+	# def forget
+	# 	update_attribute(:remember_digest, nil)
+	# end
 	
-	# 渡されたトークンがダイジェストと一致したらtrueを返す
-	def authenticated?(attribute, token)
-		digest = self.send("#{attribute}_digest")
-		return false if digest.nil?
-		BCrypt::Password.new(digest).is_password?(token)
-	end
+	# # 渡されたトークンがダイジェストと一致したらtrueを返す
+	# def authenticated?(attribute, token)
+	# 	digest = self.send("#{attribute}_digest")
+	# 	return false if digest.nil?
+	# 	BCrypt::Password.new(digest).is_password?(token)
+	# end
 
 	# 講師有効化のメール
 	def send_create_teacher_mail
@@ -93,22 +99,17 @@ class Teacher < ApplicationRecord
 		NoticeMailer.password_reset(self).deliver_now
 	end
 
-	# 有効化トークンおよびダイジェストを作成および代入
-	def create_activation_digest
-		self.activation_token  = Teacher.new_token
-		self.activation_digest = Teacher.digest(activation_token)
-	end
+	# # 有効化トークンおよびダイジェストを作成および代入
+	# def create_activation_digest
+	# 	self.activation_token  = Teacher.new_token
+	# 	self.activation_digest = Teacher.digest(activation_token)
+	# end
 
-	# パスワード再設定する際に本人かどうか確認のためのトークンとダイジェストを作成
-	def create_reset_digest
-		self.reset_token = Teacher.new_token
-		self.update_columns(reset_digest:  Teacher.digest(self.reset_token),
-												reset_sent_at: Time.zone.now)
-	end
-
-	def invert_status
-		status = { "teacher" => "講師", "manager" => "管理者", "owner" => "オーナー" }
-		status[self.status]
-	end
+	# # パスワード再設定する際に本人かどうか確認のためのトークンとダイジェストを作成
+	# def create_reset_digest
+	# 	self.reset_token = Teacher.new_token
+	# 	self.update_columns(reset_digest:  Teacher.digest(self.reset_token),
+	# 											reset_sent_at: Time.zone.now)
+	# end
 	
 end

@@ -29,7 +29,7 @@
         </li>
         <li class="nav-item">
           <% if student_logged_in? %>
-            <%= link_to students_logout_path, class: "nav-link", method: :delete, 
+            <%= link_to logout_students_path, class: "nav-link", method: :delete, 
             data: { confirm: '本当にログアウトしますか？' } do %>
               <i class="fas fa-user-slash"></i> ログアウト
             <% end %>

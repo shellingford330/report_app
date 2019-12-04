@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
   root   'students#login_form'
 
-  get    '/students/login'      => 'students#login_form'
-  post   '/students/login'
-  delete '/students/logout'
-  post   '/students/upgrade',                               as: :upgrade_student
-  resources :students 
+  # get    '/students/login'      => 'students#login_form'
+  # post   '/students/login'
+  # delete '/students/logout'
+  # post   '/students/upgrade',                               as: :upgrade_student
+  resources :students do
+    collection do
+      get :login_form
+      post :login
+      delete :logout
+      post :upgrade
+    end
+  end
 
   resources :student_activations, only: [:show, :edit]
   

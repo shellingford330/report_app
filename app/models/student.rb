@@ -2,6 +2,7 @@ class Student < ApplicationRecord
 	attr_accessor :remember_token, :activation_token, :reset_token, :lesson_days, :first_name, :last_name
 
 	mount_uploader :image, ImageUploader
+	include User
 
 	has_secure_password
 
@@ -38,34 +39,34 @@ class Student < ApplicationRecord
 	end
 
 	# 引数で受け取った文字列をハッシュ化
-	def Student.digest(string)
-		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
-	end
+	# def Student.digest(string)
+	# 	cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+  #                                                 BCrypt::Engine.cost
+  #   BCrypt::Password.create(string, cost: cost)
+	# end
 
-	# ランダムな文字列を返す
-	def Student.new_token
-		SecureRandom.urlsafe_base64
-	end
+	# # ランダムな文字列を返す
+	# def Student.new_token
+	# 	SecureRandom.urlsafe_base64
+	# end
 
-	# トークンを生成し、ハッシュ化したものをデータベースに保存
-	def remember
-		self.remember_token = Student.new_token
-		update_attribute(:remember_digest, Student.digest(remember_token) )
-	end
+	# # トークンを生成し、ハッシュ化したものをデータベースに保存
+	# def remember
+	# 	self.remember_token = Student.new_token
+	# 	update_attribute(:remember_digest, Student.digest(remember_token) )
+	# end
 
-	# 記憶トークンを破棄
-	def forget
-		update_attribute(:remember_digest, nil)
-	end
+	# # 記憶トークンを破棄
+	# def forget
+	# 	update_attribute(:remember_digest, nil)
+	# end
 
-	# 渡されたトークンがダイジェストと一致したらtrueを返す
-	def authenticated?(attribute, token)	
-		digest = self.send("#{attribute}_digest")
-		return false if digest.nil?
-		BCrypt::Password.new(digest).is_password?(token)
-	end
+	# # 渡されたトークンがダイジェストと一致したらtrueを返す
+	# def authenticated?(attribute, token)	
+	# 	digest = self.send("#{attribute}_digest")
+	# 	return false if digest.nil?
+	# 	BCrypt::Password.new(digest).is_password?(token)
+	# end
 
 	# 全部の学年を配列で返す
 	def Student.grades
@@ -99,18 +100,18 @@ class Student < ApplicationRecord
 		NoticeMailer.password_reset(self).deliver_now
 	end
 	
-	# 有効化トークンおよびダイジェストを作成および代入
-	def create_activation_digest
-		self.activation_token  = Student.new_token
-		self.activation_digest = Student.digest(activation_token)
-	end
+	# # 有効化トークンおよびダイジェストを作成および代入
+	# def create_activation_digest
+	# 	self.activation_token  = Student.new_token
+	# 	self.activation_digest = Student.digest(activation_token)
+	# end
 
-	# パスワード再設定する際に本人かどうか確認のためのトークンとダイジェストを作成
-	def create_reset_digest
-		self.reset_token = Student.new_token
-		self.update_columns(reset_digest:  Student.digest(self.reset_token),
-												reset_sent_at: Time.zone.now)
-	end
+	# # パスワード再設定する際に本人かどうか確認のためのトークンとダイジェストを作成
+	# def create_reset_digest
+	# 	self.reset_token = Student.new_token
+	# 	self.update_columns(reset_digest:  Student.digest(self.reset_token),
+	# 											reset_sent_at: Time.zone.now)
+	# end
 
 	
 end

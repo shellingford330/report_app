@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
 			@reports = @student.reports.limit(3)
 			@news = @student.news.limit(3)
 		else
-			redirect_to students_login_path
+			redirect_to root_path
 		end
 	end
 
@@ -87,7 +87,7 @@ class StudentsController < ApplicationController
 		# 有効化されているか
 		unless @student.activated?
 			flash[:danger] = "アカウントが有効化されていません。メールをご確認下さい"
-			redirect_to students_login_url and return
+			redirect_to root_url and return
 		end
 		student_log_in(@student)
 		params[:remember_me] == 'yes' ? remember_student(@student) : forget_student(@student)
@@ -97,7 +97,7 @@ class StudentsController < ApplicationController
 
 	def logout
 		student_log_out if student_logged_in?
-		redirect_to students_login_path
+		redirect_to root_path
 	end
 
 	private
@@ -126,7 +126,7 @@ class StudentsController < ApplicationController
 			@student = Student.find(params[:id])
 			unless @student.activated?
 				flash[:danger] = "アカウントが有効化されていません"
-				redirect_to students_login_url and return
+				redirect_to root_url and return
 			end
 		end
 
@@ -137,8 +137,7 @@ class StudentsController < ApplicationController
 		def correct_student_or_admin
 			unless admin_logged_in? || correct_student?(@student)
 				store_location
-				redirect_to students_login_url and return
+				redirect_to root_url and return
 			end
 		end
-
 end

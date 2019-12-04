@@ -12,6 +12,17 @@ class Reply < ApplicationRecord
   
   validates :content, presence: true
 
+  # 渡されたリプライの書いた先生を返す
+	def teacher
+		Teacher.find(self.writeable_id)
+  end
+
+  # 渡されたリプライの書いた生徒を返す
+	def student
+		Student.find(self.writeable_id)
+	end
+  
+
   # コメントされたら返信相手に通知メール
   def send_create_reply_mail
     NoticeMailer.create_reply(self).deliver_now
