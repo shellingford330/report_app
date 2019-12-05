@@ -15,7 +15,7 @@
 
 <p>
 何か情報に間違いなどがあれば、以下から申し付け下さい。<br>
-<%= mail_to(@owner_emails[0], 'お問い合わせはこちら', bcc: @owner_emails[1]) %>
+<%= mail_to("iriya@jiyujyuku.com", 'お問い合わせはこちら', cc: @owner_emails[0], bcc: @owner_emails[1]) %>
 </p>
 
 <p>
