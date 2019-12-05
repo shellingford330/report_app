@@ -5,7 +5,7 @@
         <div class="col-md-9 mb-3">
           <div class="card bg-brown">
             <div class="card-header">
-              <h4>講師一覧</h4>
+              <h4>講師一覧（<%= Teacher.where(activated: true).count %>人）</h4>
             </div>
             <table class="table table-striped">
               <thead>

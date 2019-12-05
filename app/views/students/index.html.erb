@@ -13,7 +13,7 @@
         <div class="col-md-9 mb-3">
           <div class="card">
             <div style="background: #f0e7dd;" class="card-header">
-              <h4>生徒一覧（<%= Student.where(activated: false).count %>人）</h4>
+              <h4>生徒一覧（<%= Student.where(activated: true).count %>人）</h4>
             </div>
             <% Student.grades.each do |grade| %>
               <% if (@students = students_of(grade)).exists? %>
