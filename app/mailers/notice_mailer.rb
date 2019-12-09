@@ -35,7 +35,7 @@ class NoticeMailer < ApplicationMailer
     @kind_of_doc = @doc.kind_of?(Contact) ? 'お問い合わせ' : '指導報告書'
     # 返信をしたユーザー
     @sender = reply.writeable.name
-    @kind_of_sender = @sender.kind_of?(Student) ? '生徒' : '自由塾'
+    @kind_of_sender = reply.writeable.kind_of?(Student) ? '生徒' : '自由塾'
     # 返信が届いたユーザー
     if @kind_of_sender == '生徒'
       @receiver = "自由塾"

@@ -21,7 +21,7 @@ class NoticeMailerPreview < ActionMailer::Preview
 
   # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/create_reply
   def create_reply
-    reply = Reply.first
+    reply = Reply.find(49)
     NoticeMailer.create_reply(reply)
   end
 
