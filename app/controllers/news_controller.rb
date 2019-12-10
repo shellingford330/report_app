@@ -27,12 +27,12 @@ class NewsController < ApplicationController
   end
 
   def show
+    @students = @news.students
     # ログインしているのが生徒本人か、講師か確認
-    unless teacher_logged_in? || current_student.news.exists?(@news.id)
+    unless teacher_logged_in? || @students.exists?(current_student)
       store_location
       redirect_to login_form_teachers_url and return
     end
-    @students = @news.students
   end
 
   def select

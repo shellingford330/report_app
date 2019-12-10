@@ -58,34 +58,33 @@
             
           </div>
 
+          <!-- モーダル -->
+          <div class="modal fade" id="addNewsModal">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header bg-news">
+                  <h5 class="modal-title"><i class="far fa-check-circle"></i> 選択した生徒</h5>
+                  <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <% @students.each do |student| %>
+                    <p>
+                      <%= student.grade %>
+                                <i class="fas fa-user-circle"></i>
+                      <%= student.name %>
+                    </p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+
         <% end %>
         
       </div>
       
-    </div>
-  </div>
-</div>
-
-
-<!-- モーダル -->
-<div class="modal fade" id="addNewsModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-news">
-        <h5 class="modal-title"><i class="far fa-check-circle"></i> 選択した生徒</h5>
-        <button class="close" data-dismiss="modal">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <% @students.each do |student| %>
-          <p>
-            <%= student.grade %>
-                      <i class="fas fa-user-circle"></i>
-            <%= student.name %>
-          </p>
-        <% end %>
-      </div>
     </div>
   </div>
 </div>
