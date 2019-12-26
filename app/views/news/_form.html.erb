@@ -35,6 +35,7 @@
   <div class="form-group">
     <%= f.label :upfile, '添付ファイル' %><br>
     <%= f.file_field :upfile, size: 50 %>
+    <%= f.hidden_field :upfile_cache  %>
   </div>
 
   <div class="form-group">

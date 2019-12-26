@@ -27,7 +27,7 @@
 		<%= f.label :image, "アイコン画像" %><br>
 		<%= image_tag student.image.url, size: "225x225", class: "mb-2" if student.image? %>
 		<div class="form-group mb-1">
-			<%= f.file_field :image %>
+			<%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
 			<%= f.hidden_field :image_cache %>
 		</div>
 		<div class="form-group">
@@ -63,6 +63,7 @@
 		var image_size = this.files[0].size/1024/1024;
 		if (image_size > 5) {
 			alert('最大のファイルサイズは5MBです。もっと小さいファイルを選択して下さい。');
+			$('input[type="file"]').val(null);
 		}
 	});
 </script>

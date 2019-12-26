@@ -26,9 +26,7 @@
           <%= safe_join(@news.content.split("\n"), tag(:br)) %><br/>
         </div>
 
-        <% if (filename = Dir.glob("uploads/news/#{@news.id}/*")).present? %>
-          <%= link_to File.basename(filename[0]), file_news_url(@news), method: :post, class: "link" %>
-        <% end %>
+        <%= link_to @news.upfile.file.original_filename, file_news_url(@news), method: :post, class: "link" if @news.upfile? %>
 
         <% if correct_teacher?(@news.teacher) || admin_logged_in? %>
 

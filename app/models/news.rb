@@ -1,5 +1,6 @@
 class News < ApplicationRecord
-	attr_accessor :upfile
+	# attr_accessor :upfile
+	mount_uploader :upfile, UpfileUploader
 	include FileValidation
 
 	has_and_belongs_to_many :students

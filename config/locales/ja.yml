@@ -33,6 +33,7 @@ ja:
       news:
         title: タイトル
         content: 本文
+        upfile: 添付ファイル
       contact:
         title: タイトル
         content: 本文
