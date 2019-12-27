@@ -5,10 +5,8 @@ module FileValidation
 
 	private
 		def file_invalid?
-			if self.upfile?
-				if self.upfile.size > 5.megabyte
-					errors.add(:base, 'ファイルサイズは5MBサイズまでです')
-				end
+			if self.upfile.size > 5.megabyte
+				errors.add(:base, 'ファイルサイズは5MBサイズまでです')
 			end
 		end
 end
