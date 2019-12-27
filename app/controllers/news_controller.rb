@@ -96,7 +96,7 @@ class NewsController < ApplicationController
     #   send_file "uploads/news/#{@news.id}/#{File.basename(filenames[0])}"
     if @news.upfile?
       data = open(URI.encode(@news.upfile.url))
-      send_file data.read, disposition: 'attachment', filename: @news.upfile.identifier
+      send_data data.read, disposition: 'attachment', filename: @news.upfile.identifier
     else
       flash[:danger] = "ファイルが存在しません"
       redirect_back fallback_location: { action: :show }
