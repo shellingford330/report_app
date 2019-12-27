@@ -95,7 +95,7 @@ class NewsController < ApplicationController
     # if filenames = Dir.glob("uploads/news/#{@news.id}/*")
     #   send_file "uploads/news/#{@news.id}/#{File.basename(filenames[0])}"
     if @news.upfile?
-      data = open(@news.upfile.url)
+      data = open(URI.encode(@news.upfile.url))
       send_file data.read, disposition: 'attachment', filename: @news.upfile.identifier
     else
       flash[:danger] = "ファイルが存在しません"
