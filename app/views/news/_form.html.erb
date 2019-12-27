@@ -34,7 +34,11 @@
 
   <div class="form-group">
     <%= f.label :upfile, '添付ファイル' %><br>
-    <%= f.file_field :upfile, size: 50 %>
+    <%= f.file_field :upfile, size: 50, accept: "image/jpeg, image/gif, image/png, 
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+    application/vnd.openxmlformats-officedocument.presentationml.presentation,
+    application/pdf" %>
     <%= f.hidden_field :upfile_cache  %>
   </div>
 
