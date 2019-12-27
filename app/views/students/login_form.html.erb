@@ -1,5 +1,7 @@
 <% provide(:title, "ログイン")%>
-
+<div class="fixed-top text-right p-3">
+	<%= link_to '講師はこちら', login_form_teachers_url, class: "btn", style: "border-radius: 30px; background: #b08274;" %>
+</div>
 <%= form_for(@student, url: login_students_url, html: { class: 'form-signin' , method: :post }) do |f| %>
 	<%= image_tag 'logo.png' , class: "mb-4", height: 70 %>
 	<%= f.label :login_id, class: "sr-only" %>
@@ -24,48 +26,6 @@
 		</a>
 	</p>
 <% end %>
-
-<!-- <div class="text-right p-3">
-	<%= link_to '講師はこちら', login_form_teachers_url, class: "btn", 
-	style: "border-radius: 30px; background: #b08274;" %>
-</div>
-<div class="login">
-	<%= form_for(@student, url: '/students/login', html: { class: 'login-form' , method: :post }) do |f| %>
-
-		<h1 class="mb-4">
-			<%= image_tag 'logo.png' , height: 70 %>
-		</h1>
-
-		<div class="form-group">
-			<%= f.text_field :login_id, class: "form-control", placeholder: "ログインID" %>
-
-			<%= f.password_field :password, class: "form-control", placeholder: "パスワード" %>
-			<small class="form-text">
-				(パスワードを忘れた場合は
-				<a href="#" class="link" data-toggle="modal" data-target="#forget_password_modal">
-					こちら
-				</a>
-				)
-			</small>
-		</div> 
-
-		<div class="form-group">
-			<%= label_tag :remember_me do %>
-				<%= check_box_tag :remember_me,'yes', 'no' %>
-				<span>パスワードを保存する</span>
-			<% end %>
-		</div>
-
-		<%= f.submit 'ログインする', disable_with: '処理中...' , class: "btn btn-block btn-sub" %>
-		<p class="m-2">
-			<a href="#" class="link" data-toggle="modal" data-target="#addStudentModal">
-				新規登録の方はこちらから
-			</a>
-		</p>
-
-	<% end %>
-</div> -->
-
 
 <div class="modal fade" id="addStudentModal">
 	<div class="modal-dialog modal-lg">

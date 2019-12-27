@@ -28,52 +28,6 @@
 	</p>
 <% end %>
 
-<!-- <div class="text-right p-3">
-	<%= link_to '生徒はこちら', root_url, class: "btn", 
-	style: "border-radius: 30px; background: #b08274;" %>
-</div>
-<div class="login">
-	<%= form_for(@teacher, url: '/teachers/login', html: { class: 'login-form' , method: :post }) do |f| %>
-
-		<h1 class="m-0">
-			<%= image_tag 'logo.png', height: 70 %>
-		</h1>
-
-		<p>(塾講師ログイン用)</p>
-
-		<div class="form-group">
-			<%= f.email_field :email, class: "form-control", placeholder: "メールアドレス" %>
-	
-			<%= f.password_field :password, class: "form-control", placeholder: "パスワード" %>
-
-			<small class="form-text">
-				(パスワードを忘れた場合は
-				<a href="#" class="link" data-toggle="modal" data-target="#forget_password_modal">
-					こちら
-				</a>
-				)
-			</small>
-		</div>
-
-		<div class="form-group form-checkbox">
-			<%= label_tag :remember_me do %>
-				<%= check_box_tag :remember_me, 'yes', 'no' %>
-				<span>パスワードを保存する</span>
-			<% end %>
-		</div>
-
-		<%= f.submit 'ログインする', disable_with: '処理中...' , class: "btn btn-block btn-sub" %>
-
-		<p class="m-2">
-			<a href="#" class="link" data-toggle="modal" data-target="#addTeacherModal">
-				新規登録の方はこちらから
-			</a>
-		</p>
-
-	<% end %>
-</div> -->
-
-
 <div class="modal fade" id="addTeacherModal">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content bg-brown">

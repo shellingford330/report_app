@@ -55,13 +55,6 @@ class NewsController < ApplicationController
     @news = current_teacher.news.build(news_params)
     @news.student_ids = params[:news][:student_ids]
     if @news.save
-      # if ( file = @news.upfile )
-      #   path = "uploads/news/#{@news.id}"
-      #   FileUtils.mkdir_p(path) unless FileTest.exist?(path)
-      #   File.open("#{path}/#{file.original_filename}", 'wb') do |f|
-      #     f.write(file.read)
-      #   end
-      # end
       flash[:success] = '作成されました'
       redirect_to teacher_news_url(current_teacher)
     else
@@ -92,8 +85,6 @@ class NewsController < ApplicationController
 
   def file
     user_logged_in
-    # if filenames = Dir.glob("uploads/news/#{@news.id}/*")
-    #   send_file "uploads/news/#{@news.id}/#{File.basename(filenames[0])}"
     if @news.upfile?
       data = open(URI.encode(@news.upfile.url))
       send_data data.read, disposition: 'attachment', filename: @news.upfile.identifier
