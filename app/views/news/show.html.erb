@@ -26,7 +26,8 @@
           <%= safe_join(@news.content.split("\n"), tag(:br)) %><br/>
         </div>
 
-        <%= link_to @news.upfile.identifier, file_news_url(@news), method: :post, class: "link" if @news.upfile? %>
+        <%#= link_to @news.upfile.identifier, file_news_url(@news), method: :post, class: "link" if @news.upfile? %>
+        <%= link_to @news.upfile.identifier, @news.upfile.url, class: "link" if @news.upfile? %>
 
         <% if correct_teacher?(@news.teacher) || admin_logged_in? %>
 
