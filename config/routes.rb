@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root   'students#login_form'
 
+  get '/help' => 'top#help'
+
   get    '/students/login'      => 'students#login_form',    as: :login_form_students
   # post   '/students/login'
   # delete '/students/logout'

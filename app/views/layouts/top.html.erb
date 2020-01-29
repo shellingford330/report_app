@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield(:title) %>  |  自由塾</title>
+    <title>Okurun</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,22 +13,13 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
-  <body 
-    style="
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-align: center;
-      align-items: center;
-      padding-top: 40px;
-      padding-bottom: 40px;
-    "
-  >
-    <%= render 'layouts/flash' %>
+  <body data-spy="scroll" data-target="#whole">
     <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #eeeceb;border-bottom: 1px solid #9d9b9b;">
       <div class="container">
-        <%= link_to "Okurun", "/help", class: "navbar-brand", style: "color: #4d3a34;" %>
+        <%= link_to "Okurun", "/help", class: "navbar-brand" %>
 
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
           <span class="navbar-toggler-icon text-primary"></span>
@@ -66,7 +57,34 @@
         </div>
       </div>
     </nav>
+  
     <%= yield %>
+
+
+    
+    <script>
+      // Init Scrollspy
+      $("body").scrollspy({ target: "#whole" });
+
+      // Smooth Scrolling
+      $("#whole a").on("click", function(event) {
+        if (this.hash !== "") {
+          event.preventDefault();
+
+          const hash = this.hash;
+
+          $("html, body").animate(
+            {
+              scrollTop: $(hash).offset().top
+            },
+            800,
+            function() {
+              window.location.hash = hash;
+            }
+          );
+        }
+      });
+    </script>
 
   </body>
   

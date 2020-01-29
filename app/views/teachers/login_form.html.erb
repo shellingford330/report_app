@@ -1,7 +1,7 @@
 <% provide(:title, "ログイン(講師)")%>
-<div class="fixed-top text-right p-3">
+<!--div class="fixed-top text-right p-3">
 	<%= link_to '生徒はこちら', root_url, class: "btn", style: "border-radius: 30px; background: #b08274;" %>
-</div>
+</div-->
 <%= form_for(@teacher, url: login_teachers_url, html: { class: 'form-signin' , method: :post }) do |f| %>
 	<%= image_tag 'logo.png', height: 70 %>
 	<p>(塾講師ログイン用)</p>
@@ -32,7 +32,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content bg-brown">
 			<div class="modal-header" style="background: #c9bdb9;">
-				<h4 class="modal-title"><i class="fas fa-user-plus"></i> Okurun</h4>
+				<h4 class="modal-title"><i class="fas fa-user-plus"></i> 講師登録</h4>
 				<button class="close" data-dismiss="modal">
 					<span>&times;</span>
 				</button>

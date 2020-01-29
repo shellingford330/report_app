@@ -1,7 +1,7 @@
 <% provide(:title, "報告書詳細") %>
 <div class="container">
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-8 mx-auto">
       <!-- タイトル -->
       <h2 class="pl-2 mt-3 mb-1"><strong>指導報告書</strong></h2>
 
@@ -11,10 +11,16 @@
       </p>
 
       <hr />
-
+      <p class="pl-2 mb-0">　授業日： 　<%= @report.start_date.strftime('%m/%d') %>〜<%=
+          @report.end_date.strftime('%m/%d') %></p>
       <p class="pl-2">書いた講師： <i class="fas fa-user-circle"></i>    <%= @report.teacher.name %></p>
 
       <hr />
+    
+      <p class="lead">
+        授業科目
+      </p>
+      <p class="round-text"><%= @report.subject %></p>
 
       <% if @report.content.present? %>
         <p class="lead">
@@ -70,51 +76,53 @@
     </div>
 
     <!-- サイドバー -->
-    <div class="col-md-4">
-      <!-- 生徒情報-->
-      <div class="card my-4">
-        <h5 class="card-header">生徒情報</h5>
-        <div class="card-body">
-          <p class="mb-auto">
-            <strong>氏名　　</strong><%= link_to @report.student.name, @report.student %>
-          </p>
-					<hr>
-					<p class="mb-auto"><strong>学年　　</strong><%= @report.student.grade %></p>
+    <% if teacher_logged_in? %>
+      <div class="col-md-4">
+        <!-- 生徒情報-->
+        <div class="card my-4">
+          <h5 class="card-header">生徒情報</h5>
+          <div class="card-body">
+            <p class="mb-auto">
+              <strong>氏名　　</strong><%= link_to @report.student.name, @report.student %>
+            </p>
+            <hr>
+            <p class="mb-auto"><strong>学年　　</strong><%= @report.student.grade %></p>
+          </div>
         </div>
-      </div>
 
-      <!-- 報告書情報 -->
-      <div class="card my-4">
-        <h5 class="card-header">報告書情報</h5>
-        <div class="card-body">
-          <p class="mb-auto"><strong>授業日　</strong>    <%= @report.start_date.strftime('%m/%d') %>〜<%=
-          @report.end_date.strftime('%m/%d') %></p>
-					<hr>
-					<p class="mb-auto"><strong>科目　　</strong>      <%= @report.subject %></p>
+        <!-- 報告書情報 -->
+        <div class="card my-4">
+          <h5 class="card-header">報告書情報</h5>
+          <div class="card-body">
+            <p class="mb-auto"><strong>授業日　</strong>    <%= @report.start_date.strftime('%m/%d') %>〜<%=
+            @report.end_date.strftime('%m/%d') %></p>
+            <hr>
+            <p class="mb-auto"><strong>科目　　</strong>      <%= @report.subject %></p>
+          </div>
         </div>
-      </div>
 
-      <!-- 報告書編集 -->
-      <% if correct_teacher?(@report.teacher) || admin_logged_in? %>
-				<%= link_to edit_report_path(@report), class: "btn btn-block" do %>
-					<i class="fas fa-check"></i>  編集する
-				<% end %>
-        <% if admin_logged_in? %>
-          <% if draft?(@report) %>
-            <%= link_to release_report_url(@report), method: :post, class: "btn d-block mt-2" do %>
-              <i class="far fa-eye"></i> 公開する
-            <% end %>
-          <% elsif released?(@report) %>
-            <%= link_to draft_report_url(@report), method: :post, class: "btn d-block mt-2" do %>
-              <i class="far fa-eye-slash"></i> 非公開にする
+        <!-- 報告書編集 -->
+        <% if correct_teacher?(@report.teacher) || admin_logged_in? %>
+          <%= link_to edit_report_path(@report), class: "btn btn-block" do %>
+            <i class="fas fa-check"></i>  編集する
+          <% end %>
+          <% if admin_logged_in? %>
+            <% if draft?(@report) %>
+              <%= link_to release_report_url(@report), method: :post, class: "btn d-block mt-2" do %>
+                <i class="far fa-eye"></i> 公開する
+              <% end %>
+            <% elsif released?(@report) %>
+              <%= link_to draft_report_url(@report), method: :post, class: "btn d-block mt-2" do %>
+                <i class="far fa-eye-slash"></i> 非公開にする
+              <% end %>
             <% end %>
           <% end %>
+          <%= link_to @report, method: :delete,
+          data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-block mt-2 bg-delete" do %>
+            <i class="fas fa-trash"></i>  削除する
+          <% end %>
         <% end %>
-        <%= link_to @report, method: :delete,
-        data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-block mt-2 bg-delete" do %>
-					<i class="fas fa-trash"></i>  削除する
-				<% end %>
-			<% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>

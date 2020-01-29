@@ -850,3 +850,18 @@ footer {
   border-top: none !important;
   border-bottom: 2px solid #e6ddda !important;
 }
+
+//////////////////////////////////////
+///////////*-- トップページ --*/////////
+//////////////////////////////////////
+#help {
+  span {
+    color: #ffb458;
+  }
+  h2 {
+    padding: 0.5em; /*文字周りの余白*/
+    color: #010101; /*文字色*/
+    background: #e3eefe; /*背景色*/
+    border-bottom: solid 3px #516ab6; /*下線*/
+  }
+}
