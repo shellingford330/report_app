@@ -17,23 +17,23 @@ class SearchController < ApplicationController
 			@reports.where!(status: params[:report][:status])
 		end
 
-		@reports_id = @reports.pluck(:id)
+		# @reports_id = @reports.pluck(:id)
 		# 返信が有る報告書を検索
-		if params[:reply] && (params[:reply][:exists] || (judge = params[:reply][:read_flg]))
-			@reports_id = []
-			@reports.each do |report|
-				if report.replies.where(writeable_type: "Student").exists?
-					# 未読の返信を検索
-					if judge
-						if report.replies.where(writeable_type: "Student", read_flg: false).exists?
-							@reports_id.push(report.id)
-						end
-					else
-						@reports_id.push(report.id)
-					end
-				end
-			end
-		end
+		# if params[:reply] && (params[:reply][:exists] || (judge = params[:reply][:read_flg]))
+		# 	@reports_id = []
+		# 	@reports.each do |report|
+		# 		if report.replies.where(writeable_type: "Student").exists?
+		# 			# 未読の返信を検索
+		# 			if judge
+		# 				if report.replies.where(writeable_type: "Student", read_flg: false).exists?
+		# 					@reports_id.push(report.id)
+		# 				end
+		# 			else
+		# 				@reports_id.push(report.id)
+		# 			end
+		# 		end
+		# 	end
+		# end
 
 		@reports = Report.where(id: @reports_id).page(params[:page]).per(15)
 		@reports_id = []
