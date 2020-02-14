@@ -8,7 +8,7 @@
 			<%= image_tag 'teacher.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle student-icon" %>
 		<% end %>
 		<div class="media-body">
-			<h5 class="mt-0"><%= teacher.name %></h5>
+			<h5 class="mt-0"><%= teacher.name %>　<small class="text-muted"><%= reply.created_at.strftime('%Y/%m/%d %H:%M') %></small></h5>
 			<p class="reply reply-right"><%= safe_join(reply.content.split("\n"), tag(:br)) %></p>
 		</div>
 	</div>
@@ -21,7 +21,7 @@
 			<%= image_tag 'student.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle student-icon" %>
 		<% end %>
 		<div class="media-body">
-			<h5 class="mt-0"><%= student.name %></h5>
+			<h5 class="mt-0"><%= student.name %>　<small class="text-muted"><%= reply.created_at.strftime('%Y/%m/%d %H:%M') %></small></h5>
 			<p class="reply reply-left"><%= safe_join(reply.content.split("\n"), tag(:br)) %></p>
 		</div>
 	</div>
