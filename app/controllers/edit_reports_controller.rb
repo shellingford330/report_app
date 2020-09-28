@@ -3,7 +3,7 @@ class EditReportsController < ApplicationController
 
 	# 報告書編集ページの報告書の一覧表示
 	def index
-		@report = current_teacher.reports.build
+		@search_reports_form = SearchReportsForm.new(status: "all")
 		@reports = Report.page(params[:page]).per(15)
 		if (reports_id = params[:reports_id])
 			@reports_id = reports_id.map { |i| i.to_i }

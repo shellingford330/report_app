@@ -26,7 +26,6 @@
 					<th class="table-column">書いた講師</th>
 					<th class="table-column">公開</th>
 					<th class="table-column d-none d-lg-table-cell">既読</th>
-					<!--th class="table-column">返信あり</th-->
 					
 				</tr>
 			</thead>
@@ -55,7 +54,7 @@
           <span>&times;</span>
         </button>
       </div>
-			<%= form_for(@report, url: search_index_url, method: :get ) do |f| %> 
+			<%= form_for(@search_reports_form, url: search_index_url, method: :get ) do |f| %> 
       <div class="modal-body">
 
        	<h5><i class="fas fa-tasks"></i> 検索条件</h5>
@@ -63,8 +62,8 @@
 				<hr>
 
 				<div class="form-group">
-					<%= f.label :teacher_id, '書いた講師', class: "font-weight-bold" %>
-					<%= f.collection_select :teacher_id , Teacher.all, :id, :name, { include_blank: 'すべての講師' },
+					<%= f.label :teacher_ids, '書いた講師', class: "font-weight-bold" %>
+					<%= f.collection_select :teacher_ids , Teacher.all, :id, :name, { include_blank: 'すべての講師' },
 					class: "select-teachers", style: "width: 100%;", multiple: true %>
 				</div>
 
@@ -83,21 +82,6 @@
 						<%= f.label :status, '下書き', class:"form-check-label" %>
 					</div>	
 				</div>
-				<!--
-				<%= fields_for @report.replies.build do |fr| %>
-					<div class="form-group">
-						<legend class="col-form-label font-weight-bold">返信あり</legend>
-						<div class="form-check">
-							<%= fr.check_box :exists, { class: "form-check-input" }, true, false %>
-							<%= fr.label :exists, 'すべて', class: "form-check-label"%>
-						</div>
-						<div class="form-check">
-							<%= fr.check_box :read_flg, { class: "form-check-input" }, true, false %>
-							<%= fr.label :read_flg, '未読のみ', class: "form-check-label"%>
-						</div>
-					</div>
-				<% end %>
-				-->
 
 			</div>
 			<div style="border-color: #e3d9d5 !important;" class="modal-footer">
