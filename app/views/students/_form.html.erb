@@ -27,7 +27,7 @@
 		<%= f.label :image, "アイコン画像" %><br>
 		<%= image_tag student.image.url, size: "225x225", class: "mb-2" if student.image? %>
 		<div class="form-group mb-1">
-			<%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
+			<%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', class: "form-control-file" %>
 			<%= f.hidden_field :image_cache %>
 		</div>
 		<div class="form-group">
