@@ -1,0 +1,58 @@
+<% provide(:title, "詳細") %>
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-9 mx-auto">
+
+      <h3 class="mb-0 pl-3">
+        <%= link_to teachers_news_path(@news), class: "btn" do %>
+          <i class="fas fa-arrow-left"></i>
+        <% end %>
+        <strong class="align-middle"><%= "お知らせ - #{@student.name}" %></strong>
+      </h3>
+
+      <hr>
+
+			<!-- お知らせ本体 -->
+      <div class="news-wrapper">
+
+        <div class="news-title">
+          「<%= @news.title %>」
+        </div>
+
+        <div class="news-info">
+          書いた講師：<i class="fas fa-user-circle"></i>     <%= @news.teacher.name %>
+        </div>
+        <div class="news-info">
+          日付：<%= @news.created_at.strftime('%Y年%m月%d日') %>
+        </div>
+
+        <div class="news-content">
+          <%= safe_join(@news.content.split("\n"), tag(:br)) %><br/>
+        </div>
+
+        <%= link_to @news.upfile.identifier, @news.upfile.url, class: "link" if @news.upfile? %>
+        
+      </div>
+      
+			<!-- 返信フォーム -->
+      <% if admin_logged_in? %>
+        <div class="card bg-brown mt-4">
+          <h5 class="card-header">返信する：</h5>
+          <div class="card-body">
+            <%= form_for(@reply, url: teachers_news_student_replies_path(@news, @student), method: :post) do |f| %>
+              <div class="form-group">
+                <%= f.text_area :content, :size => "10x3", class: "form-control form-control-lg" %>
+              </div>
+              <%= f.submit '送信する', data: { confirm: "本当に送信してもよろしいですか？", disable_with: '処理中...' }, class: "btn" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+			<!-- 返信履歴 -->
+      <div class="mt-4">
+			  <%= render partial: "news_replies/news_reply", collection: @replies %>
+      <div>
+    </div>
+  </div>
+</div>

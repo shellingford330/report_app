@@ -22,10 +22,10 @@
 				<% @news.each do |news| %>
 					<tr type="a">
 						<td  class="py-2">
-							<%= link_to news.created_at.strftime('%Y年%m月%d日'), news, class: "link" %>
+							<%= link_to news.created_at.strftime('%Y年%m月%d日'), teachers_news_path(news), class: "link" %>
 						</td>
 						<td class="py-2">
-							<%= link_to "「#{news.title}」", news %>
+							<%= link_to "「#{news.title}」", teachers_news_path(news) %>
 						</td>
 						<td  class="py-2">
 							<i class="fas fa-user-circle"></i> <%= news.teacher.name %>

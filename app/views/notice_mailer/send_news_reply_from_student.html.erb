@@ -1,0 +1,13 @@
+<p>自由塾 様</p>
+
+<hr>
+
+<p>
+お知らせに生徒の<%= @reply.student.name %>さんから返信が届きました。<br>
+ご確認される場合は、以下のリンクをクリックして下さい。<br>
+<%= link_to '内容を確認する', teachers_news_url(@reply.news) %>
+</p>
+
+<hr>
+
+<%= render 'zyuku' %>

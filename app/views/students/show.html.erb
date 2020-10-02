@@ -39,7 +39,7 @@
 						<h4 class="display-4">
 							<i class="fas fa-clipboard"></i> <%= @student.news.released.count %>
 						</h4>
-						<%= link_to '見る', student_news_url(@student), class: "btn btn-view-pink" %>
+						<%= link_to '見る', news_index_path, class: "btn btn-view-pink" %>
 					</div>
 				</div>
 				<div class="card text-center card-bg-blue mb-3">
@@ -86,7 +86,7 @@
 
 				<% end %>
 
-				<% if @news.any? %>
+				<% if student_logged_in? && @news.any? %>
 					<h2 class="mb-0 pl-2">
 						お知らせ
 						<% if teacher_logged_in? %>
@@ -101,7 +101,7 @@
 					<%= render @news %>
 
 					<p class="text-right">
-						<%= link_to student_news_url(@student), class: "link" do %>
+						<%= link_to news_index_path, class: "link" do %>
 							<i class="arrow fa fa-angle-right mt-1"></i>  もっと見る
 						<% end %>
 					</p>

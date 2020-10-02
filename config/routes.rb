@@ -18,6 +18,14 @@ Rails.application.routes.draw do
   resources :student_activations, only: [:show, :edit]
   
   resources :groups, except: [:edit, :update]
+
+  namespace :teachers do 
+    resources :news, only: [:index, :show] do
+      resources :students, only: [:show], controller: :news_students do
+        resources :replies,  only: [:create], controller: :news_replies
+      end
+    end
+  end
   
   resources :teachers do
     collection do
@@ -50,13 +58,12 @@ Rails.application.routes.draw do
 
   resources :edit_reports, only: [:index, :new, :create]
 
-  resources :news, except: [:index, :edit, :update] do
+  resources :news, except: [:edit, :update] do
     collection do
       get :select
     end
     member do
-      post :release, :file
-      get :teacher, :student
+      post :release, :file, :reply
     end
   end
 

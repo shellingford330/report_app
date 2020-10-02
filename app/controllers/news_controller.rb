@@ -1,38 +1,19 @@
 class NewsController < ApplicationController
-  before_action :teacher_logged_in,          only: [:select, :new, :create]
-  before_action :set_news,                   only: [:show, :release, :file, :destroy]
+  before_action :teacher_logged_in, only: [:select, :new, :create, :destroy, :release]
+  before_action :student_logged_in, only: [:index, :show, :reply]
+  before_action :set_news,          only: [:release, :file, :destroy]
 
-  def student
-    student = Student.find(params[:id])
-    if teacher_logged_in?
-      @news = student.news.paginate(page: params[:page], per_page: 9) 
-    elsif correct_student?(student)
-      @news = student.news.released.paginate(page: params[:page], per_page: 9) 
-    else
-      store_location
-      redirect_to root_url
-    end
-  end
-
-  def teacher
-    teacher = Teacher.find(params[:id])
-    if admin_logged_in?
-      @news = News.paginate(page: params[:page], per_page: 16) 
-    elsif teacher_logged_in?
-      @news = teacher.news.paginate(page: params[:page], per_page: 16)
-    else
-      store_location
-      redirect_to login_form_teachers_url
-    end
+  def index
+    @news = current_student.news.released.paginate(page: params[:page], per_page: 9) 
   end
 
   def show
-    @students = @news.students
-    # ログインしているのが生徒本人か、講師か確認
-    unless teacher_logged_in? || @students.exists?(current_student)
-      store_location
-      redirect_to login_form_teachers_url and return
-    end
+    @news    = current_student.news.released.find(params[:id])
+    @reply   = @news.replies.build # form用
+    @replies = @news.replies.where(student: current_student)
+
+    # 講師のリプライをすべて既読にする
+    @news.replies.from_teacher.where(student: current_student).update_all(is_read: true)
   end
 
   def select
@@ -56,7 +37,7 @@ class NewsController < ApplicationController
     @news.student_ids = params[:news][:student_ids]
     if @news.save
       flash[:success] = '作成されました'
-      redirect_to teacher_news_url(current_teacher)
+      redirect_to teachers_news_url(@news)
     else
       flash.now[:danger] = '入力情報をご確認下さい'
       render 'new'
@@ -67,7 +48,7 @@ class NewsController < ApplicationController
     # ログインしているのが講師本人か、認証された講師か確認
     if correct_teacher?(@news.teacher) || admin_logged_in?
       @news.destroy
-      redirect_to teacher_news_url(current_teacher)
+      redirect_to teachers_news_index_path
       flash[:success] = '削除しました'
     else
       store_location
@@ -75,12 +56,31 @@ class NewsController < ApplicationController
     end
   end
 
+  def reply
+    @news = current_student.news.released.find(params[:id])
+
+    @reply = @news.replies.build do |reply|
+      reply.content = params[:news_reply][:content]
+      reply.student = current_student
+      reply.teacher = @news.teacher # 生徒はお知らせを書いた講師にリプライしている前提
+      reply.sender_type = "student"
+    end
+
+    if @reply.save
+      NoticeMailer.send_news_reply_from_student(@reply).deliver_now
+      flash[:success] = "返信しました"
+    else
+      flash[:danger] = "返信に失敗しました"
+    end
+    redirect_to @news
+  end
+
   def release
     admin_logged_in
     @news.released!
     flash[:success] = "公開しました"
     NoticeMailer.create_news(@news).deliver_later
-    redirect_to teacher_news_url(current_teacher)
+    redirect_to teachers_news_url(@news)
   end
 
   def file

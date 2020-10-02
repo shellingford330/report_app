@@ -626,6 +626,68 @@ footer {
   padding: 20px 20px 10px 20px;
 }
 
+/*-- お知らせ 生徒一覧リプライ --*/
+.news-student-list-item {
+  &:hover {
+    filter: brightness(90%);
+  }
+  background: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+  padding: 8px 10px;
+  position: relative;
+  border-radius: 10px;
+  img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    margin-right: 10px;
+    width: 40px;
+    border-radius: 50%;
+  }
+}
+
+.news-student {
+  display: inline-block;
+  width: calc(100% - 55px);
+  div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+  }
+  &__name {
+    width: calc(100% - 120px);
+    display: inline-block;
+    overflow: hidden;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &__last-reply-date {
+    float: right;
+    color: #8a8a8f;
+    font-size: 12px;
+  }
+  &__last-comment {
+    margin-top: -6px;
+    font-size: 13px;
+    color: #8a8a8f;
+    width: calc(100% - 100px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+  }
+  &__reply-status {
+    width: 90px;
+    font-size: 13px;
+    display: inline-block;
+    text-align: right;
+  }
+}
+
 /*-- リプライ --*/
 .reply-teacher {
   padding-left: 60px;

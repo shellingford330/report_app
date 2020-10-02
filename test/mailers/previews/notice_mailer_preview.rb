@@ -25,6 +25,18 @@ class NoticeMailerPreview < ActionMailer::Preview
     NoticeMailer.create_reply(reply)
   end
 
+  # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/send_news_reply_from_student
+  def send_news_reply_from_student
+    reply = NewsReply.first
+    NoticeMailer.send_news_reply_from_student(reply)
+  end
+
+  # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/send_news_reply_from_teacher
+  def send_news_reply_from_teacher
+    reply = NewsReply.first
+    NoticeMailer.send_news_reply_from_teacher(reply)
+  end
+
   # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/activate_account
   def activate_account
     student = Student.first

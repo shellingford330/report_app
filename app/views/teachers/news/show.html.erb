@@ -1,0 +1,109 @@
+<% provide(:title, "詳細") %>
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-9 mx-auto">
+
+      <h3 class="mb-0 pl-3">
+        <%= link_to teachers_news_index_path, class: "btn" do %>
+          <i class="fas fa-arrow-left"></i>
+        <% end %>
+        <strong class="align-middle">お知らせ</strong>
+      </h3>
+
+      <hr>
+
+			<!-- お知らせ本体 -->
+      <div class="news-wrapper">
+
+        <div class="news-title">
+          「<%= @news.title %>」
+        </div>
+
+        <div class="news-info">
+          書いた講師：<i class="fas fa-user-circle"></i>     <%= @news.teacher.name %>
+        </div>
+        <div class="news-info">
+          日付：<%= @news.created_at.strftime('%Y年%m月%d日') %>
+        </div>
+
+        <div class="news-content">
+          <%= safe_join(@news.content.split("\n"), tag(:br)) %><br/>
+        </div>
+
+        <%= link_to @news.upfile.identifier, @news.upfile.url, class: "link" if @news.upfile? %>
+
+        <% if admin_logged_in? %>
+
+        <hr>
+
+        <!-- お知らせの操作 -->
+        <div class="row">
+
+          <% if draft?(@news) %>
+            <div class="col-md-6 mt-2">
+              <%= link_to release_news_url(@news), method: :post, class: "btn d-block" do %>
+                <i class="far fa-eye"></i> 公開する
+              <% end %>
+            </div>
+          <% end %>
+
+          
+          <div class="col-md-6 mt-2 mx-auto">
+            <%= link_to news_url(@news), data:{ confirm: "本当に削除してもよろしいですか" },
+              method: :delete, class: "btn d-block bg-delete" do %>
+              <i class="fas fa-trash"></i>  削除する
+            <% end %>
+          </div>
+          
+        </div>
+
+        <% end %>
+      
+      </div>
+
+      <hr>
+      
+      <!-- お知らせした生徒一覧 -->
+      <div class="news-student-list">
+        <% @students.each do |student| %>
+          <!-- 生徒とのリプライで最新の１件 -->
+          <% reply = @news.replies.where(student: student).order(id: :desc).first %>
+          <%= link_to teachers_news_student_path(@news, student) do %>
+            <div class="news-student-list-item">
+              <% if student.image? %>
+                <%= image_tag student.image %>
+              <% else %>
+                <%= image_tag 'student.png' %>
+              <% end %>
+              <div class="news-student">
+                <div>
+                  <div class="news-student__name"><%= "#{student.name}(#{student.grade})" %></div>
+                  <span class="news-student__last-reply-date">
+                    <%= reply&.created_at&.strftime('%Y/%m/%d %H:%M') || "" %>
+                  </span>
+                </div>
+                <div style="max-width: 100%; margin-top: 5px;">
+                  <div class="news-student__last-comment">
+                    <%= reply&.content || "" %>
+                  </div>
+                  <div class="news-student__reply-status">
+                    <% if @news.replies.from_student.where(student: student, is_read: false).exists? %>
+                      <span style="color: rgb(234, 141, 118); vertical-align: super;">
+                        未読
+                      </span>
+                    <% else %>
+                      <span style="color: rgb(67, 169, 85);">
+                        既読
+                      </span>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

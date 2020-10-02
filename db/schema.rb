@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191226022615) do
+ActiveRecord::Schema.define(version: 20201002184642) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "title"
@@ -69,6 +69,20 @@ ActiveRecord::Schema.define(version: 20191226022615) do
     t.datetime "updated_at",             null: false
     t.string   "upfile"
     t.index ["teacher_id", "created_at"], name: "index_news_on_teacher_id_and_created_at"
+  end
+
+  create_table "news_replies", force: :cascade do |t|
+    t.string   "content",     limit: 500,                 null: false
+    t.boolean  "is_read",                 default: false, null: false
+    t.integer  "sender_type", limit: 5,                   null: false
+    t.integer  "student_id",                              null: false
+    t.integer  "teacher_id",                              null: false
+    t.integer  "news_id",                                 null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["news_id"], name: "index_news_replies_on_news_id"
+    t.index ["student_id"], name: "index_news_replies_on_student_id"
+    t.index ["teacher_id"], name: "index_news_replies_on_teacher_id"
   end
 
   create_table "news_students", id: false, force: :cascade do |t|

@@ -1,0 +1,32 @@
+<!-- 返信履歴 -->
+
+<!-- 講師が返信した時 -->
+<% if news_reply.from_teacher? %>
+	<div class="media mb-2 reply-teacher">
+		<% teacher = news_reply.teacher %>
+		<% if teacher.image? %>
+			<%= image_tag teacher.image.url, :size => "50x50", class: "d-flex mr-3 rounded-circle" %>
+		<% else %>
+			<%= image_tag 'teacher.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle student-icon" %>
+		<% end %>
+		<div class="media-body">
+			<h5 class="mt-0"><%= teacher.name %>　<small class="text-muted"><%= news_reply.created_at.strftime('%Y/%m/%d %H:%M') %></small></h5>
+			<p class="reply reply-right"><%= safe_join(news_reply.content.split("\n"), tag(:br)) %></p>
+		</div>
+	</div>
+	
+<!-- 生徒が返信した時 -->
+<% elsif news_reply.from_student? %>
+	<div class="media mb-2">
+		<% student = news_reply.student %>
+		<% if student.image? %>
+			<%= image_tag student.image.url, :size => "50x50", class: "d-flex mr-3 rounded-circle" %>
+		<% else %>
+			<%= image_tag 'student.png', :size => "50x50", class: "d-flex pt-1 mr-3 rounded-circle student-icon" %>
+		<% end %>
+		<div class="media-body">
+			<h5 class="mt-0"><%= student.name %>　<small class="text-muted"><%= news_reply.created_at.strftime('%Y/%m/%d %H:%M') %></small></h5>
+			<p class="reply reply-left"><%= safe_join(news_reply.content.split("\n"), tag(:br)) %></p>
+		</div>
+	</div>
+<% end %>

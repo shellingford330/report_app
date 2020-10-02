@@ -5,7 +5,7 @@ class News < ApplicationRecord
 
 	has_and_belongs_to_many :students
 	belongs_to :teacher
-	has_many :replies, as: :replyable
+	has_many :replies, class_name: "NewsReply"
 	
 	default_scope { order(created_at: :desc) }
 
@@ -20,17 +20,4 @@ class News < ApplicationRecord
 		inclusion: { in: [ "draft", "released", "deleted" ], allow_nil: true }
 	validates :teacher_id, presence: true
 	validate :file_invalid?
-
-	# private
-	# 	def file_invalid?
-	# 		if ( file = self.upfile )
-	# 			name = file.original_filename
-	# 			perms = ['.jpg', '.jpeg', '.gif', '.png', '.xlsx', '.pdf', '.pptx', '.docx']
-	# 			if !perms.include?(File.extname(name).downcase)
-	# 				errors.add(:base, 'アップロード可能な種類のファイルではありません')
-	# 			elsif file.size > 5.megabyte
-	# 				errors.add(:base, 'ファイルサイズは5MBサイズまでです')
-	# 			end
-	# 		end
-	# 	end
 end

@@ -47,7 +47,18 @@ class NoticeMailer < ApplicationMailer
       mail to: student.email, subject: "#{@kind_of_doc}に返信が届きました"
     end
   end
-  
+
+  def send_news_reply_from_student(news_reply)
+    @reply = news_reply
+    mail to: Teacher.admin.pluck(:email),
+          subject: "お知らせに生徒から返信が届きました"
+  end
+
+  def send_news_reply_from_teacher(news_reply)
+    @reply = news_reply
+    mail to: @reply.student.email,
+          subject: "お知らせに自由塾から返信が届きました"
+  end
 
   # 生徒のメールアドレス確認メール
   def activate_account(student)
