@@ -38,7 +38,7 @@ gem 'kaminari'
 
 # 画像アップロード系
 gem 'carrierwave', '2.0.2'
-gem 'mini_magick', '4.9.5'
+gem 'mini_magick', '4.10.1'
 gem 'rmagick',     '4.0.0'
 
 # 非同期実行
