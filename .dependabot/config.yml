@@ -1,0 +1,9 @@
+version: 1
+update_configs:
+  - package_manager: ruby:bundler
+    directory: /
+    update_schedule: weekly
+    automerged_updates: # 自動マージの設定
+      - match:
+          dependency_type: development # テスト用と開発環境用のパッケージを対象
+          update_type: all
