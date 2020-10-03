@@ -9,7 +9,7 @@ end
 gem 'rails', '~> 5.0.7', '>= 5.0.7.1'
 gem 'rails-i18n', '~> 5.1'
 gem 'puma', '~> 3.0'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
