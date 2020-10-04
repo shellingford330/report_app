@@ -41,10 +41,6 @@ gem 'carrierwave', '2.0.2'
 gem 'mini_magick', '4.9.5'
 gem 'rmagick',     '4.0.0'
 
-# PWA
-gem 'webpush'
-gem 'serviceworker-rails'
-
 # 非同期実行
 # gem 'delayed_job_active_record'
 
