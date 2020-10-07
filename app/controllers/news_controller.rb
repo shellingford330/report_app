@@ -10,7 +10,7 @@ class NewsController < ApplicationController
   def show
     @news    = current_student.news.released.find(params[:id])
     @reply   = @news.replies.build # form用
-    @replies = @news.replies.where(student: current_student)
+    @replies = @news.replies.where(student: current_student).order(id: :asc)
 
     # 講師のリプライをすべて既読にする
     @news.replies.from_teacher.where(student: current_student).update_all(is_read: true)

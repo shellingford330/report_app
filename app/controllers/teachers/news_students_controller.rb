@@ -6,7 +6,7 @@ module Teachers
 			@news    = News.find(params[:news_id])
 			@student = @news.students.find(params[:id])
 			@reply   = @news.replies.build # form用
-			@replies = @news.replies.where(student: @student)
+			@replies = @news.replies.where(student: @student).order(id: :asc)
 
 			# 生徒のリプライをすべて既読にする
 			if current_teacher.admin?
