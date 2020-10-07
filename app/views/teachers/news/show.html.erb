@@ -89,11 +89,11 @@
                   <div class="news-student__reply-status">
                     <% if @news.replies.from_student.where(student: student, is_read: false).exists? %>
                       <span style="color: rgb(234, 141, 118); vertical-align: super;">
-                        未読
+                        未確認
                       </span>
                     <% else %>
                       <span style="color: rgb(67, 169, 85);">
-                        既読
+                        確認済
                       </span>
                     <% end %>
                   </div>
