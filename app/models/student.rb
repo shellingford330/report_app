@@ -8,9 +8,9 @@ class Student < ApplicationRecord
 
 	has_and_belongs_to_many :news
 	has_and_belongs_to_many :groups
-	has_many :replies,  as: :writeable
-	has_many :contacts
-	has_many :reports
+	has_many :replies,  dependent: :destroy, as: :writeable
+	has_many :contacts, dependent: :destroy
+	has_many :reports,  dependent: :destroy
 	has_many :teachers, through: :reports
 
 	before_create :create_activation_digest
