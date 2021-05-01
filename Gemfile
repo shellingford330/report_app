@@ -51,12 +51,12 @@ group :development, :test do
   # ステップ実行
   gem 'pry-byebug'
   # gem 'byebug', platform: :mri
-  # モデルの出力を整形
-  gem 'hirb'
-  gem 'hirb-unicode'
   # エラー画面を高機能
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :development do
