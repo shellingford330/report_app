@@ -1,30 +1,23 @@
-# 指導報告書サービス
+# What's this?
 
 これは自由塾の指導報告書サービスです。
 
-# 使い方
+# How to use
 
-このアプリケーションを動かす場合は、まずはリポジトリを手元にクローンしてください。
-その後、次のコマンドで必要になる RubyGems をインストールします。
-
-```
-$ bundle install
-```
-
-その後、データベースへのマイグレーションを実行します。
+### 1. アプリケーションをcloneする
 
 ```
-$ rails db:migrate
+$ git clone git@github.com:shellingford330/report_app.git
 ```
 
-最後に、テストを実行してうまく動いているかどうか確認してください。
+### 2. セットアップ
 
 ```
-$ rails test
+$ docker-compose run web rails db:setup
+$ docker-compose up --build
 ```
 
-テストが無事に通ったら、Rails サーバーを立ち上げる準備が整っているはずです。
+### 3. アクセス
 
-```
-$ rails server
-```
+ブラウザから http://localhost:3000 でアクセスできます。
+
