@@ -5,8 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'puma', '~> 3.0'
-gem 'rails', '5.1.0'
+gem 'puma', '3.9.1'
+gem 'rails', '5.2.5'
 gem 'rails-i18n', '~> 5.1'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
