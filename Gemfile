@@ -36,7 +36,7 @@ gem 'kaminari'
 gem 'will_paginate'
 
 # 画像アップロード系
-gem 'carrierwave', '2.0.2'
+gem 'carrierwave'
 gem 'mini_magick', '4.9.5'
 gem 'rmagick',     '4.0.0'
 
