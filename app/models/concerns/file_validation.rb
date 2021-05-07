@@ -1,12 +1,13 @@
-module FileValidation
-	###################################################
-	########### Include：お知らせ・お問い合わせ ###########
-	###################################################
+# frozen_string_literal: true
 
-	private
-		def file_invalid?
-			if self.upfile.size > 5.megabyte
-				errors.add(:base, 'ファイルサイズは5MBサイズまでです')
-			end
-		end
+module FileValidation
+  ###################################################
+  ########### Include：お知らせ・お問い合わせ ###########
+  ###################################################
+
+  private
+
+  def file_invalid?
+    errors.add(:base, 'ファイルサイズは5MBサイズまでです') if upfile.size > 5.megabyte
+  end
 end

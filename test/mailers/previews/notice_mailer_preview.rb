@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # Preview all emails at http://localhost:3000/rails/mailers/notice_mailer
 class NoticeMailerPreview < ActionMailer::Preview
-
   # Preview this email at http://localhost:3000/rails/mailers/notice_mailer/create_report
   def create_report
     report = Report.first
@@ -69,5 +70,4 @@ class NoticeMailerPreview < ActionMailer::Preview
     user.reset_token = Token.generate
     NoticeMailer.password_reset(user)
   end
-
 end

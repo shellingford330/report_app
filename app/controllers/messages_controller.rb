@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessagesController < ApplicationController
   protect_from_forgery except: :create
 
@@ -33,5 +35,4 @@ class MessagesController < ApplicationController
     current_teacher.sent_messages.create(content: params[:content], to_id: to_id)
     redirect_to message_url(to_id)
   end
-
 end

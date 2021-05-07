@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class TeacherTest < ActiveSupport::TestCase
   setup do
-    @teacher = Teacher.new( name: "keiichi", email: "keiichi@example.com", status: :teacher, 
-      password: "keiichi", password_confirmation: "keiichi" )
+    @teacher = Teacher.new(name: "keiichi", email: "keiichi@example.com", status: :teacher,
+      password: "keiichi", password_confirmation: "keiichi",)
   end
 
   test "name should be present" do
@@ -13,12 +15,12 @@ class TeacherTest < ActiveSupport::TestCase
 
   test "email should be present" do
     @teacher.email = ""
-     assert @teacher.invalid?
+    assert @teacher.invalid?
   end
 
   test "email should not be too long" do
     @teacher.email = "a" * 256
-     assert @teacher.invalid?
+    assert @teacher.invalid?
   end
 
   test "email should be fixed format" do
@@ -35,7 +37,7 @@ class TeacherTest < ActiveSupport::TestCase
     @teacher.save
     assert_not duplicate_teacher.valid?
   end
-  
+
   test "email should change into downcase before save" do
     address = "FOObar@examPle.Com"
     @teacher.email = address
@@ -52,5 +54,4 @@ class TeacherTest < ActiveSupport::TestCase
     @teacher.password = @teacher.password_confirmation = "a" * 5
     assert_not @teacher.valid?
   end
-
 end

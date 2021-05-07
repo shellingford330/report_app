@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class GroupsController < ApplicationController
   before_action :teacher_logged_in
-  before_action :admin_logged_in, only: [:new, :create, :destroy]
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :admin_logged_in, only: %i[new create destroy]
+  before_action :set_group, only: %i[show edit update destroy]
 
   # GET /groups
   def index
@@ -16,13 +18,13 @@ class GroupsController < ApplicationController
   # GET /groups/new
   def new
     @group = Group.new
-		@students_id = []
+    @students_id = []
   end
 
   # POST /groups
   def create
     @group = Group.new(params.require(:group).permit(:name))
-    @students_id = params[:students_id] ? params[:students_id] : []
+    @students_id = params[:students_id] || []
     @group.students = Student.where(id: @students_id)
     if @group.save
       flash[:success] = "グループを作成しました"
@@ -37,14 +39,13 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     redirect_to groups_url
-    flash[:success] = 'グループが削除されました' 
+    flash[:success] = 'グループが削除されました'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_group
-      @group = Group.find(params[:id])
-    end
 
-    
+  # Use callbacks to share common setup or constraints between actions.
+  def set_group
+    @group = Group.find(params[:id])
+  end
 end

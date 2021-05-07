@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class NewsController < ApplicationController
-  before_action :teacher_logged_in, only: [:select, :new, :create, :destroy, :release]
-  before_action :student_logged_in, only: [:index, :show, :reply]
-  before_action :set_news,          only: [:release, :file, :destroy]
+  before_action :teacher_logged_in, only: %i[select new create destroy release]
+  before_action :student_logged_in, only: %i[index show reply]
+  before_action :set_news,          only: %i[release file destroy]
 
   def index
-    @news = current_student.news.released.paginate(page: params[:page], per_page: 9) 
+    @news = current_student.news.released.paginate(page: params[:page], per_page: 9)
   end
 
   def show
@@ -19,7 +21,7 @@ class NewsController < ApplicationController
   def select
     @news = News.new
     @news.student_ids = params[:student_ids]
-	end
+  end
 
   def new
     @news = News.new
@@ -95,11 +97,12 @@ class NewsController < ApplicationController
   end
 
   private
-    def set_news
-      @news = News.find(params[:id])
-    end
 
-    def news_params
-      params.require(:news).permit(:title, :content, :upfile, :upfile_cache)
-    end
+  def set_news
+    @news = News.find(params[:id])
+  end
+
+  def news_params
+    params.require(:news).permit(:title, :content, :upfile, :upfile_cache)
+  end
 end
