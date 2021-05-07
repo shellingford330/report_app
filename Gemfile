@@ -43,6 +43,8 @@ gem 'rmagick',     '4.0.0'
 # 非同期実行
 # gem 'delayed_job_active_record'
 
+gem 'bootsnap', require: false
+
 group :development, :test do
   gem 'sqlite3'
   # 高機能コンソール
