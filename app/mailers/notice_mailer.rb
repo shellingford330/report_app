@@ -1,5 +1,6 @@
-class NoticeMailer < ApplicationMailer
+# frozen_string_literal: true
 
+class NoticeMailer < ApplicationMailer
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -32,10 +33,10 @@ class NoticeMailer < ApplicationMailer
   def create_reply(reply)
     # 返信先の媒体(お問い合わせ, 指導報告書)
     @doc = reply.replyable
-    @kind_of_doc = @doc.kind_of?(Contact) ? 'お問い合わせ' : '指導報告書'
+    @kind_of_doc = @doc.is_a?(Contact) ? 'お問い合わせ' : '指導報告書'
     # 返信をしたユーザー
     @sender = reply.writeable.name
-    @kind_of_sender = reply.writeable.kind_of?(Student) ? '生徒' : '自由塾'
+    @kind_of_sender = reply.writeable.is_a?(Student) ? '生徒' : '自由塾'
     # 返信が届いたユーザー
     if @kind_of_sender == '生徒'
       @receiver = "自由塾"
@@ -85,7 +86,6 @@ class NoticeMailer < ApplicationMailer
     owner_emails = Teacher.owner.pluck(:email)
     mail to: owner_emails, subject: "講師の登録依頼が届きました"
   end
-    
 
   # 渡された指導報告の生徒に通知メール
   def create_student(student)
@@ -110,5 +110,4 @@ class NoticeMailer < ApplicationMailer
     @user = user
     mail to: user.email, subject: 'パスワード再設定'
   end
-
 end

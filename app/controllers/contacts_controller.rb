@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ContactsController < ApplicationController
-  before_action :student_logged_in,        only: [:new, :create]
+  before_action :student_logged_in,        only: %i[new create]
 
   def index
     if teacher_logged_in?
@@ -62,7 +64,7 @@ class ContactsController < ApplicationController
 
   private
 
-    def contact_params
-      params.require(:contact).permit(:title, :content, :teacher_id)
-    end
+  def contact_params
+    params.require(:contact).permit(:title, :content, :teacher_id)
+  end
 end

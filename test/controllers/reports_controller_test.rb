@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ReportsControllerTest < ActionDispatch::IntegrationTest
@@ -40,5 +42,4 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to login_form_teachers_url
   end
-
 end

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class NewsReply < ApplicationRecord
   belongs_to :news
   belongs_to :student
   belongs_to :teacher
 
-  enum sender_type: [:student, :teacher], _prefix: :from
+  enum sender_type: { student: 0, teacher: 1 }, _prefix: :from
 
   validates :news,    presence: true
   validates :student, presence: true

@@ -1,0 +1,93 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 2.7
+  Exclude:
+    - bin/*
+    - db/**/*
+    - vendor/**/*
+    - config/**/*
+    - config.ru
+    - Rakefile
+    - node_modules/**/*
+  DisplayCopNames: true
+  NewCops: enable
+
+##################### Style ##################################
+# Rails用の設定を有効化
+Rails:
+  Enabled: true
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+Rails/DynamicFindBy:
+  Whitelist:
+    - find_by_slack_team_and_user_id
+Rails/WhereExists:
+  EnforcedStyle: where
+
+# Metrics
+Metrics/AbcSize:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Layout/LineLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+
+# Layout
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation # メソッドの長さに寄らず、毎回記述場所が同じになるので読みやすいのでは、という理由
+Layout/HashAlignment:
+  Enabled: false # hashのalignを揃えたい人もいそう
+Layout/IndentationConsistency:
+  EnforcedStyle: normal
+
+# Style
+Style/AsciiComments:
+  Enabled: false # 日本語のコメントを許可
+Style/Documentation:
+  Enabled: false # ドキュメントの無い public class を許可する
+Style/StringLiterals:
+  Enabled: false # シングルクォートかダブルクォートかの警告を無効化
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - Gemfile
+Style/SymbolArray:
+  Exclude:
+    - Gemfile
+Style/SingleArgumentDig:
+  Enabled: false
+Style/HashEachMethods:
+  Enabled: false # keys,each, values.eachの使用を許可
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/DoubleNegation:
+  Enabled: false
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true

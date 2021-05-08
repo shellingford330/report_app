@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class TeachersController < ApplicationController
-  before_action :teacher_already_logged_in, only: [:login_form, :login]
-  before_action :teacher_logged_in,  only: [:index , :show, :edit, :update, :destroy]
-  before_action :correct_teacher,    only: [:edit, :update]
-  before_action :owner_logged_in,    only: [:auth, :destroy]
+  before_action :teacher_already_logged_in, only: %i[login_form login]
+  before_action :teacher_logged_in,  only: %i[index show edit update destroy]
+  before_action :correct_teacher,    only: %i[edit update]
+  before_action :owner_logged_in,    only: %i[auth destroy]
   before_action :initialize_teacher, only: [:login_form]
-  before_action :new_teacher,        only: [:create, :login]
-  before_action :set_teacher,        only: [:show, :edit, :update, :auth, :destroy]
+  before_action :new_teacher,        only: %i[create login]
+  before_action :set_teacher,        only: %i[show edit update auth destroy]
   def index
     @teachers = Teacher.where(activated: true).paginate(page: params[:page], per_page: 10)
   end
@@ -27,18 +29,17 @@ class TeachersController < ApplicationController
     if @teacher.save
       @teacher.send_teacher_activation_mail
       redirect_to login_form_teachers_url
-      flash[:success] =  'アカウント有効化メールをご確認下さい' 
+      flash[:success] = 'アカウント有効化メールをご確認下さい'
     else
       flash.now[:danger] = "入力情報をご確認下さい"
       render :login_form, layout: 'login'
     end
   end
 
-  
   def update
     if @teacher.update(teacher_params)
       redirect_to @teacher
-      flash[:success] =  '更新しました'
+      flash[:success] = '更新しました'
     else
       flash.now[:danger] = "入力情報をご確認下さい"
       render 'edit'
@@ -52,12 +53,12 @@ class TeachersController < ApplicationController
   end
 
   def login_form
-    render layout: 'login' 
+    render layout: 'login'
   end
 
   def login
     teacher = Teacher.find_by(email: params[:teacher][:email].downcase)
-    if teacher && teacher.authenticate(params[:teacher][:password])
+    if teacher&.authenticate(params[:teacher][:password])
       if teacher.activated?
         flash[:notice] = "ログインしました"
         teacher_log_in(teacher)
@@ -67,10 +68,10 @@ class TeachersController < ApplicationController
         flash[:danger] = "アカウントが有効化されていません。メールをご確認下さい"
         redirect_to login_form_teachers_url
       end
-		else
+    else
       flash.now[:danger] = "入力情報をご確認下さい"
       render 'login_form', layout: 'login'
-		end
+    end
   end
 
   def logout
@@ -79,39 +80,39 @@ class TeachersController < ApplicationController
   end
 
   private
-    def teacher_params
-      params.require(:teacher).permit(
-        :name, :email, :image, :image_cache, :remove_image, :password, :password_confirmation
-      )
+
+  def teacher_params
+    params.require(:teacher).permit(
+      :name, :email, :image, :image_cache, :remove_image, :password, :password_confirmation,
+    )
+  end
+
+  # before_action
+
+  def initialize_teacher
+    @teacher = Teacher.new
+  end
+
+  def new_teacher
+    @teacher = Teacher.new(teacher_params)
+  end
+
+  def set_teacher
+    @teacher = Teacher.find(params[:id])
+    unless @teacher.activated?
+      flash[:danger] = "アカウントが有効化されていません"
+      redirect_to login_form_teachers_url and return
     end
+  end
 
-    # before_action
+  # ログインを既にしているか確認
+  def teacher_already_logged_in
+    redirect_to current_teacher if teacher_logged_in?
+  end
 
-    def initialize_teacher
-			@teacher = Teacher.new
-		end
-
-		def new_teacher
-			@teacher = Teacher.new(teacher_params)
-		end
-
-    def set_teacher
-      @teacher = Teacher.find(params[:id])
-      unless @teacher.activated?
-				flash[:danger] = "アカウントが有効化されていません"
-				redirect_to login_form_teachers_url and return
-			end
-    end
-
-    # ログインを既にしているか確認
-		def teacher_already_logged_in
-			redirect_to current_teacher if teacher_logged_in?
-		end
-    
-    # ログインしている講師であるか確認
-		def correct_teacher
-			@teacher = Teacher.find(params[:id])
-			redirect_to current_teacher unless correct_teacher?(@teacher)
-    end
-    
+  # ログインしている講師であるか確認
+  def correct_teacher
+    @teacher = Teacher.find(params[:id])
+    redirect_to current_teacher unless correct_teacher?(@teacher)
+  end
 end
