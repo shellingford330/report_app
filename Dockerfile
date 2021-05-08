@@ -1,7 +1,7 @@
 FROM ruby:2.6.7
 
 # 必要なパッケージ(nodejs, postgres)をインストール
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y nodejs
 
 ENV APP_ROOT /app
 
