@@ -47,8 +47,9 @@ gem 'rmagick',     '4.0.0'
 
 gem 'bootsnap', require: false
 
+gem 'pg'
+
 group :development, :test do
-  gem 'sqlite3'
   # 高機能コンソール
   gem 'pry-rails'
   # ステップ実行
@@ -81,7 +82,6 @@ end
 
 group :production do
   gem 'fog', '1.42'
-  gem 'pg', '0.20.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
