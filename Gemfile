@@ -5,8 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'puma', '~> 3.0'
-gem 'rails', '~> 5.0.7', '>= 5.0.7.1'
+gem 'puma', '3.9.1'
+gem 'rails', '5.2.5'
 gem 'rails-i18n', '~> 5.1'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -36,12 +36,14 @@ gem 'kaminari'
 gem 'will_paginate'
 
 # 画像アップロード系
-gem 'carrierwave', '2.0.2'
+gem 'carrierwave'
 gem 'mini_magick', '4.9.5'
 gem 'rmagick',     '4.0.0'
 
 # 非同期実行
 # gem 'delayed_job_active_record'
+
+gem 'bootsnap', require: false
 
 group :development, :test do
   gem 'sqlite3'
