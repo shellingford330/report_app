@@ -11,6 +11,7 @@ class Student < ApplicationRecord
   has_and_belongs_to_many :news
   has_and_belongs_to_many :groups
   has_many :replies,  dependent: :destroy, as: :writeable
+  has_many :news_replies, dependent: :destroy
   has_many :contacts, dependent: :destroy
   has_many :reports,  dependent: :destroy
   has_many :teachers, through: :reports
