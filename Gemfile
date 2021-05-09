@@ -10,7 +10,7 @@ ruby '2.6.7'
 gem 'puma', '3.9.1'
 gem 'rails', '5.2.5'
 gem 'rails-i18n', '~> 5.1'
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.2'
 gem 'uglifier', '>= 1.3.0'
