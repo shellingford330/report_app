@@ -263,7 +263,7 @@ GEM
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-compat (1.2.1)
-    guard-minitest (2.4.4)
+    guard-minitest (2.4.6)
       guard-compat (~> 1.2)
       minitest (>= 3.0)
     http-accept (1.7.0)
@@ -497,7 +497,7 @@ DEPENDENCIES
   faker
   fog (= 1.42)
   guard (= 2.13.0)
-  guard-minitest (= 2.4.4)
+  guard-minitest (= 2.4.6)
   jbuilder (~> 2.5)
   jquery-rails
   kaminari
