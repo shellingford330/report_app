@@ -402,7 +402,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
-    rmagick (4.0.0)
+    rmagick (4.2.2)
     rubocop (1.13.0)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
@@ -512,7 +512,7 @@ DEPENDENCIES
   rails (= 5.2.5)
   rails-controller-testing (= 1.0.2)
   rails-i18n (~> 5.1)
-  rmagick (= 4.0.0)
+  rmagick (= 4.2.2)
   rubocop
   rubocop-performance
   rubocop-rails
