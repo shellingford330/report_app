@@ -30,9 +30,6 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# データサンプル作成系
-gem 'faker'
-
 # ページネーション系
 gem 'kaminari'
 gem 'will_paginate'

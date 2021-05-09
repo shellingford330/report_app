@@ -90,8 +90,6 @@ GEM
     erubi (1.10.0)
     excon (0.71.1)
     execjs (2.7.0)
-    faker (1.9.1)
-      i18n (>= 0.7)
     ffi (1.9.25)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
@@ -454,7 +452,6 @@ DEPENDENCIES
   bootstrap (~> 4.2.1)
   carrierwave
   coffee-rails (~> 4.2)
-  faker
   fog (= 1.42)
   jbuilder (~> 2.5)
   jquery-rails
