@@ -10,7 +10,7 @@ ruby '2.6.7'
 gem 'puma', '3.9.1'
 gem 'rails', '5.2.5'
 gem 'rails-i18n', '~> 5.1'
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.2'
 gem 'uglifier', '>= 1.3.0'
@@ -30,9 +30,6 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# データサンプル作成系
-gem 'faker'
-
 # ページネーション系
 gem 'kaminari'
 gem 'will_paginate'
@@ -40,7 +37,6 @@ gem 'will_paginate'
 # 画像アップロード系
 gem 'carrierwave'
 gem 'mini_magick', '4.9.5'
-gem 'rmagick',     '4.0.0'
 
 # 非同期実行
 # gem 'delayed_job_active_record'
@@ -72,16 +68,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :test do
-  gem 'guard', '2.13.0'
-  gem 'guard-minitest', '2.4.4'
-  gem 'minitest', '5.10.3'
-  gem 'minitest-reporters', '1.1.14'
-  gem 'rails-controller-testing', '1.0.2'
-end
-
 group :production do
-  gem 'fog', '1.42'
+  gem 'fog-aws'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
