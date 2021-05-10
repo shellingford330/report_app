@@ -36,6 +36,7 @@ gem 'will_paginate'
 
 # 画像アップロード系
 gem 'carrierwave'
+gem 'fog-aws'
 gem 'mini_magick', '4.9.5'
 
 # 非同期実行
@@ -66,10 +67,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-end
-
-group :production do
-  gem 'fog-aws'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
