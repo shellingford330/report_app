@@ -48,7 +48,7 @@ GEM
     ast (2.4.2)
     autoprefixer-rails (9.4.4)
       execjs
-    bcrypt (3.1.11)
+    bcrypt (3.1.16)
     better_errors (2.5.1)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -270,7 +270,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bcrypt (~> 3.1.7)
+  bcrypt (~> 3.1.16)
   better_errors
   binding_of_caller
   bootsnap
