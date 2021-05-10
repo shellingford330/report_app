@@ -37,7 +37,7 @@ gem 'will_paginate'
 # 画像アップロード系
 gem 'carrierwave'
 gem 'fog-aws'
-gem 'mini_magick', '4.9.5'
+gem 'mini_magick', '4.11.0'
 
 # 非同期実行
 # gem 'delayed_job_active_record'
