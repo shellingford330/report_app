@@ -71,7 +71,7 @@
           <%= link_to teachers_news_student_path(@news, student) do %>
             <div class="news-student-list-item">
               <% if student.image? %>
-                <%= image_tag student.image %>
+                <%= image_tag student.image.url %>
               <% else %>
                 <%= image_tag 'student.png' %>
               <% end %>
