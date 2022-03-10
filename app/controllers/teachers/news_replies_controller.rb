@@ -5,7 +5,7 @@ module Teachers
     before_action :admin_logged_in, only: [:create]
 
     def create
-      @news    = current_teacher.news.find(params[:news_id])
+      @news    = News.find(params[:news_id])
       @student = @news.students.find(params[:student_id])
       @replies = @news.replies.preload(:student, :teacher)
 
