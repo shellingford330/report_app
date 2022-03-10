@@ -5,7 +5,7 @@ require 'test_helper'
 class TeacherTest < ActiveSupport::TestCase
   setup do
     @teacher = Teacher.new(name: "keiichi", email: "keiichi@example.com", status: :teacher,
-      password: "keiichi", password_confirmation: "keiichi",)
+                           password: "keiichi", password_confirmation: "keiichi",)
   end
 
   test "name should be present" do

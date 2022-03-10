@@ -32,6 +32,6 @@ module User
   def create_reset_digest
     self.reset_token = Token.generate
     update_columns(reset_digest:  Token.digest(reset_token),
-                        reset_sent_at: Time.zone.now,)
+                   reset_sent_at: Time.zone.now,)
   end
 end

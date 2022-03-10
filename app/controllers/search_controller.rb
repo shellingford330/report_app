@@ -6,7 +6,7 @@ class SearchController < ApplicationController
   def index
     @search_reports_form = SearchReportsForm.new(
       status: params[:search_reports_form][:status],
-       teacher_ids: params[:search_reports_form][:teacher_ids],
+      teacher_ids: params[:search_reports_form][:teacher_ids],
     )
     # 書いた講師を検索
     teachers = Teacher.where(id: @search_reports_form.teacher_ids)

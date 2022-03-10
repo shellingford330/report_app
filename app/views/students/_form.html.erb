@@ -9,12 +9,12 @@
 
 	<div class="form-group">
 		<%= f.label :grade, '現在の学年'%>
-		<%= f.select :grade, Student.grades, { include_blank: '選択して下さい' }, class: "form-control" %>
+		<%= f.select :grade, Student::GRADES, { include_blank: '選択して下さい' }, class: "form-control" %>
 	</div>
 
 	<div class="form-group">
 		<%= f.label :lesson_days ,'授業の曜日'%>
-		<%= f.select :lesson_days, Student.days, {}, multiple: true, class: "select-subjects" %>
+		<%= f.select :lesson_days, Student::DAYS, {}, multiple: true, class: "select-subjects" %>
 	</div>
 
 	<% if correct_student?(student) %>

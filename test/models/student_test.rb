@@ -49,7 +49,7 @@ class StudentTest < ActiveSupport::TestCase
   test "associated reports should be destroyed" do
     @student.save
     @student.reports.create!(start_date: Date.today, end_date: Date.tomorrow, status: 1, read_flg: false,
-      teacher: teachers(:owner),)
+                             teacher: teachers(:owner),)
     assert_difference 'Report.count', -1 do
       @student.destroy
     end

@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        <% Student.grades.each do |grade| %>
+        <% Student::GRADES.each do |grade| %>
           <% judge = true %>
           <% @students.where(grade: grade).each do |student| %>
             <tr>

@@ -7,7 +7,7 @@ class ReportTest < ActiveSupport::TestCase
     @student = students(:keiichi)
     @teacher = teachers(:owner)
     @report = @student.reports.build(start_date: Date.today, end_date: Date.tomorrow, status: 1, read_flg: false,
-       teacher_id: @teacher.id,)
+                                     teacher_id: @teacher.id,)
   end
 
   test "report should be valid" do
