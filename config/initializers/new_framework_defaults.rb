@@ -24,3 +24,6 @@ Rails.application.config.active_record.belongs_to_required_by_default = true
 
 # Configure SSL options to enable HSTS with subdomains. Previous versions had false.
 Rails.application.config.ssl_options = { hsts: { subdomains: true } }
+
+# Existing cookies will be converted on read then written with the new scheme.
+Rails.application.config.action_dispatch.use_authenticated_cookie_encryption = false

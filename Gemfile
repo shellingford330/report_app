@@ -5,11 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.6.7'
+ruby '2.7.5'
 
 gem 'puma', '3.9.1'
-gem 'rails', '5.2.5'
-gem 'rails-i18n', '~> 5.1'
+gem 'rails', '6.0.4'
+gem 'rails-i18n'
 gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.2'
@@ -22,7 +22,7 @@ gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+# gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
@@ -62,8 +62,8 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'listen', '~> 3.0.5'
-  gem 'web-console', '>= 3.3.0'
+  gem 'listen'
+  gem 'web-console'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
