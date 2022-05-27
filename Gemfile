@@ -7,7 +7,7 @@ end
 
 ruby '2.7.5'
 
-gem 'puma', '3.9.1'
+gem 'puma', '5.6.4'
 gem 'rails', '6.0.4'
 gem 'rails-i18n'
 gem 'sassc-rails'
