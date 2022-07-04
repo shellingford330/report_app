@@ -41,7 +41,7 @@ class StudentsController < ApplicationController
       "高校１年生" => 12, "高校２年生" => 13, "高校３年生" => 14, "大学１年生" => 15, "大学２年生" => 16, "大学３年生" => 17, "大学４年生" => 18, }
     Student.all.each do |student|
       up_idx = (change_into_index[student.grade] + 1) % 19
-      upgrade = Student.grades[up_idx]
+      upgrade = Student::GRADES[up_idx]
       student.update(grade: upgrade)
     end
     redirect_to students_path
@@ -55,7 +55,7 @@ class StudentsController < ApplicationController
     if student.save
       student.send_account_activation_mail
       flash[:success] = "アカウント有効化メールを送信しました"
-      head 201
+      head :created
     else
       flash.now[:danger] = "入力情報をご確認下さい"
       render json: { messages: student.errors.full_messages }, status: :unprocessable_entity

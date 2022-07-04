@@ -10,7 +10,7 @@ class Student < ApplicationRecord
 
   has_and_belongs_to_many :news
   has_and_belongs_to_many :groups
-  has_many :replies,  dependent: :destroy, as: :writeable
+  has_many :replies, dependent: :destroy, as: :writeable
   has_many :news_replies, dependent: :destroy
   has_many :contacts, dependent: :destroy
   has_many :reports,  dependent: :destroy
@@ -39,17 +39,9 @@ class Student < ApplicationRecord
     errors.add(:image, "5MB以下にして下さい。") if student.image.size > 5.megabytes
   end
 
-  # 全部の学年を配列で返す
-  def self.grades
-    %w[年少 年中 年長 小学１年生 小学２年生 小学３年生 小学４年生 小学５年生 小学６年生
-       中学１年生 中学２年生 中学３年生 高校１年生 高校２年生 高校３年生 大学１年生 大学２年生
-       大学３年生 大学４年生]
-  end
+  GRADES = %w[年少 年中 年長 小学１年生 小学２年生 小学３年生 小学４年生 小学５年生 小学６年生 中学１年生 中学２年生 中学３年生 高校１年生 高校２年生 高校３年生 大学１年生 大学２年生 大学３年生 大学４年生].freeze
 
-  # 曜日を配列で返す
-  def self.days
-    %w[月 火 水 木 金 土 日]
-  end
+  DAYS = %w[月 火 水 木 金 土 日].freeze
 
   # アカウント有効化のメール
   def send_account_activation_mail

@@ -24,7 +24,7 @@
 								<div style="background: #f0e7dd;" class="card-header">
 									<h4>生徒を選択して下さい</h4>
 								</div>
-								<% Student.grades.each do |grade| %>
+								<% Student::GRADES.each do |grade| %>
 									<% if (@students = students_of(grade)).exists? %>
 										<div type="a" class="card-header bg-brown" id="heading-<%= grade %>">
 											<h5 class="mb-0">
@@ -90,7 +90,7 @@
 								<div style="background: #f0e7dd;" class="card-header">
 									<h4>生徒を選択して下さい</h4>
 								</div>
-								<% Student.days.each do |day| %>
+								<% Student::DAYS.each do |day| %>
 									<% ["年", "小", "中", "高", "大"].each do |grade| %>
 
 										<% if (students = Student.where("lesson_day LIKE ? AND grade LIKE ? AND activated = ?", "%#{day}%", "#{grade}%", true)).exists? %>

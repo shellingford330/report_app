@@ -16,7 +16,7 @@
 						<div id="accordion">
 							<label>生徒を選択</label>
 							<!-- フォーム本体 -->
-							<% Student.grades.each do |grade| %>
+							<% Student::GRADES.each do |grade| %>
 								<% if (@students = students_of(grade)).exists? %>
 									<div type="a" class="card-header bg-brown" id="heading-<%= grade %>">
 										<h5 class="mb-0">

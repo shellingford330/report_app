@@ -89,7 +89,7 @@
       });
 
 
-      <% Student.grades.each do |grade| %>
+      <% Student::GRADES.each do |grade| %>
         // 読み込んだ時、各学年下の生徒が全てチェックされていると「学年選択」もチェックする
         if ($('#collapse-<%= grade %> :checked').length == $('#collapse-<%= grade %> :input').length) {
           $('#student_<%= grade %>').prop('checked', 'checked');
@@ -147,7 +147,7 @@
       });
 
       // 学年ソート
-      <% Student.grades.each do |grade| %>
+      <% Student::GRADES.each do |grade| %>
         // 「学年選択」のチェックするとその学年の生徒全てをチェックする
         $('#student_<%= grade %>').on('click', function() {
           $('#collapse-<%= grade %>').find('.student').prop('checked', this.checked);
@@ -164,7 +164,7 @@
       <% end %>
 
       // 曜日ソート
-      <% Student.days.each do |day| %>
+      <% Student::DAYS.each do |day| %>
 				<% ["年", "小", "中", "高", "大"].each do |grade| %>
           // 「曜日選択」のチェックするとその学年の生徒全てをチェックする
           $('#student_<%= day %>_<%= grade %>').on('click', function() {
