@@ -8,7 +8,7 @@ end
 ruby '2.7.5'
 
 gem 'puma', '3.9.1'
-gem 'rails', '6.0.4'
+gem 'rails', '7.0.4'
 gem 'rails-i18n'
 gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
