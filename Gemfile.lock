@@ -69,7 +69,7 @@ GEM
     bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.11.1)
+    bootsnap (1.15.0)
       msgpack (~> 1.2)
     bootstrap (4.2.1)
       autoprefixer-rails (>= 9.1.0)
@@ -155,10 +155,10 @@ GEM
     mini_magick (4.9.5)
     mini_mime (1.1.2)
     minitest (5.15.0)
-    msgpack (1.4.5)
+    msgpack (1.6.0)
     multi_json (1.15.0)
     nio4r (2.5.8)
-    nokogiri (1.13.3-aarch64-linux)
+    nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
     parallel (1.21.0)
     parser (3.1.1.0)
@@ -279,7 +279,7 @@ GEM
     zeitwerk (2.5.4)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
